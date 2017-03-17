@@ -1,55 +1,70 @@
 # 2017.1 Sistema de Localização no campus Darcy Ribeiro
 
-README.md em desenvolvimento
+## Instalação
 
-Para contribuir com esse repositório é necessário a instalação do VirtualBox e Vagrant.
+Para contribuir com esse repositório é necessário a instalação do VirtualBox e Vagrant em um ambiente linux como o ubuntu.
 
-Faça clone ou download do repositorio
+Faça clone ou download do repositório.
 
-git clone <url>
+```console
+$ git clone https://github.com/fga-gpp-mds/2017.1-LocalizacaoDarcy
+```
 
-Entre no arquivo e execute:
+Entre no arquivo clonado e execute o seguinte comando para fazer o boot na máquina virtual e executa os o que está definido no VagrantFile
+```console
+$ vagrant up
+```
 
-vagrant up
+Após isso, entre na maquina virtual criada
+```console
+$ vagrant ssh
+```
 
-Após isso, entre na máquina virtual:
+Agora já na máquina virtual criada entre no bash
+```console
+$ vim ~/.bashrc
+```
 
-vagrant ssh
+E adicione a seguinte linha no final do arquivo para que na próxima vez que abrir com ssh já abra na pasta do projeto.
 
-Abra o bash:
-
-vim ~/.bashrc
-
-Insira essa linha no final do arquivo para que na próxima vez que abrir com ssh já abra na pasta do projeto.
-
+```console
 cd /vagrant/darcyWeb
-
+```
 Configure o postgree com:
+```console
+$ sudo su
+$ cd nano /etc/postgresql/9.5/main/pg_hba.conf
+```
 
-sudo su
-cd
-nano /etc/postgresql/9.5/main/pg_hba.conf
-
-Altere as linhas:
-local	all	postgres	peer
-local	all	all	peer
+Altere as linhas do arquivo de:
+```console
+local   all postgres peer
+local   all all peer
+```
 
 Para:
+```console
+local   all postgres trust
+local   all all trust
+```
 
-local	all	postgres	trust
-local	all	all	trust
-
-E reinicie o postgree:
-
+Reinicie o postgree
+```console
 service postgresql reload
-
-Saia do modo root:
-
+```
+Saia do modo root
+```console
 exit
+```
 
-Entre na pasta do projeto e digite:
-bundle install
-rake db:migrate
-rails s
+Para entrar na pasta, reinicie o vagrant ssh ou digite
+```console
+$ cd
+$ cd vagrant/
+```
 
-O seu site deverá estar rodando em localhost:8080
+E rode o servidor
+```console
+$ rails s
+```
+Abra seu navegador em localhost:8080
