@@ -33,13 +33,13 @@ cd /vagrant/darcyWeb
 Configure o postgree com:
 ```console
 $ sudo su
-$ cd nano /etc/postgresql/9.5/main/pg_hba.conf
+$ nano /etc/postgresql/9.5/main/pg_hba.conf
 ```
 
 Altere as linhas do arquivo de:
 ```console
-local   all postgres peer
-local   all all peer
+local all postgres peer
+local all all peer
 ```
 
 Para:
@@ -63,7 +63,7 @@ $ cd
 $ cd vagrant/
 ```
 
-E rode o servidor
+Rode o servidor
 ```console
 $ rails s
 ```
