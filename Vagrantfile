@@ -70,12 +70,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, path: "install-postgresql.sh", args: "9.5.4", privileged: false
 
   config.vm.provision "shell", inline: <<-SHELL, privileged: false
-    sudo /bin/bash --login
-    sudo add-apt-repository ppa:webupd8team/sublime-text-3
-
     sudo apt-get update
 
-    sudo apt-get install sublime-text-installer
     sudo apt-get install -y --force-yes  lib32z1 lib32ncurses5 lib32bz2-1.0 lib32stdc++6
     sudo apt-get install -y nodejs nodejs-legacy postgresql-common postgresql-9.5
     sudo apt-get install -y git curl automake build-essential bison
