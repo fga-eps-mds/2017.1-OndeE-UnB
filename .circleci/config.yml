@@ -14,17 +14,11 @@ jobs:
           name: Install System Dependencies
           command: apt-get update -qq && apt-get install -y build-essential nodejs
       - run:
-          name: List Archives
-          command: ls
-      - run:
-          name: Go To Project
-          command: cd darcyWeb
-      - run:
-          name: List Archives
-          command: ls
+          name: Debug
+          command: cd darcyWeb && ls
       - run:
           name: Install Ruby Dependencies
-          command: bundle install
+          command: cd darcyWeb && bundle install
       - run:
           name: Create DB
           command: bundle exec rake db:create db:schema:load --trace
