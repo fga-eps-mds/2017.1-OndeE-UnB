@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   #Olá MDS, agora sim, estamos comecando a desenvolver em ruby on rails, tire o comentário da linha abaixo e você deverá ver uma mensagem no seu navagador.
   #root 'home#home'
 
+  root 'buildings#index'
+
+  resources :buildings
+
 end
