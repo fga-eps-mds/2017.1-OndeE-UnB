@@ -7,7 +7,7 @@ jobs:
         environment:
           POSTGRES_USER: root
 
-    working_directory: ~/darcyWeb
+    working_directory: ~/darcyWeb/
     steps:
       - checkout
       - run:
@@ -19,6 +19,9 @@ jobs:
       - run:
           name: Go To Project
           command: cd darcyWeb
+      - run:
+          name: List Archives
+          command: ls
       - run:
           name: Install Ruby Dependencies
           command: bundle install
