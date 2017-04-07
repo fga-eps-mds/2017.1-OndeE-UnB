@@ -7,7 +7,7 @@ jobs:
         environment:
           POSTGRES_USER: root
 
-    working_directory: ~/cci-demo-rails
+    working_directory: ~/darcyWeb
     steps:
       - checkout
       - run:
