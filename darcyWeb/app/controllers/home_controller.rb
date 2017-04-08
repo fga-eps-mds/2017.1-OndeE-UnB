@@ -1,6 +1,5 @@
-class HomeController < ActionController::Base
+class HomeController < ApplicationController
     protect_from_forgery with: :exception
     def home
-        render html: "hello, world!"
     end
 end
