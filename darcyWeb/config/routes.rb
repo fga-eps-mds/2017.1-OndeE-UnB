@@ -3,4 +3,8 @@ Rails.application.routes.draw do
 
   root 'map#index'
 
+  root 'buildings#index'
+
+  resources :buildings
+
 end
