@@ -1,0 +1,173 @@
+html body {
+    height: 100%;
+    color: #777;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    line-height: 1.57142857;
+}
+
+html, body, #map {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.search {
+    position: absolute;
+    top: 1rem;
+    z-index: 2;
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.search input {
+    height: 45px;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0 1px 4px -1px;
+    border: none;
+    visibility: hidden;
+    color: #666;
+    width: 350px;
+    position: absolute;
+    right: 1rem;
+}
+
+label {
+    position: absolute;
+    top: 0;
+    right: 8px;
+    position: absolute;
+    right: 1rem;
+    z-index: 2;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0 1px 4px -1px;
+    border-radius: 2px;
+    width: 45px;
+    height: 45px;
+    background-color: #FFF;
+    padding: 15px;
+    font-size: 20px;
+    color: #666;
+    text-align: center;
+}
+
+label.active{
+  background-color: #47C9AF;
+  color: #FFF;
+}
+
+.search-input {
+    visibility: hidden;
+    position: absolute;
+    top: 20px;
+    z-index: 10;
+    background-color: rgb(255, 255, 255);
+    width: 98% !important;
+    margin-left: 10px;
+    margin-right: 10px;
+    box-shadow: 0px 0px 0px 3px rgba(242, 242, 242, 0.61);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.slide-panel {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 350px;
+    z-index: 1;
+    height: 100%;
+    background-color: #FFF;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.slide-panel-heading {
+    width: 100%;
+    background-color: #47C9AF;
+    height: 50px;
+    padding: 17px;
+}
+
+.slide-panel-heading h1 {
+    font-size: 15px;
+    color: #fff;
+}
+
+.slide-panel-body {
+    padding: 15px;
+    overflow: auto;
+    height: calc(100% - 50px);
+}
+
+.slide-panel-body::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.slide-panel-body::-webkit-scrollbar-track {}
+
+.slide-panel-body::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+
+.table.classes thead th {
+    font-size: 12px;
+    text-transform: uppercase;
+    border-top: none;
+    border-bottom-color: #F2F2F2;
+    font-weight: 500;
+}
+
+.table.classes tbody td {
+    font-size: 12px;
+    border-top: 1px dashed #F2F2F2;
+    vertical-align: middle;
+}
+
+.form-group .label {
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group .data {
+    color: #76838f;
+}
+
+.btn-group.level {
+    position: absolute;
+    left: calc(calc(100% - 226px) / 2);
+    z-index: 2;
+    bottom: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0 1px 4px -1px;
+}
+
+.btn-group button {
+    border: none;
+}
+
+.btn-group button.active {
+    border: none;
+    background-color: #47c9af;
+    color: #fff;
+}
+
+.info-label {
+    visibility: hidden;
+    z-index: 1;
+    position: absolute;
+    bottom: 4rem;
+    background-color: #FFF;
+    padding: 10px 5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    left: calc(calc(100% - 250px) / 2);
+    width: 250px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0 1px 4px -1px;
+    border-radius: 3px;
+    color: #666;
+}
