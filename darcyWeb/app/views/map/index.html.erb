@@ -3,45 +3,11 @@
     <head>
         <meta charset="utf-8"/>
         <title>Onde É UnB</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-        <%= stylesheet_link_tag 'map' %>
     </head>
+    <%= render :partial => "shared/head"%>
+    <%= stylesheet_link_tag 'map' %>
     <body>
-        <nav class="navbar navbar-toggleable-md navbar-light bg-faded" "navbar-fixed-top">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a  href="#">
-              <%= image_tag "unblogochanges.jpg" %>
-            </a>
-
-            <a class="navbar-brand" href="#">Onde É UnB</a>
-
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Sobre</a>
-                  </li>
-                </ul>
-              <!--  <form class="form-inline my-2 my-lg-0">
-                  <input class="form-control mr-sm-2" type="text" placeholder="Procurar Locais">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>-->
-                <form class="form-inline my-2 my-lg-0"
-                    <div class="info-label"></div>
-                    <div class="search">
-                      <input type="text" placeholder="Procurar Locais" class="form-control  mr-sm-2">
-                      <label class="fa fa-search btn-outline-success" title="Procurar Locais"></label>
-                    </div>
-                  </form>
-            </div>
-        </nav>
-
-
-
+        <%= render :partial => "shared/navbar"%>
         <div class="slide-panel animated"></div>
 
         <div id="map" style="float: left;"></div>
@@ -52,11 +18,22 @@
             <button type="button" class="btn btn-secondary">3</button>
         </div>
 
+        <div class="info-label"></div>
+        <div class="search">
+          <input type="text" placeholder="Procurar Locais" class="form-control  mr-sm-2">
+          <label class="fa fa-search btn-outline-success" title="Procurar Locais"></label>
+        </div>
+
         <script src="https://use.fontawesome.com/84624258b7.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCxXbyDJA8I_TUJDsmD_O8EKpzd51UtRrk&sensor=false&libraries=drawing"></script>
-        <%= javascript_include_tag 'map' %>
+        <div>
+          <%= javascript_include_tag 'map' %>
+        </div>
+        <div>
+          <%= render :partial => "shared/footer"%>
+        </div>
     </body>
 </html>
