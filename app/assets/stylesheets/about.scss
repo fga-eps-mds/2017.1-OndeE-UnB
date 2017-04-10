@@ -1,0 +1,23 @@
+html body {
+    height: 110%;
+    color: #777;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    line-height: 1.57142857;
+}
+
+html, body, #about {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-top: 15px;
+    overflow: visible;
+}
+
+.footer{
+    height:4px;
+    width: 100%;
+    position: relative;
+    z-index:-2;
+}
