@@ -1,23 +1,10 @@
-html body {
-    height: 110%;
-    color: #777;
-    font-family: "Roboto", sans-serif;
-    font-size: 14px;
-    line-height: 1.57142857;
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
+body{
+  overflow:auto;
 }
 
-html, body, #about {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    padding-top: 15px;
-    overflow: visible;
-}
-
-.footer{
-    height:4px;
-    width: 100%;
-    position: relative;
-    z-index:-2;
+footer{
+  margin-bottom: 30px;
 }
