@@ -1,4 +1,4 @@
-class BuildingsController < ApplicationController
+class Admin::BuildingsController < AdminController
   def index
     @buildings = Building.all
   end
