@@ -44,34 +44,19 @@ var infoLabel = {
     }
 }
 
+var centerMap = [-15.764544, -47.866929];
 
-var element = document.getElementById("map");
-
-var centerMap = {
-    lat: -15.764544,
-    lng: -47.866929
-};
-
-var map = new google.maps.Map(element, {
+var map = L.map('map', {
     center: centerMap,
-    zoom: 17,
-    minZoom: 16,
-    mapTypeId: "OSM",
-    mapTypeControl: false,
-    streetViewControl: false
+    zoom: 18,
+    minZoom: 16
 });
 
-//Define OSM map type pointing at the OpenStreetMap tile server
-map.mapTypes.set("OSM", new google.maps.ImageMapType({
-    getTileUrl(coord, zoom) {
-        // "Wrap" x (logitude) at 180th meridian properly
-        var tilesPerGlobe = 1 << zoom;
-        var x = coord.x % tilesPerGlobe;
-        if (x < 0) x = tilesPerGlobe + x;
-        var tile = "http://tile.openstreetmap.org/" + zoom + "/" + x + "/" + coord.y + ".png";
-        return tile;
-    },
-    tileSize: new google.maps.Size(256, 256),
-    name: "OpenStreetMap",
-    maxZoom: 19
-}));
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+
+
+L.marker(centerMap).addTo(map)
+    .bindPopup('Onde É? UnB');
