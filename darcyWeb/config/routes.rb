@@ -6,8 +6,10 @@ Rails.application.routes.draw do
 
   root 'buildings#index'
 
-  resources :buildings 
-  resources :admin
+  namespace :admin do
+    resources :buildings
+    resources :admin
+  end
 
   get "admin/index"
 end
