@@ -11,12 +11,10 @@
         <script src="https://releases.route360.net/r360-js/latest.js"></script>
 
     </head>
+    <%= render :partial => "shared/head"%>
+    <%= stylesheet_link_tag 'map' %>
     <body>
-        <div class="info-label"></div>
-        <div class="search">
-            <input type="text" placeholder="Procurar Locais" class="form-control">
-            <label class="fa fa-search" title="Procurar Locais"></label>
-        </div>
+        <%= render :partial => "shared/navbar"%>
 
         <div class="slide-panel animated"></div>
 
@@ -28,11 +26,19 @@
             <button type="button" class="btn btn-secondary">3</button>
         </div>
 
+        <div class="info-label"></div>
+        <div class="search">
+          <input type="text" placeholder="Procurar Locais" class="form-control  mr-sm-2">
+          <label class="fa fa-search" title="Procurar Locais"></label>
+        </div>
         <%= javascript_include_tag 'https://use.fontawesome.com/84624258b7.js' %>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
         <%= javascript_include_tag 'https://unpkg.com/leaflet@1.0.3/dist/leaflet.js' %>
         <%= javascript_include_tag 'map' %>
+        <div>
+          <%= render :partial => "shared/footer"%>
+        </div>
     </body>
 </html>
