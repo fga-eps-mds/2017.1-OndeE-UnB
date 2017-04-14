@@ -1,19 +1,92 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Onde é? UnB - Administration</title>
-    <%= csrf_meta_tags %>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                Basic Elements
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Input">
+                        <textarea name="name" rows="3" class="form-control"></textarea>
+                        <input type="text" class="form-control" placeholder="Disabled" disabled="">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Input group" aria-describedby="basic-addon1" value="">
+                        </div>
+                        <div>
+                            <div class="checkbox">
+                                <input type="checkbox" id="checkbox1">
+                                <label for="checkbox1">
+                                    Checkbox
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <input type="checkbox" id="checkbox2">
+                                <label for="checkbox2">
+                                    Checkbox Square
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="checkbox checkbox-inline">
+                                <input type="checkbox" id="checkbox3">
+                                <label for="checkbox3">
+                                    Checkbox Inline
+                                </label>
+                            </div>
+                            <div class="checkbox checkbox-inline">
+                                <input type="checkbox" id="checkbox4">
+                                <label for="checkbox4">
+                                    Checkbox Inline
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="radio">
+                                <input type="radio" name="radio2" id="radio3" value="option1">
+                                <label for="radio3">
+                                    One
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <input type="radio" name="radio2" id="radio4" value="option2" checked="">
+                                <label for="radio4">
+                                    Two
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="radio radio-inline">
+                                <input type="radio" name="radio2" id="radio5" value="option1">
+                                <label for="radio5">
+                                    One
+                                </label>
+                            </div>
+                            <div class="radio radio-inline">
+                                <input type="radio" name="radio2" id="radio6" value="option2" checked="">
+                                <label for="radio6">
+                                    Two
+                                </label>
+                            </div>
+                        </div>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-  </head>
-
-  <body>
-    <%= "HELLO WORLD!" %> 
-  </body>
-</html>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-success">
+                            <input type="text" class="form-control" id="inputSuccess1" placeholder="Success">
+                        </div>
+                        <div class="form-group has-warning">
+                            <input type="text" class="form-control" id="inputWarning1" placeholder="Warning">
+                        </div>
+                        <div class="form-group has-error">
+                            <input type="text" class="form-control" id="inputError1" placeholder="Danger">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
