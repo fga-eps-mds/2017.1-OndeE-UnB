@@ -5,9 +5,12 @@ Rails.application.routes.draw do
 
   root 'buildings#index'
 
-  resources :buildings
+  resources :buildings 
+  resources :admin
+
 
   get "app/views/map/index.html.erb", to: "map#index", as: "map"
   get "app/views/about/about.html.erb", to: "about#about", as: "about"
+  get "admin/index"
 
 end
