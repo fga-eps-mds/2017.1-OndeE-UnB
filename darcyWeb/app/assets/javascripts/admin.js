@@ -1,14 +1,6 @@
 //= require admin/vendor.js
 //= require admin/app.js
 
-var centerMap = [-15.764544, -47.866929];
+//= require admin/buildings.js
 
-var map = L.map('map', {
-    center: centerMap,
-    zoom: 18,
-    minZoom: 16
-});
-
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+$('#map').height($(document).height()-90);

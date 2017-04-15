@@ -1,33 +1,46 @@
 class Admin::BuildingsController < AdminController
-  def index
-    @buildings = Building.all
-  end
+    before_action :set_building, only: [:destroy, :edit, :update]
 
-  def new
-    @building = Building.new
-  end
-
-  def show
-    @building = Building.find(params[:id])
-  end
-
-  def create
-    @building = Building.new(building_params)
-    if @building.save
-      redirect_to @building
-    else
-      render :new
+    def index
+        @buildings = Building.all
     end
-  end
 
-  def destroy
-    @building = Building.find(params[:id])
-    @building.destroy
-    redirect_to action: "index"
-  end
+    def new
+        @building = Building.new
+    end
 
-  private
-     def building_params
-       params.require(:building).permit(:department, :description)
-     end
+    def edit
+    end
+
+    def update
+        if @building.update(building_params)
+            redirect_to admin_buildings_path, notice: 'Edifício criado com êxito.'
+        else
+            render :edit
+        end
+    end
+
+    def create
+        @building = Building.new(building_params)
+        if @building.save
+            redirect_to admin_buildings_path, notice: 'Edifício criado com êxito.'
+        else
+            render :new
+        end
+    end
+
+    def destroy
+        @building.destroy
+        redirect_to admin_buildings_path, notice: 'Edifício excluído com êxito.'
+    end
+
+    private
+
+    def set_building
+        @building = Building.find(params[:id])
+    end
+
+    def building_params
+        params.require(:building).permit(:acronym, :title, :phone, :latitude, :longitude)
+    end
 end

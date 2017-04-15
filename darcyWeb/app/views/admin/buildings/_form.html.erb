@@ -1,0 +1,45 @@
+<div class="card">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card-header">
+                <%= title %>
+            </div>
+            <div class="card-body">
+                <%= form_for(building, url: url) do |f| %>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <%= f.label :acronym %>
+                        <%= f.text_field :acronym, class: 'form-control' %>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <%= f.label :title %>
+                        <%= f.text_field :title, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <%= f.label :phone %>
+                        <%= f.number_field :phone, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <%= f.label :latitude %>
+                        <%= f.text_field :latitude, class: 'form-control' %>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <%= f.label :longitude %>
+                        <%= f.text_field :longitude, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <%= f.submit 'Salvar', class: 'btn btn-sm btn-success' %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div id="map" style="float: left;"></div>
+        </div>
+    </div>
+</div>

@@ -1,14 +1,37 @@
 //= require admin/vendor.css
 //= require admin/main.css
+//= require leaflet-draw/leaflet.draw.css
 
 // TODO: change the border color to one more softer
 .navbar {
   padding: 0;
-  border-right: none;
+  border: none;
+  margin-bottom: 0;
 }
 // TODO: set the sidebar color to dark
 
 #map {
   width: 100%;
-  height: 450px;
+  height: 500px;
+}
+
+.card-header {
+  border: none !important;
+}
+
+label{
+  font-weight: 400;
+}
+
+input.form-control{
+  border-color: #F2F2F2;
+}
+
+.leaflet-div-icon {
+    border: 1px solid #666;
+    width: 10px !important;
+    height: 10px !important;
+    background: #666 !important;
+    border-radius: 50%;
+    margin: -5px !important;
 }
