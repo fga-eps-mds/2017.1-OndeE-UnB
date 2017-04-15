@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+    attributes:
+      building:
+        acronym: "Sigla"
+        title: "Título"
+        latitude: "Latitude"
+        longitude: "Longitude"
