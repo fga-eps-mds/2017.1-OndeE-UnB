@@ -1,2 +1,3 @@
-class Building < ApplicationRecord
+class Building < Location
+
 end
