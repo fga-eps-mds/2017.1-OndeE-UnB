@@ -3,11 +3,24 @@
 
 //= require leaflet/draw.translations
 
-var drawnItems = new L.FeatureGroup();
-map.addLayer(drawnItems);
+const $building_geo_data = $('#building_geo_data');
+const $building_geo_data_json = $building_geo_data.val();
+
+function saveToForm(geo_json) {
+    $building_geo_data.val(JSON.stringify(geo_json.toGeoJSON()));
+}
+
+var drawnLayer = L.geoJSON().addTo(map);
+map.addLayer(drawnLayer);
+
+// Load json from the form
+if ($building_geo_data_json) {
+    drawnLayer.addData(JSON.parse($building_geo_data_json));
+}
+
 var drawControl = new L.Control.Draw({
     edit: {
-        featureGroup: drawnItems
+        featureGroup: drawnLayer
     },
     draw: {
         polyline: false,
@@ -22,11 +35,21 @@ var drawControl = new L.Control.Draw({
 
 map.on(L.Draw.Event.CREATED, function(event) {
     var layer = event.layer;
-    console.log(layer);
-    drawnItems.addLayer(layer);
+    drawnLayer.addLayer(layer);
+    saveToForm(drawnLayer);
 });
+
+// map.on(L.Draw.Event.EDITED, function(event) {
+//     var layer = event.layer;
+//     drawnLayer.addLayer(layer);
+//     saveToForm(drawnLayer);
+// });
+// map.on(L.Draw.Event.DELETED, function(event) {
+//     var layer = event.layer;
+//     drawnLayer.addLayer(layer);
+//     saveToForm(drawnLayer);
+// });
+
 map.addControl(drawControl);
 
-// TODO: Save the layer to the form
-// TODO: Load the layer from the form
-// TODO: Create button to define the location
+// TODO:10 Create button to define the location

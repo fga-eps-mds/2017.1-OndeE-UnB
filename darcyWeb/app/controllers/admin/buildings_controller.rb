@@ -41,6 +41,6 @@ class Admin::BuildingsController < AdminController
     end
 
     def building_params
-        params.require(:building).permit(:acronym, :title, :phone, :latitude, :longitude)
+        params.require(:building).permit(:acronym, :title, :phone, :latitude, :longitude, :geo_data)
     end
 end
