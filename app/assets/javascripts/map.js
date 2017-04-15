@@ -1,4 +1,5 @@
 //= require leaflet/map
+//= require leaflet-easy-button/easy-button
 //= require map/routes
 
 var slidePanel;
@@ -46,3 +47,8 @@ var infoLabel = {
         $('.info-label').css('visibility', 'hidden');
     }
 }
+
+
+L.easyButton('fa-globe', function(btn, map){
+  slidePanel.show("/map/routes");
+}).addTo(map);
