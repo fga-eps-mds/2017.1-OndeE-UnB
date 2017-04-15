@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+    attributes:
+      location:
+        title: "Título do Local"
+        latitude: "Latitude"
+        longitude: "Longitude"
+      building:
+        acronym: "Sigla"
+        phone: "Telefone"
+        latitude: "Latitude"
