@@ -110,3 +110,51 @@ var getRoutes = function() {
       sourceMarker1.on('dragend', getRoutes);
       targetMarker1.on('dragend', getRoutes);
       targetMarker2.on('dragend', getRoutes);
+
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+var map;
+var haight = new google.maps.LatLng(-15.762902, -47.866971);
+var oceanBeach = new google.maps.LatLng(-15.760950, -47.867860);
+
+function initialize() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  var mapOptions = {
+    zoom: 14,
+    center: haight
+  }
+  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  directionsDisplay.setMap(map);
+}
+
+function calcRoute() {
+  var selectedMode = document.getElementById('mode').value;
+  var request = {
+      origin: haight,
+      destination: oceanBeach,
+      // Note that Javascript allows us to access the constant
+      // using square brackets and a string value as its
+      // "property."
+      travelMode: google.maps.TravelMode[selectedMode]
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == 'OK') {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+//Define OSM map type pointing at the OpenStreetMap tile server
+map.mapTypes.set("OSM", new google.maps.ImageMapType({
+    getTileUrl(coord, zoom) {
+        // "Wrap" x (logitude) at 180th meridian properly
+        var tilesPerGlobe = 1 << zoom;
+        var x = coord.x % tilesPerGlobe;
+        if (x < 0) x = tilesPerGlobe + x;
+        var tile = "http://tile.openstreetmap.org/" + zoom + "/" + x + "/" + coord.y + ".png";
+        return tile;
+    },
+    tileSize: new google.maps.Size(256, 256),
+    name: "OpenStreetMap",
+    maxZoom: 19
+}));
