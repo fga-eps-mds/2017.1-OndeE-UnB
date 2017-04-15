@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
 
   root 'map#index'
 
-  root 'buildings#index'
-
-  resources :buildings 
-  resources :admin
+  namespace :admin do
+    resources :buildings, except: [:show]
+    resources :rooms
+    resources :departments
+    resources :admin
+  end
 
 
   get "app/views/map/index.html.erb", to: "map#index", as: "map"
