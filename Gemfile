@@ -58,3 +58,5 @@ gem "rspec-rails", "~> 3.5.0"
 
 # Gem responsible for test coverage
 gem 'simplecov', :require => false, :group => :test
+
+gem 'rails-controller-testing'
