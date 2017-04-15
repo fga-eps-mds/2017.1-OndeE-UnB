@@ -49,6 +49,10 @@ var infoLabel = {
 }
 
 
-L.easyButton('fa-globe', function(btn, map){
+L.easyButton('fa-map-marker', function(btn, map){
   slidePanel.show("/map/routes");
 }).addTo(map);
+
+map.on('click', function(e) {
+        slidePanel.hide();
+    });
