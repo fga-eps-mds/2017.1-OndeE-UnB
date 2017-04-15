@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   get "admin/index"
 
   get "map/data"
+  get "map/routes"
+
 end
