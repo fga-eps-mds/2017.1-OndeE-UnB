@@ -52,3 +52,15 @@ var infoLabel = {
 
 L.marker(centerMap).addTo(map)
     .bindPopup('Onde É? UnB');
+
+var buildingLayer = L.geoJSON().addTo(map); //adding the building layers to the map
+map.addLayer(buildingLayer);
+
+$.getJSON( "/map/data", function(data) { //getting the json data
+  var items = [];
+  $.each(data, function (key, val){
+    var geo_json = JSON.parse(val.geo_data);
+    buildingLayer.addData(geo_json); //adding the json data to the building layer 
+
+});
+});
