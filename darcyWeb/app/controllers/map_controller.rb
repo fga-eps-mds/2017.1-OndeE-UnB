@@ -3,4 +3,11 @@ class MapController < ApplicationController
     def index
 
     end
+
+    def data
+    @buildings = Building.all
+    render json: @buildings
+
+  end
+
 end

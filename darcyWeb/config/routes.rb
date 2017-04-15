@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   get "app/views/about/about.html.erb", to: "about#about", as: "about"
   get "admin/index"
 
+  get "map/data"
 end
