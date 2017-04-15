@@ -1,3 +1,10 @@
+var latlons = {
+        map: [-15.762023, -47.867114],
+        src1: [-15.761096, -47.867648],
+        trg1: [-15.762795, -47.866854],
+        trg2: [-15.763875, -47.865910]
+      };
+
 var redIcon = L.icon({
         iconUrl: 'http://assets.route360.net/leaflet-extras/marker-icon-red.png',
         shadowUrl: 'http://assets.route360.net/leaflet-extras/marker-shadow.png',
