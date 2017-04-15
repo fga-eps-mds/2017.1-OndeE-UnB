@@ -55,3 +55,6 @@ gem 'active_record-acts_as'
 
 # Gem responsible for unit tests
 gem "rspec-rails", "~> 3.5.0"
+
+# Gem responsible for test coverage
+gem 'simplecov', :require => false, :group => :test
