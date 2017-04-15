@@ -53,17 +53,14 @@ var infoLabel = {
 L.marker(centerMap).addTo(map)
     .bindPopup('Onde É? UnB');
 
+var buildingLayer = L.geoJSON().addTo(map); //adding the building layers to the map
+map.addLayer(buildingLayer);
 
+$.getJSON( "/map/data", function(data) { //getting the json data
+  var items = [];
+  $.each(data, function (key, val){
+    var geo_json = JSON.parse(val.geo_data);
+    buildingLayer.addData(geo_json); //adding the json data to the building layer 
 
-L.layerJSON("map/data").addTo(map);
-
-  $.getJSON( "map/data", function() {
-  $.each( function( "geo_data":, {\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-47.867006007581956,-15.762497981882012],[-47.86737078800798,-15.76273546568898],[-47.866957727819695,-15.763324011317367],[-47.86659294739366,-15.76307104015989],[-47.867006007581956,-15.762497981882012]]]}}]}","acronym":"Reitoria","phone":null}] ) {
-  items.push( "<li id='" + "geo_data" + "'>" + + "</li>" );
-  });
-
-$( "<ul/>", {
-  "class": "my-new-list",
-  html: items.join( "" )
-  }).appendTo( "body" );
+});
 });
