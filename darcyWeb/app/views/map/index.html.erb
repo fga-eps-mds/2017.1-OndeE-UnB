@@ -19,11 +19,19 @@
         <div class="slide-panel animated"></div>
 
         <div id="map" style="float: left;"></div>
+
         <div class="btn-group level" role="group">
             <button type="button" class="btn btn-secondary">Subsolo</button>
             <button type="button" class="btn btn-secondary active">1</button>
             <button type="button" class="btn btn-secondary">2</button>
             <button type="button" class="btn btn-secondary">3</button>
+<strong>Mode of Travel: </strong>
+<select id="mode" onchange="calcRoute();">
+  <option value="DRIVING">Driving</option>
+  <option value="WALKING">Walking</option>
+  <option value="BICYCLING">Bicycling</option>
+  <option value="TRANSIT">Transit</option>
+</select>
         </div>
 
         <div class="info-label"></div>
@@ -32,6 +40,10 @@
           <label class="fa fa-search" title="Procurar Locais"></label>
         </div>
         <%= javascript_include_tag 'https://use.fontawesome.com/84624258b7.js' %>
+
+
+
+        <script src="https://use.fontawesome.com/84624258b7.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
