@@ -16,5 +16,5 @@ Rails.application.routes.draw do
   get "app/views/map/index.html.erb", to: "map#index", as: "map"
   get "app/views/about/about.html.erb", to: "about#about", as: "about"
   get "admin/index"
-
+  get "map/routes"
 end
