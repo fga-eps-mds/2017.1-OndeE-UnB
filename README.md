@@ -83,6 +83,11 @@ Crie o usuário vagrant e autorize-o a criar databases
 CREATE USER vagrant WITH createdb;
 ```
 
+Saia do postgres
+```console
+\q
+```
+
 Saia do usuário postgres e root
 ```console
 exit
@@ -101,5 +106,3 @@ Rode o servidor
 $ rails s
 ```
 Abra seu navegador em localhost:8080
-
-
