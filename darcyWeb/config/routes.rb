@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   get "admin/index"
 
   get "map/data"
+  get "map/building/:id", to:"map#building"
 end
