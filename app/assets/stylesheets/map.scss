@@ -7,7 +7,7 @@ html body {
 }
 
 html, body, #map {
-    height: 92.7%;
+    height: 94%;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -17,7 +17,7 @@ html, body, #map {
 .search {
     position: absolute;
     top: 100px;
-    z-index: 2;
+    z-index: 9999;
     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -156,7 +156,7 @@ label.active{
 
 .info-label {
     visibility: hidden;
-    z-index: 1;
+    z-index: 9999;
     position: absolute;
     bottom: 4rem;
     background-color: #FFF;
@@ -171,8 +171,14 @@ label.active{
     color: #666;
 }
 
-.navbar{
+.w3-top{
   height: 45px;
+  z-index: 9999;
+}
+
+.leaflet-top{
+  padding-top: 100px;
+  z-index: 9999;
 }
 
 .navbar-brand{
