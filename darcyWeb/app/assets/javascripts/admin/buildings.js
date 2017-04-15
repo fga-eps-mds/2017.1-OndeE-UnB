@@ -3,20 +3,24 @@
 
 //= require leaflet/draw.translations
 
-const $building_geo_data = $('#building_geo_data');
-const $building_geo_data_json = $building_geo_data.val();
-
-function saveToForm(geo_json) {
-    $building_geo_data.val(JSON.stringify(geo_json.toGeoJSON()));
-}
+const $building_geo_data = {
+  element: $('#building_geo_data'),
+  save: function(geo_json){
+    this.element.val(JSON.stringify(geo_json.toGeoJSON()));
+  },
+  load(){
+    const $geo_json = this.element.val();
+    if ($geo_json) {
+        drawnLayer.addData(JSON.parse($geo_json));
+    }
+  }
+};
 
 var drawnLayer = L.geoJSON().addTo(map);
 map.addLayer(drawnLayer);
 
 // Load json from the form
-if ($building_geo_data_json) {
-    drawnLayer.addData(JSON.parse($building_geo_data_json));
-}
+$building_geo_data.load();
 
 var drawControl = new L.Control.Draw({
     edit: {
@@ -36,19 +40,15 @@ var drawControl = new L.Control.Draw({
 map.on(L.Draw.Event.CREATED, function(event) {
     var layer = event.layer;
     drawnLayer.addLayer(layer);
-    saveToForm(drawnLayer);
+    $building_geo_data.save(drawnLayer);
 });
 
-// map.on(L.Draw.Event.EDITED, function(event) {
-//     var layer = event.layer;
-//     drawnLayer.addLayer(layer);
-//     saveToForm(drawnLayer);
-// });
-// map.on(L.Draw.Event.DELETED, function(event) {
-//     var layer = event.layer;
-//     drawnLayer.addLayer(layer);
-//     saveToForm(drawnLayer);
-// });
+map.on(L.Draw.Event.EDITED, function(event) {
+    $building_geo_data.save(drawnLayer);
+});
+map.on(L.Draw.Event.DELETED, function(event) {
+    $building_geo_data.save(drawnLayer);
+});
 
 map.addControl(drawControl);
 
