@@ -1,4 +1,6 @@
 //= require leaflet/map
+//= require leaflet-easy-button/easy-button
+//= require map/routes
 
 var slidePanel;
 
@@ -47,8 +49,9 @@ var infoLabel = {
 }
 
 
-
-
+L.easyButton('fa-map-marker', function(btn, map){
+  slidePanel.show("/map/routes");
+}).addTo(map);
 
 L.marker(centerMap).addTo(map)
     .bindPopup('Onde É? UnB');
@@ -64,3 +67,7 @@ $.getJSON( "/map/data", function(data) { //getting the json data
 
 });
 });
+
+map.on('click', function(e) {
+        slidePanel.hide();
+    });
