@@ -1,3 +1,5 @@
+//= require leaflet-easy-button/easy-button
+
 html body {
     height: 110%;
     color: #777;
@@ -14,7 +16,7 @@ html, body, #map {
     overflow: hidden;
 }
 
-.search {
+.search, .routes {
     position: absolute;
     top: 100px;
     z-index: 9999;
@@ -94,6 +96,17 @@ label.active{
 .slide-panel-heading h1 {
     font-size: 15px;
     color: #fff;
+}
+
+.slide-panel-routes {
+  width: 100%;
+  padding: 17px;
+  background-color: #47C9AF;
+  height: auto;
+}
+
+.slide-panel-routes {
+  border-color: transparent;
 }
 
 .slide-panel-body {
