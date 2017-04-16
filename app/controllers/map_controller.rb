@@ -4,6 +4,10 @@ class MapController < ApplicationController
 
     end
 
+    def building
+      @building = Building.find(params[:id])
+    end
+
     def data
     @buildings = Building.all
     render json: @buildings
