@@ -14,7 +14,7 @@ class Admin::BuildingsController < AdminController
 
     def update
         if @building.update(building_params)
-            redirect_to admin_buildings_path, notice: 'Edifício criado com êxito.'
+            redirect_to admin_buildings_path, notice: 'Edifício atualizado com êxito.'
         else
             render :edit
         end
