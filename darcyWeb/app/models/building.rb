@@ -1,4 +1,7 @@
 class Building < ApplicationRecord
+  has_and_belongs_to_many :departments
+  has_many :rooms
+  has_many :entrances
   acts_as :location
   validates :acronym, length: {  maximum: 20 }, presence: true
   validates :title, length: {  maximum: 50 }, presence: true
