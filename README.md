@@ -1,4 +1,21 @@
+<p align="center"><a href="https://vuejs.org" target="_blank"><img width="340"src="http://i.imgur.com/MXSzQCq.jpg"></a></p>
+
+<p align="center">
+<a href="https://circleci.com/gh/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://circleci.com/gh/fga-gpp-mds/2017.1-OndeE-UnB.svg?style=shield&circle-token=:circle-token" alt="Build Status"></a>
+<a href="https://codeclimate.com/github/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://img.shields.io/codeclimate/github/fga-gpp-mds/2017.1-OndeE-UnB.svg" alt="Build Status"></a>
+<a href="(https://github.com/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://img.shields.io/badge/ruby-2.3.1-blue.svg"></a>
+<a href="(https://github.com/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://img.shields.io/badge/rails-5.0.2-blue.svg"></a>
+<a href="http://www.gnu.org/licenses/agpl-3.0"><img src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg" alt="License: AGPL v3"></a>
+<a href="https://github.com/fga-gpp-mds"><img src="https://img.shields.io/badge/gpp--mds-2017.1-lightgrey.svg" alt="GPP/MDS 2017.1"></a>
+</p>
+
 # 2017.1 Onde É UnB
+
+## Sobre o Projeto
+
+<p align="justify">O "Onde É? UnB" tem a finalidade de facilitar a localização, via mapa interativo, de algumas das instalações e estabelecimentos do Campus Darcy Ribeiro da UnB. A plataforma web é um serviço de localização dentro do campus que pretende auxiliar os diversos frequentadores da UnB a encontrar edifícios, departamentos e salas.</p>
+
+
 
 ## Instalação
 
@@ -106,3 +123,12 @@ Rode o servidor
 $ rails s
 ```
 Abra seu navegador em localhost:8080
+
+## Licença
+
+[GNU AGPL v3.0](https://www.gnu.org/licenses/agpl-3.0.html)
+
+
+<p align="center">Grupo 2 - Gestão de Portifólios e Projetos de Software (GPP) / Métodos de Desenvolvimento de Software (MDS)<br /><br />
+<a href="https://fga.unb.br" target="_blank"><img width="200"src="https://4.bp.blogspot.com/-0aa6fAFnSnA/VzICtBQgciI/AAAAAAAARn4/SxVsQPFNeE0fxkCPVgMWbhd5qIEAYCMbwCLcB/s1600/unb-gama.png"></a>
+</p>
