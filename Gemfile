@@ -41,6 +41,9 @@ group :development, :test do
 
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
+
+  gem "rspec-rails", "~> 3.5.0"
+  gem 'factory_girl_rails'
 end
 
 group :development do
@@ -56,9 +59,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'active_record-acts_as'
-
-# Gem responsible for unit tests
-gem "rspec-rails", "~> 3.5.0"
 
 # Gem responsible for test coverage
 gem 'simplecov', :require => false, :group => :test
