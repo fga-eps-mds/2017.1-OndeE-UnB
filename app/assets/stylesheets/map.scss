@@ -80,7 +80,7 @@ label.active{
     top: 0;
     left: 0;
     width: 350px;
-    z-index: 9999;
+    z-index: 10000;
     height: 100%;
     background-color: #FFF;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
@@ -90,7 +90,7 @@ label.active{
     width: 100%;
     background-color: #47C9AF;
     height: 50px;
-    padding: 17px;
+    padding: 10px 15px;
 }
 
 .slide-panel-heading h1 {
