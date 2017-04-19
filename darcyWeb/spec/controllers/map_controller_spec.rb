@@ -26,8 +26,7 @@ describe MapController do
 		it "responds with JSON" do
 			building = FactoryGirl.create :building
 	 		get :data, format: :json
-	 		response.body.should == my_model.to_json
-			expect(response).to eq("index")
+	 		expect(response).to be_success
 		end
 	end
 
