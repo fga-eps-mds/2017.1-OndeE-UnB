@@ -64,3 +64,4 @@ gem 'active_record-acts_as'
 gem 'simplecov', :require => false, :group => :test
 
 gem 'rails-controller-testing'
+gem 'client_side_validations'
