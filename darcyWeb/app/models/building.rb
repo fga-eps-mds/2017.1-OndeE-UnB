@@ -3,9 +3,10 @@ class Building < ApplicationRecord
   has_many :rooms
   has_many :entrances
   acts_as :location
-  validates :acronym, presence: true
-  validates :title, presence: true
-  validates :latitude, presence: true
-  validates :longitude, presence: true
+  validates :acronym, length: {  maximum: 20 }, presence: true
+  validates :title, length: {  maximum: 50 }, presence: true
+  validates :phone, numericality: { only_integer: true }, presence: true
+  validates :latitude, numericality: true, presence: true
+  validates :longitude, numericality: true, presence: true
   validates :geo_data, presence: true
 end
