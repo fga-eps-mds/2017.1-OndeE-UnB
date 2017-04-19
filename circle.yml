@@ -31,7 +31,7 @@ deployment:
       - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
       - git subtree push --prefix darcyWeb git@heroku.com:ondeeunb-prod.git master
   staging:
-    branch: devel_config
+    branch: devel
     commands:
       - |
         cat >~/.netrc <<EOF
