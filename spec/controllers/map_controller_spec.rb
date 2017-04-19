@@ -3,18 +3,32 @@ require 'rails_helper'
 #Integration tests.
 describe MapController do
 
-	describe "checking the request the home map of application" do
-		it "checks the request" do
-			get:index
+	describe "#index" do
+		it "responds successfully with an HTTP 200 status code" do
+      get :index
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+    end
+
+		it "renders the index template" do
+			get :index
 			expect(response).to render_template("index")
 		end
 	end
 
-	describe "Should return the information of buildings from an id" do
-		it "Checking if the return is true" do
-			get :building, params: { id: 1 }
-			expect(assigns(:building)).to be_truthy
+	describe "GET #data" do
+		it "responds successfully with an HTTP 200 status code" do
+      get :data
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+    end
+
+		it "responds with JSON" do
+			building = FactoryGirl.create :building
+	 		get :data, format: :json
+	 		response.body.should == my_model.to_json
+			expect(response).to eq("index")
 		end
 	end
-	
+
 end
