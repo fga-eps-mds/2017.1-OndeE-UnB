@@ -9,7 +9,7 @@
 <a href="https://github.com/fga-gpp-mds"><img src="https://img.shields.io/badge/gpp--mds-2017.1-lightgrey.svg" alt="GPP/MDS 2017.1"></a>
 </p>
 
-# 2017.1 Onde É UnB
+# 2017.1 Onde É? UnB
 
 ## Sobre o Projeto
 
@@ -116,7 +116,6 @@ Entre na pasta do projeto em rails darcyWeb e execute
 rake db:setup
 rake db:migrate
 ```
-* Ps: em edição, caso não funcione essa etapa, tente rake db:create:all e entao rake db:migrate. Se quiser testar ainda mais, execute rails g scaffold Foo name:text description:text
 
 Rode o servidor
 ```console

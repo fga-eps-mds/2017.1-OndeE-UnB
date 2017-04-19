@@ -13,6 +13,8 @@ engines:
     enabled: true
   rubocop:
     enabled: true
+    config:
+      file: my_rubocop.yml
 ratings:
   paths:
   - "darcyWeb/**.js"
