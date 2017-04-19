@@ -64,3 +64,4 @@ gem "rspec-rails", "~> 3.5.0"
 gem 'simplecov', :require => false, :group => :test
 
 gem 'rails-controller-testing'
+gem 'devise'
