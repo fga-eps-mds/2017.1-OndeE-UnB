@@ -1,5 +1,23 @@
 pt-BR:
   activerecord:
+    errors:
+      messages:
+        record_invalid: "Registro inválido."
+      models:
+        building:
+          attributes:
+            acronym:
+              blank: "Insira a sigla do edifício."
+            phone:
+              blank: "Insira o número de telefone."
+        location:
+          attributes:
+            title:
+              blank: "Insira o título do edifício."
+            latitude:
+              blank: "Insira a latitude."
+            longitude:
+              blank: "Insira a longitude"
     models:
     attributes:
       location:

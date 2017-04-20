@@ -13,7 +13,7 @@
             </li>
             <li>
                 <button type="button" class="navbar-toggle">
-                    <img class="profile-img" src="./assets/images/profile.png">
+                    <%= image_tag 'avatar' , class: 'profile-img' %>
                 </button>
             </li>
         </ul>
@@ -22,35 +22,20 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown profile">
-                <a href="/html/pages/profile.html" class="dropdown-toggle" data-toggle="dropdown">
-                    <%= image_tag 'profile.png', class: 'profile-img' %>
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                    <%= image_tag 'avatar.png', class: 'profile-img' %>
                     <div class="title">Profile</div>
                 </a>
                 <div class="dropdown-menu">
                     <div class="profile-info">
-                        <h4 class="username">Admin Name</h4>
+                        <h4 class="username"><%= current_admin.name %></h4>
                     </div>
                     <ul class="action">
                         <li>
-                            <a href="#">
-                                Profile
-                            </a>
+                            <%= link_to 'Configurações', edit_admin_registration_path  %>
                         </li>
                         <li>
-                            <a href="#">
-                                <span class="badge badge-danger pull-right">5</span>
-                                My Inbox
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Setting
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Logout
-                            </a>
+                            <%= link_to 'Sair', logout_path  %>
                         </li>
                     </ul>
                 </div>
