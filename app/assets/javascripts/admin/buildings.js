@@ -1,6 +1,6 @@
 //= require leaflet/draw
 //= require leaflet/map
-
+//= require leaflet-easy-button/easy-button
 //= require leaflet/draw.translations
 
 const $building_geo_data = {
@@ -15,6 +15,24 @@ const $building_geo_data = {
     }
   }
 };
+
+const $building_coods = {
+  element_lat: $('#building_latitude'),
+  element_lng: $('#building_longitude'),
+  save: function(lat, lng){
+    this.element_lat.val(lat);
+    this.element_lng.val(lng);
+  },
+  load: function(){
+    const $lat = this.element_lat.val();
+    const $lng = this.element_lng.val();
+    if ($lat && $lng) {
+        map.flyTo(new L.LatLng($lat, $lng));
+    }
+  }
+}
+$building_coods.load();
+
 
 var drawnLayer = L.geoJSON().addTo(map);
 map.addLayer(drawnLayer);
@@ -52,4 +70,7 @@ map.on(L.Draw.Event.DELETED, function(event) {
 
 map.addControl(drawControl);
 
-// TODO:10 Create button to define the location
+L.easyButton('fa-map-marker', function(btn, map){
+  const $center = map.getCenter();
+  $building_coods.save($center.lat, $center.lng);
+}).addTo(map);
