@@ -8,7 +8,7 @@ Feature: View Unb Map
 		When I go to the homepage
 		And  I wait for the map to appear
 		Then I should see the map
-		#And I should see zoom in and out buttons
+		And I should see zoom in and out buttons
 		And I should see the buttons to change the floor
 
 
@@ -17,3 +17,11 @@ Feature: View Unb Map
 	#	And I wait for the map to appear
 	#	When I click on the zoom in
 	#	Then the map should be zoomed in
+
+
+
+	Scenario: Search for places
+		Given I am a normal user
+		When I go to the homepage
+		Then I should see a search box
+

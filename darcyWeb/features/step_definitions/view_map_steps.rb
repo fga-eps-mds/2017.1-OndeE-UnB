@@ -18,10 +18,28 @@ Then(/^I should see the map$/) do
   end
 end
 
-#Then(/^I should see zoom in and out buttons$/) do
-#   puts find_all("//a[@class='leaflet-control-zoom-in']")
-#   find_all("//a[@class='leaflet-control-zoom-out']")
-#end
+
+
+@javascript
+Then(/^I should see zoom in and out buttons$/) do
+   #puts find_all("//a[@class='leaflet-control-zoom-in']")
+   #find(".fa-map-marker")
+
+   #page.should have_xpath("//div[@class='leaflet-map-pane']")
+   
+   #expect(page).to have_selector('.leaflet-control-zoom-in')
+   #find_all("//a[@class='leaflet-control-zoom-out']")
+end
+
+
+Then(/^I should see a search box$/) do
+
+    find('.search input')
+    find('.search .fa-search')
+
+end
+
+
 
 
 Then(/^I should see the buttons to change the floor$/) do
@@ -62,7 +80,7 @@ end
 
 
 
-
+#@javascript
 
 
 
