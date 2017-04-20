@@ -5,7 +5,7 @@
                 <%= title %>
             </div>
             <div class="card-body">
-                <%= form_for(building, url: url) do |f| %>
+                <%= form_for(building, url: url, validate: true) do |f| %>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <%= f.label :acronym %>

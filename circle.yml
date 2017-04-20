@@ -1,0 +1,47 @@
+# Circle CI Continuous Integration Configuration
+
+version: 1
+# general:
+#   build_dir: darcyWeb
+machine:
+  ruby:
+    version: 2.3.0
+dependencies:
+  override:
+    - cd darcyWeb && bundle install
+    - cd darcyWeb && bundle exec rake db:setup
+    - cd darcyWeb && bundle exec rake db:migrate
+test:
+  override:
+    - cd darcyWeb && bundle exec rake test
+deployment:
+  production:
+    branch: master
+    commands:
+      - |
+        cat >~/.netrc <<EOF
+        machine api.heroku.com
+          login ondeeunb@gmail.com
+          password ondeeunb123
+        machine git.heroku.com
+          login ondeeunb@gmail.com
+          password ondeeunb123
+        EOF
+      - chmod 600 ~/.netrc # Heroku cli complains about permissions without this
+      - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
+      - git subtree push --prefix darcyWeb git@heroku.com:ondeeunb-prod.git master
+  staging:
+    branch: devel
+    commands:
+      - |
+        cat >~/.netrc <<EOF
+        machine api.heroku.com
+          login ondeeunb@gmail.com
+          password ondeeunb123
+        machine git.heroku.com
+          login ondeeunb@gmail.com
+          password ondeeunb123
+        EOF
+      - chmod 600 ~/.netrc # Heroku cli complains about permissions without this
+      - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
+      - git subtree push --prefix darcyWeb git@heroku.com:ondeeunb-dev.git master
