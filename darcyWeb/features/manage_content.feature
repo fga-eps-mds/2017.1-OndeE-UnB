@@ -60,8 +60,17 @@ Feature: Manage the web application content
 
 
 
-	#Scenario: Go to the page to create departments
-	#	Given I am an admin user
-	#	When I go to the departments page
-	#	And I click on new department
-	#	Then I should see a link to manage rooms
+	Scenario: Go to the page to create buildings
+		Given I am an admin user
+		And I go to the buildings page
+		When I click to add a building
+		Then I should go to the new building page
+
+
+	Scenario: Create a non valid building
+		Given I am an admin user
+		And I go to the new building page
+		When I create a non valid building
+		Then I must not see it in the buildings page
+
+
