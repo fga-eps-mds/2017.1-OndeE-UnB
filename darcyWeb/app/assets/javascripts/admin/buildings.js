@@ -8,7 +8,7 @@ const $building_geo_data = {
   save: function(geo_json){
     this.element.val(JSON.stringify(geo_json.toGeoJSON()));
   },
-  load(){
+  load: function(){
     const $geo_json = this.element.val();
     if ($geo_json) {
         drawnLayer.addData(JSON.parse($geo_json));

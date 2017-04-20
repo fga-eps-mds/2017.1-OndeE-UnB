@@ -1,4 +1,6 @@
 //= require leaflet/map
+//= require leaflet-easy-button/easy-button
+//= require map/routes
 
 var slidePanel;
 
@@ -18,17 +20,17 @@ $(document).ready(function() {
     });
     slidePanel = {
         panel: $('.slide-panel'),
-        content() {
+        content: function() {
 
         },
-        show(url) {
+        show: function(url) {
             this.panel.load(url, function() {
                 $(this).removeClass('slideOutLeft').addClass('slideInLeft').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
                     $(this).css('visibility', 'visible');
                 });
             });
         },
-        hide() {
+        hide: function() {
             this.panel.removeClass('slideInLeft').addClass('slideOutLeft').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
                 $(this).css('visibility', 'hidden');
             });
@@ -47,8 +49,35 @@ var infoLabel = {
 }
 
 
+function onEachFeature(feature,layer){
+  layer.on('click', function(){
+    slidePanel.show('/map/building/1');
+  });
+}
 
+
+L.easyButton('fa-map-marker', function(btn, map){
+  slidePanel.show("/map/routes");
+}).addTo(map);
 
 
 L.marker(centerMap).addTo(map)
     .bindPopup('Onde É? UnB');
+
+var buildingLayer = L.geoJSON('', {
+    onEachFeature: onEachFeature
+}).addTo(map); //adding the building layers to the map
+map.addLayer(buildingLayer);
+
+$.getJSON( "/map/data", function(data) { //getting the json data
+  var items = [];
+  $.each(data, function (key, val){
+    var geo_json = JSON.parse(val.geo_data);
+    buildingLayer.addData(geo_json); //adding the json data to the building layer
+
+});
+});
+
+map.on('click', function(e) {
+        slidePanel.hide();
+    });
