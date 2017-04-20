@@ -13,7 +13,7 @@
             </li>
             <li>
                 <button type="button" class="navbar-toggle">
-                    <img class="profile-img" src="./assets/images/profile.png">
+                    <%= image_tag 'avatar' , class: 'profile-img' %>
                 </button>
             </li>
         </ul>
@@ -22,8 +22,8 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown profile">
-                <a href="/html/pages/profile.html" class="dropdown-toggle" data-toggle="dropdown">
-                    <%= image_tag 'profile.png', class: 'profile-img' %>
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                    <%= image_tag 'avatar.png', class: 'profile-img' %>
                     <div class="title">Profile</div>
                 </a>
                 <div class="dropdown-menu">
@@ -32,10 +32,10 @@
                     </div>
                     <ul class="action">
                         <li>
-                          <%= link_to 'Configurações', edit_admin_registration_path  %>
+                            <%= link_to 'Configurações', edit_admin_registration_path  %>
                         </li>
                         <li>
-                          <%= link_to 'Sair', destroy_admin_session_path, method: :delete  %>
+                            <%= link_to 'Sair', logout_path  %>
                         </li>
                     </ul>
                 </div>
