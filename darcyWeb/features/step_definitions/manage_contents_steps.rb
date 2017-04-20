@@ -81,5 +81,44 @@ end
 
 
 
+Given(/^I go to the buildings page$/) do
+  visit admin_buildings_path
+end
 
-#http://localhost:8080/admin/index
+When(/^I click to add a building$/) do
+  find_all('.card-action li a')[0].click
+end
+
+Then(/^I should go to the new building page$/) do
+  expected = new_admin_building_path
+  actual = URI.parse(current_url).path
+  expect(actual).to eql(expected)
+end
+
+
+
+
+
+Given(/^I go to the new building page$/) do
+  visit new_admin_building_path
+end
+
+When(/^I create a non valid building$/) do
+  @sigla = 'adfsasdfa'
+  @title = 'adfsasfsf'
+
+  fill_in "building_acronym", :with => @sigla
+  fill_in "building_title", :with => @title
+  click_button "Salvar"
+end
+
+Then(/^I must not see it in the buildings page$/) do
+  visit admin_buildings_path
+
+  expect(page).not_to have_content(@sigla)
+  expect(page).not_to have_content(@title)
+end
+
+
+
+
