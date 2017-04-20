@@ -57,8 +57,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'active_record-acts_as'
 
-
 gem 'devise'
+
 # Gem responsible for unit tests
 gem "rspec-rails", "~> 3.5.0"
 
@@ -66,4 +66,5 @@ gem "rspec-rails", "~> 3.5.0"
 gem 'simplecov', :require => false, :group => :test
 
 gem 'rails-controller-testing'
+
 gem 'client_side_validations'
