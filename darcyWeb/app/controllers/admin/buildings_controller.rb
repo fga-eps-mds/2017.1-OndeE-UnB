@@ -14,7 +14,7 @@ class Admin::BuildingsController < AdminController
 
     def update
         if @building.update(building_params)
-            redirect_to admin_buildings_path, notice: 'Edifício atualizado com êxito.'
+            redirect_to admin_buildings_path, notice: alert_success('Edifício editado com êxito.')
         else
             render :edit
         end
@@ -23,7 +23,7 @@ class Admin::BuildingsController < AdminController
     def create
         @building = Building.new(building_params)
         if @building.save
-            redirect_to admin_buildings_path, notice: 'Edifício criado com êxito.'
+            redirect_to admin_buildings_path, notice: alert_success('Edifício criado com êxito.')
         else
             render :new
         end
@@ -31,11 +31,18 @@ class Admin::BuildingsController < AdminController
 
     def destroy
         @building.destroy
-        redirect_to admin_buildings_path, notice: 'Edifício excluído com êxito.'
+        redirect_to admin_buildings_path, notice: alert_success('Edifício excluído com êxito.')
     end
 
     private
 
+    def alert_success(message)
+      "<div class='alert alert-success'>#{message}</div>"
+    end
+
+    def alert_danger(message)
+      "<div class='alert alert-danger'>#{message}</div>"
+    end
     def set_building
         @building = Building.find(params[:id])
     end
