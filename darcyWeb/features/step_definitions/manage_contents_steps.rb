@@ -48,8 +48,9 @@ Given(/^I am an not an admin user$/) do
 end
 
 Then(/^I should be redirected to the login page$/) do
-	expect(page).to have_content("Log in")
-	expect(page).to have_content("Forgot your password")
+	#expect(page).to have_content("Log in")
+	#expect(page).to have_content("Forgot your password")
+	find('#new_admin')
 end
 
 
