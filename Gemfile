@@ -57,6 +57,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'active_record-acts_as'
 
+
+gem 'devise'
 # Gem responsible for unit tests
 gem "rspec-rails", "~> 3.5.0"
 
