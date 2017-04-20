@@ -1,3 +1,5 @@
+//= require leaflet-easy-button/easy-button
+
 html body {
     height: 110%;
     color: #777;
@@ -7,17 +9,17 @@ html body {
 }
 
 html, body, #map {
-    height: 92.7%;
+    height: 94%;
     width: 100%;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
 
-.search {
+.search, .routes {
     position: absolute;
     top: 100px;
-    z-index: 2;
+    z-index: 9999;
     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -78,7 +80,7 @@ label.active{
     top: 0;
     left: 0;
     width: 350px;
-    z-index: 9999;
+    z-index: 10000;
     height: 100%;
     background-color: #FFF;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
@@ -88,12 +90,23 @@ label.active{
     width: 100%;
     background-color: #47C9AF;
     height: 50px;
-    padding: 17px;
+    padding: 10px 15px;
 }
 
 .slide-panel-heading h1 {
     font-size: 15px;
     color: #fff;
+}
+
+.slide-panel-routes {
+  width: 100%;
+  padding: 17px;
+  background-color: #47C9AF;
+  height: auto;
+}
+
+.slide-panel-routes {
+  border-color: transparent;
 }
 
 .slide-panel-body {
@@ -156,7 +169,7 @@ label.active{
 
 .info-label {
     visibility: hidden;
-    z-index: 1;
+    z-index: 9999;
     position: absolute;
     bottom: 4rem;
     background-color: #FFF;
@@ -171,8 +184,14 @@ label.active{
     color: #666;
 }
 
-.navbar{
+.w3-top{
   height: 45px;
+  z-index: 9999;
+}
+
+.leaflet-top{
+  padding-top: 100px;
+  z-index: 9999;
 }
 
 .navbar-brand{
