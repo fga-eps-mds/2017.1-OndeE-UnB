@@ -23,15 +23,15 @@ end
 
 
 Then(/^I should see a link to manage departments$/) do
-	find('.title', :text => 'Departamentos')
+	find_all('.title', :text => 'Departamentos')[0]
 end
 
 Then(/^I should see a link to manage buildings$/) do
-	find('.title', :text => 'Edifícios')
+	find_all('.title', :text => 'Edifícios')[0]
 end
 
 Then(/^I should see a link to manage rooms$/) do
-	find('.title', :text => 'Salas')
+	find_all('.title', :text => 'Salas')[0]
 end
 
 
@@ -57,7 +57,7 @@ end
 
 
 When(/^I click on the departments link$/) do
-  find('a', :text => 'Departamentos').click
+  find_all('a', :text => 'Departamentos')[0].click
 end
 
 Then(/^I should go to the departments index page$/) do
@@ -70,7 +70,7 @@ end
 
 
 When(/^I click on the buildings link$/) do
-  find('a', :text => 'Edifícios').click
+  find_all('a', :text => 'Edifícios')[0].click
 end
 
 Then(/^I should go to the buildings index page$/) do
