@@ -20,17 +20,17 @@ $(document).ready(function() {
     });
     slidePanel = {
         panel: $('.slide-panel'),
-        content() {
+        content: function() {
 
         },
-        show(url) {
+        show: function(url) {
             this.panel.load(url, function() {
                 $(this).removeClass('slideOutLeft').addClass('slideInLeft').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
                     $(this).css('visibility', 'visible');
                 });
             });
         },
-        hide() {
+        hide: function() {
             this.panel.removeClass('slideInLeft').addClass('slideOutLeft').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
                 $(this).css('visibility', 'hidden');
             });
