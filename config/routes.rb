@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  devise_scope :admin do
+    get 'admin/login', to: 'devise/sessions#new', as: 'new_login'
+    post 'admin/login', to: 'devise/sessions#create', as: 'login'
+    get 'admin/logout', to: 'devise/sessions#destroy', as: 'logout'
+    get 'admin/registration', to: 'devise/registrations#new', as: 'new_registration'
+    post 'admin/registration', to: 'devise/registrations#create', as: 'registration'
+  end
+  devise_for :admins
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
@@ -18,6 +26,10 @@ Rails.application.routes.draw do
   get "admin/index"
 
   get "map/data"
+
+  get "map/building/:id", to:"map#building"
+
   get "map/routes"
+
 
 end
