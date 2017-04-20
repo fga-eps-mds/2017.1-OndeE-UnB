@@ -1,0 +1,19 @@
+<%= form_for(resource, as: resource_name, url: login_path) do |f| %>
+<div class="input-group">
+    <span class="input-group-addon">
+        <i class="fa fa-user" aria-hidden="true"></i>
+    </span>
+    <%= f.email_field :email, class: "form-control", placeholder: "Email", autofocus: true %>
+</div>
+
+<div class="input-group">
+    <span class="input-group-addon">
+        <i class="fa fa-key" aria-hidden="true"></i>
+    </span>
+    <%= f.password_field :password, class: "form-control", placeholder: "Senha", autocomplete: "off" %>
+</div>
+
+<div class="text-center">
+    <%= f.submit "Log in", class: "btn btn-success btn-submit" %>
+</div>
+<% end %>
