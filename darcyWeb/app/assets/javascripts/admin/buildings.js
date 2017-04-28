@@ -20,8 +20,10 @@ const $building_coods = {
   element_lat: $('#building_latitude'),
   element_lng: $('#building_longitude'),
   save: function(lat, lng){
-    this.element_lat.val(lat);
-    this.element_lng.val(lng);
+    if (this.element_lat.val(lat) && this.element_lng.val(lng)) {
+      return true;
+    } else {
+    return false; }
   },
   load: function(){
     const $lat = this.element_lat.val();

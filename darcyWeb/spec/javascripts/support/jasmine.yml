@@ -12,7 +12,11 @@
 #
 src_files:
   - assets/application.js
-
+  - assets/javascripts/admin/buildings.js
+  - assets/javascripts/leaflet/map.js
+  - assets/javascripts/leaflet/draw.js
+  - assets/javascripts/leaflet/draw.translations.js
+  - assets/javascripts/map/routes.js
 # stylesheets
 #
 # Return an array of stylesheet filepaths relative to src_dir to include before jasmine specs.
@@ -132,4 +136,3 @@ boot_files:
 # random: true
 #
 random:
-
