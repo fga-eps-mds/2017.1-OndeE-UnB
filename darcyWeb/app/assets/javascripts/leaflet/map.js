@@ -1,4 +1,4 @@
-// This is the common setting to starting up the map
+// this is the common setting to starting up the map
 
 const centerMap = [-15.764544, -47.866929];
 
