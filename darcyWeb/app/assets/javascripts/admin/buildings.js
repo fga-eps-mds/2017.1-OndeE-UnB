@@ -16,7 +16,7 @@ const $building_geo_data = {
   }
 };
 
-const $building_coods = {
+const $building_coords = {
   element_lat: $('#building_latitude'),
   element_lng: $('#building_longitude'),
   save: function(lat, lng){
@@ -33,7 +33,7 @@ const $building_coods = {
     }
   }
 }
-$building_coods.load();
+$building_coords.load();
 
 
 var drawnLayer = L.geoJSON().addTo(map);
@@ -74,5 +74,5 @@ map.addControl(drawControl);
 
 L.easyButton('fa-map-marker', function(btn, map){
   const $center = map.getCenter();
-  $building_coods.save($center.lat, $center.lng);
+  $building_coords.save($center.lat, $center.lng);
 }).addTo(map);
