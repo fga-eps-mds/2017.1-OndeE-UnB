@@ -24,7 +24,7 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    active_record-acts_as (2.4.1)
+    active_record-acts_as (2.4.2)
       activerecord (>= 4.2)
       activesupport (>= 4.2)
     activejob (5.0.2)
@@ -55,7 +55,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    client_side_validations (9.2.0)
+    client_side_validations (9.3.0)
       jquery-rails (~> 4.3)
       js_regex (~> 1.2)
       rails (>= 5.0.0.1, < 5.2)
@@ -105,6 +105,12 @@ GEM
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     i18n (0.8.1)
+    jasmine (2.6.0)
+      jasmine-core (>= 2.6.0, < 3.0.0)
+      phantomjs
+      rack (>= 1.2.1)
+      rake
+    jasmine-core (2.6.1)
     jbuilder (2.6.3)
       activesupport (>= 3.0.0, < 5.2)
       multi_json (~> 1.2)
@@ -120,7 +126,7 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.7)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
-    mail (2.6.4)
+    mail (2.6.5)
       mime-types (>= 1.16, < 4)
     method_source (0.8.2)
     mime-types (3.1)
@@ -135,6 +141,7 @@ GEM
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
     pg (0.18.4)
+    phantomjs (2.1.1.0)
     public_suffix (2.0.5)
     puma (3.8.2)
     rack (2.0.1)
@@ -250,6 +257,7 @@ DEPENDENCIES
   database_cleaner
   devise
   factory_girl_rails
+  jasmine
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)

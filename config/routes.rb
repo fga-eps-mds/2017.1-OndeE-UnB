@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   devise_scope :admin do
     get 'admin/login', to: 'devise/sessions#new', as: 'new_login'
     post 'admin/login', to: 'devise/sessions#create', as: 'login'
