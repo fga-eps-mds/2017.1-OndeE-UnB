@@ -1,3 +1,7 @@
+<%= content_tag :div, class: "buildings_class", data: {buildings: @building} do %>
+<% end %>
+<h1> <%= @building.id %> </h1>
+
 <div class="slide-panel-heading">
   <h1><%= @building.acronym %></h1>
 </div>
@@ -5,6 +9,8 @@
 <div class="Slide-panel-body">
   <div class="row">
     <div class="col-md-12 form-group">
+
+
       <div class="label">Edifício</div>
       <div class="data"><%= @building.title %></div>
     </div>
