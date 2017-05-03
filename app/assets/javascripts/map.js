@@ -1,9 +1,15 @@
 //= require leaflet/map
+//= require map/sidebar
 //= require leaflet-easy-button/easy-button
 //= require map/routes
 
 var slidePanel;
 
+var sidebarBuilding = L.control.sidebar('sidebar', {
+    position: 'left'
+});
+
+map.addControl(sidebarBuilding);
 
 $(document).ready(function() {
     $('label').click(function() {
@@ -78,6 +84,28 @@ function onEachFeature(feature,layer){
 
   layer.on('click', function(){
 
+
+      if (sidebarBuilding.isVisible()){
+        sidebarBuilding.hide();
+      }
+      else {
+        $("#sidebar").load( "/map/building", function() {
+         sidebarBuilding.show();
+        });
+      }
+
+
+    L.Routing.control({
+      waypoints: [
+        L.latLng(-15.762023, -47.867114),
+        L.latLng(-15.761096, -47.867648)
+      ],
+     router: L.Routing.mapzen('mapzen-CEq2eYW', {
+       costing:'pedestrian'
+     }),
+     formatter: new L.Routing.mapzenFormatter()
+    }).addTo(map);
+    var visible = sidebar.isVisible();
     var actualBuildingKey = this.feature.geometry.coordinates[0].key;
     console.log("#ActualBuildingId");
     console.log(actualBuildingKey);
@@ -124,13 +152,20 @@ function onEachFeature(feature,layer){
 
         console.log("#0.1");
         console.log(data);
-
+     if (sidebarBuilding.isVisible()){
+        sidebarBuilding.hide();
+      } else {
         if(validKeyBuilding){
             var numberToBuilding = '/map/building/' +(actualBuildingKey+1);
-            slidePanel.show(numberToBuilding);
+            $("#sidebar").load( numberToBuilding, function() {
+         sidebarBuilding.show();
+        });
         }else{
             console.log("Invalid id to building selected");
         }
+
+      }
+
     });
 
 
@@ -147,15 +182,15 @@ L.easyButton('fa-map-marker', function(btn, map){
 L.marker(centerMap).addTo(map).bindPopup('Onde É? UnB');
 
 var buildingLayer = L.geoJSON('', {
-    onEachFeature: onEachFeature
+  onEachFeature: onEachFeature
 }).addTo(map); //adding the building layers to the map
 map.addLayer(buildingLayer);
 
+
 $.getJSON( "/map/data", function(data) { //getting the json data
     var items = [];
-    //console.log("Meus itens" + items);
-    console.log("-----------------");
     $.each(data, function (key, val){
+
     var geo_json = JSON.parse(val.geo_data);
     geo_json.features[0].geometry.coordinates[0].key = key;
     //console.log(geo_json);
@@ -164,8 +199,9 @@ $.getJSON( "/map/data", function(data) { //getting the json data
     buildingLayer.addData(geo_json); //adding the json data to the building layer
 
     });
+
 });
 
 map.on('click', function(e) {
-        slidePanel.hide();
-    });
+  //slidePanel.hide();
+});

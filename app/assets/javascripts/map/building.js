@@ -6,7 +6,7 @@ L.easyButton('fa-map-marker', function(btn, map) {
     sidebar.hide();
   }
   else {
-    $("#sidebar").load( "/map/routes", function() {
+    $("#sidebar").load( "/map/building", function() {
       sidebar.show();
     });
   }
@@ -22,3 +22,4 @@ L.Routing.control({
  }),
  formatter: new L.Routing.mapzenFormatter()
 }).addTo(map);
+
