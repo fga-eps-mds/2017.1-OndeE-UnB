@@ -34,7 +34,7 @@
     transition: all 0.2s ease;
 }
 
-.leaflet-control-container .leaflet-routing-container-hide .leaflet-routing-alt, 
+.leaflet-control-container .leaflet-routing-container-hide .leaflet-routing-alt,
 .leaflet-control-container .leaflet-routing-container-hide .leaflet-routing-geocoders {
     display: none;
 }
