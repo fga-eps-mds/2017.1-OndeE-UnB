@@ -9,13 +9,6 @@ function onEachFeature(feature, layer) {
   });
 }
 
-
-L.easyButton('fa-map-marker', function(btn, map) {
-  //slidePanel.show("/map/routes");
-}).addTo(map);
-
-
-
 L.marker(centerMap).addTo(map)
   .bindPopup('Onde É? UnB');
 
