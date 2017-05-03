@@ -1,214 +1,197 @@
-/**
- * @name Sidebar
- * @class L.Control.Sidebar
- * @extends L.Control
- * @param {string} id - The id of the sidebar element (without the # character)
- * @param {Object} [options] - Optional options object
- * @param {string} [options.position=left] - Position of the sidebar: 'left' or 'right'
- * @see L.control.sidebar
- */
-L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
+L.Control.Sidebar = L.Control.extend({
+
     includes: L.Mixin.Events,
 
     options: {
-        position: 'left'
+        closeButton: true,
+        position: 'left',
+        autoPan: true,
     },
 
-    initialize: function (id, options) {
-        var i, child;
-
+    initialize: function (placeholder, options) {
         L.setOptions(this, options);
 
-        // Find sidebar HTMLElement
-        this._sidebar = L.DomUtil.get(id);
+        // Find content container
+        var content = this._contentContainer = L.DomUtil.get(placeholder);
 
-        // Attach .sidebar-left/right class
-        L.DomUtil.addClass(this._sidebar, 'sidebar-' + this.options.position);
+        // Remove the content container from its original parent
+        content.parentNode.removeChild(content);
 
-        // Attach touch styling if necessary
-        if (L.Browser.touch)
-            L.DomUtil.addClass(this._sidebar, 'leaflet-touch');
+        var l = 'leaflet-';
 
-        // Find sidebar > div.sidebar-content
-        for (i = this._sidebar.children.length - 1; i >= 0; i--) {
-            child = this._sidebar.children[i];
-            if (child.tagName == 'DIV' &&
-                    L.DomUtil.hasClass(child, 'sidebar-content'))
-                this._container = child;
-        }
+        // Create sidebar container
+        var container = this._container =
+            L.DomUtil.create('div', l + 'sidebar ' + this.options.position);
 
-        // Find sidebar ul.sidebar-tabs > li, sidebar .sidebar-tabs > ul > li
-        this._tabitems = this._sidebar.querySelectorAll('ul.sidebar-tabs > li, .sidebar-tabs > ul > li');
-        for (i = this._tabitems.length - 1; i >= 0; i--) {
-            this._tabitems[i]._sidebar = this;
-        }
+        // Style and attach content container
+        L.DomUtil.addClass(content, l + 'control');
+        container.appendChild(content);
 
-        // Find sidebar > div.sidebar-content > div.sidebar-pane
-        this._panes = [];
-        this._closeButtons = [];
-        for (i = this._container.children.length - 1; i >= 0; i--) {
-            child = this._container.children[i];
-            if (child.tagName == 'DIV' &&
-                L.DomUtil.hasClass(child, 'sidebar-pane')) {
-                this._panes.push(child);
-
-                var closeButtons = child.querySelectorAll('.sidebar-close');
-                for (var j = 0, len = closeButtons.length; j < len; j++)
-                    this._closeButtons.push(closeButtons[j]);
-            }
+        // Create close button and attach it if configured
+        if (this.options.closeButton) {
+            var close = this._closeButton =
+                L.DomUtil.create('a', 'close', container);
+            close.innerHTML = '&times;';
         }
     },
 
-    /**
-     * Add this sidebar to the specified map.
-     *
-     * @param {L.Map} map
-     * @returns {Sidebar}
-     */
     addTo: function (map) {
-        var i, child;
+        var container = this._container;
+        var content = this._contentContainer;
+
+        // Attach event to close button
+        if (this.options.closeButton) {
+            var close = this._closeButton;
+
+            L.DomEvent.on(close, 'click', this.hide, this);
+        }
+
+        L.DomEvent
+            .on(container, 'transitionend',
+                this._handleTransitionEvent, this)
+            .on(container, 'webkitTransitionEnd',
+                this._handleTransitionEvent, this);
+
+        // Attach sidebar container to controls container
+        var controlContainer = map._controlContainer;
+        controlContainer.insertBefore(container, controlContainer.firstChild);
 
         this._map = map;
 
-        for (i = this._tabitems.length - 1; i >= 0; i--) {
-            child = this._tabitems[i];
-            var sub = child.querySelector('a');
-            if (sub.hasAttribute('href') && sub.getAttribute('href').slice(0,1) == '#') {
-                L.DomEvent
-                    .on(sub, 'click', L.DomEvent.preventDefault )
-                    .on(sub, 'click', this._onClick, child);
-            }
-        }
-
-        for (i = this._closeButtons.length - 1; i >= 0; i--) {
-            child = this._closeButtons[i];
-            L.DomEvent.on(child, 'click', this._onCloseClick, this);
-        }
+        // Make sure we don't drag the map when we interact with the content
+        var stop = L.DomEvent.stopPropagation;
+        var fakeStop = L.DomEvent._fakeStop || stop;
+        L.DomEvent
+            .on(content, 'contextmenu', stop)
+            .on(content, 'click', fakeStop)
+            .on(content, 'mousedown', stop)
+            .on(content, 'touchstart', stop)
+            .on(content, 'dblclick', fakeStop)
+            .on(content, 'mousewheel', stop)
+            .on(content, 'MozMousePixelScroll', stop);
 
         return this;
     },
 
-    /**
-     * @deprecated - Please use remove() instead of removeFrom(), as of Leaflet 0.8-dev, the removeFrom() has been replaced with remove()
-     * Removes this sidebar from the map.
-     * @param {L.Map} map
-     * @returns {Sidebar}
-     */
-     removeFrom: function(map) {
-         console.log('removeFrom() has been deprecated, please use remove() instead as support for this function will be ending soon.');
-         this.remove(map);
-     },
+    removeFrom: function (map) {
+        //if the control is visible, hide it before removing it.
+        this.hide();
 
-    /**
-     * Remove this sidebar from the map.
-     *
-     * @param {L.Map} map
-     * @returns {Sidebar}
-     */
-    remove: function (map) {
-        var i, child;
+        var container = this._container;
+        var content = this._contentContainer;
 
+        // Remove sidebar container from controls container
+        var controlContainer = map._controlContainer;
+        controlContainer.removeChild(container);
+
+        //disassociate the map object
         this._map = null;
 
-        for (i = this._tabitems.length - 1; i >= 0; i--) {
-            child = this._tabitems[i];
-            L.DomEvent.off(child.querySelector('a'), 'click', this._onClick);
-        }
+        // Unregister events to prevent memory leak
+        var stop = L.DomEvent.stopPropagation;
+        var fakeStop = L.DomEvent._fakeStop || stop;
+        L.DomEvent
+            .off(content, 'contextmenu', stop)
+            .off(content, 'click', fakeStop)
+            .off(content, 'mousedown', stop)
+            .off(content, 'touchstart', stop)
+            .off(content, 'dblclick', fakeStop)
+            .off(content, 'mousewheel', stop)
+            .off(content, 'MozMousePixelScroll', stop);
 
-        for (i = this._closeButtons.length - 1; i >= 0; i--) {
-            child = this._closeButtons[i];
-            L.DomEvent.off(child, 'click', this._onCloseClick, this);
-        }
+        L.DomEvent
+            .off(container, 'transitionend',
+                this._handleTransitionEvent, this)
+            .off(container, 'webkitTransitionEnd',
+                this._handleTransitionEvent, this);
 
-        return this;
-    },
+        if (this._closeButton && this._close) {
+            var close = this._closeButton;
 
-    /**
-     * Open sidebar (if necessary) and show the specified tab.
-     *
-     * @param {string} id - The id of the tab to show (without the # character)
-     */
-    open: function(id) {
-        var i, child;
-
-        // hide old active contents and show new content
-        for (i = this._panes.length - 1; i >= 0; i--) {
-            child = this._panes[i];
-            if (child.id == id)
-                L.DomUtil.addClass(child, 'active');
-            else if (L.DomUtil.hasClass(child, 'active'))
-                L.DomUtil.removeClass(child, 'active');
-        }
-
-        // remove old active highlights and set new highlight
-        for (i = this._tabitems.length - 1; i >= 0; i--) {
-            child = this._tabitems[i];
-            if (child.querySelector('a').hash == '#' + id)
-                L.DomUtil.addClass(child, 'active');
-            else if (L.DomUtil.hasClass(child, 'active'))
-                L.DomUtil.removeClass(child, 'active');
-        }
-
-        this.fire('content', { id: id });
-
-        // open sidebar (if necessary)
-        if (L.DomUtil.hasClass(this._sidebar, 'collapsed')) {
-            this.fire('opening');
-            L.DomUtil.removeClass(this._sidebar, 'collapsed');
+            L.DomEvent.off(close, 'click', this.hide, this);
         }
 
         return this;
     },
 
-    /**
-     * Close the sidebar (if necessary).
-     */
-    close: function() {
-        // remove old active highlights
-        for (var i = this._tabitems.length - 1; i >= 0; i--) {
-            var child = this._tabitems[i];
-            if (L.DomUtil.hasClass(child, 'active'))
-                L.DomUtil.removeClass(child, 'active');
-        }
+    isVisible: function () {
+        return L.DomUtil.hasClass(this._container, 'visible');
+    },
 
-        // close sidebar
-        if (!L.DomUtil.hasClass(this._sidebar, 'collapsed')) {
-            this.fire('closing');
-            L.DomUtil.addClass(this._sidebar, 'collapsed');
+    show: function () {
+        if (!this.isVisible()) {
+            L.DomUtil.addClass(this._container, 'visible');
+            if (this.options.autoPan) {
+                this._map.panBy([-this.getOffset() / 2, 0], {
+                    duration: 0.5
+                });
+            }
+            this.fire('show');
+        }
+    },
+
+    hide: function (e) {
+        if (this.isVisible()) {
+            L.DomUtil.removeClass(this._container, 'visible');
+            if (this.options.autoPan) {
+                this._map.panBy([this.getOffset() / 2, 0], {
+                    duration: 0.5
+                });
+            }
+            this.fire('hide');
+        }
+        if(e) {
+            L.DomEvent.stopPropagation(e);
+        }
+    },
+
+    toggle: function () {
+        if (this.isVisible()) {
+            this.hide();
+        } else {
+            this.show();
+        }
+    },
+
+    getContainer: function () {
+        return this._contentContainer;
+    },
+
+    getCloseButton: function () {
+        return this._closeButton;
+    },
+
+    setContent: function (content) {
+        var container = this.getContainer();
+
+        if (typeof content === 'string') {
+            container.innerHTML = content;
+        } else {
+            // clean current content
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+
+            container.appendChild(content);
         }
 
         return this;
     },
 
-    /**
-     * @private
-     */
-    _onClick: function() {
-        if (L.DomUtil.hasClass(this, 'active'))
-            this._sidebar.close();
-        else if (!L.DomUtil.hasClass(this, 'disabled'))
-            this._sidebar.open(this.querySelector('a').hash.slice(1));
+    getOffset: function () {
+        if (this.options.position === 'right') {
+            return -this._container.offsetWidth;
+        } else {
+            return this._container.offsetWidth;
+        }
     },
 
-    /**
-     * @private
-     */
-    _onCloseClick: function () {
-        this.close();
+    _handleTransitionEvent: function (e) {
+        if (e.propertyName == 'left' || e.propertyName == 'right')
+            this.fire(this.isVisible() ? 'shown' : 'hidden');
     }
 });
 
-/**
- * Creates a new sidebar.
- *
- * @example
- * var sidebar = L.control.sidebar('sidebar').addTo(map);
- *
- * @param {string} id - The id of the sidebar element (without the # character)
- * @param {Object} [options] - Optional options object
- * @param {string} [options.position=left] - Position of the sidebar: 'left' or 'right'
- * @returns {Sidebar} A new sidebar instance
- */
-L.control.sidebar = function (id, options) {
-    return new L.Control.Sidebar(id, options);
+L.control.sidebar = function (placeholder, options) {
+    return new L.Control.Sidebar(placeholder, options);
 };
