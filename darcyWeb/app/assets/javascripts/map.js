@@ -2,7 +2,6 @@
 //= require map/sidebar
 //= require leaflet-easy-button/easy-button
 //= require map/routes
-
 function onEachFeature(feature, layer) {
   layer.on('click', function() {
     //slidePanel.show('/map/building/1');
