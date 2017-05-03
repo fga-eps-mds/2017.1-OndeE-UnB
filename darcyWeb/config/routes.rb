@@ -27,4 +27,5 @@ Rails.application.routes.draw do
   get 'map/building/:id', to: 'map#building'
 
   get 'map/routes'
+  get 'map/building'
 end
