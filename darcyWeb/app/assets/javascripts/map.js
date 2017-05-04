@@ -2,19 +2,11 @@
 //= require map/sidebar
 //= require leaflet-easy-button/easy-button
 //= require map/routes
-
 function onEachFeature(feature, layer) {
   layer.on('click', function() {
     //slidePanel.show('/map/building/1');
   });
 }
-
-
-L.easyButton('fa-map-marker', function(btn, map) {
-  //slidePanel.show("/map/routes");
-}).addTo(map);
-
-
 
 L.marker(centerMap).addTo(map)
   .bindPopup('Onde É? UnB');
