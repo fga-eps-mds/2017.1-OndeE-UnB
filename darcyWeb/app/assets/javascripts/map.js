@@ -21,7 +21,6 @@ $.getJSON("/map/data", function(data) { //getting the json data
   $.each(data, function(key, val) {
     var geo_json = JSON.parse(val.geo_data);
     buildingLayer.addData(geo_json); //adding the json data to the building layer
-
   });
 });
 
