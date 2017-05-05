@@ -31,5 +31,7 @@ Rails.application.routes.draw do
 
   get "map/routes"
 
+  get "parse", to:"parser#get_departaments"
+
 
 end
