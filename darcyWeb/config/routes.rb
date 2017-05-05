@@ -34,4 +34,15 @@ Rails.application.routes.draw do
   get 'map/search_building'
   get 'map/collect_building_data'
   get 'map/building'
+  
+  get "app/views/map/index.html.erb", to: "map#index", as: "map"
+  get "app/views/about/about.html.erb", to: "about#about", as: "about"
+  get "admin/index"
+
+  get "map/data"
+  get "map/building/:id", to:"map#building"
+  get "map/routes"
+
+  get "parse", to:"parser#index"
+>>>>>>> Fix departaments parse
 end
