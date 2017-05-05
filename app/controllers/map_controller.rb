@@ -23,11 +23,12 @@ class MapController < ApplicationController
       @testab = "ABCDe"
   end
 
-  def search_buildings
+  def search_building
       @buildings = Building.all
       #inspect(@buildings)
-     #puts "*"*50 + @buildings[0].title
+      puts "*"*50 + @buildings[0].title
 
+      @testab = "ABCDe"
   end
 
 end
