@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get 'map/data'
 
   get 'map/building/:id', to: 'map#building'
+  get 'parse', to:'parser#get_departaments'
 
   get 'map/routes'
   get 'map/search_building'
