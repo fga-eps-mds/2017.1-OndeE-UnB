@@ -79,96 +79,41 @@ const $building_geo_data = {
   }
 };
 
-function onEachFeature(feature,layer){
-    //console.log(layer.bindPopup(feature.properties.description));
+function setValidBuilding(data){
+    console.log("Funcao mostrar slidebar");
+};
 
-  layer.on('click', function(){
-
-
-      if (sidebarBuilding.isVisible()){
-        sidebarBuilding.hide();
-      }
-      else {
+function hideAndShowSlideBar(sidebar){
+    if (sidebar.isVisible()){
+        sidebar.hide();
+    } else {
         $("#sidebar").load( "/map/building", function() {
-         sidebarBuilding.show();
+            sidebar.show();
         });
-      }
+    }
+};
 
 
-    L.Routing.control({
-      waypoints: [
-        L.latLng(-15.762023, -47.867114),
-        L.latLng(-15.761096, -47.867648)
-      ],
-     router: L.Routing.mapzen('mapzen-CEq2eYW', {
-       costing:'pedestrian'
-     }),
-     formatter: new L.Routing.mapzenFormatter()
-    }).addTo(map);
-    var visible = sidebar.isVisible();
-    var actualBuildingKey = this.feature.geometry.coordinates[0].key;
-    console.log("#ActualBuildingId");
-    console.log(actualBuildingKey);
-    console.log("");
 
-    //Takes the actual Latitude for the selected building
-    var actualBuildingLat = this._latlngs[0][length].lat;
+function onEachFeature(feature,layer){
+    layer.on('click', function(){
 
-    //Takes the actual Longitude for the selected building
-    var actualBuildingLng = this._latlngs[0][length].lng;
-    console.log("#This Lat");
-    console.log(actualBuildingLat);
-    console.log("#This Lng");
-    console.log(actualBuildingLng);
-    console.log("");
+        hideAndShowSlideBar(sidebarBuilding);
 
-    var promiseThisBuilding = $.getJSON("/map/data");
-    promiseThisBuilding.then(function(data) {
+        var visible = sidebar.isVisible();
 
+        var buildingKey = this.feature.geometry.coordinates[0].key;
 
-        var validKeyBuilding = false;
+        //var polygon = L.polygon(this._latlngs, {color: 'red'}).addTo(map);
 
-        $.each(data, function (key, val){
-            var geo_json = JSON.parse(val.geo_data);
-            var dataLat = geo_json;
-
-            //Takes each Latitude from saved buildings
-            var dataLat = geo_json.features[0].geometry.coordinates[0][length][1];
-
-            //Takes each Longitude from saved buildings
-            var dataLng = geo_json.features[0].geometry.coordinates[0][length][0];
-
-            console.log("Building number " + String(key));
-            console.log("Lat " + String(dataLat));
-            console.log("Lng " + String(dataLng));
-
-            if(dataLat === actualBuildingLat && dataLng === actualBuildingLng){
-                console.log("Esse é o prédio " + String(key));
-                validKeyBuilding = true;
-            }
-
-        });
-
-
-        console.log("#0.1");
-        console.log(data);
-     if (sidebarBuilding.isVisible()){
-        sidebarBuilding.hide();
-      } else {
-        if(validKeyBuilding){
-            var numberToBuilding = '/map/building/' +(actualBuildingKey+1);
+        if(sidebarBuilding.isVisible()){
+            sidebarBuilding.hide();
+        } else {
+            var numberToBuilding = '/map/building/' +(buildingKey);
             $("#sidebar").load( numberToBuilding, function() {
-         sidebarBuilding.show();
-        });
-        }else{
-            console.log("Invalid id to building selected");
+                hideAndShowSlideBar(sidebarBuilding);
+            });
         }
-
-      }
-
-    });
-
-
   });
 }
 
@@ -190,16 +135,15 @@ map.addLayer(buildingLayer);
 $.getJSON( "/map/data", function(data) { //getting the json data
     var items = [];
     $.each(data, function (key, val){
+        var geo_json = JSON.parse(val.geo_data);
+        geo_json.features[0].geometry.coordinates[0].key = val.id;
+        var a = true;
+        if(a){
+            buildingLayer.addData(geo_json); //adding the json data to the building layer
+        }else{
 
-    var geo_json = JSON.parse(val.geo_data);
-    geo_json.features[0].geometry.coordinates[0].key = key;
-    //console.log(geo_json);
-    //console.log("Minha key" + key);
-    //console.log("Meu geo json" + geo_json.properties);
-    buildingLayer.addData(geo_json); //adding the json data to the building layer
-
+        }
     });
-
 });
 
 map.on('click', function(e) {
