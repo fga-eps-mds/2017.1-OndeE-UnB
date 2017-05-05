@@ -35,13 +35,27 @@ map.contextmenu.addItem({
 });
 
 function routesFromHere(e) {
-  var lat = e.latlng.lat;
-  var lng = e.latlng.lng;
-  $('#route_origin').val( lat + ", " + lng);
-  control.spliceWaypoints(0, 1, e.latlng);
+  if (sidebar.isVisible()) {
+    var lat = e.latlng.lat;
+    var lng = e.latlng.lng;
+    $('#route_origin').val(lat + ", " + lng);
+    control.spliceWaypoints(0, 1, e.latlng);
+  } else {
+    $("#sidebar").load("/map/routes", function() {
+      sidebar.show();
+    });
+  }
 }
 
 function routesToHere(e) {
-  $('#route_destination').val(e.latlng);
-  control.spliceWaypoints(0, 1, e.latlng);
+  if (sidebar.isVisible()) {
+    var lat = e.latlng.lat;
+    var lng = e.latlng.lng;
+    $('#route_destination').val(lat + ', ' + lng);
+    control.spliceWaypoints(0, 1, e.latlng);
+  } else {
+    $("#sidebar").load("/map/routes", function() {
+      sidebar.show();
+    });
+  }
 }
