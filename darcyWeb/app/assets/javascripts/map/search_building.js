@@ -1,6 +1,7 @@
 //= require leaflet/routing-machine
 //= require leaflet/lrm-mapzen
 //= require leaflet/sidebar/index
+//= require typeahead/index
 
 L.easyButton('fa-search', function(btn, map) {
   if (sidebar.isVisible()){

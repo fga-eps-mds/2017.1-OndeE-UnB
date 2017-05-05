@@ -1,19 +1,5 @@
 <form class="mt-3">
-    </div>
-
-  <div class="form-group">
-
-        <label>Pesquisar Edifício</label>
-        <%= text_field_tag :search, params[:search] %>
-        <%= submit_tag "Pesquisar" %>
-    </div>
-    <% @buildings.each do |b| %>
-      Acron: <%= b.acronym %>
-      <br/>
-      Nome: <%= b.title %>
-      <hr/>
-    <% end %>
-    <!-- < %= @buildings[0].title %> -->
-    </div>
-  </div>
+<div id="multiple-datasets">
+  <input class="typeahead" type="text" placeholder="NBA and NHL teams">
+</div>
 </form>
