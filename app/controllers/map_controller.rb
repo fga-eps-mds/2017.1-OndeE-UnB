@@ -6,7 +6,7 @@ class MapController < ApplicationController
 
   def building
     @building = Building.find(params[:id])
-    
+
   end
 
   def data
@@ -22,4 +22,12 @@ class MapController < ApplicationController
 
       @testab = "ABCDe"
   end
+
+  def search_buildings
+      @buildings = Building.all
+      #inspect(@buildings)
+     #puts "*"*50 + @buildings[0].title
+
+  end
+
 end
