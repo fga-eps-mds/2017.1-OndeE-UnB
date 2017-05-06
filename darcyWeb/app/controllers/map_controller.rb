@@ -25,6 +25,7 @@ class MapController < ApplicationController
 
   def collect_building_data
     @buildings = Building.all
+    @buildings.each do t
     render json: @buildings
   end
 
