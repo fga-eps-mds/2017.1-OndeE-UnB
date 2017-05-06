@@ -2,7 +2,6 @@
 //= require map/sidebar
 //= require leaflet-easy-button/easy-button
 //= require map/routes
-//= require typeahead
 //= require map/search_building
 
 function onEachFeature(feature, layer) {
