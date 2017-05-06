@@ -2,8 +2,8 @@
 //= require map/sidebar
 //= require leaflet-easy-button/easy-button
 //= require map/routes
+//= require typeahead
 //= require map/search_building
-//= require typeahead/index
 
 function onEachFeature(feature, layer) {
   layer.on('click', function() {
