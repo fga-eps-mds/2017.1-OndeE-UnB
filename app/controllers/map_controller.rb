@@ -17,18 +17,15 @@ class MapController < ApplicationController
 
   def routes
       @buildings = Building.all
-      #inspect(@buildings)
-      puts "*"*50 + @buildings[0].title
-
-      @testab = "ABCDe"
   end
 
   def search_building
       @buildings = Building.all
-      #inspect(@buildings)
-      puts "*"*50 + @buildings[0].title
+  end
 
-      @testab = "ABCDe"
+  def collect_building_data
+    @buildings = Building.all
+    render json: @buildings
   end
 
 end

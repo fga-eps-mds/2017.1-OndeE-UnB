@@ -28,4 +28,5 @@ Rails.application.routes.draw do
 
   get 'map/routes'
   get 'map/search_building'
+  get 'map/collect_building_data'
 end
