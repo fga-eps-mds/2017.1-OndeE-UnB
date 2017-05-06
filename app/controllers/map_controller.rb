@@ -25,8 +25,31 @@ class MapController < ApplicationController
 
   def collect_building_data
     @buildings = Building.all
-    @buildings.each do t
-    render json: @buildings
+
+    features = []
+    @buildings.each_with_index do |building, index|
+
+      properties = {
+        popupContent: "MDS",
+        title: building.title,
+        description: building.acronym,
+        image: ""
+      }
+
+      geo_data = JSON.parse building.geo_data
+      geo_data['features'].each do |feature|
+        feature.merge!(properties: properties)
+        features.push(feature)
+      end
+
+    end
+
+     geo_json = {
+      type: "FeatureCollection",
+      features: features
+    }
+
+    render plain: geo_json.to_json
   end
 
 end
