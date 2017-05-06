@@ -65,3 +65,8 @@ gem 'simplecov', group: :test
 gem 'rails-controller-testing'
 
 gem 'client_side_validations'
+
+# Gem responsible for test on javascript
+group :development, :test do
+  gem 'jasmine'
+end
