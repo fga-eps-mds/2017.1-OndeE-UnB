@@ -1,15 +1,14 @@
 //= require leaflet/map
+//= require leaflet/awesome-markers
 //= require map/sidebar
 //= require leaflet-easy-button/easy-button
 //= require map/routes
+
 function onEachFeature(feature, layer) {
   layer.on('click', function() {
     //slidePanel.show('/map/building/1');
   });
 }
-
-L.marker(centerMap).addTo(map)
-  .bindPopup('Onde É? UnB');
 
 var buildingLayer = L.geoJSON('', {
   onEachFeature: onEachFeature
