@@ -14,30 +14,25 @@ map.contextmenu.addItem({
 
 var route_form;
 
-var waypoints = [{
+var origin = {
+    marker: null,
+    title: 'origin',
     icon: 'arrow-up-c',
-    color: 'green',
-    latLng: L.latLng(-15.762023, -47.867114),
-  },
-  {
-    icon: 'arrow-down-c',
-    color: 'red',
-    latLng: L.latLng(-15.761096, -47.867648)
-  }
-];
+    color: 'green'
+};
 
+var destination = {
+    marker: null,
+    title: 'destination',
+    icon: 'arrow-down-c',
+    color: 'red'
+};
 
 // starts the route options.
 var control = L.Routing.control({
-  plan: L.Routing.plan(waypoints, {
-    createMarker: function(i, wp) {
-      return L.marker(wp.latLng, {
-        icon: L.AwesomeMarkers.icon({
-          prefix: 'ion',
-          icon: waypoints[i].icon,
-          markerColor: waypoints[i].color
-        })
-      });
+  plan: L.Routing.plan([], {
+    createMarker: function() {
+      return null;
     },
   }),
   autoRoute: false,
@@ -45,18 +40,6 @@ var control = L.Routing.control({
     costing: 'pedestrian'
   }),
   formatter: new L.Routing.mapzenFormatter()
-});
-
-// adds the route button to map
-L.easyButton('ion-merge', function(btn, map) {
-
-  // triggered when user clicks the routes button.
-  if (sidebar.isVisible()) {
-    unLoadRouteForm();
-  } else {
-    loadRouteForm({});
-  }
-
 }).addTo(map);
 
 // This function is triggered when a route is successfully calculated
@@ -69,7 +52,7 @@ control.on('routesfound', function(e) {
   // into the sidebar
   setTimeout(function() {
 
-    var summary = function(){
+    var summary = function() {
       // gets the time and distance from route
       this.summary = $('.leaflet-routing-alt').find('h3').text().split(',');
       console.log(this.summary);
@@ -77,7 +60,7 @@ control.on('routesfound', function(e) {
       this.time = this.summary[1];
 
       // gets the route mode from route form.
-      this.mode = function(){
+      this.mode = function() {
         this.mode = route_form.mode.parent('label');
         this.icon = this.mode.find('i').attr('class');
         this.text = this.mode.text();
@@ -105,13 +88,25 @@ control.on('routesfound', function(e) {
 
 });
 
+// adds the route button to map
+L.easyButton('ion-merge', function(btn, map) {
+
+  // triggered when user clicks the routes button.
+  if (sidebar.isVisible()) {
+    unLoadRoute();
+  } else {
+    loadRouteForm({});
+  }
+
+}).addTo(map);
+
 // loads the routes form into the sidebar
 function loadRouteForm(data) {
 
   $("#sidebar").load("/map/routes", function() {
 
     // set elements, so jquery can look up
-    route_form = function () {
+    route_form = function() {
       this.form = $('#sidebar').find('form');
       this.origin = this.form.find('input[name="route[origin]"]');
       this.destination = this.form.find('input[name="route[destination]"]');
@@ -130,10 +125,13 @@ function loadRouteForm(data) {
       // get route mode from the form and set into the control
       control.options.router.options.costing = route_form.mode.val();
 
-      control.options.autoRoute = true;
+      let origin_latlng = control.getWaypoints()[0].latLng;
+      let destination_latlng = control.getWaypoints()[1].latLng;
 
-      control.addTo(map);
-      control.route();
+      if(origin_latlng != null && destination_latlng != null){
+        control.options.autoRoute = true;
+        control.route();
+      }
 
     });
 
@@ -141,14 +139,24 @@ function loadRouteForm(data) {
   });
 }
 
-function unLoadRouteForm(){
+function unLoadRoute() {
   sidebar.hide();
+
+  // remove markers from map
+  map.removeLayer(origin.marker);
+  map.removeLayer(destination.marker);
+
+  // set markers as null
+  origin.marker = null;
+  destination.marker = null;
+
   // removes route from map
   control.spliceWaypoints(0, 2);
 }
 
 // set values to location in the route form
-function fillFormRouteLocations(data){
+// when sidebar is already loaded
+function fillFormRouteLocations(data) {
   if ('origin' in data) {
     route_form.origin.val(data.origin);
   }
@@ -158,12 +166,12 @@ function fillFormRouteLocations(data){
 }
 
 
-function setRouteLocation(e, location){
+function setRouteLocation(e, waypoint) {
   var lat = e.latlng.lat;
   var lng = e.latlng.lng;
 
   var data = {
-    [location]: lat + ", " + lng
+    [waypoint.title]: lat + ", " + lng
   };
 
   if (sidebar.isVisible()) {
@@ -171,24 +179,35 @@ function setRouteLocation(e, location){
   } else {
     loadRouteForm(data);
   }
+  if (waypoint.marker == null) {
+
+    waypoint.marker = L.marker(e.latlng, {
+      icon: L.AwesomeMarkers.icon({
+        prefix: 'ion',
+        icon: waypoint.icon,
+        markerColor: waypoint.color
+      })
+    });
+
+    map.addLayer(waypoint.marker);
+
+  } else {
+    waypoint.marker.setLatLng(e.latlng);
+  }
 };
 
 // this is performed when user clicks "Rotas a partir daqui"
 function routesFromHere(e) {
-  var marker = L.marker(e.latlng);
-  setRouteLocation(e, 'origin', marker);
-
+  setRouteLocation(e, origin);
   control.spliceWaypoints(0, 1, e.latlng);
 }
 
 // this is performed when user clicks "Rotas para cá"
 function routesToHere(e) {
-  setRouteLocation(e, 'destination');
+  setRouteLocation(e, destination);
   control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
 }
 
-// FIXME Show marker when click on the context menu
-// FIXME SHow distance and time in the correct unit
 // FIXME Require to fill out origin and destination in the form, before calculate route
 // TODO Add button to create a new route
 // TODO Suggest locations on whe form
