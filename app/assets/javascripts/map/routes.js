@@ -15,17 +15,17 @@ map.contextmenu.addItem({
 var route_form;
 
 var origin = {
-    marker: null,
-    title: 'origin',
-    icon: 'arrow-up-c',
-    color: 'green'
+  marker: null,
+  title: 'origin',
+  icon: 'arrow-up-c',
+  color: 'green'
 };
 
 var destination = {
-    marker: null,
-    title: 'destination',
-    icon: 'arrow-down-c',
-    color: 'red'
+  marker: null,
+  title: 'destination',
+  icon: 'arrow-down-c',
+  color: 'red'
 };
 
 // starts the route options.
@@ -91,7 +91,7 @@ control.on('routesfound', function(e) {
 
 });
 
-control.on('routingerror', function(){
+control.on('routingerror', function() {
   // TODO Show message when it's not possible to calculate routes
 
 });
@@ -113,7 +113,7 @@ function loadRouteForm(data) {
 
   $("#sidebar").load("/map/routes", function() {
 
-    $('.btn-reverse-route').on('click', function(e){
+    $('.btn-reverse-route').on('click', function(e) {
       reverseRoute(e);
     });
 
@@ -141,7 +141,7 @@ function loadRouteForm(data) {
       let origin_latlng = control.getWaypoints()[0].latLng;
       let destination_latlng = control.getWaypoints()[1].latLng;
 
-      if(origin_latlng != null && destination_latlng != null){
+      if (origin_latlng != null && destination_latlng != null) {
         control.route();
       }
 
@@ -155,12 +155,8 @@ function unLoadRoute() {
   sidebar.hide();
 
   // remove markers from map
-  map.removeLayer(origin.marker);
-  map.removeLayer(destination.marker);
-
-  // set markers as null
-  origin.marker = null;
-  destination.marker = null;
+  removeMarker(origin);
+  removeMarker(destination);
 
   // removes route from map
   control.spliceWaypoints(0, 2);
@@ -194,25 +190,35 @@ function setRouteLocation(e, waypoint) {
   } else {
     loadRouteForm(data);
   }
-  createMarker(e.latlng, waypoint);
+  if (waypoint.marker == null) {
+    createMarker(waypoint, e.latlng);
+  } else {
+    waypoint.marker.setLatLng(e.latlng);
+  }
 };
 
-function createMarker(latlng, waypoint){
-  if (waypoint.marker == null) {
-
-    waypoint.marker = L.marker(latlng, {
-      icon: L.AwesomeMarkers.icon({
-        prefix: 'ion',
-        icon: waypoint.icon,
-        markerColor: waypoint.color
-      })
-    });
-
-    map.addLayer(waypoint.marker);
-
-  } else {
-    waypoint.marker.setLatLng(latlng);
+function removeMarker(waypoint) {
+  try {
+    map.removeLayer(waypoint.marker);
+    waypoint.marker = null;
   }
+  catch(err) {
+    console.error(err.message);
+  }
+}
+
+function createMarker(waypoint, latlng) {
+  console.log('Create marker');
+  console.log(waypoint);
+  console.log(latlng);
+  waypoint.marker = L.marker(latlng, {
+    icon: L.AwesomeMarkers.icon({
+      prefix: 'ion',
+      icon: waypoint.icon,
+      markerColor: waypoint.color
+    })
+  });
+  map.addLayer(waypoint.marker);
 }
 
 // this is performed when user clicks "Rotas a partir daqui"
@@ -227,19 +233,42 @@ function routesToHere(e) {
   control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
 }
 
-function reverseRoute(e){
+function reverseRoute(e) {
   e.preventDefault();
-
-  // swap values in form
-  let temp = route_form.origin.val();
-  route_form.origin.val(route_form.destination.val());
-  route_form.destination.val(temp);
 
   // reverse waypoints to route
   let waypoints = control.getWaypoints();
   control.setWaypoints(waypoints.reverse());
 
+  // NOTE reverse markers was so hard to figure out
+  if (origin.marker != null && destination.marker == null) {
+    console.log('Destination in blank.');
+    createMarker(destination, origin.marker.getLatLng());
+    removeMarker(origin);
+  }
+  else if (destination.marker != null && origin.marker == null) {
+    console.log('Origin in blank');
+    createMarker(origin, destination.marker.getLatLng());
+    removeMarker(destination);
+  }
+
+  if(origin.marker != null && destination.marker != null) {
+    let latlng = origin.marker.getLatLng();
+    origin.marker.setLatLng(destination.marker.getLatLng());
+    destination.marker.setLatLng(latlng);
+  }
+
+  let origin_latlng = route_form.origin.val();
+  let destination_latlng = route_form.destination.val();
+
+  // swap values in form
+  route_form.origin.val(destination_latlng);
+  route_form.destination.val(origin_latlng);
+
+
   // TODO Reverse markers in the map
+
+
 
 }
 // TODO Require to fill out origin and destination in the form, before calculate route
