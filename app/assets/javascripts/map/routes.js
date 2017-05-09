@@ -123,7 +123,6 @@ function loadRouteForm(data) {
       this.form = $('#sidebar').find('form');
       this.origin = this.form.find('input[name="route[origin]"]');
       this.destination = this.form.find('input[name="route[destination]"]');
-      this.mode = this.form.find('input[name="route[mode]"]:checked');
       this.submit = this.form.find('button[type=submit]');
       return this;
     }.call({});
@@ -134,6 +133,7 @@ function loadRouteForm(data) {
     route_form.submit.on('click', function(e) {
       // prevent default behavior
       e.preventDefault();
+      route_form.mode = route_form.form.find('input[name="route[mode]"]:checked');
 
       // get route mode from the form and set into the control
       control.options.router.options.costing = route_form.mode.val();
@@ -264,11 +264,6 @@ function reverseRoute(e) {
   // swap values in form
   route_form.origin.val(destination_latlng);
   route_form.destination.val(origin_latlng);
-
-
-  // TODO Reverse markers in the map
-
-
 
 }
 // TODO Require to fill out origin and destination in the form, before calculate route
