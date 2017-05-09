@@ -45,6 +45,9 @@ var control = L.Routing.control({
 // This function is triggered when a route is successfully calculated
 control.on('routesfound', function(e) {
 
+  // enable autoRoute
+  control.options.autoRoute = true;
+
   // hides the route form
   route_form.form.fadeOut();
 
@@ -88,6 +91,11 @@ control.on('routesfound', function(e) {
 
 });
 
+control.on('routingerror', function(){
+  // TODO Show message when it's not possible to calculate routes
+
+});
+
 // adds the route button to map
 L.easyButton('ion-merge', function(btn, map) {
 
@@ -104,6 +112,11 @@ L.easyButton('ion-merge', function(btn, map) {
 function loadRouteForm(data) {
 
   $("#sidebar").load("/map/routes", function() {
+
+    $('.btn-reverse-route').on('click', function(e){
+      reverseRoute(e);
+    });
+
 
     // set elements, so jquery can look up
     route_form = function() {
@@ -129,7 +142,6 @@ function loadRouteForm(data) {
       let destination_latlng = control.getWaypoints()[1].latLng;
 
       if(origin_latlng != null && destination_latlng != null){
-        control.options.autoRoute = true;
         control.route();
       }
 
@@ -152,6 +164,9 @@ function unLoadRoute() {
 
   // removes route from map
   control.spliceWaypoints(0, 2);
+
+  // disable auto route
+  control.options.autoRoute = false;
 }
 
 // set values to location in the route form
@@ -179,9 +194,13 @@ function setRouteLocation(e, waypoint) {
   } else {
     loadRouteForm(data);
   }
+  createMarker(e.latlng, waypoint);
+};
+
+function createMarker(latlng, waypoint){
   if (waypoint.marker == null) {
 
-    waypoint.marker = L.marker(e.latlng, {
+    waypoint.marker = L.marker(latlng, {
       icon: L.AwesomeMarkers.icon({
         prefix: 'ion',
         icon: waypoint.icon,
@@ -192,9 +211,9 @@ function setRouteLocation(e, waypoint) {
     map.addLayer(waypoint.marker);
 
   } else {
-    waypoint.marker.setLatLng(e.latlng);
+    waypoint.marker.setLatLng(latlng);
   }
-};
+}
 
 // this is performed when user clicks "Rotas a partir daqui"
 function routesFromHere(e) {
@@ -208,7 +227,21 @@ function routesToHere(e) {
   control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
 }
 
-// FIXME Require to fill out origin and destination in the form, before calculate route
+function reverseRoute(e){
+  e.preventDefault();
+
+  // swap values in form
+  let temp = route_form.origin.val();
+  route_form.origin.val(route_form.destination.val());
+  route_form.destination.val(temp);
+
+  // reverse waypoints to route
+  let waypoints = control.getWaypoints();
+  control.setWaypoints(waypoints.reverse());
+
+  // TODO Reverse markers in the map
+
+}
+// TODO Require to fill out origin and destination in the form, before calculate route
 // TODO Add button to create a new route
 // TODO Suggest locations on whe form
-// TODO Add button to reverse route

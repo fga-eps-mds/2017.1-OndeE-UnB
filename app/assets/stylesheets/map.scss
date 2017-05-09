@@ -27,6 +27,16 @@ html {
   font-family: "Roboto", sans-serif !important;
 }
 
+.btn-reverse-route {
+  margin-top: -8px;
+  i {
+    $rotate: 90deg;
+    -ms-transform: rotate($rotate);
+    -webkit-transform: rotate($rotate);
+    transform: rotate($rotate);
+  }
+}
+
 .btn-group-justified {
   display: table;
   width: 100%;
