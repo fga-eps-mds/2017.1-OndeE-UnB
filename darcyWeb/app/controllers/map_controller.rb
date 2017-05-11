@@ -25,9 +25,14 @@ class MapController < ApplicationController
 
   def collect_building_data
     @buildings = Building.all
+    geo_json = json_building_search(@buildings)
+    render plain: geo_json.to_json
+  end
+
+  def json_building_search(buildings)
 
     features = []
-    @buildings.each_with_index do |building, index|
+    buildings.each_with_index do |building, index|
 
       properties = {
         popupContent: "MDS",
@@ -48,8 +53,6 @@ class MapController < ApplicationController
       type: "FeatureCollection",
       features: features
     }
-
-    render plain: geo_json.to_json
   end
 
 end
