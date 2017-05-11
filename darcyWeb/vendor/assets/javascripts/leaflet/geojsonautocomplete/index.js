@@ -12,9 +12,9 @@
         clearButtonTitle: "Clear",
         foundRecordsMessage: "showing results.",
         limit: 10,
-        notFoundMessage: "not found.",
-        notFoundHint: "Make sure your search criteria is correct and try again.",
-        drawColor: "blue",
+        notFoundMessage: "não encontrado.",
+        notFoundHint: "Tenha certeza que sua pesquisa está correta e tente novamente.",
+        drawColor: "green",
         pointGeometryZoomLevel: -1, //Set zoom level for point geometries -1 means use leaflet default.
         pagingActive: true
     };
@@ -247,9 +247,9 @@
                 nextDisabled = "disabled";
             }
 
-            var htmlPaging = "<div align='right' class='pagingDiv'>" + (offset + 1) + " - " + (offset + loopCount) + " " + options.foundRecordsMessage + " ";
-            htmlPaging += "<input id='pagingPrev' type='image' src='../dist/image/" + prevPic + "' width='16' height='16' class='pagingArrow' " + prevDisabled + ">";
-            htmlPaging += "<input id='pagingNext' type='image' src='../dist/image/" + nextPic + "' width='16' height='16' class='pagingArrow' " + nextDisabled + "></div>";
+            // var htmlPaging = "<div align='right' class='pagingDiv'>" + (offset + 1) + " - " + (offset + loopCount) + " " + options.foundRecordsMessage + " ";
+            // htmlPaging += "<input id='pagingPrev' type='image' src='../dist/image/" + prevPic + "' width='16' height='16' class='pagingArrow' " + prevDisabled + ">";
+            // htmlPaging += "<input id='pagingNext' type='image' src='../dist/image/" + nextPic + "' width='16' height='16' class='pagingArrow' " + nextDisabled + "></div>";
             $("#resultsDiv").append(htmlPaging);
 
             $("#pagingPrev").mousedown(function () {
