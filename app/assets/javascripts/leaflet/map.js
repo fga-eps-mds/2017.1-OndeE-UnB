@@ -1,12 +1,15 @@
 //= require leaflet/context-menu
 
 // this is the common setting to starting up the map
-
-const centerMap = [-15.764544, -47.866929];
+const centerMap = [-15.763654422150273, -47.86942720413208];
+const south_west = L.latLng(-15.77963740364866, -47.879254817962654);
+const north_east = L.latLng(-15.74892996748966, -47.853977680206306);
+const bounds = L.latLngBounds(south_west, north_east);
 
 var map = L.map('map', {
+    maxBounds: bounds,
     center: centerMap,
-    zoom: 18,
+    zoom: 15,
     minZoom: 16,
     contextmenu: false,
     contextmenuWidth: 140,
