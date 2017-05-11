@@ -31,9 +31,9 @@ class MapController < ApplicationController
 
       properties = {
         popupContent: "MDS",
-        title: building.title,
-        description: building.acronym,
-        image: ""
+        title: building.acronym,
+        description: building.title,
+        image: 'fa-building'
       }
 
       geo_data = JSON.parse building.geo_data
