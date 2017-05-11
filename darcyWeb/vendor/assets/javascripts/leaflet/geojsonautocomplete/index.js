@@ -7,7 +7,7 @@
 
     var options = {
         geojsonServiceAddress: "http://yourGeoJsonSearchAddress",
-        placeholderMessage: "Search...",
+        placeholderMessage: "O que você está procurando?",
         searchButtonTitle: "Search",
         clearButtonTitle: "Clear",
         foundRecordsMessage: "showing results.",
@@ -131,7 +131,7 @@
         featureCollection = [];
         var limitToSend = options.limit;
         if (withPaging) {
-            limitToSend++;
+            //limitToSend++;
         }
         lastSearch = $("#searchBox")[0].value;
 
@@ -202,8 +202,16 @@
 
         for (var i = 0; i < loopCount; i++) {
 
-            var html = "<li id='listElement" + i + "' class='listResult'>";
-            html += "<span id='listElementContent" + i + "' class='content'><i class='iconStyle fa " + features[i].properties.image + "'  align='middle'></i>";
+            var name = features[i].properties.title.toUpperCase();
+            sub_string = lastSearch.toUpperCase();
+            acronym = features[i].properties.description.toUpperCase();
+
+            console.log("Busca:" + lastSearch);
+            console.log("Nome do edificio:" + features[i].properties.title);
+
+            if(name.includes(sub_string)|| acronym.includes(sub_string)){
+                var html = "<li id='listElement" + i + "' class='listResult'>";
+            html += "<span id='listElementContent" + i + "' class='content'><img src='./image/" + features[i].properties.image + "' class='iconStyle' align='middle'>";
             html += "<font size='2' color='#333' class='title'>" + features[i].properties.title + "</font><font size='1' color='#8c8c8c'> " + features[i].properties.description + "<font></span></li>";
 
             $("#resultList").append(html);
@@ -219,6 +227,8 @@
             $("#listElement" + i).mousedown(function () {
                 listElementMouseDown(this);
             });
+            }
+
         }
 
         if (withPaging) {
