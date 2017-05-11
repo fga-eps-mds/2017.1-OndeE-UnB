@@ -45,6 +45,8 @@ var control = L.Routing.control({
 // This function is triggered when a route is successfully calculated
 control.on('routesfound', function(e) {
 
+  console.debug("Routes found");
+
   // enable autoRoute
   control.options.autoRoute = true;
 
@@ -132,16 +134,39 @@ function loadRouteForm(data) {
 
     // calculate route when user clicks submit button
     route_form.submit.on('click', function(e) {
+      console.debug('Clicked submit button');
       // prevent default behavior
       e.preventDefault();
 
       // get route mode from the form and set into the control
       control.options.router.options.costing = route_form.mode.parent('.btn.active').find('input').val();
 
-      var origin_latlng = control.getWaypoints()[0].latLng;
-      var destination_latlng = control.getWaypoints()[1].latLng;
+      var origin_latlng = route_form.origin.val().split(',');
+      var destination_latlng = route_form.destination.val().split(',');
+
+      console.info(origin_latlng);
+      console.info(destination_latlng);
 
       if (origin_latlng != null && destination_latlng != null) {
+
+        control.spliceWaypoints(0, 1, origin_latlng);
+        control.spliceWaypoints(control.getWaypoints().length - 1, 1, destination_latlng);
+
+        // TODO refactor
+        if (origin.marker == null) {
+          createMarker(origin, origin_latlng);
+        } else {
+          origin.marker.setLatLng(origin_latlng);
+        }
+
+        // TODO refactor
+        if (destination.marker == null) {
+          createMarker(destination, destination_latlng);
+        } else {
+          destination.marker.setLatLng(destination_latlng);
+        }
+
+        console.debug("Calculate route!");
         control.route();
       }
 
