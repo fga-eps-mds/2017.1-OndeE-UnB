@@ -5,24 +5,56 @@ describe "Route", type: :feature do
 	it "should show the route form when you click the route button", js: true do
 		visit root_path
 		page.evaluate_script("$('.ion-merge').click()")
-		expect(page).to have_content('Trajetos')
+		expect(page).to have_content('TRAJETOS')
 	end
 
-	it "should swap locations of the route", js: true do
-		visit root_path
-		page.evaluate_script("$('.ion-merge').click()")
+	context "Swap Locations of the route" do
 
-		origin = '-15.76528581775335, -47.866482138633735'
-		destination = '-15.766824273744168, -47.867302894592285'
+		before(:each) do
+			visit root_path
+			page.evaluate_script("$('.ion-merge').click()")
+  	end
 
-		within("#sidebar form") do
-			fill_in 'route[origin]', with: origin
-			fill_in 'route[destination]', with: destination
-			find('.btn-reverse-route').click
+		it "should swap locations when there is origin and destination", js: true do
+
+			origin = '-15.76528581775335, -47.866482138633735'
+			destination = '-15.766824273744168, -47.867302894592285'
+
+			within("#sidebar form") do
+				fill_in 'route[origin]', with: origin
+				fill_in 'route[destination]', with: destination
+				find('.btn-reverse-route').click
+			end
+
+			expect(page).to have_field('route[origin]', with: destination)
+			expect(page).to have_field('route[destination]', with: origin)
 		end
 
-		expect(page).to have_field('route[origin]', with: destination)
-		expect(page).to have_field('route[destination]', with: origin)
+		it "should swap origin even when destination is blank", js: true do
+
+			origin = '-15.76528581775335, -47.866482138633735'
+
+			within("#sidebar form") do
+				fill_in 'route[origin]', with: origin
+				find('.btn-reverse-route').click
+			end
+
+			expect(page).to have_field('route[origin]', with: '')
+			expect(page).to have_field('route[destination]', with: origin)
+		end
+
+		it "should swap destination even when origin is blank", js: true do
+
+			destination = '-15.76528581775335, -47.866482138633735'
+
+			within("#sidebar form") do
+				fill_in 'route[destination]', with: destination
+				find('.btn-reverse-route').click
+			end
+
+			expect(page).to have_field('route[origin]', with: destination)
+			expect(page).to have_field('route[destination]', with: '')
+		end
 	end
 
 	context "Calculate the route" do
@@ -62,22 +94,6 @@ describe "Route", type: :feature do
 			end
 			expect(find('#mode_text')).to have_content('Carro')
 			expect(page).to have_content('You have arrived at your destination.')
-		end
-	end
-
-	context "Context Menu" do
-		it "should show context menu when right click the map", js: true do
-			visit root_path
-			tiles_origin = page.evaluate_script('$(".leaflet-tile").eq(3).trigger("contextmenu")')
-			
-			tiles_destination = page.evaluate_script('$(".leaflet-tile").eq(4)')
-
-			#puts tiles_origin
-			#puts tiles_destination
-			#page.evaluate_script('$("#map").trigger("contextmenu")')
-			##puts page.evaluate_script('$(".leaflet-contextmenu").html()')
-			#expect(page).to have_content('Rotas a partir daqui')
-			page.save_screenshot
 		end
 	end
 end
