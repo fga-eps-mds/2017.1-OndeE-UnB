@@ -4,19 +4,9 @@
 //= require leaflet-easy-button/easy-button
 //= require map/routes
 
-function hideAndShowSlideBar(sidebar){
-    if (sidebar.isVisible()){
-        sidebar.hide();
-    } else {
-        $("#sidebar").load( "/map/building", function() {
-            sidebar.show();
-        });
-    }
-};
 
 function onEachFeature(feature,layer){
     layer.on('click', function(){
-        hideAndShowSlideBar(sidebar);
         var buildingKey = this.feature.geometry.coordinates[0].key;
 
         //var polygon = L.polygon(this._latlngs, {color: 'red'}).addTo(map);
@@ -26,8 +16,8 @@ function onEachFeature(feature,layer){
 
             var numberToBuilding = '/map/building/' + buildingKey;
             console.log(numberToBuilding);
-            $("#sidebar").load( numberToBuilding, function() {
-                hideAndShowSlideBar(sidebar);
+            $("#sidebar").load(numberToBuilding, function() {
+                sidebar.toggle();
             });
         }
   });
@@ -43,10 +33,10 @@ map.addLayer(buildingLayer);
 $.getJSON( "/map/data", function(data) { //getting the json data
     var items = [];
     $.each(data, function (key, val){
-        var geo_json = JSON.parse(val.geo_data);
-        geo_json.features[0].geometry.coordinates[0].key = val.id;
 
         try {
+            var geo_json = JSON.parse(val.geo_data);
+            geo_json.features[0].geometry.coordinates[0].key = val.id;
             buildingLayer.addData(geo_json); //adding the json data to the building layer
         } catch(err) {
           //console.log(err);
