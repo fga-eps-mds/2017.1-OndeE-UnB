@@ -19,4 +19,16 @@ describe "Map", type: :feature do
 		expect(sidebar).to be_empty
 	end
 
+	it "should show the sidebar when click on building", js: true do
+		visit root_path
+		sidebarclick = page.evaluate_script("map._layers['105'].fire('click')")
+		expect(sidebarclick).to eq(1)
+		# clicar em um building
+		# expect(sidebar). to be_visible()
+
+
+		# sidebar = page.evaluate_script("$('#sidebar').html()")
+		# expect(sidebar).to be_empty
+	  end
+
 end
