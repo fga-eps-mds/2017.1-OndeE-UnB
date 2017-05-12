@@ -30,10 +30,10 @@ function onEachFeature(feature,layer){
   });
 }
 
-
 var buildingLayer = L.geoJSON('', {
   onEachFeature: onEachFeature
-}).addTo(map); //adding the building layers to the map
+});
+
 map.addLayer(buildingLayer);
 
 
@@ -49,4 +49,3 @@ $.getJSON( "/map/data", function(data) { //getting the json data
         }
     });
 });
-

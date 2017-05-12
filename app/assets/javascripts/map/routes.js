@@ -45,6 +45,8 @@ var control = L.Routing.control({
 // This function is triggered when a route is successfully calculated
 control.on('routesfound', function(e) {
 
+  console.debug("Routes found");
+
   // enable autoRoute
   control.options.autoRoute = true;
 
@@ -64,7 +66,7 @@ control.on('routesfound', function(e) {
 
       // gets the route mode from route form.
       this.mode = function() {
-        this.mode = route_form.mode.parent('label');
+        this.mode = route_form.mode.parent('.btn.active');
         this.icon = this.mode.find('i').attr('class');
         this.text = this.mode.text();
         return this;
@@ -123,6 +125,7 @@ function loadRouteForm(data) {
       this.form = $('#sidebar').find('form');
       this.origin = this.form.find('input[name="route[origin]"]');
       this.destination = this.form.find('input[name="route[destination]"]');
+      this.mode = this.form.find('input[name="route[mode]"]');
       this.submit = this.form.find('button[type=submit]');
       return this;
     }.call({});
@@ -131,17 +134,39 @@ function loadRouteForm(data) {
 
     // calculate route when user clicks submit button
     route_form.submit.on('click', function(e) {
+      console.debug('Clicked submit button');
       // prevent default behavior
       e.preventDefault();
-      route_form.mode = route_form.form.find('input[name="route[mode]"]:checked');
 
       // get route mode from the form and set into the control
-      control.options.router.options.costing = route_form.mode.val();
+      control.options.router.options.costing = route_form.mode.parent('.btn.active').find('input').val();
 
-      let origin_latlng = control.getWaypoints()[0].latLng;
-      let destination_latlng = control.getWaypoints()[1].latLng;
+      var origin_latlng = route_form.origin.val().split(',');
+      var destination_latlng = route_form.destination.val().split(',');
+
+      console.info(origin_latlng);
+      console.info(destination_latlng);
 
       if (origin_latlng != null && destination_latlng != null) {
+
+        control.spliceWaypoints(0, 1, origin_latlng);
+        control.spliceWaypoints(control.getWaypoints().length - 1, 1, destination_latlng);
+
+        // TODO refactor
+        if (origin.marker == null) {
+          createMarker(origin, origin_latlng);
+        } else {
+          origin.marker.setLatLng(origin_latlng);
+        }
+
+        // TODO refactor
+        if (destination.marker == null) {
+          createMarker(destination, destination_latlng);
+        } else {
+          destination.marker.setLatLng(destination_latlng);
+        }
+
+        console.debug("Calculate route!");
         control.route();
       }
 
@@ -176,14 +201,12 @@ function fillFormRouteLocations(data) {
   }
 }
 
-
 function setRouteLocation(e, waypoint) {
   var lat = e.latlng.lat;
   var lng = e.latlng.lng;
 
-  var data = {
-    [waypoint.title]: lat + ", " + lng
-  };
+  var data = {};
+  data[waypoint.title] = lat + ", " + lng;
 
   if (sidebar.isVisible()) {
     fillFormRouteLocations(data);
@@ -237,7 +260,7 @@ function reverseRoute(e) {
   e.preventDefault();
 
   // reverse waypoints to route
-  let waypoints = control.getWaypoints();
+  var waypoints = control.getWaypoints();
   control.setWaypoints(waypoints.reverse());
 
   // NOTE reverse markers was so hard to figure out
@@ -253,13 +276,13 @@ function reverseRoute(e) {
   }
 
   if(origin.marker != null && destination.marker != null) {
-    let latlng = origin.marker.getLatLng();
+    var latlng = origin.marker.getLatLng();
     origin.marker.setLatLng(destination.marker.getLatLng());
     destination.marker.setLatLng(latlng);
   }
 
-  let origin_latlng = route_form.origin.val();
-  let destination_latlng = route_form.destination.val();
+  var origin_latlng = route_form.origin.val();
+  var destination_latlng = route_form.destination.val();
 
   // swap values in form
   route_form.origin.val(destination_latlng);

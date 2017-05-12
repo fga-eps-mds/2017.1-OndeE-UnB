@@ -5,8 +5,3 @@ var sidebar = L.control.sidebar('sidebar', {
 }).addTo(map);
 
 var visible = sidebar.isVisible();
-
-// assign options settings to sidebar
-Object.assign(sidebar, {
-  mode: null
-});
