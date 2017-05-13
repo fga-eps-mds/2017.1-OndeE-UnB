@@ -6,18 +6,32 @@ class Admin::DepartmentsController < AdminController
   end
 
   def new
+    @department = Department.new
   end
 
   def edit
   end
 
   def update
+    if @department.update(department_params)
+      redirect_to admin_departments_path, notice: alert_success('Departamento editado com êxito.')
+    else
+      render :edit
+    end
   end
 
   def create
+    @department = Department.new(department_params)
+    if @department.save
+      redirect_to admin_departments_path, notice: alert_success('Departamento criado com êxito.')
+    else
+      render :new
+    end
   end
 
   def destroy
+    @department.destroy
+    redirect_to admin_departments_path, notice: alert_success('Departmento excluído com êxito.')
   end
 
 
