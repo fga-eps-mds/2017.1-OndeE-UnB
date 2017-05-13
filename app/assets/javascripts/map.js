@@ -3,6 +3,7 @@
 //= require map/sidebar
 //= require leaflet-easy-button/easy-button
 //= require map/routes
+//= require map/search_building
 
 function onEachFeature(feature, layer) {
   layer.on('click', function() {
@@ -19,6 +20,7 @@ $.getJSON("/map/data", function(data) {
   var items = [];
   $.each(data, function(key, val) {
     try {
+      var geo_json = JSON.parse(val.geo_data);
       buildingLayer.addData(JSON.parse(val.geo_data));
     }
     catch(err){
@@ -26,3 +28,4 @@ $.getJSON("/map/data", function(data) {
     }
   });
 });
+
