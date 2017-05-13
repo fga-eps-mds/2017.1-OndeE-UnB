@@ -5,27 +5,42 @@
 //= require map/routes
 //= require map/search_building
 
-function onEachFeature(feature, layer) {
-  layer.on('click', function() {
-    //slidePanel.show('/map/building/1');
+
+function onEachFeature(feature,layer){
+    layer.on('click', function(){
+        var buildingKey = this.feature.geometry.coordinates[0].key;
+
+        //var polygon = L.polygon(this._latlngs, {color: 'red'}).addTo(map);
+        if(sidebar.isVisible()){
+            sidebar.hide();
+        } else {
+
+            var numberToBuilding = '/map/building/' + buildingKey;
+            console.log(numberToBuilding);
+            $("#sidebar").load(numberToBuilding, function() {
+                sidebar.toggle();
+            });
+        }
   });
 }
+
 var buildingLayer = L.geoJSON('', {
   onEachFeature: onEachFeature
 });
 
 map.addLayer(buildingLayer);
 
-$.getJSON("/map/data", function(data) {
-  var items = [];
-  $.each(data, function(key, val) {
-    try {
-      var geo_json = JSON.parse(val.geo_data);
-      buildingLayer.addData(JSON.parse(val.geo_data));
-    }
-    catch(err){
-      //console.log(err);
-    }
-  });
+$.getJSON( "/map/data", function(data) { //getting the json data
+    var items = [];
+    $.each(data, function (key, val){
+
+        try {
+            var geo_json = JSON.parse(val.geo_data);
+            geo_json.features[0].geometry.coordinates[0].key = val.id;
+            buildingLayer.addData(geo_json); //adding the json data to the building layer
+        } catch(err) {
+          //console.log(err);
+        }
+    });
 });
 
