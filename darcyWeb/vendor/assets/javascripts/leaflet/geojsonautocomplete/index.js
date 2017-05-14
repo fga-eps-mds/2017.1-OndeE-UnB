@@ -7,13 +7,13 @@
 
     var options = {
         geojsonServiceAddress: "http://yourGeoJsonSearchAddress",
-        placeholderMessage: "O que você está procurando?",
-        searchButtonTitle: "Search",
-        clearButtonTitle: "Clear",
-        foundRecordsMessage: "showing results.",
+        placeholderMessage: "O que você deseja encontrar?",
+        searchButtonTitle: "Buscar",
+        clearButtonTitle: "Limpar",
+        foundRecordsMessage: "Resultados encontrados",
         limit: 10,
-        notFoundMessage: "não encontrado.",
-        notFoundHint: "Tenha certeza que sua pesquisa está correta e tente novamente.",
+        notFoundMessage: "Nada foi encontrado",
+        notFoundHint: "Veja se sua busca está correta e tente novamente",
         drawColor: "green",
         pointGeometryZoomLevel: -1, //Set zoom level for point geometries -1 means use leaflet default.
         pagingActive: true
@@ -42,8 +42,7 @@
         $(this).each(function () {
             var element = $(this);
             element.addClass("searchContainer");
-
-            element.append('<input id="searchBox" name = "searchBoxName" class="searchBox" placeholder="' + options.placeholderMessage + '"/>');
+            element.append('<input id="searchBox" class="searchBox" placeholder="' + options.placeholderMessage + '"/>');
             element.append('<input id="searchButton" class="searchButton" type="submit" value="" title="' + options.searchButtonTitle + '"/>');
             element.append('<span class="divider"></span>');
             element.append('<input id="clearButton" class="clearButton" type="submit"  value="" title="' + options.clearButtonTitle + '">');
@@ -132,7 +131,7 @@
         featureCollection = [];
         var limitToSend = options.limit;
         if (withPaging) {
-            //limitToSend++;
+            limitToSend++;
         }
         lastSearch = $("#searchBox")[0].value;
 
@@ -203,16 +202,8 @@
 
         for (var i = 0; i < loopCount; i++) {
 
-            var name = features[i].properties.title.toUpperCase();
-            sub_string = lastSearch.toUpperCase();
-            acronym = features[i].properties.description.toUpperCase();
-
-            console.log("Busca:" + lastSearch);
-            console.log("Nome do edificio:" + features[i].properties.title);
-
-            if(name.includes(sub_string)|| acronym.includes(sub_string)){
             var html = "<li id='listElement" + i + "' class='listResult'>";
-            html += "<span id='listElementContent" + i + "' class='content'><i class='iconStyle fa " + features[i].properties.image + "'  align='middle'></i>";
+            //html += "<span id='listElementContent" + i + "' class='content'><img src='./image/" + features[i].properties.image + "' class='iconStyle' align='middle'>";
             html += "<font size='2' color='#333' class='title'>" + features[i].properties.title + "</font><font size='1' color='#8c8c8c'> " + features[i].properties.description + "<font></span></li>";
 
             $("#resultList").append(html);
@@ -228,8 +219,6 @@
             $("#listElement" + i).mousedown(function () {
                 listElementMouseDown(this);
             });
-            }
-
         }
 
         if (withPaging) {
@@ -248,9 +237,9 @@
                 nextDisabled = "disabled";
             }
 
-            // var htmlPaging = "<div align='right' class='pagingDiv'>" + (offset + 1) + " - " + (offset + loopCount) + " " + options.foundRecordsMessage + " ";
-            // htmlPaging += "<input id='pagingPrev' type='image' src='../dist/image/" + prevPic + "' width='16' height='16' class='pagingArrow' " + prevDisabled + ">";
-            // htmlPaging += "<input id='pagingNext' type='image' src='../dist/image/" + nextPic + "' width='16' height='16' class='pagingArrow' " + nextDisabled + "></div>";
+            var htmlPaging = "<div align='right' class='pagingDiv'>" + (offset + 1) + " - " + (offset + loopCount) + " " + options.foundRecordsMessage + " ";
+            htmlPaging += "<input id='pagingPrev' type='image' src='../dist/image/" + prevPic + "' width='16' height='16' class='pagingArrow' " + prevDisabled + ">";
+            htmlPaging += "<input id='pagingNext' type='image' src='../dist/image/" + nextPic + "' width='16' height='16' class='pagingArrow' " + nextDisabled + "></div>";
             $("#resultsDiv").append(htmlPaging);
 
             $("#pagingPrev").mousedown(function () {
