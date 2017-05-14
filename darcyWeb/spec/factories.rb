@@ -7,4 +7,5 @@ FactoryGirl.define do
     longitude 0.0
     geo_data '.'
   end
+
 end
