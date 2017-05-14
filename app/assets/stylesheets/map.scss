@@ -1,4 +1,4 @@
-//= require leaflet-easy-button/easy-button
+//= require leaflet/easy-button
 //= require leaflet/awesome-markers
 //= require leaflet/context-menu
 //= require leaflet/routing-machine
@@ -137,34 +137,4 @@ html {
 
 .leaflet-routing-container {
   display: none !important;
-}
-
-
-#multiple-datasets .league-name {
-  margin: 0 20px 5px 20px;
-  padding: 3px 0;
-  border-bottom: 1px solid #ccc;
-}
-
-.container {
-    width: 800px;
-    margin: 50px auto;
-}
-.typeahead-wrapper {
-    display: block;
-    margin: 50px 0;
-}
-.tt-dropdown-menu {
-    background-color: #fff;
-    border: 1px solid #000;
-}
-.tt-suggestion.tt-cursor {
-    background-color: #ccc;
-}
-
-
-#multiple-datasets .building-search {
-  margin: 0 20px 5px 20px;
-  padding: 3px 0;
-  border-bottom: 1px solid #ccc;
 }

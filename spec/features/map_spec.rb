@@ -25,12 +25,5 @@ describe "Map", type: :feature do
 
 		sidebar = page.evaluate_script("sidebar.isVisible()")
 		expect(sidebar).to eq(true)
-		# clicar em um building
-		# expect(sidebar). to be_visible()
-
-
-		# sidebar = page.evaluate_script("$('#sidebar').html()")
-		# expect(sidebar).to be_empty
-	  end
-
+  end
 end
