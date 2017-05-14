@@ -10,6 +10,7 @@ SimpleCov.start
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+require 'support/wait_for_ajax'
 Capybara.javascript_driver = :poltergeist
 
 Capybara.register_driver :poltergeist do |app|
