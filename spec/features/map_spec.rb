@@ -25,5 +25,5 @@ describe "Map", type: :feature do
 
 		sidebar = page.evaluate_script("sidebar.isVisible()")
 		expect(sidebar).to eq(true)
-  end
+	end
 end
