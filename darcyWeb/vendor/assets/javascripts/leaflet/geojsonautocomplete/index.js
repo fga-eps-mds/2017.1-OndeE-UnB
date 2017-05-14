@@ -42,7 +42,8 @@
         $(this).each(function () {
             var element = $(this);
             element.addClass("searchContainer");
-            element.append('<input id="searchBox" class="searchBox" placeholder="' + options.placeholderMessage + '"/>');
+
+            element.append('<input id="searchBox" name = "searchBoxName" class="searchBox" placeholder="' + options.placeholderMessage + '"/>');
             element.append('<input id="searchButton" class="searchButton" type="submit" value="" title="' + options.searchButtonTitle + '"/>');
             element.append('<span class="divider"></span>');
             element.append('<input id="clearButton" class="clearButton" type="submit"  value="" title="' + options.clearButtonTitle + '">');
