@@ -10,6 +10,7 @@ SimpleCov.start
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+require 'support/wait_for_ajax'
 Capybara.javascript_driver = :poltergeist
 
 Capybara.register_driver :poltergeist do |app|
@@ -17,7 +18,7 @@ Capybara.register_driver :poltergeist do |app|
     debug:     false,  # turn on poltergeist debug mode
     js_errors: true,  # turn on javascript errors on page
     timeout:   10000,
-    phantomjs_options: ['--load-images=yes', '--ignore-ssl-errors=yes', '--ssl-protocol=any']
+    phantomjs_options: ['--load-images=no', '--ignore-ssl-errors=yes', '--ssl-protocol=any']
   })
 end
 

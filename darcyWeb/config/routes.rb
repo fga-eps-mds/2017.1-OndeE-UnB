@@ -30,5 +30,7 @@ Rails.application.routes.draw do
   get 'map/building/:id', to: 'map#building'
 
   get 'map/routes'
+  get 'map/search_building'
+  get 'map/collect_building_data'
   get 'map/building'
 end
