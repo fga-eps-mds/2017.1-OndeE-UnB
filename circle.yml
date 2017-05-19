@@ -21,11 +21,11 @@ deployment:
       - |
         cat >~/.netrc <<EOF
         machine api.heroku.com
-          login ondeeunb@gmail.com
-          password ondeeunb123
+          login ${HEROKU_EMAIL}
+          password ${HEROKU_PASSWORD}
         machine git.heroku.com
-          login ondeeunb@gmail.com
-          password ondeeunb123
+          login ${HEROKU_EMAIL}
+          password ${HEROKU_PASSWORD}
         EOF
       - chmod 600 ~/.netrc # Heroku cli complains about permissions without this
       - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
@@ -37,11 +37,11 @@ deployment:
       - |
         cat >~/.netrc <<EOF
         machine api.heroku.com
-          login ondeeunb@gmail.com
-          password ondeeunb123
+          login ${HEROKU_EMAIL}
+          password ${HEROKU_PASSWORD}
         machine git.heroku.com
-          login ondeeunb@gmail.com
-          password ondeeunb123
+          login ${HEROKU_EMAIL}
+          password ${HEROKU_PASSWORD}
         EOF
       - chmod 600 ~/.netrc # Heroku cli complains about permissions without this
       - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
