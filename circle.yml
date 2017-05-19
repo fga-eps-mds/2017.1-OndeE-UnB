@@ -29,7 +29,8 @@ deployment:
         EOF
       - chmod 600 ~/.netrc # Heroku cli complains about permissions without this
       - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
-      - git subtree push --prefix darcyWeb git@heroku.com:ondeeunb-prod.git master
+      # - git subtree push --prefix darcyWeb git@heroku.com:ondeeunb-prod.git master
+      - git push git@heroku.com:ondeeunb-prod.git `git subtree split --prefix darcyWeb master`:master --force
   staging:
     branch: devel
     commands:
@@ -44,4 +45,5 @@ deployment:
         EOF
       - chmod 600 ~/.netrc # Heroku cli complains about permissions without this
       - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
-      - git subtree push --prefix darcyWeb git@heroku.com:ondeeunb-dev.git master
+      # - git subtree push --prefix darcyWeb git@heroku.com:ondeeunb-dev.git master
+      - git push git@heroku.com:ondeeunb-dev.git `git subtree split --prefix darcyWeb devel`:master --force
