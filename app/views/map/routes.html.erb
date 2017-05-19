@@ -1,23 +1,69 @@
-<div class="slide-panel-heading">
-
-    <h1>Pesquisar Rotas</h1>
-</div>
-
-<div class="slide-panel-routes">
-    <div class="row">
-
-        <div class="form-group col-xs-12">
-            <input class="form-control" placeholder="Ponto de Partida">
-        </div>
-        <div class="form-group col-xs-12">
-            <input class="form-control" placeholder="Ponto de Chegada">
-        </div>
-        <div class="form-group">
-            <button type="button" class="btn btn-secondary">Pedestre</button>
-            <button type="button" class="btn btn-secondary">Carro</button>
-            <button type="button" class="btn btn-secondary">Bicicleta</button>
-        </div>
+<h1 class="sidebar-header">Trajetos</h1>
+<div class="sidebar-body">
+  <form>
+    <div class="form-group">
+      <label>Local de Partida</label>
+      <input type="text" name="route[origin]" class="form-control">
     </div>
-</div>
+    <button class="btn btn-reverse-route btn-sm btn-primary float-sm-right">
+      <i class="ion-arrow-swap"></i>
+    </button>
+    <div class="form-group">
+      <label>Local de Chegada</label>
+      <input type="text" name="route[destination]" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Modo de Descolamento</label>
+      <div class="btn-group btn-group-justified" data-toggle="buttons">
+        <label class="btn btn-outline-info active">
+          <input type="radio" name="route[mode]" value="pedestrian">
+          <i class="ion-android-walk"></i>
+          A pé
+        </label>
+        <label class="btn btn-outline-info">
+          <input type="radio" name="route[mode]" value="bicycle">
+          <i class="ion-android-bicycle"></i>
+          Bicicleta
+        </label>
+        <label class="btn btn-outline-info">
+          <input type="radio" name="route[mode]" value="auto">
+          <i class="ion-android-car"></i>
+          Carro
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" id="route_submit" class="btn btn-info btn-block">Obter Trajeto</button>
+    </div>
+  </form>
 
-<div class="slide-panel-body"></div>
+  <div id="itinerary" class="hide">
+    <div class="row">
+      <div class="col-sm-4 text-center">
+        <b>Modo</b>
+        <i id="mode_icon" class="ion-android-car"></i>
+        <p id="mode_text">Carro</p>
+      </div>
+      <div class="col-sm-4 text-center">
+        <b>Distância</b>
+        <i class="ion-arrow-return-right"></i>
+        <p id="distance"></p>
+      </div>
+      <div class="col-sm-4 text-center">
+        <b>Tempo</b>
+        <i class="ion-android-time"></i>
+        <p id="time"></p>
+      </div>
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Passo</th>
+          <th>Instrução</th>
+          <th>Distância</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
