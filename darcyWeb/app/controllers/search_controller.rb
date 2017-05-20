@@ -1,7 +1,13 @@
 class SearchController < MapController
 
   def index
-     geo_json = json_department_search(params[:search])
+     buildings = json_building_search(params[:search])
+     departments = json_department_search(params[:search])
+     features = buildings + departments
+     geo_json = {
+      type: "FeatureCollection",
+      features: features
+     }
      render plain: geo_json.to_json
   end
 
@@ -22,10 +28,29 @@ class SearchController < MapController
         feature.merge!(properties: properties)
         features.push(feature)
       end
+    end
+    features
+  end
+
+  def json_building_search(search)
+    @buildings = Building.where('acronym LIKE ?', "%#{search}%")
+    features = []
+    @buildings.each_with_index do |building, index|
+
+      properties = {
+        popupContent: "MDS",
+        title: building.acronym,
+        description: building.title,
+        image: 'fa-building'
+      }
+
+      geo_data = JSON.parse building.geo_data
+      geo_data['features'].each do |feature|
+        feature.merge!(properties: properties)
+        features.push(feature)
+      end
 
     end
-    geo_json = {
-     type: "FeatureCollection",
-     features: features
-    }
+    features
+  end
 end
