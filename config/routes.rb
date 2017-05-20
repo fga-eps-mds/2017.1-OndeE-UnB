@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   root 'map#index'
 
+  get 'admin', to: 'admin#index'
   namespace :admin do
     resources :buildings, except: [:show]
     resources :rooms

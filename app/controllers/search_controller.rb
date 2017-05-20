@@ -1,4 +1,4 @@
-SearchController < MapController
+class SearchController < MapController
 
   def index
      geo_json = json_department_search(params[:search])
