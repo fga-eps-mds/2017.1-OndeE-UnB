@@ -1,1 +1,26 @@
-<%= render 'form', title: 'Editar Administrador', admin: @admin, url: admin_admin_path(@admin) %>
+<div class="row" style="margin-top: 30px;">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Editar Administrador
+      </div>
+      <div class="card-body">
+        <%= form_for(@admin, url: admin_admin_path, validate: true) do |f| %>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= f.label :email %>
+            <%= f.text_field :email, class: 'form-control' %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= f.submit 'Salvar', class: 'btn btn-sm btn-success' %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

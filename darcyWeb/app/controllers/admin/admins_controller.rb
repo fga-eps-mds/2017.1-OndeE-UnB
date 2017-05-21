@@ -22,8 +22,9 @@ class Admin::AdminsController < AdminController
     end
 
     def update
-      if @admin.update(admin_params)
+      if @admin.update(admin_params_edit)
         redirect_to admin_admins_path, notice: helpers.alert_success('Administrador editado com êxito.')
+      end
     end
 
     def destroy
@@ -38,5 +39,9 @@ class Admin::AdminsController < AdminController
 
     def admin_params
       params.require(:admin).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def admin_params_edit
+      params.require(:admin).permit(:name, :email)
     end
 end
