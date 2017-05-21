@@ -6,7 +6,7 @@ class Admin::AdminsController < AdminController
     end
 
     def new
-        @admins= Admin.new
+        @admin = Admin.new
     end
 
     def create
