@@ -26,8 +26,10 @@ Rails.application.routes.draw do
   get 'admin/index'
 
   get 'map/data'
-
   get 'map/building/:id', to: 'map#building'
+
+  get 'map/datapoint'
+  get 'map/point/:id', to: 'map#point'
 
   get 'map/routes'
   get 'map/building'
