@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     post 'admin/registration', to: 'devise/registrations#create', as: 'registration'
   end
   devise_for :admins
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'map#index'
@@ -18,8 +19,9 @@ Rails.application.routes.draw do
     resources :buildings, except: [:show]
     resources :rooms
     resources :departments
-    resources :admin
+    resources :admins, except: [:show]
   end
+
 
   get 'app/views/map/index.html.erb', to: 'map#index', as: 'map'
   get 'app/views/about/about.html.erb', to: 'about#about', as: 'about'
@@ -30,5 +32,7 @@ Rails.application.routes.draw do
   get 'map/building/:id', to: 'map#building'
 
   get 'map/routes'
+  get 'map/search_building'
+  get 'map/collect_building_data'
   get 'map/building'
 end
