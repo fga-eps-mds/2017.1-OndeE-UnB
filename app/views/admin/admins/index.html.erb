@@ -26,7 +26,8 @@
                             <td><%= admin.email %></td>
                             <td><%= admin.name %></td>
                             <td>
-                                <!-- colocar link de edita e deletar admin -->
+                                <%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_admin_admin_path(admin) %>
+                                <%= link_to '<i class="fa fa-remove"></i>'.html_safe, admin_admin_path(admin), method: :delete %>
                             </td>
                         </tr>
                         <% end %>
