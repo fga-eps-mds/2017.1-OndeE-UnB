@@ -12,7 +12,7 @@ class Admin::AdminsController < AdminController
     def create
         @admin = Admin.new(admin_params)
         if @admin.save
-          redirect_to admin_adm_path, notice: alert_success('Administrador criado com êxito.')
+          redirect_to admin_admins_path, notice: ('Administrador criado com êxito.')
         else
           render :new
         end
@@ -21,9 +21,11 @@ class Admin::AdminsController < AdminController
     def update
     end
 
-
-
     def destroy
     end
 
+    private
+    def admin_params
+      params.require(:admin).permit(:name, :email, :password, :password_confirmation)
+    end
 end

@@ -16,13 +16,15 @@
                     <thead>
                         <tr>
                             <th>Email</th>
+                            <th>Nome</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <% @admins.each do |adm| %>
+                        <% @admins.each do |admin| %>
                         <tr>
-                            <td><%= adm.email %></td>
+                            <td><%= admin.email %></td>
+                            <td><%= admin.name %></td>
                             <td>
                                 <!-- colocar link de edita e deletar admin -->
                             </td>
