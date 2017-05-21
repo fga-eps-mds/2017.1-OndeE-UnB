@@ -16,16 +16,26 @@ class Admin::AdminsController < AdminController
         else
           render :new
         end
-  end
+    end
+
+    def edit
+    end
 
     def update
+      if @admin.update(admin_params)
+        redirect_to admin_admins_path, notice: helpers.alert_success('Administrador editado com êxito.')
     end
 
     def destroy
+      @admin.destroy
+      redirect_to admin_admins_path, notice: helpers.alert_success('Administrador excluído com êxito.')
     end
 
-
     private
+    def set_admin
+      @admin = Admin.find(params[:id])
+    end
+
     def admin_params
       params.require(:admin).permit(:name, :email, :password, :password_confirmation)
     end
