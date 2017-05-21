@@ -6,6 +6,7 @@
                 <div class="card-title">Administradores</div>
                 <ul class="card-action">
                     <li>
+                        <!-- colocar link de new admin -->
                         <%= link_to '<i class="fa fa-plus"></i>'.html_safe, new_admin_building_path %>
                     </li>
                 </ul>
@@ -19,12 +20,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% @admins.each do |admin| %>
+                        <% @admins.each do |adm| %>
                         <tr>
-                            <td><%= admin.email %></td>
+                            <td><%= adm.email %></td>
                             <td>
-                                <!-- <%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_admin_building_path(building) %> -->
-                                <!-- <%= link_to '<i class="fa fa-remove"></i>'.html_safe, admin_building_path(building), method: :delete %> -->
+                                <!-- colocar link de edita e deletar admin -->
                             </td>
                         </tr>
                         <% end %>

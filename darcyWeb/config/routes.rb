@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :rooms
     resources :departments
     resources :admin
+    resources :adm, except: [:show]
   end
 
   get 'app/views/map/index.html.erb', to: 'map#index', as: 'map'
