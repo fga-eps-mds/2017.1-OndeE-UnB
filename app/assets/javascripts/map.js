@@ -3,7 +3,7 @@
 //= require map/sidebar
 //= require leaflet-easy-button/easy-button
 //= require map/routes
-
+//= require map/points
 
 function onEachFeature(feature,layer){
     layer.on('click', function(){
