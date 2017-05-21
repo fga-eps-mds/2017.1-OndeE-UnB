@@ -1,27 +1,34 @@
-<div class="card">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card-header">
-                <%= title %>
-            </div>
-            <div class="card-body">
-                <%= form_for(admin, url: url, validate: true) do |f| %>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <%= f.label :name %>
-                        <%= f.text_field :name, class: 'form-control' %>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <%= f.label :email %>
-                        <%= f.text_field :email, class: 'form-control' %>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <%= f.label :password %>
-                        <%= f.text_field :password, class: 'form-control' %>
-                    </div>
-                </div>
-                <% end %>
-            </div>
+<div class="row" style="margin-top: 30px;">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <%= title %>
+      </div>
+      <div class="card-body">
+        <%= form_for(admin, url: url, validate: true) do |f| %>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= f.label :email %>
+            <%= f.text_field :email, class: 'form-control' %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= f.label :password %>
+            <%= f.password_field :password, class: 'form-control' %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, class: 'form-control' %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= f.submit 'Salvar', class: 'btn btn-sm btn-success' %>
+          </div>
         </div>
+        <% end %>
+      </div>
     </div>
+  </div>
 </div>
