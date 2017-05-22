@@ -49,6 +49,6 @@ class Admin::PointsController < AdminController
   end
 
   def point_params
-    params.require(:point).permit(:type_point, :description, :latitude, :longitude, :geo_data)
+    params.require(:point).permit(:title, :type_point, :description, :latitude, :longitude, :geo_data)
   end
 end

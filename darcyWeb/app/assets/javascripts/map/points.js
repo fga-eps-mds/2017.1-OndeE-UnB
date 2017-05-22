@@ -1,6 +1,3 @@
-//= require leaflet/routing-machine
-//= require leaflet/lrm-mapzen
-
 var greenIcon = L.icon({
     iconUrl: 'http://icons.iconarchive.com/icons/icons-land/points-of-interest/24/Bicycle-Green-2-icon.png',
 });
