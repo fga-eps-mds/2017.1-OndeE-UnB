@@ -30,7 +30,7 @@ var buildingLayer = L.geoJSON('', {
 map.addLayer(buildingLayer);
 
 
-$.getJSON( "/map/data", function(data) { //getting the json data
+$.getJSON( "/map/data/buildings", function(data) { //getting the json data
     var items = [];
     $.each(data, function (key, val){
 
@@ -40,6 +40,24 @@ $.getJSON( "/map/data", function(data) { //getting the json data
             buildingLayer.addData(geo_json); //adding the json data to the building layer
         } catch(err) {
           //console.log(err);
+        }
+    });
+});
+
+
+var bikesLayer = L.geoJSON('');
+
+map.addLayer(bikesLayer);
+
+$.getJSON( "/map/data/bikes", function(data) { //getting the json data
+    console.log(data);
+    var items = [];
+    $.each(data, function (key, val){
+        try {
+            var geo_json = JSON.parse(val.geo_data);
+            bikesLayer.addData(geo_json); //adding the json data to the building layer
+        } catch(err) {
+          console.log(err);
         }
     });
 });
