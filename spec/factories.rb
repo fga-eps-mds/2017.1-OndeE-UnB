@@ -9,7 +9,7 @@ FactoryGirl.define do
   end
 
   factory :admin do
-    name "mds"
+    name "MDS"
     email "mds@mds.com"
     password "mds123"
     password_confirmation "mds123"
