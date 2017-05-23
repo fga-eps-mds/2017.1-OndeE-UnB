@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
+
   devise_scope :admin do
     get 'admin/login', to: 'devise/sessions#new', as: 'new_login'
     post 'admin/login', to: 'devise/sessions#create', as: 'login'
@@ -29,4 +31,7 @@ Rails.application.routes.draw do
   get 'map/building/:id', to: 'map#building'
 
   get 'map/routes'
+  get 'map/search_building'
+  get 'map/collect_building_data'
+  get 'map/building'
 end
