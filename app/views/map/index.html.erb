@@ -1,50 +1,26 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>Onde É? UnB</title>
-        <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Roboto' %>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-        <%= stylesheet_link_tag 'https://unpkg.com/leaflet@1.0.3/dist/leaflet.css' %>
-        <%= stylesheet_link_tag 'map' %>
-        <script src="https://releases.route360.net/r360-js/latest.js"></script>
-
-    </head>
-    <%= render :partial => "shared/head"%>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Onde É UnB</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Roboto:400,500' %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css' %>
+    <%= stylesheet_link_tag 'https://unpkg.com/leaflet@1.0.3/dist/leaflet.css' %>
     <%= stylesheet_link_tag 'map' %>
-    <body>
+  </head>
+  <body>
+    <div id="sidebar"></div>
 
-        <%= render :partial => "shared/navbar"%>
+    <div id="map"></div>
+    <div id="searchContainer"></div>
 
-        <div class="slide-panel animated"></div>
-
-        <div id="map" style="float: left;"></div>
-
-        <div class="btn-group level" role="group">
-            <button type="button" class="btn btn-secondary">Subsolo</button>
-            <button type="button" class="btn btn-secondary active">1</button>
-            <button type="button" class="btn btn-secondary">2</button>
-            <button type="button" class="btn btn-secondary">3</button>
-        </div>
-
-        <div class="info-label"></div>
-        <div class="search">
-          <input type="text" placeholder="Procurar Locais" class="form-control  mr-sm-2">
-          <label class="fa fa-search" title="Procurar Locais"></label>
-        </div>
-        <%= javascript_include_tag 'https://use.fontawesome.com/84624258b7.js' %>
-
-
-
-        <script src="https://use.fontawesome.com/84624258b7.js"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-        <%= javascript_include_tag 'https://unpkg.com/leaflet@1.0.3/dist/leaflet.js' %>
-        <%= javascript_include_tag 'map' %>
-        <div>
-          <%= render :partial => "shared/footer"%>
-        </div>
-    </body>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <%= javascript_include_tag 'https://unpkg.com/leaflet@1.0.3/dist/leaflet.js' %>
+    <%= javascript_include_tag 'map' %>
+  </body>
 </html>
