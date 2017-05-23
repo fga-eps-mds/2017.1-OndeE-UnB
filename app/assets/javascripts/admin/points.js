@@ -1,10 +1,5 @@
-//= require leaflet/draw
-//= require leaflet/map
-//= require leaflet/easy-button
-//= require leaflet/draw.translations
-
-const $building_geo_data = {
-  element: $('#building_geo_data'),
+const $point_geo_data = {
+  element: $('#point_geo_data'),
   save: function(geo_json){
     this.element.val(JSON.stringify(geo_json.toGeoJSON()));
   },
@@ -16,9 +11,12 @@ const $building_geo_data = {
   }
 };
 
-const $building_coords = {
-  element_lat: $('#building_latitude'),
-  element_lng: $('#building_longitude'),
+$point_geo_data.load();
+
+
+const $point_coords = {
+  element_lat: $('#point_latitude'),
+  element_lng: $('#point_longitude'),
   save: function(lat, lng){
     if (this.element_lat.val(lat) && this.element_lng.val(lng)) {
       return true;
@@ -33,14 +31,11 @@ const $building_coords = {
     }
   }
 }
-$building_coords.load();
-
+$point_coords.load();
 
 var drawnLayer = L.geoJSON().addTo(map);
 map.addLayer(drawnLayer);
 
-// Load json from the form
-$building_geo_data.load();
 
 var drawControl = new L.Control.Draw({
     edit: {
@@ -50,30 +45,42 @@ var drawControl = new L.Control.Draw({
         polyline: false,
         circle: false,
         rectangle: false,
-        marker: false,
-        polygon: {
-            allowIntersection: false,
-            showArea: true
-        }
+        polygon: false
     }
 });
 
 map.on(L.Draw.Event.CREATED, function(event) {
-    var layer = event.layer;
-    drawnLayer.addLayer(layer);
-    $building_geo_data.save(drawnLayer);
+    var pointLayer = event.layer;
+
+
+    const $centerPoint = pointLayer.getLatLng();
+    $point_coords.save($centerPoint.lat, $centerPoint.lng);
+    drawnLayer.addLayer(pointLayer);
+    $point_geo_data.save(drawnLayer);
+
+    drawControl.setDrawingOptions({
+        marker: false
+    });
+    map.removeControl(drawControl);
+    map.addControl(drawControl);
+
 });
 
 map.on(L.Draw.Event.EDITED, function(event) {
-    $building_geo_data.save(drawnLayer);
+
+  const $centerPoint = drawnLayer.getLayers()[0].getLatLng()
+  $point_coords.save($centerPoint.lat, $centerPoint.lng);
+
+    $point_geo_data.save(drawnLayer);
 });
+
 map.on(L.Draw.Event.DELETED, function(event) {
-    $building_geo_data.save(drawnLayer);
+    $point_geo_data.save(drawnLayer);
+      drawControl.setDrawingOptions({
+          marker: true
+      });
+      map.removeControl(drawControl);
+    map.addControl(drawControl);
 });
 
 map.addControl(drawControl);
-
-L.easyButton('fa-map-marker', function(btn, map){
-  const $center = map.getCenter();
-  $building_coords.save($center.lat, $center.lng);
-}).addTo(map);

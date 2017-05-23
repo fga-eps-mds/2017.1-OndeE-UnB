@@ -1,7 +1,12 @@
 FactoryGirl.define do
+<<<<<<< HEAD
   factory :department do
     acronym "MyString"
     phone 1
+=======
+  factory :point do
+    
+>>>>>>> ee57b9f71b63d526324050475300d90f4d5b3d60
   end
   factory :building do
     acronym "Reitoria"
