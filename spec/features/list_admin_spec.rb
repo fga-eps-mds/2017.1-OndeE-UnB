@@ -8,7 +8,7 @@ describe "List of admins", type: :feature do
         email = "mds@mds.com"
         senha = "mds123"
 
-    it "deve encontrar a pagina de login de admin" do
+    it "should find the page of admin sign in" do
 
         visit admin_session_path
 
@@ -16,7 +16,7 @@ describe "List of admins", type: :feature do
 
     end
 
-    it "deve logar-se como admin" do
+    it "should log in as admin" do
 
         visit admin_session_path
 
@@ -28,48 +28,62 @@ describe "List of admins", type: :feature do
         expect(page).to have_content('Administrador')
     end
 
-    it "deve encontrar o card-banner administradores" do
+    context "Should be logged in the system" do
 
-        visit admin_session_path
+        email = "mds@mds.com"
+        senha = "mds123"
 
-        fill_in 'admin[email]', with: email
-        fill_in 'admin[password]', with: senha
+        before(:each) do
+                visit admin_session_path
 
-        find('input.btn.btn-success.btn-submit').click
+                fill_in 'admin[email]', with: email
+                fill_in 'admin[password]', with: senha
 
-        page.find(:css, 'a[href="/admin/index"]').click
+                find('input.btn.btn-success.btn-submit').click
+        end
 
-        expect(page).to have_content('Administradores')
-    end
+        it "should find the card-banner of admins" do
 
-    it "deve encontrar campo email na lista de administradores" do
+            page.find(:css, 'a[href="/admin/index"]').click
 
-        visit admin_session_path
+            expect(page).to have_content('Administradores')
+        end
 
-        fill_in 'admin[email]', with: email
-        fill_in 'admin[password]', with: senha
+        it "should find the field email on list of admins" do
 
-        find('input.btn.btn-success.btn-submit').click
 
-        page.find(:css, 'a[href="/admin/admins"]').click
+            page.find(:css, 'a[href="/admin/admins"]').click
 
-        expect(page).to have_content('Email')
+            expect(page).to have_content('Email')
 
-    end
+        end
 
-    it "deve encontrar campo nome na lista de administradores" do
+        it "should find the field name on list of admins" do
 
-        visit admin_session_path
 
-        fill_in 'admin[email]', with: email
-        fill_in 'admin[password]', with: senha
+            page.find(:css, 'a[href="/admin/admins"]').click
 
-        find('input.btn.btn-success.btn-submit').click
+            expect(page).to have_content('Nome')
 
-        page.find(:css, 'a[href="/admin/admins"]').click
+        end
 
-        expect(page).to have_content('Nome')
+        it "should find the email of admin tester" do
 
+
+            page.find(:css, 'a[href="/admin/admins"]').click
+
+            expect(page).to have_content("mds@mds.com")
+
+        end
+
+        it "should find the name of admin tester" do
+
+
+            page.find(:css, 'a[href="/admin/admins"]').click
+
+            expect(page).to have_content("MDS")
+
+        end
     end
 
 end
