@@ -62,18 +62,18 @@ $.getJSON( "/map/data/bikes", function(data) { //getting the json data
     });
 });
 
-var departamentLayer = L.geoJSON('');
+var departmentLayer = L.geoJSON('');
 
-map.addLayer(departamentLayer);
+map.addLayer(departmentLayer);
 
-$.getJSON("/map/data/departaments", function(data) { //getting the json data
+$.getJSON("/map/data/departments", function(data) { //getting the json data
   console.log(data);
   var items = [];
   $.each(data, function(key, val) {
     try {
-      console.log('Load Departaments');
+      console.log('Load Departments');
       var geo_json = JSON.parse(val.geo_data);
-      departamentLayer.addData(geo_json); //adding the json data to the departament layer
+      departmentLayer.addData(geo_json); //adding the json data to the departament layer
     } catch (err) {
       console.log(err);
     }

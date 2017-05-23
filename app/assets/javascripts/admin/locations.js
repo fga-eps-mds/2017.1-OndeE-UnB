@@ -1,10 +1,10 @@
 //= require leaflet/draw
 //= require leaflet/map
-//= require leaflet-easy-button/easy-button
+//= require leaflet/easy-button
 //= require leaflet/draw.translations
 
 const $location_geo_data = {
-  element: $("input[id$='_geo_data']"), 
+  element: $("input[id$='_geo_data']"),
   save: function(geo_json){
     this.element.val(JSON.stringify(geo_json.toGeoJSON()));
   },
@@ -18,7 +18,7 @@ const $location_geo_data = {
 
 const $location_coods = {
   element_lat: $("input[id$='_latitude']"),
-  element_lng: $("input[id$='_longitude']"), 
+  element_lng: $("input[id$='_longitude']"),
   save: function(lat, lng){
     this.element_lat.val(lat);
     this.element_lng.val(lng);
@@ -74,5 +74,3 @@ L.easyButton('fa-map-marker', function(btn, map){
   const $center = map.getCenter();
   $location_coods.save($center.lat, $center.lng);
 }).addTo(map);
-
-

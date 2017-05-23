@@ -7,4 +7,8 @@ class Map::DataController < MapController
         @buildings = Building.all
         render json: @buildings
     end
+    def departments
+        @departments = Department.all
+        render json: @departments
+    end
 end
