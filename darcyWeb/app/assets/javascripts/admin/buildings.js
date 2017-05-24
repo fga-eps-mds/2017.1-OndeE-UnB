@@ -1,6 +1,6 @@
 //= require leaflet/draw
 //= require leaflet/map
-//= require leaflet-easy-button/easy-button
+//= require leaflet/easy-button
 //= require leaflet/draw.translations
 
 const $building_geo_data = {
