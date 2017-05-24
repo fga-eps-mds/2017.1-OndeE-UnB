@@ -1,9 +1,9 @@
 //= require leaflet/map
 //= require leaflet/awesome-markers
 //= require map/sidebar
-//= require leaflet-easy-button/easy-button
+//= require leaflet/easy-button
 //= require map/routes
-//= require map/points
+//= require map/search
 
 //Buildings
 

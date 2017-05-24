@@ -24,8 +24,9 @@ Rails.application.routes.draw do
 
   namespace :map do
     namespace :data do
-      get 'bikes', action: 'bikes'
       get 'buildings', action: 'buildings'
+      get 'building/:id', action: 'building'
+      get 'bikes', action: 'bikes'
       get 'bathrooms', action: 'bathrooms'
       get 'snackbars', action: 'snackbars'
       get 'busstops', action: 'busstops'
@@ -43,6 +44,8 @@ Rails.application.routes.draw do
   get 'map/point/:id', to: 'map#point'
 
   get 'map/routes'
+  get 'map/search_building'
+  get 'map/collect_building_data'
   get 'map/building'
   get 'map/point'
 end
