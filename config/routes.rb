@@ -26,6 +26,10 @@ Rails.application.routes.draw do
     namespace :data do
       get 'bikes', action: 'bikes'
       get 'buildings', action: 'buildings'
+      get 'bathrooms', action: 'bathrooms'
+      get 'snackbars', action: 'snackbars'
+      get 'busstops', action: 'busstops'
+      get 'entrances', action: 'entrances'
     end
   end
 
