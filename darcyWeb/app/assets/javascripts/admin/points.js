@@ -13,7 +13,6 @@ const $point_geo_data = {
 
 $point_geo_data.load();
 
-
 const $point_coords = {
   element_lat: $('#point_latitude'),
   element_lng: $('#point_longitude'),
@@ -31,11 +30,11 @@ const $point_coords = {
     }
   }
 }
+
 $point_coords.load();
 
 var drawnLayer = L.geoJSON().addTo(map);
 map.addLayer(drawnLayer);
-
 
 var drawControl = new L.Control.Draw({
     edit: {
