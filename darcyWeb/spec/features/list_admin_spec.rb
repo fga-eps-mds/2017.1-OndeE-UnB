@@ -86,4 +86,63 @@ describe "List of admins", type: :feature do
         end
     end
 
+     context "Should be logged in the system" do
+
+        email = "mds@mds.com"
+        senha = "mds123"
+
+        before(:each) do
+                visit admin_session_path
+
+                fill_in 'admin[email]', with: email
+                fill_in 'admin[password]', with: senha
+
+                find('input.btn.btn-success.btn-submit').click
+
+
+
+        end
+
+         it "should find the page of create admin" do
+
+            visit new_admin_admin_path
+
+            expect(page).to have_content('Criar Administrador')
+
+        end
+
+         it "should find the field name on create admin" do
+
+            visit new_admin_admin_path
+
+            expect(page).to have_content('Name')
+
+        end
+
+         it "should find the field email on create admin" do
+
+            visit new_admin_admin_path
+
+            expect(page).to have_content('Email')
+
+        end
+
+         it "should find the field password on create admin" do
+
+            visit new_admin_admin_path
+
+            expect(page).to have_content('Password')
+
+        end
+
+        it "should find the field password confirmation on create admin" do
+
+            visit new_admin_admin_path
+
+            expect(page).to have_content('Password confirmation')
+
+        end
+
+    end
+
 end
