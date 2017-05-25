@@ -1,3 +1,4 @@
+//Loads and save points
 const $point_geo_data = {
   element: $('#point_geo_data'),
   save: function(geo_json){
@@ -13,6 +14,7 @@ const $point_geo_data = {
 
 $point_geo_data.load();
 
+//Loads and save coordinates related to points
 const $point_coords = {
   element_lat: $('#point_latitude'),
   element_lng: $('#point_longitude'),
@@ -33,53 +35,63 @@ const $point_coords = {
 
 $point_coords.load();
 
-var drawnLayer = L.geoJSON().addTo(map);
-map.addLayer(drawnLayer);
+//Adicionate layer of points to map
+var drawnLayerPoints = L.geoJSON().addTo(map);
+map.addLayer(drawnLayerPoints);
 
-var drawControl = new L.Control.Draw({
+//Sets control to create new point, marker by default is present
+var drawControlPoints = new L.Control.Draw({
     edit: {
-        featureGroup: drawnLayer
+        featureGroup: drawnLayerPoints
     },
     draw: {
         polyline: false,
         circle: false,
         rectangle: false,
-        polygon: false
+        polygon: false,
+        marker: true
     }
 });
 
-map.on(L.Draw.Event.CREATED, function(event) {
+map.on(L.Draw.Event.CREATED, function (event) {
+  //checks url to not conflict with the building creation
+  if(isOnPointsUrl){
     var pointLayer = event.layer;
-
-
+    //After put an point to create, the coordinates are displayed in the form of creation of points
     const $centerPoint = pointLayer.getLatLng();
     $point_coords.save($centerPoint.lat, $centerPoint.lng);
-    drawnLayer.addLayer(pointLayer);
-    $point_geo_data.save(drawnLayer);
 
-    drawControl.setDrawingOptions({
-        marker: false
+    drawnLayerPoints.addLayer(pointLayer);
+    $point_geo_data.save(drawnLayerPoints);
+
+    //This was the only way finded to remove marker option
+    drawControlPoints.setDrawingOptions({
+      marker: false
     });
-    map.removeControl(drawControl);
-    map.addControl(drawControl);
-
+    map.removeControl(drawControlPoints);
+    map.addControl(drawControlPoints);
+  }
 });
 
 map.on(L.Draw.Event.EDITED, function(event) {
-
-  const $centerPoint = drawnLayer.getLayers()[0].getLatLng()
-  $point_coords.save($centerPoint.lat, $centerPoint.lng);
-
-    $point_geo_data.save(drawnLayer);
+  if(isOnPointsUrl){
+    //takes the latitude and longitude and update according new edited point
+    const $centerPoint = drawnLayerPoints.getLayers()[0].getLatLng();
+    $point_coords.save($centerPoint.lat, $centerPoint.lng);
+    $point_geo_data.save(drawnLayerPoints);
+  }
 });
 
 map.on(L.Draw.Event.DELETED, function(event) {
-    $point_geo_data.save(drawnLayer);
-      drawControl.setDrawingOptions({
-          marker: true
-      });
-      map.removeControl(drawControl);
-    map.addControl(drawControl);
+  if(isOnPointsUrl){
+    $point_geo_data.save(drawnLayerPoints);
+    //Puts again the marker as option
+    drawControlPoints.setDrawingOptions({
+      marker: true
+    });
+    map.removeControl(drawControlPoints);
+    map.addControl(drawControlPoints);
+  }
 });
 
-map.addControl(drawControl);
+map.addControl(drawControlPoints);
