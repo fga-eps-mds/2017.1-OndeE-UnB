@@ -9,8 +9,8 @@ FactoryGirl.define do
   end
 
   factory :building do
-    acronym "Reitoria"
-    title "Reitoria"
+    acronym "BSA"
+    title "Bloco"
     phone 302310312
     latitude 0.0
     longitude 0.0
