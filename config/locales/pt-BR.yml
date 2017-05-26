@@ -12,6 +12,7 @@ pt-BR:
             email:
               blank: "Insira o email."
               invalid: "Email inválido. Insira novamente."
+              taken: "Já existe administrador com esse email."
             password:
               blank: "Insira a senha."
               too_short: "Insira a senha com no mínimo 6 caracteres."

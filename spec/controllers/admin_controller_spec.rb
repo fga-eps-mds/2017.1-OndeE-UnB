@@ -1,12 +1,14 @@
 require 'rails_helper'
 
-describe AdminController do
+describe AdminController, "creating a new admin" do
 
-#	describe "checking the request the view of admin" do
-#		it "checks the request" do
-#			get:index
-#			expect(response).to render_template("index")
-#		end
-#	end
+	integrate_views
 
-end
+	it "should redirect to index with a notice on sucessful save"
+
+
+
+
+	it "shoul re-render new template on failed save"
+
+end	
