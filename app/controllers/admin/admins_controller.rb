@@ -19,11 +19,16 @@ class Admin::AdminsController < AdminController
     end
 
     def edit
+      @admin = Admin.find(params[:id])
     end
 
     def update
+      @admin = Admin.find(params[:id])
       if @admin.update(admin_params_edit)
         redirect_to admin_admins_path, notice: helpers.alert_success('Administrador editado com êxito.')
+      else
+        flash.now[:alert] = "Member not updated"
+        render 'edit'
       end
     end
 
