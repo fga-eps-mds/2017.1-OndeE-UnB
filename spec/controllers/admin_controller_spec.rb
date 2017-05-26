@@ -1,14 +1,15 @@
 require 'rails_helper'
 
-describe AdminController, "creating a new admin" do
+describe AdminController,  type: :controller do
 
-	integrate_views
+	before do
+		@admin = FactoryGirl.create(:admin)
+	end
 
-	it "should redirect to index with a notice on sucessful save"
-
-
-
-
-	it "shoul re-render new template on failed save"
-
+	describe "GET new" do
+		it "should GET a new user" do
+			get :new
+			expect(response). to have_http_status(:sucess)
+		end
+	end
 end	

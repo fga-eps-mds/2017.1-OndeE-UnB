@@ -27,9 +27,18 @@ class Admin::AdminsController < AdminController
       end
     end
 
+    def my_requests
+      @admin = current_user
+    end
+
     def destroy
+      user = Admin.find(params[:id])
+      if (current_admin == user)
+        redirect_to admin_admins_path, notice: helpers.alert_danger('Você não pode se excluir.')
+      else
       @admin.destroy
       redirect_to admin_admins_path, notice: helpers.alert_success('Administrador excluído com êxito.')
+    end
     end
 
     private
