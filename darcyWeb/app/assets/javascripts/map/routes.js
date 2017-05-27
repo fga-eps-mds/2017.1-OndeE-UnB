@@ -129,13 +129,20 @@ function positionSuccess(position, point) {
       lng: position.coords.longitude
     }
   }
-  if(point == 'origin'){
-    routesFromHere(location);
+  var inside_bounds = map.getBounds().contains(location.latlng);
+  if(inside_bounds){
+    if(point == 'origin'){
+      routesFromHere(location);
+    } else {
+      routesToHere(location);
+    }
   } else {
-    routesToHere(location);
+    alert("Ops... Parece que você não está no campus.");
   }
+
 }
 
+// process the error when it is not possible to get user position
 function positionError(error) {
   switch (error.code) {
     case error.PERMISSION_DENIED:
@@ -342,4 +349,5 @@ function reverseRoute(e) {
 }
 // TODO Require to fill out origin and destination in the form, before calculate route
 // TODO Add button to create a new route
+// TODO Suggest locations on whe form
 // TODO Suggest locations on whe form
