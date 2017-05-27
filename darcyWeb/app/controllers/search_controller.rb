@@ -13,7 +13,7 @@ class SearchController < MapController
 
   def json_department_search(search)
     search = "%#{search}%"
-    @department = Department.joins(:location).where("locations.title LIKE ? OR acronym LIKE ? ", search, search)
+    @department = Department.joins(:location).where("locations.title ILIKE ? OR acronym ILIKE ? ", search, search)
     features = []
     @department.each_with_index do |department, index|
 
@@ -35,7 +35,7 @@ class SearchController < MapController
 
   def json_building_search(search)
     search = "%#{search}%"
-    @buildings = Building.joins(:location).where("locations.title LIKE ? OR acronym LIKE ? ", search, search)
+    @buildings = Building.joins(:location).where("locations.title ILIKE ? OR acronym ILIKE ? ", search, search)
     features = []
     @buildings.each_with_index do |building, index|
 
