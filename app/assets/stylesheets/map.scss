@@ -138,3 +138,24 @@ html {
 .leaflet-routing-container {
   display: none !important;
 }
+.input-location {
+    position: relative;
+    .input-current-location-btn {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        padding: 0 10px;
+        border: none;
+        border-radius: 0 200px 200px 0;
+        background: 0 0;
+        transition: all 0.5s ease;
+    }
+}
+
+.input-location:hover {
+  .input-current-location-btn {
+    display: inline;
+  }
+}
