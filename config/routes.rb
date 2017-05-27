@@ -48,4 +48,9 @@ Rails.application.routes.draw do
   get 'map/collect_building_data'
   get 'map/building'
   get 'map/point'
+
+  # Provisory method to destroy points and buildings
+  get 'admin/points/:id', to: 'admin/points#destroy'
+  get 'admin/buildings/:id', to: 'admin/buildings#destroy'
+
 end

@@ -1,3 +1,8 @@
+//= require leaflet/draw
+//= require leaflet/map
+//= require leaflet/easy-button
+//= require leaflet/draw.translations
+
 //Loads and save points
 const $point_geo_data = {
   element: $('#point_geo_data'),
@@ -55,7 +60,6 @@ var drawControlPoints = new L.Control.Draw({
 
 map.on(L.Draw.Event.CREATED, function (event) {
   //checks url to not conflict with the building creation
-  if(isOnPointsUrl){
     var pointLayer = event.layer;
     //After put an point to create, the coordinates are displayed in the form of creation of points
     const $centerPoint = pointLayer.getLatLng();
@@ -70,20 +74,16 @@ map.on(L.Draw.Event.CREATED, function (event) {
     });
     map.removeControl(drawControlPoints);
     map.addControl(drawControlPoints);
-  }
 });
 
 map.on(L.Draw.Event.EDITED, function(event) {
-  if(isOnPointsUrl){
     //takes the latitude and longitude and update according new edited point
     const $centerPoint = drawnLayerPoints.getLayers()[0].getLatLng();
     $point_coords.save($centerPoint.lat, $centerPoint.lng);
     $point_geo_data.save(drawnLayerPoints);
-  }
 });
 
 map.on(L.Draw.Event.DELETED, function(event) {
-  if(isOnPointsUrl){
     $point_geo_data.save(drawnLayerPoints);
     //Puts again the marker as option
     drawControlPoints.setDrawingOptions({
@@ -91,7 +91,6 @@ map.on(L.Draw.Event.DELETED, function(event) {
     });
     map.removeControl(drawControlPoints);
     map.addControl(drawControlPoints);
-  }
 });
 
 map.addControl(drawControlPoints);
