@@ -132,6 +132,10 @@ function loadRouteForm(data) {
 
     fillFormRouteLocations(data);
 
+    $('.input-current-location-btn').on('click', function(){
+      $(this).parent().find('input').val('Ola');
+    });
+
     // calculate route when user clicks submit button
     route_form.submit.on('click', function(e) {
       console.debug('Clicked submit button');
