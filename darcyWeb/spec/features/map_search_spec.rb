@@ -62,4 +62,12 @@ describe "Search", type: :feature do
 
 	end
 
+	it "Should find a room by title" , js:true do
+		FactoryGirl.create :room
+		visit root_path
+		fill_in 'searchBox', with: 'BT-43'
+		wait_for_ajax
+		expect(find('#resultsDiv')).to have_content('BT-43')
+	end
+
 end
