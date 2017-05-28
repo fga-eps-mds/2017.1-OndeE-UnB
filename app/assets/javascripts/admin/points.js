@@ -9,10 +9,11 @@ const $point_geo_data = {
   save: function(geo_json){
     this.element.val(JSON.stringify(geo_json.toGeoJSON()));
   },
+  //Points have some problem beeing loaded, cannot edit after point saved
   load: function(){
     const $geo_json = this.element.val();
     if ($geo_json) {
-        drawnLayer.addData(JSON.parse($geo_json));
+        drawnLayerPoints.addData(JSON.parse($geo_json));
     }
   }
 };
@@ -59,7 +60,6 @@ var drawControlPoints = new L.Control.Draw({
 });
 
 map.on(L.Draw.Event.CREATED, function (event) {
-  //checks url to not conflict with the building creation
     var pointLayer = event.layer;
     //After put an point to create, the coordinates are displayed in the form of creation of points
     const $centerPoint = pointLayer.getLatLng();

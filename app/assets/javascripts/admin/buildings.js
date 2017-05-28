@@ -58,7 +58,6 @@ var drawControl = new L.Control.Draw({
 });
 
 map.on(L.Draw.Event.CREATED, function(event) {
-  //checks url to not conflict with the point creation
     var layer = event.layer;
     drawnLayer.addLayer(layer);
     $building_geo_data.save(drawnLayer);
