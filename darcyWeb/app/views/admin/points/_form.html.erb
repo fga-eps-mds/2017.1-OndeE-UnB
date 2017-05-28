@@ -1,7 +1,7 @@
 <%= content_for :javascripts do %>
     <%= javascript_include_tag 'admin/points' %>
 <% end %>
-<div class="card">
+<div  id="card" class="card">
     <div class="row">
         <div class="col-md-5">
             <div class="card-header">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <%= f.hidden_field :geo_data %>
-                    <%= f.submit 'Salvar', class: 'btn btn-sm btn-success' %>
+                    <%= f.submit 'Salvar', class: 'btn btn-sm btn-success', id: "Salvar" %>
                 </div>
                 <% end %>
             </div>
