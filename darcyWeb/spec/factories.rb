@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :point do
+    
+  end
   factory :building do
     acronym "Reitoria"
     title "Reitoria"
