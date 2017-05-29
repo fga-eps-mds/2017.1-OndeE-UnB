@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   root 'map#index'
 
+  get "admin/", to: 'admin#index'
   namespace :admin do
     resources :buildings, except: [:show]
     resources :rooms
@@ -33,11 +34,8 @@ Rails.application.routes.draw do
       get 'entrances', action: 'entrances'
     end
   end
-  get "app/views/map/index.html.erb", to: "map#index", as: "map"
-  get "app/views/about/about.html.erb", to: "about#about", as: "about"
-  get "admin/index"
 
-  get "map/data"
+  get 'map/data'
   get "map/building/:id", to:"map#building"
   get "map/routes"
 
@@ -59,5 +57,10 @@ Rails.application.routes.draw do
   # Provisory method to destroy points and buildings
   get 'admin/points/:id', to: 'admin/points#destroy'
   get 'admin/buildings/:id', to: 'admin/buildings#destroy'
+  get 'app/views/map/index.html.erb', to: 'map#index', as: 'map'
+  get 'app/views/about/about.html.erb', to: 'about#about', as: 'about'
+  get 'admin/index'
 
+  get 'map/search_building'
+  get 'map/collect_building_data'
 end
