@@ -1,28 +1,28 @@
-<% content_for :javascripts do %>
-    <%= javascript_include_tag 'admin/buildings' %>
+<%= content_for :javascripts do %>
+    <%= javascript_include_tag 'admin/points' %>
 <% end %>
-<div class="card">
+<div  id="card" class="card">
     <div class="row">
         <div class="col-md-5">
             <div class="card-header">
                 <%= title %>
             </div>
             <div class="card-body">
-                <%= form_for(building, url: url, validate: true) do |f| %>
+                <%= form_for(point, url: url, validate: true) do |f| %>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <%= f.label :acronym %>
-                        <%= f.text_field :acronym, class: 'form-control' %>
+                        <%= f.label "Título" %>
+                        <%= f.text_field :title, class: 'form-control' %>
                     </div>
                     <div class="form-group col-md-6">
-                        <%= f.label :title %>
-                        <%= f.text_field :title, class: 'form-control' %>
+                        <%= f.label "Tipo de Ponto" %>
+                        <%= f.select :type_point, ['Bicicletario', 'Banheiro','Lanchonete', 'Parada de Onibus', 'Entrada de Edificio'], {}, {required: 'true', class: 'form-control' } %>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <%= f.label :phone %>
-                        <%= f.number_field :phone, class: 'form-control' %>
+                        <%= f.label "Descrição" %>
+                        <%= f.text_field :description, class: 'form-control' %>
                     </div>
                 </div>
                 <div class="row">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <%= f.hidden_field :geo_data %>
-                    <%= f.submit 'Salvar', class: 'btn btn-sm btn-success', id: "Salvar"  %>
+                    <%= f.submit 'Salvar', class: 'btn btn-sm btn-success', id: "Salvar" %>
                 </div>
                 <% end %>
             </div>
