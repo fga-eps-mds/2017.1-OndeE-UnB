@@ -70,3 +70,5 @@ gem 'client_side_validations'
 group :development, :test do
   gem 'jasmine'
 end
+
+gem 'font-awesome-rails'
