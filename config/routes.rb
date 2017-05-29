@@ -14,7 +14,9 @@ Rails.application.routes.draw do
 
   root 'map#index'
 
-  get "admin/", to: 'admin#index'
+
+  get 'admin', to: 'admin#index'
+  
   namespace :admin do
     resources :buildings, except: [:show]
     resources :rooms
@@ -48,6 +50,7 @@ Rails.application.routes.draw do
   get 'map/point/:id', to: 'map#point'
 
   get 'map/routes'
+  get 'map/search', to: 'search#index'
   get 'map/search_building'
   get 'map/collect_building_data'
   get 'map/building'
