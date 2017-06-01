@@ -6,22 +6,22 @@ Rails.application.routes.draw do
     get 'admin/login', to: 'devise/sessions#new', as: 'new_login'
     post 'admin/login', to: 'devise/sessions#create', as: 'login'
     get 'admin/logout', to: 'devise/sessions#destroy', as: 'logout'
-    get 'admin/registration', to: 'devise/registrations#new', as: 'new_registration'
-    post 'admin/registration', to: 'devise/registrations#create', as: 'registration'
+    # get 'admin/registration', to: 'devise/registrations#new', as: 'new_registration'
+    # post 'admin/registration', to: 'devise/registrations#create', as: 'registration'
   end
-  devise_for :admins
+  devise_for :admins, skip: [:sessions, :registrations, :passwords]
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'map#index'
 
-
   get 'admin', to: 'admin#index'
-  
+
   namespace :admin do
     resources :buildings, except: [:show]
     resources :rooms
     resources :departments
-    resources :admin
+    resources :admins, except: [:show]
     resources :points, except: [:show]
   end
 
@@ -51,8 +51,6 @@ Rails.application.routes.draw do
 
   get 'map/routes'
   get 'map/search', to: 'search#index'
-  get 'map/search_building'
-  get 'map/collect_building_data'
   get 'map/building'
 
   get 'map/point'
@@ -62,8 +60,4 @@ Rails.application.routes.draw do
   get 'admin/buildings/:id', to: 'admin/buildings#destroy'
   get 'app/views/map/index.html.erb', to: 'map#index', as: 'map'
   get 'app/views/about/about.html.erb', to: 'about#about', as: 'about'
-  get 'admin/index'
-
-  get 'map/search_building'
-  get 'map/collect_building_data'
 end
