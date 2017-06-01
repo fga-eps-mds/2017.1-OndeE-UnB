@@ -86,6 +86,7 @@ html {
   margin: 0;
   overflow: hidden;
 }
+
 .sidebar-body {
   padding: 15px;
   overflow: auto;
@@ -137,4 +138,15 @@ html {
 
 .leaflet-routing-container {
   display: none !important;
+}
+
+
+@media (max-width: 767px) {
+  .leaflet-sidebar.left.visible ~ .leaflet-left {
+    left: 0;
+  }
+  #sidebar {
+    top: 60%;
+    width: 100%;
+  }
 }
