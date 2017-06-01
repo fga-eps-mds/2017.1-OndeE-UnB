@@ -145,8 +145,18 @@ html {
   .leaflet-sidebar.left.visible ~ .leaflet-left {
     left: 0;
   }
+
   #sidebar {
     top: 60%;
     width: 100%;
+  }
+
+  #searchContainer {
+    width: 90%;
+    left: calc((100% - 90%) / 2);
+  }
+
+  #searchBox {
+    width: 73%;
   }
 }
