@@ -15,8 +15,9 @@
 				<%= yield %>
 			</div>
 		</div>
-		<%= javascript_include_tag 'https://use.fontawesome.com/84624258b7.js' %>
 		<%= javascript_include_tag 'https://unpkg.com/leaflet@1.0.3/dist/leaflet.js' %>
 		<%= javascript_include_tag 'admin' %>
+		<%= yield :javascripts %>
+
 	</body>
 </html>
