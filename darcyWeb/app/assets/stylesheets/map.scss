@@ -25,58 +25,6 @@ html {
   overflow: hidden;
 }
 
-.leaflet-right {
-  right: 0;
-}
-
-.leaflet-popup-pane,
-.leaflet-control {
-	cursor: auto;
-}
-
-.leaflet-control-layers-expanded {
-  padding: 6px 10px 6px 6px;
-  color: #333;
-  background: #fff;
-}
-
-.leaflet-control-layers .leaflet-control-layers-list, .leaflet-control-layers-expanded .leaflet-control-layers-toggle {
-    display: none;
-}
-
-.leaflet-touch .leaflet-control-layers,
-.leaflet-touch .leaflet-bar {
-	border: 2px solid rgba(0,0,0,0.2);
-	background-clip: padding-box;
-}
-
-.leaflet-retina .leaflet-control-layers-toggle {
-    background-image: url(images/layers-2x.png);
-    background-size: 26px 26px;
-}
-
-.leaflet-touch .leaflet-control-layers-toggle {
-    width: 44px;
-    height: 44px;
-}
-
-.leaflet-container a {
-    color: #0078A8;
-}
-
-.leaflet-bar a, .leaflet-control-layers-toggle {
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    display: block;
-}
-
-.leaflet-control {
-    position: relative;
-    z-index: 800;
-    pointer-events: visiblePainted;
-    pointer-events: auto;
-}
-
 .leaflet-control-container {
   font-family: "Roboto", sans-serif !important;
 }
