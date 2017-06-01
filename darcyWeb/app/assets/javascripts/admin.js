@@ -1,3 +1,6 @@
+//= require jquery
+//= require jquery_ujs
+
 //= require admin/vendor.js
 //= require admin/app.js
 //= require admin/locations.js
