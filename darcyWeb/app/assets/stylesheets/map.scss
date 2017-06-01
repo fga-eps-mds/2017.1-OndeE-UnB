@@ -164,3 +164,34 @@ html {
 .input-location:hover .input-current-location-btn {
   display: inline;
 }
+
+@media (min-width: 992px){
+.navbar-text {
+
+    display: inline-block;
+    padding-top: .425rem;
+    padding-bottom: .425rem;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: auto;
+    padding-top: 10px;
+    font-size: 23px;
+}
+}
+
+@media (min-width: 320px){
+.navbar-text {
+
+    display: inline-block;
+    padding-top: .425rem;
+    padding-bottom: .425rem;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: auto;
+    padding-top: 10px;
+    font-size: 23px;
+}
+}
