@@ -43,3 +43,45 @@ $.getJSON("/map/data", function(data) { //getting the json data
     }
   });
 });
+
+
+
+var sharedLocation = {
+  marker: null,
+  title: 'sharedLocation',
+  icon: 'arrow-down-c',
+  color: 'blue'
+};
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+    function(m,key,value) {
+      vars[key] = value;
+    });
+    return vars;
+  }
+
+function createMarker(waypoint, latlng) {
+  console.log('Create marker');
+  console.log(waypoint);
+  console.log(latlng);
+  waypoint.marker = L.marker(latlng, {
+    icon: L.AwesomeMarkers.icon({
+      prefix: 'ion',
+      icon: waypoint.icon,
+      markerColor: waypoint.color
+    })
+  });
+  map.addLayer(waypoint.marker);
+}
+
+
+createMarker(sharedLocation, getUrlVars());
+
+
+
+
+
+
+

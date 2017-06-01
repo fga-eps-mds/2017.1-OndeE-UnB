@@ -1,7 +1,7 @@
 class MapController < ApplicationController
   layout false
   def index
-
+      #puts "*"*50 + params[:lat] + "   ---   " + params[:lng]
   end
 
   def building
