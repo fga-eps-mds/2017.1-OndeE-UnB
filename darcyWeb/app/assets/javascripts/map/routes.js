@@ -11,6 +11,10 @@ map.contextmenu.addItem({
   text: 'Rotas para cá',
   callback: routesToHere
 });
+map.contextmenu.addItem({
+  text: 'Compartilhar Localizacao',
+  callback: shareLocation
+});
 
 var route_form;
 
@@ -27,6 +31,7 @@ var destination = {
   icon: 'arrow-down-c',
   color: 'red'
 };
+
 
 // starts the route options.
 var control = L.Routing.control({
@@ -255,6 +260,34 @@ function routesToHere(e) {
   setRouteLocation(e, destination);
   control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
 }
+
+var sharedLocation = {
+  marker: null,
+  title: 'sharedLocation',
+  icon: 'arrow-down-c',
+  color: 'blue'
+};
+
+function setSharedLocation(e, waypoint) {
+  var lat = e.latlng.lat;
+  var lng = e.latlng.lng;
+
+  var data = {};
+  data[waypoint.title] = lat + ", " + lng;
+
+  if (waypoint.marker == null) {
+    createMarker(waypoint, e.latlng);
+  } else {
+    waypoint.marker.setLatLng(e.latlng);
+  }
+  alert(e.latlng);
+};
+
+function shareLocation(e) {
+  setSharedLocation(e, sharedLocation);
+  control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
+}
+
 
 function reverseRoute(e) {
   e.preventDefault();
