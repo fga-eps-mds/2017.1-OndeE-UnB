@@ -5,48 +5,6 @@
 //= require map/routes
 //= require map/search
 
-//Buildings
-
-//Method called when click on one building
-function onEachFeature(feature,layer){
-    layer.on('click', function(){
-        //The key references to that building clicked
-        var buildingKey = this.feature.geometry.coordinates[0].key;
-
-        if(sidebar.isVisible()){
-            sidebar.hide();
-        } else {
-            //selects the building clicked and shows sidebar
-            var numberToBuilding = '/map/data/building/' + buildingKey;
-            $("#sidebar").load(numberToBuilding, function() {
-                sidebar.toggle();
-            });
-        }
-  });
-}
-
-var buildingLayer = L.geoJSON('', {
-  onEachFeature: onEachFeature
-});
-
-//adds layer of building on map
-map.addLayer(buildingLayer);
-
-//Insert each building on the layer of building
-$.getJSON( "/map/data/buildings", function(data) { //getting the json data
-    var items = [];
-    $.each(data, function (key, val){
-
-        try {
-            var geo_json = JSON.parse(val.geo_data);
-            geo_json.features[0].geometry.coordinates[0].key = val.id;
-            buildingLayer.addData(geo_json); //adding the json data to the building layer
-        } catch(err) {
-          //console.log(err);
-        }
-    });
-});
-
 //Bikes
 
 //Layer with bikes icon personalized
@@ -55,12 +13,10 @@ var bikesLayer = L.geoJSON('', {
         var smallIcon = new L.Icon({
             iconUrl: 'http://icons.iconarchive.com/icons/elegantthemes/beautiful-flat/24/bike-icon.png',
         });
-        return L.marker(latlng, {icon: smallIcon});
+        return L.marker(latlng, {icon: smallIcon}).bindPopup("Bicicletário");
     }
 });
 
-//adds layer to bikes on map
-map.addLayer(bikesLayer);
 
 //Insert each bicycle rack on the layer of bikes
 $.getJSON( "/map/data/bikes", function(data) { //getting the json data
@@ -84,12 +40,9 @@ var bathroomLayer = L.geoJSON('', {
             iconUrl: 'http://icons.iconarchive.com/icons/rokey/smooth/32/toilet-paper-icon.png',
             iconSize: [24, 24],
         });
-        return L.marker(latlng, {icon: smallIcon});
+        return L.marker(latlng, {icon: smallIcon}).bindPopup("Banheiro");
     }
 });
-
-//adds layer to bathroom on map
-map.addLayer(bathroomLayer);
 
 //Insert each bathroom on the layer of bathrooms
 $.getJSON( "/map/data/bathrooms", function(data) { //getting the json data
@@ -112,11 +65,10 @@ var snackbarLayer = L.geoJSON('', {
             iconUrl: 'http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/24/Restaurant-icon.png',
             iconSize: [24, 24],
         });
-        return L.marker(latlng, {icon: smallIcon});
+        return L.marker(latlng, {icon: smallIcon}).bindPopup("Alimentação");
     }
 });
 
-map.addLayer(snackbarLayer);
 
 $.getJSON( "/map/data/snackbars", function(data) { //getting the json data
     var items = [];
@@ -138,11 +90,10 @@ var busstopLayer = L.geoJSON('', {
             iconUrl: 'http://icons.iconarchive.com/icons/elegantthemes/beautiful-flat/32/school-bus-icon.png',
             iconSize: [24, 24],
         });
-        return L.marker(latlng, {icon: smallIcon});
+        return L.marker(latlng, {icon: smallIcon}).bindPopup("Ponto de Ônibus");
     }
 });
 
-map.addLayer(busstopLayer);
 
 $.getJSON( "/map/data/busstops", function(data) { //getting the json data
     var items = [];
@@ -164,11 +115,10 @@ var entranceLayer = L.geoJSON('', {
             iconUrl: 'http://icons.iconarchive.com/icons/elegantthemes/beautiful-flat-one-color/24/door-icon.png',
             iconSize: [24, 24],
         });
-        return L.marker(latlng, {icon: smallIcon});
+        return L.marker(latlng, {icon: smallIcon}).bindPopup("Entrada de Edifício");
     }
 });
 
-map.addLayer(entranceLayer);
 
 $.getJSON( "/map/data/entrances", function(data) { //getting the json data
     var items = [];
@@ -181,3 +131,31 @@ $.getJSON( "/map/data/entrances", function(data) { //getting the json data
         }
     });
 });
+
+var urlWorld = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+
+var esri_WorldImagery = L.tileLayer(urlWorld, {
+  maxZoom: 20,
+  maxNativeZoom: 22,
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+});
+
+
+//Creating the radio buttos for the two possible base maps
+var baseMaps = {
+  "Satélite": esri_WorldImagery,
+  "Ruas": mapBox
+}
+
+//Creating the check box for the overlay layers
+var overlayMaps = {
+  "Prédios": buildingLayer,
+  "Bicicletários": bikesLayer,
+  "Banheiros": bathroomLayer,
+  "Lanchonete": snackbarLayer,
+  "Ponto de Entrada": entranceLayer,
+  "Parada de Ônibus": busstopLayer
+}
+
+//Adding the control to choose which layer you want
+L.control.layers(baseMaps, overlayMaps).addTo(map);
