@@ -25,10 +25,21 @@ pt-BR:
               blank: "Insira a sigla do edifício."
             phone:
               blank: "Insira o número de telefone."
+        room:
+          attributes:
+            acronym:
+              blank: "Insira a sigla da sala."
+              too_long: "A sigla é muito grande."
+            room_type:
+              blank: "Insira o tipo de sala."
+            level:
+              blank: "Insira o nível da sala."
+              not_a_number: "Insira um número."
+              not_an_integer: "Insira um número inteiro."
         location:
           attributes:
             title:
-              blank: "Insira o título do edifício."
+              blank: "Insira o título."
             latitude:
               blank: "Insira a latitude."
             longitude:
@@ -37,12 +48,13 @@ pt-BR:
     attributes:
       location:
         title: "Título do Local"
-        latitude: "Latitude"
-        longitude: "Longitude"
       building:
         acronym: "Sigla"
         phone: "Telefone"
-        latitude: "Latitude"
+      room:
+        title: "Título"
+        acronym: "Acrônimo"
+        level: "Nível"
       admin:
         name: "Nome"
         password: "Senha"
