@@ -50,6 +50,6 @@ class Admin::RoomsController < AdminController
   end
 
   def room_params
-    params.require(:room).permit(:acronym, :title, :building_id, :room_type, :latitude, :longitude, :geo_data)
+    params.require(:room).permit(:acronym, :title, :building_id, :room_type, :level, :latitude, :longitude, :geo_data)
   end
 end
