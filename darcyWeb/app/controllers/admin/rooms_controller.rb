@@ -1,6 +1,6 @@
 class Admin::RoomsController < AdminController
   before_action :set_room, only: [:destroy, :edit, :update]
-  before_action :set_room_types, :set_buildings, only: [:new, :edit]
+  before_action :set_room_types, :set_buildings, only: [:new, :edit, :update, :create]
 
   def index
     @rooms = Room.all
