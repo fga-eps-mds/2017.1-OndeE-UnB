@@ -4,6 +4,7 @@
 //= require leaflet/easy-button
 //= require map/routes
 //= require map/search
+//= require leaflet/indoor-map
 
 
 function onEachFeature(feature, layer) {
