@@ -21,8 +21,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :buildings, except: [:show]
-    resources :rooms
-    resources :departments
+    resources :rooms, except: [:show]
+    resources :departments, except: [:show]
     resources :admins, except: [:show]
     resources :points, except: [:show]
   end
