@@ -4,45 +4,7 @@
 //= require leaflet/easy-button
 //= require map/routes
 //= require map/search
-//= require leaflet/image-overlay-rotated
-
-var topleft    = L.latLng(-15.760040524436832,-47.86734580993653),
-    topright   = L.latLng(-15.760061175463681,-47.86524295806885),
-    bottomleft = L.latLng(-15.761940410112881,-47.86747455596800);
-
-var marker1 = L.marker(topleft, {draggable: true} ).addTo(map),
-    marker2 = L.marker(topright, {draggable: true} ).addTo(map),
-    marker3 = L.marker(bottomleft, {draggable: true} ).addTo(map);
-
-var boundsImage = new L.LatLngBounds(topleft, topright).extend(bottomleft);
-map.fitBounds(boundsImage);
-
-var myImage = "http://icons.iconarchive.com/icons/custom-icon-design/2014-world-cup-flags/64/Brazil-icon.png";
-
-var overlay = L.imageOverlay.rotated(myImage, topleft, topright, bottomleft, {
-    opacity: 0.4,
-    interactive: true
-}).addTo(map);
-
-function repositionImage() {
-    overlay.reposition(marker1.getLatLng(), marker2.getLatLng(), marker3.getLatLng());
-};
-
-marker1.on('drag dragend', repositionImage);
-marker2.on('drag dragend', repositionImage);
-marker3.on('drag dragend', repositionImage);
-
-map.addLayer(overlay);
-overlay.on('dblclick',function (e) {
-    console.log('Double click on image.');
-    e.stop();
-});
-overlay.on('click',function (e) {
-    console.log('Click on image.');
-});
-function setOverlayOpacity(opacity) {
-    overlay.setOpacity(opacity);
-}
+//= require admin/plants.js
 
 
 //Buildings
