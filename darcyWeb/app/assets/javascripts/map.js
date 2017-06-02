@@ -49,6 +49,44 @@ $.getJSON( "/map/data/buildings", function(data) { //getting the json data
     });
 });
 
+//Indoor map
+
+// Indoor Map
+
+var data = {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+            "level": [0, 1],
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-15.76165129822223, -47.86936283111573]
+        }
+      }
+      ]
+};
+
+
+var indoorLayer = new L.Indoor(data);
+indoorLayer.setLevel("0");
+
+indoorLayer.addTo(map);
+
+var levelControl = new L.Control.Level({
+    level: "0",
+    levels: [-1, 0, 1],
+});
+
+// Connect the level control to the indoor layer
+// levelControl.addEventListener("levelchange", indoorLayer.setLevel, indoorLayer);
+levelControl.addTo(map);
+
+
+// END Indoor Map
+
 //Bikes
 
 //Layer with bikes icon personalized
