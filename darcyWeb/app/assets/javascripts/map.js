@@ -59,7 +59,7 @@ var data = {
       {
         "type": "Feature",
         "properties": {
-            "level": [0, 1],
+            "level": [0, 1, -1],
         },
         "geometry": {
             "type": "Point",
@@ -77,7 +77,7 @@ indoorLayer.addTo(map);
 
 var levelControl = new L.Control.Level({
     level: "0",
-    levels: [-1, 0, 1],
+    levels: indoorLayer.getLevels(),
 });
 
 // Connect the level control to the indoor layer

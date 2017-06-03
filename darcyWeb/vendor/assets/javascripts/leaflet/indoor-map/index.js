@@ -68,6 +68,10 @@ L.Indoor = L.Class.extend({
         this.addData(data);
     },
     addTo: function (map) {
+        console.log('###');
+        console.log(map);
+        console.log(this);
+        console.log('###');
         map.addLayer(this);
         return this;
     },
