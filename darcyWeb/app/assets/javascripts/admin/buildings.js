@@ -2,7 +2,6 @@
 //= require leaflet/map
 //= require leaflet/easy-button
 //= require leaflet/draw.translations
-//= require admin/plants.js
 
 const $building_geo_data = {
   element: $('#building_geo_data'),
