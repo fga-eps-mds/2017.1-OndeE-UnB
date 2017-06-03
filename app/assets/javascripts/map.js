@@ -63,17 +63,23 @@ function getUrlVars() {
   }
 
 function createMarker(waypoint, latlng) {
-  console.log('Create marker');
-  console.log(waypoint);
-  console.log(latlng);
-  waypoint.marker = L.marker(latlng, {
-    icon: L.AwesomeMarkers.icon({
-      prefix: 'ion',
-      icon: waypoint.icon,
-      markerColor: waypoint.color
-    })
-  });
-  map.addLayer(waypoint.marker);
+  //console.log("Lat and Lng");
+  if (! $.isEmptyObject(latlng) ) {
+    //console.log('Create marker');
+    //console.log(waypoint);
+    //console.log(latlng);
+    waypoint.marker = L.marker(latlng, {
+      icon: L.AwesomeMarkers.icon({
+        prefix: 'ion',
+        icon: waypoint.icon,
+        markerColor: waypoint.color
+      })
+    });
+    map.addLayer(waypoint.marker);
+
+    map.setView(latlng,32, {animate: true});
+    //map.setZoom(200, {animate: true});
+  }
 }
 
 
