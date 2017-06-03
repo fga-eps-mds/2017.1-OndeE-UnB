@@ -26,4 +26,33 @@ describe 'Map', type: :feature do
     sidebar = page.evaluate_script('sidebar.isVisible()')
     expect(sidebar).to eq(true)
   end
+
+  it "Should find a navbar", js:true do
+
+    visit root_path
+    expect(find('.navbar')).to have_content("Onde É? Universidade de Brasília")
+
+  end
+
+  it "Should find admin link on the navbar", js:true do
+
+    visit root_path
+    expect(find('.navbar')).to have_content("Administração")
+
+  end
+
+  it "Should find the link of admin on the navbar", js:true do
+
+    visit root_path
+    expect(find('.navbar')).to have_link("Administração")
+
+  end
+
+
+#  it "Should click on the link of admin", js:true do
+  #  visit root_path
+   # find('.navbar').find(:css, 'a[href="admins/sign_in"]').click
+
+  #end
+
 end
