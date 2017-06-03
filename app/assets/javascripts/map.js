@@ -24,19 +24,34 @@ function onEachFeature(feature, layer) {
         sidebar.toggle();
       });
 
-      console.log(numberToBuilding);
 
       $.get('/map/data/roomsByBuilding/'+ buildingKey, function(data) { //getting the json data
-        console.log(data);
-        var items = [];
-        $.each(data, function(key, val) {
+
+        let rooms = {
+          'type': 'FeatureCollection',
+          'features': [],
+        };
+
+        data.forEach((room)=>{
           try {
-            var geo_json = JSON.parse(val.geo_data);
-            console.log(geo_json);
+            let geo_json = JSON.parse(room.geo_data);
+            geo_json.features[0].properties.level = room.level;
+            rooms.features.push(geo_json.features[0]);
           } catch (err) {
-            //console.log(err);
+            console.log(err);
           }
+        })
+
+        let indoorLayer = new L.Indoor(rooms);
+        indoorLayer.setLevel("0");
+        indoorLayer.addTo(map);
+
+        var levelControl = new L.Control.Level({
+          level: "0",
+          levels: indoorLayer.getLevels(),
         });
+        levelControl.addTo(map);
+
       });
 
     }
