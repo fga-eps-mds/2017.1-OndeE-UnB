@@ -4,6 +4,21 @@ pt-BR:
       messages:
         record_invalid: "Registro inválido."
       models:
+        admin:
+          attributes:
+            name:
+              blank: "Insira o nome."
+              too_long: "Insira um nome com até 20 caracteres."
+            email:
+              blank: "Insira o email."
+              invalid: "Email inválido. Insira novamente."
+              taken: "Já existe administrador com esse email."
+            password:
+              blank: "Insira a senha."
+              too_short: "Insira a senha com no mínimo 6 caracteres."
+            password_confirmation:
+              blank: "Insira a confirmação da senha."
+              confirmation: "As senhas não correspondem."
         building:
           attributes:
             acronym:
@@ -28,3 +43,7 @@ pt-BR:
         acronym: "Sigla"
         phone: "Telefone"
         latitude: "Latitude"
+      admin:
+        name: "Nome"
+        password: "Senha"
+        password_confirmation: "Confirmação da senha"
