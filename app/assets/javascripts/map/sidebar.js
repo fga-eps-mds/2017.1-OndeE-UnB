@@ -8,6 +8,10 @@ var sidebar = L.control.sidebar('sidebar', {
 
 //var visible = sidebar.isVisible();
 
+sidebar.on('show', function(){
+  //$('.leaflet-map-pane').css('height', '50%');
+});
+
 // sidebar.on('shown', function () {
 //   var myBlock = document.getElementsByClassName('sidebar-header')[0];
 //

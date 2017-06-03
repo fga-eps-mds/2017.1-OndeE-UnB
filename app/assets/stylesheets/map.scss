@@ -151,10 +151,15 @@ html {
   .leaflet-control-zoom {
     margin-top: 80px !important;
   }
-
-  #sidebar {
+  
+  .leaflet-sidebar {
     top: 50%;
+    height: 50%;
     width: 100%;
+  }
+
+  .sidebar-body {
+    height: calc(100% - 30px);
   }
 
   #searchContainer {
@@ -178,14 +183,13 @@ html {
     margin-top: 80px !important;
   }
 
-  #sidebar {
-    top: 50%;
-    width: 100%;
+  .leaflet-sidebar {
     overflow: scroll;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     transform: translate3d(0,0,0);
   }
+
 
   #searchContainer {
     width: 90%;
