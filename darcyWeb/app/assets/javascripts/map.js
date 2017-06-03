@@ -51,6 +51,7 @@ function onEachFeature(feature, layer) {
           level: "0",
           levels: indoorLayer.getLevels(),
         });
+
         levelControl.addEventListener("levelchange", indoorLayer.setLevel, indoorLayer);
         levelControl.addTo(map);
 
