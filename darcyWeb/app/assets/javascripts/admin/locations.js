@@ -3,8 +3,8 @@
 //= require leaflet/easy-button
 //= require leaflet/draw.translations
 
-const $building_geo_data = {
-  element: $('#building_geo_data'),
+const $location_geo_data = {
+  element: $("input[id$='_geo_data']"),
   save: function(geo_json){
     this.element.val(JSON.stringify(geo_json.toGeoJSON()));
   },
@@ -16,14 +16,12 @@ const $building_geo_data = {
   }
 };
 
-const $building_coords = {
-  element_lat: $('#building_latitude'),
-  element_lng: $('#building_longitude'),
+const $location_coods = {
+  element_lat: $("input[id$='_latitude']"),
+  element_lng: $("input[id$='_longitude']"),
   save: function(lat, lng){
-    if (this.element_lat.val(lat) && this.element_lng.val(lng)) {
-      return true;
-    } else {
-    return false; }
+    this.element_lat.val(lat);
+    this.element_lng.val(lng);
   },
   load: function(){
     const $lat = this.element_lat.val();
@@ -33,14 +31,14 @@ const $building_coords = {
     }
   }
 }
-$building_coords.load();
+$location_coods.load();
 
 
 var drawnLayer = L.geoJSON().addTo(map);
 map.addLayer(drawnLayer);
 
 // Load json from the form
-$building_geo_data.load();
+$location_geo_data.load();
 
 var drawControl = new L.Control.Draw({
     edit: {
@@ -50,7 +48,6 @@ var drawControl = new L.Control.Draw({
         polyline: false,
         circle: false,
         rectangle: false,
-        marker: false,
         polygon: {
             allowIntersection: false,
             showArea: true
@@ -61,19 +58,19 @@ var drawControl = new L.Control.Draw({
 map.on(L.Draw.Event.CREATED, function(event) {
     var layer = event.layer;
     drawnLayer.addLayer(layer);
-    $building_geo_data.save(drawnLayer);
+    $location_geo_data.save(drawnLayer);
 });
 
 map.on(L.Draw.Event.EDITED, function(event) {
-    $building_geo_data.save(drawnLayer);
+    $location_geo_data.save(drawnLayer);
 });
 map.on(L.Draw.Event.DELETED, function(event) {
-    $building_geo_data.save(drawnLayer);
+    $location_geo_data.save(drawnLayer);
 });
 
 map.addControl(drawControl);
 
 L.easyButton('fa-map-marker', function(btn, map){
   const $center = map.getCenter();
-  $building_coords.save($center.lat, $center.lng);
+  $location_coods.save($center.lat, $center.lng);
 }).addTo(map);
