@@ -1,12 +1,15 @@
 require 'rails_helper'
 
-describe AdminController do
+describe AdminController,  type: :controller do
 
-#	describe "checking the request the view of admin" do
-#		it "checks the request" do
-#			get:index
-#			expect(response).to render_template("index")
-#		end
-#	end
+	before do
+		@admin = FactoryGirl.create(:admin)
+	end
 
-end
+	describe "GET new" do
+		it "should GET a new user" do
+			get :new
+			expect(response). to have_http_status(:sucess)
+		end
+	end
+end	
