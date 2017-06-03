@@ -1,4 +1,11 @@
 FactoryGirl.define do
+  factory :department do
+    acronym "MyString"
+    phone 1
+  end
+  factory :point do
+
+  end
   factory :building do
     acronym "Reitoria"
     title "Reitoria"

@@ -4,22 +4,23 @@
 //= require leaflet/easy-button
 //= require map/routes
 //= require map/search
+//= require map/points
 
+function onEachFeature(feature,layer){
+    layer.on('click', function(){
+        var buildingKey = this.feature.geometry.coordinates[0].key;
 
-function onEachFeature(feature, layer) {
-  layer.on('click', function() {
-    var buildingKey = this.feature.geometry.coordinates[0].key;
-    //var polygon = L.polygon(this._latlngs, {color: 'red'}).addTo(map);
-    if (sidebar.isVisible()) {
-      sidebar.hide();
-    } else {
+        //var polygon = L.polygon(this._latlngs, {color: 'red'}).addTo(map);
+        if(sidebar.isVisible()){
+            sidebar.hide();
+        } else {
 
-      var numberToBuilding = '/map/building/' + buildingKey;
-      console.log(numberToBuilding);
-      $("#sidebar").load(numberToBuilding, function() {
-        sidebar.toggle();
-      });
-    }
+            var numberToBuilding = '/map/building/' + buildingKey;
+            console.log(numberToBuilding);
+            $("#sidebar").load(numberToBuilding, function() {
+                sidebar.toggle();
+            });
+        }
   });
 }
 
@@ -29,15 +30,60 @@ var buildingLayer = L.geoJSON('', {
 
 map.addLayer(buildingLayer);
 
-$.getJSON("/map/data", function(data) { //getting the json data
+$.getJSON( "/map/data/buildings", function(data) { //getting the json data
+    var items = [];
+    $.each(data, function (key, val){
+
+        try {
+            var geo_json = JSON.parse(val.geo_data);
+            geo_json.features[0].geometry.coordinates[0].key = val.id;
+            buildingLayer.addData(geo_json); //adding the json data to the building layer
+        } catch(err) {
+          //console.log(err);
+        }
+    });
+});
+
+
+var bikesLayer = L.geoJSON('');
+
+map.addLayer(bikesLayer);
+
+$.getJSON( "/map/data/bikes", function(data) { //getting the json data
+    console.log(data);
+    var items = [];
+    $.each(data, function (key, val){
+        try {
+            var geo_json = JSON.parse(val.geo_data);
+            bikesLayer.addData(geo_json); //adding the json data to the building layer
+        } catch(err) {
+          console.log(err);
+        }
+    });
+});
+
+
+var departmentLayer = L.geoJSON('');
+
+var departmentIcon = L.icon({
+    //iconUrl: 'https://cdn0.iconfinder.com/data/icons/professionals-line/2048/1606_-_Secretary-512.png',
+    iconUrl: 'https://drive.google.com/uc?export=view&id=0B8jEDVP6IcfKOVJscS1LRHlMemc'
+});
+
+map.addLayer(departmentLayer);
+
+$.getJSON("/map/data/departments", function(data) { //getting the json data
   console.log(data);
   var items = [];
   $.each(data, function(key, val) {
     try {
-      console.log('Load Building');
+
+      console.log('Load Departments');
       var geo_json = JSON.parse(val.geo_data);
-      geo_json.features[0].geometry.coordinates[0].key = val.id;
-      buildingLayer.addData(geo_json); //adding the json data to the building layer
+      var coordinates = geo_json.features[0].geometry.coordinates;
+      //console.log(geo_data);
+      //departmentLayer.addData(geo_json); //adding the json data to the departament layer
+      L.marker([coordinates[1], coordinates[0]], {icon: departmentIcon}).addTo(map);
     } catch (err) {
       console.log(err);
     }

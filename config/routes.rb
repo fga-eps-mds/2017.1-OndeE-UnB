@@ -15,23 +15,35 @@ Rails.application.routes.draw do
   root 'map#index'
   get 'findme', to: 'map#index'
 
+  get 'admin', to: 'admin#index'
   namespace :admin do
     resources :buildings, except: [:show]
     resources :rooms
     resources :departments
     resources :admin
+    resources :points, except: [:show]
+  end
+
+  namespace :map do
+    namespace :data do
+      get 'bikes', action: 'bikes'
+      get 'buildings', action: 'buildings'
+      get 'departments', action: 'departments'
+    end
   end
 
   get 'app/views/map/index.html.erb', to: 'map#index', as: 'map'
   get 'app/views/about/about.html.erb', to: 'about#about', as: 'about'
   get 'admin/index'
 
-  get 'map/data'
-
   get 'map/building/:id', to: 'map#building'
+
+  get 'map/datapoint'
+  get 'map/point/:id', to: 'map#point'
 
   get 'map/routes'
   get 'map/search_building'
   get 'map/collect_building_data'
   get 'map/building'
+  get 'map/point'
 end
