@@ -5,8 +5,6 @@
 //= require map/routes
 //= require map/search
 
-// = r equire map/points
-
 
 //Buildings
 

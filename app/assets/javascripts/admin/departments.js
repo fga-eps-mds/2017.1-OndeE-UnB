@@ -18,7 +18,7 @@ const $department_geo_data = {
 
 const $department_coods = {
   element_lat: $("#department_latitude"),
-  element_lng: $("#department_latitude"),
+  element_lng: $("#department_longitude"),
   save: function(lat, lng){
     this.element_lat.val(lat);
     this.element_lng.val(lng);

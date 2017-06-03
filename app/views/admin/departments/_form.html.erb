@@ -1,4 +1,6 @@
-<!--< % include_javascript 'app/assets/javascripts/admin/departments.js' %> -->
+<% content_for :javascripts do %>
+    <%= javascript_include_tag 'admin/departments' %>
+<% end %>
 <div class="card">
     <div class="row">
         <div class="col-md-5">
