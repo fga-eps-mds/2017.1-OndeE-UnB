@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     # get 'admin/registration', to: 'devise/registrations#new', as: 'new_registration'
     # post 'admin/registration', to: 'devise/registrations#create', as: 'registration'
   end
-  devise_for :admins, skip: [:sessions, :registrations, :passwords]
+  devise_for :admins, skip: [:sessions, :passwords]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
