@@ -105,7 +105,6 @@ control.on('routingerror', function() {
 
 // adds the route button to map
 L.easyButton('ion-merge', function(btn, map) {
-
   // triggered when user clicks the routes button.
   if (sidebar.isVisible()) {
     unLoadRoute();
@@ -114,6 +113,57 @@ L.easyButton('ion-merge', function(btn, map) {
   }
 
 }).addTo(map);
+
+// get the user's current position
+function getLocation(point) {
+  try {
+    navigator.geolocation.getCurrentPosition(function(position){
+      positionSuccess(position, point);
+    }, positionError);
+  } catch (error) {
+    console.warn(error);
+    alert("Recurso não disponível no seu browser.");
+  }
+}
+
+// process the user's current position to create the route
+function positionSuccess(position, point) {
+  var location = {
+    latlng: {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    }
+  }
+  var inside_bounds = map.getBounds().contains(location.latlng);
+  if(inside_bounds){
+    if(point == 'origin'){
+      routesFromHere(location);
+    } else {
+      routesToHere(location);
+    }
+  } else {
+    alert("Ops... Parece que você não está no campus.");
+  }
+
+}
+
+// process the error when it is not possible to get user position
+function positionError(error) {
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      alert("Habilite o uso da localização no browser.");
+      break;
+    case error.POSITION_UNAVAILABLE:
+      alert("Localização não disponível.");
+      break;
+    case error.TIMEOUT:
+      alert("Não foi possível obter a localização no tempo esperado.");
+      break;
+    case error.UNKNOWN_ERROR:
+      alert("Ocorreu um erro desconhecido. Tente novamente.")
+      break;
+  }
+}
 
 // loads the routes form into the sidebar
 function loadRouteForm(data) {
@@ -125,7 +175,7 @@ function loadRouteForm(data) {
     });
 
 
-    // set elements, so jquery can look up
+    // instantiate route form elements when the page is loaded
     route_form = function() {
       this.form = $('#sidebar').find('form');
       this.origin = this.form.find('input[name="route[origin]"]');
@@ -136,6 +186,16 @@ function loadRouteForm(data) {
     }.call({});
 
     fillFormRouteLocations(data);
+
+    // when user clicks the button to use the current location in origin input
+    route_form.origin.parent().find('button').on('click', function() {
+      getLocation('origin');
+    });
+
+    // when user clicks the button to use the current location in destination input
+    route_form.destination.parent().find('button').on('click', function() {
+      getLocation('destination');
+    });
 
     // calculate route when user clicks submit button
     route_form.submit.on('click', function(e) {
@@ -229,8 +289,7 @@ function removeMarker(waypoint) {
   try {
     map.removeLayer(waypoint.marker);
     waypoint.marker = null;
-  }
-  catch(err) {
+  } catch (err) {
     console.error(err.message);
   }
 }
@@ -336,14 +395,13 @@ function reverseRoute(e) {
     console.log('Destination in blank.');
     createMarker(destination, origin.marker.getLatLng());
     removeMarker(origin);
-  }
-  else if (destination.marker != null && origin.marker == null) {
+  } else if (destination.marker != null && origin.marker == null) {
     console.log('Origin in blank');
     createMarker(origin, destination.marker.getLatLng());
     removeMarker(destination);
   }
 
-  if(origin.marker != null && destination.marker != null) {
+  if (origin.marker != null && destination.marker != null) {
     var latlng = origin.marker.getLatLng();
     origin.marker.setLatLng(destination.marker.getLatLng());
     destination.marker.setLatLng(latlng);
@@ -359,4 +417,5 @@ function reverseRoute(e) {
 }
 // TODO Require to fill out origin and destination in the form, before calculate route
 // TODO Add button to create a new route
+// TODO Suggest locations on whe form
 // TODO Suggest locations on whe form
