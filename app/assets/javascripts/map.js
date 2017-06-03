@@ -23,6 +23,22 @@ function onEachFeature(feature, layer) {
       $("#sidebar").load(numberToBuilding, function() {
         sidebar.toggle();
       });
+
+      console.log(numberToBuilding);
+
+      $.get('/map/data/roomsByBuilding/'+ buildingKey, function(data) { //getting the json data
+        console.log(data);
+        var items = [];
+        $.each(data, function(key, val) {
+          try {
+            var geo_json = JSON.parse(val.geo_data);
+            console.log(geo_json);
+          } catch (err) {
+            //console.log(err);
+          }
+        });
+      });
+
     }
   });
 }
@@ -49,6 +65,19 @@ $.getJSON("/map/data/buildings", function(data) { //getting the json data
   });
 
 });
+
+//Rooms
+
+// $.getJSON("/map/data/rooms", function(data) { //getting the json data
+//   var items = [];
+//   $.each(data, function(key, val) {
+//     try {
+//       console.log(key, val);
+//     } catch (err) {
+//       //console.log(err);
+//     }
+//   });
+// });
 
 //Bikes
 

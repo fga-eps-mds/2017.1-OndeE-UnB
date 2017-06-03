@@ -6,6 +6,14 @@ class Map::DataController < MapController
     def building
         @building = Building.find(params[:id])
     end
+    def rooms
+        @rooms = Room.all
+        render json: @rooms
+    end
+    def roomsByBuilding
+        @rooms = Room.where(building_id: params[:id])
+        render json: @rooms
+    end
     def bikes
         @bikes = Point.where(type_point: "Bicicletario")
         render json: @bikes
