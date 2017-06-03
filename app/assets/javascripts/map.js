@@ -4,8 +4,6 @@
 //= require leaflet/easy-button
 //= require map/routes
 //= require map/search
-//= require admin/plants
-
 
 //Buildings
 
