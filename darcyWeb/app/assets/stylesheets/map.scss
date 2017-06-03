@@ -87,6 +87,7 @@ html {
   overflow: hidden;
 }
 
+
 .sidebar-body {
   padding: 15px;
   overflow: auto;
@@ -141,13 +142,18 @@ html {
 }
 
 
+// Responsive screens
 @media (max-width: 767px) {
   .leaflet-sidebar.left.visible ~ .leaflet-left {
     left: 0;
   }
 
+  .leaflet-control-zoom {
+    margin-top: 80px !important;
+  }
+
   #sidebar {
-    top: 60%;
+    top: 50%;
     width: 100%;
   }
 
@@ -158,5 +164,35 @@ html {
 
   #searchBox {
     width: 73%;
+  }
+}
+
+// Mobile resolution
+@media (max-width: 320px) {
+  //Click in sidebar button
+  .leaflet-sidebar.left.visible ~ .leaflet-left {
+    left: 0;
+  }
+
+  .leaflet-control-zoom {
+    margin-top: 80px !important;
+  }
+
+  #sidebar {
+    top: 50%;
+    width: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    transform: translate3d(0,0,0);
+  }
+
+  #searchContainer {
+    width: 90%;
+    left: calc((100% - 90%) / 2);
+  }
+
+  #searchBox {
+    width: 70%;
   }
 }
