@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+#Those test are working on main page. When rooms are completed, must login first as admin
 describe 'Plant', type: :feature do
 
       context "Change plant" do
