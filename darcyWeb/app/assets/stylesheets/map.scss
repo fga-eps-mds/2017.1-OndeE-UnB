@@ -171,7 +171,7 @@ html {
     display: inline-block;
     padding-top: .425rem;
     padding-bottom: .425rem;
-    position: absolute;
+
     width: 100%;
     left: 0;
     text-align: center;
@@ -193,5 +193,17 @@ html {
     margin: auto;
     padding-top: 10px;
     font-size: 23px;
+}
+}
+
+
+
+@media (min-width: 992px){
+.navbar-toggleable-md .navbar-collapse {
+    display: -webkit-box!important;
+    display: -webkit-flex!important;
+    display: -ms-flexbox!important;
+    display: flex!important;
+    width: 3%;
 }
 }
