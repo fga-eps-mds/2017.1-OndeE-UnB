@@ -3,7 +3,8 @@ class SearchController < MapController
   def index
      buildings = json_building_search(params[:search])
      departments = json_department_search(params[:search])
-     features = buildings + departments
+     rooms = json_room_search(params[:search])
+     features = buildings + departments + rooms
      geo_json = {
       type: "FeatureCollection",
       features: features
@@ -12,14 +13,15 @@ class SearchController < MapController
   end
 
   def json_room_search(search)
-    search = "%#{search}"
-    @room = Room.joins(:location).where("locations.title ILIKE", search)
+    search = "%#{search}%"
+    @room = Room.joins(:location).where("locations.title ILIKE ? OR acronym ILIKE ? ", search, search)
     features = []
     @room.each_with_index do |room, index|
+
       properties = {
         popupContent: "MDS",
         title: room.title,
-        description: "Sala de aula",
+        description: room.room_type,
         image: 'fa-room'
       }
 
