@@ -1,12 +1,11 @@
 //= require leaflet/map
 //= require leaflet/awesome-markers
+//= require leaflet/indoor-map
 //= require map/sidebar
 //= require leaflet/easy-button
 //= require map/routes
 //= require map/search
-//= require leaflet/indoor-map
-
-
+//= require map/rooms
 //Buildings
 
 //Method called when click on one building
@@ -22,39 +21,7 @@ function onEachFeature(feature, layer) {
       var numberToBuilding = '/map/data/building/' + buildingKey;
       $("#sidebar").load(numberToBuilding, function() {
         sidebar.toggle();
-
-      });
-
-
-      $.get('/map/data/roomsByBuilding/'+ buildingKey, function(data) { //getting the json data
-
-        let rooms = {
-          'type': 'FeatureCollection',
-          'features': [],
-        };
-
-        data.forEach((room)=>{
-          try {
-            let geo_json = JSON.parse(room.geo_data);
-            geo_json.features[0].properties.level = room.level;
-            rooms.features.push(geo_json.features[0]);
-          } catch (err) {
-            console.log(err);
-          }
-        })
-
-        let indoorLayer = new L.Indoor(rooms);
-        indoorLayer.setLevel("0");
-        indoorLayer.addTo(map);
-
-        var levelControl = new L.Control.Level({
-          level: "0",
-          levels: indoorLayer.getLevels(),
-        });
-
-        levelControl.addEventListener("levelchange", indoorLayer.setLevel, indoorLayer);
-        levelControl.addTo(map);
-
+        loadRooms(buildingKey);
       });
 
     }
@@ -83,19 +50,6 @@ $.getJSON("/map/data/buildings", function(data) { //getting the json data
   });
 
 });
-
-//Rooms
-
-// $.getJSON("/map/data/rooms", function(data) { //getting the json data
-//   var items = [];
-//   $.each(data, function(key, val) {
-//     try {
-//       console.log(key, val);
-//     } catch (err) {
-//       //console.log(err);
-//     }
-//   });
-// });
 
 //Bikes
 
@@ -263,7 +217,7 @@ var indoorLayer = new L.Indoor(data, {
   },
   style: function(feature) {
     var fill = 'white';
-
+    console.log(feature.properties);
     if (feature.properties.tags.buildingpart === 'corridor') {
       fill = '#169EC6';
     } else if (feature.properties.tags.buildingpart === 'verticalpassage') {
