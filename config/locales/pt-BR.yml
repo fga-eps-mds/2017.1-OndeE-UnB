@@ -55,6 +55,11 @@ pt-BR:
         title: "Título"
         acronym: "Acrônimo"
         level: "Nível"
+        room_type_list:
+          classroom: 'Sala de Aula'
+          laboratory: 'Laboratório'
+          professor_room: 'Sala de Professor'
+          study_room: 'Sala de Estudo'
       admin:
         name: "Nome"
         password: "Senha"
