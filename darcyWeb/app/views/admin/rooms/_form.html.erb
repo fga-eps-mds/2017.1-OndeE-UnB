@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <%= f.label :room_type %>
-                        <%= f.select :room_type, @room_types.map{ |room_type| [room_type.humanize, room_type] }, {}, { class: 'form-control' } %>
+                        <%= f.select :room_type, @room_types.map{ |translation, room_type| [translation, room_type] }, {}, { class: 'form-control' } %>
                     </div>
                 </div>
                 <div class="row">

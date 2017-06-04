@@ -42,7 +42,7 @@ class Admin::RoomsController < AdminController
   end
 
   def set_room_types
-    @room_types = Room.room_types.keys
+    @room_types = Room.translated_room_types
   end
 
   def set_room

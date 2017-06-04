@@ -7,6 +7,7 @@ class Room < ApplicationRecord
 
   # types of rooms
   enum room_type: [ :classroom, :laboratory, :professor_room, :study_room ]
+  translate_enum :room_type
 
   # validations
   validates :acronym, length: { maximum: 20 }, presence: true
