@@ -25,28 +25,22 @@ function onEachFeature(feature, layer) {
       var numberToBuilding = '/map/data/building/' + buildingKey;
       $("#sidebar").load(numberToBuilding, function() {
         sidebar.toggle();
-        loadRooms(buildingKey);
       });
-
+      loadRooms(buildingKey);
     }
   });
 }
 
 var buildingLayer = L.geoJSON('', {
   onEachFeature: onEachFeature
-});
-
-//adds layer of building on map
-map.addLayer(buildingLayer);
+}).addTo(map);
 
 //Insert each building on the layer of building
-$.getJSON("/map/data/buildings", function(data) { //getting the json data
-  var items = [];
-  $.each(data, function(key, val) {
-
+$.getJSON("/map/data/buildings", function(buildings) { //getting the json data
+  buildings.forEach(function(building) {
     try {
-      var geo_json = JSON.parse(val.geo_data);
-      geo_json.features[0].geometry.coordinates[0].key = val.id;
+      var geo_json = JSON.parse(building.geo_data);
+      geo_json.features[0].geometry.coordinates[0].key = building.id;
       buildingLayer.addData(geo_json); //adding the json data to the building layer
     } catch (err) {
       //console.log(err);
@@ -67,10 +61,7 @@ var bikesLayer = L.geoJSON('', {
       icon: smallIcon
     });
   }
-});
-
-//adds layer to bikes on map
-map.addLayer(bikesLayer);
+}).addTo(map);
 
 //Insert each bicycle rack on the layer of bikes
 $.getJSON("/map/data/bikes", function(data) { //getting the json data
@@ -98,10 +89,7 @@ var bathroomLayer = L.geoJSON('', {
       icon: smallIcon
     });
   }
-});
-
-//adds layer to bathroom on map
-map.addLayer(bathroomLayer);
+}).addTo(map);
 
 //Insert each bathroom on the layer of bathrooms
 $.getJSON("/map/data/bathrooms", function(data) { //getting the json data
@@ -128,9 +116,7 @@ var snackbarLayer = L.geoJSON('', {
       icon: smallIcon
     });
   }
-});
-
-map.addLayer(snackbarLayer);
+}).addTo(map);
 
 $.getJSON("/map/data/snackbars", function(data) { //getting the json data
   var items = [];
@@ -156,9 +142,7 @@ var busstopLayer = L.geoJSON('', {
       icon: smallIcon
     });
   }
-});
-
-map.addLayer(busstopLayer);
+}).addTo(map);
 
 $.getJSON("/map/data/busstops", function(data) { //getting the json data
   var items = [];
@@ -184,9 +168,7 @@ var entranceLayer = L.geoJSON('', {
       icon: smallIcon
     });
   }
-});
-
-map.addLayer(entranceLayer);
+}).addTo(map);
 
 $.getJSON("/map/data/entrances", function(data) { //getting the json data
   var items = [];
@@ -199,55 +181,3 @@ $.getJSON("/map/data/entrances", function(data) { //getting the json data
     }
   });
 });
-
-//Indoor map
-
-// Indoor Map
-
-
-//Indoor Map
-
-// $.getJSON("#", function(geoJSON) {
-var data = [];
-var indoorLayer = new L.Indoor(data, {
-  getLevel: function(feature) {
-    if (feature.properties.relations.length === 0)
-      return null;
-
-    return feature.properties.relations[0].reltags.level;
-  },
-  onEachFeature: function(feature, layer) {
-    layer.bindPopup(JSON.stringify(feature.properties, null, 4));
-  },
-  style: function(feature) {
-    var fill = 'white';
-    console.log(feature.properties);
-    if (feature.properties.tags.buildingpart === 'corridor') {
-      fill = '#169EC6';
-    } else if (feature.properties.tags.buildingpart === 'verticalpassage') {
-      fill = '#0A485B';
-    }
-
-    return {
-      fillColor: fill,
-      weight: 1,
-      color: '#666',
-      fillOpacity: 1
-    };
-  }
-});
-
-indoorLayer.setLevel("0");
-
-indoorLayer.addTo(map);
-
-var levelControl = new L.Control.Level({
-  level: "0",
-  levels: indoorLayer.getLevels()
-});
-
-// Connect the level control to the indoor layer
-levelControl.addEventListener("levelchange", indoorLayer.setLevel, indoorLayer);
-
-levelControl.addTo(map);
-// });
