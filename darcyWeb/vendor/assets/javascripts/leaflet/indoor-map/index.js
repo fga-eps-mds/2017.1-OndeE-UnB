@@ -68,13 +68,6 @@ L.Indoor = L.Class.extend({
     },
     addTo: function (map) {
         this._map = map;
-        for(layer in this._layers){
-          map.addLayer(this._layers[layer]);
-        }
-        return this;
-    },
-    onAdd: function (map) {
-        this._map = map;
 
         if (this._level === null) {
             var levels = this.getLevels();
@@ -100,6 +93,12 @@ L.Indoor = L.Class.extend({
         }
 
         this._map = null;
+    },
+    clean: function(){
+      for(level in this.getLevels()){
+        var layer = this._layers[level];
+        this._map.removeLayer(layer);
+      }
     },
     addData: function(data) {
         var layers = this._layers,

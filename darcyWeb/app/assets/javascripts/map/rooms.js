@@ -11,19 +11,18 @@ const roomColor = function color(type){
 
   return color;
 }
-const loadRooms = function loadRooms(buildingKey){
+var loadRooms = function loadRooms(buildingKey){
   $.get('/map/data/roomsByBuilding/'+ buildingKey, function(data) { //getting the json data
 
-    let rooms = {
+    var rooms = {
       'type': 'FeatureCollection',
       'features': [],
     };
 
     data.forEach((room)=>{
-      console.log(room);
       try {
-        let geo_json = JSON.parse(room.geo_data);
-        geo_json.features[0].properties.level = room.level;
+        var geo_json = JSON.parse(room.geo_data);
+        geo_json.features[0].properties.level = room.level.toString();
         geo_json.features[0].properties.roomType = room.room_type;
         rooms.features.push(geo_json.features[0]);
       } catch (err) {
@@ -31,7 +30,7 @@ const loadRooms = function loadRooms(buildingKey){
       }
     })
 
-    let indoorLayer = new L.Indoor(rooms, {
+    var indoorLayer = new L.Indoor(rooms, {
       style: function(feature) {
         var fillColor = roomColor(feature.properties.roomType);
 
@@ -45,20 +44,22 @@ const loadRooms = function loadRooms(buildingKey){
     });
 
     // set the default level
-    indoorLayer.setLevel("0");
+    var levels = indoorLayer.getLevels();
+    var level = levels[0];
+
     indoorLayer.addTo(map);
+    indoorLayer.setLevel(level);
 
     var levelControl = new L.Control.Level({
-      level: "0",
-      levels: indoorLayer.getLevels(),
+      level: level,
+      levels: levels,
     });
 
     levelControl.addEventListener("levelchange", indoorLayer.setLevel, indoorLayer);
     levelControl.addTo(map);
 
     sidebar.on('hide', function(){
-      // FIXME Remove indoorLayer and levelControl when the sidebar is hidden
-      map.removeLayer(indoorLayer);
+      indoorLayer.clean();
       map.removeControl(levelControl);
     });
 
