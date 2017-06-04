@@ -1,12 +1,16 @@
+// load leaflet libraries
 //= require leaflet/map
+//= require leaflet/context-menu
 //= require leaflet/awesome-markers
 //= require leaflet/indoor-map
-//= require map/sidebar
 //= require leaflet/easy-button
+
+//= require map/init
+//= require map/sidebar
 //= require map/routes
 //= require map/search
 //= require map/rooms
-//Buildings
+
 
 //Method called when click on one building
 function onEachFeature(feature, layer) {

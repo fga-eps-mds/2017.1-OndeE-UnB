@@ -1,4 +1,3 @@
-require 'json'
 class Point < ApplicationRecord
       acts_as :location
       enum type_point: ["Bicicletario", "Banheiro", "Lanchonete", "Parada de Onibus", "Entrada de Edificio"]
