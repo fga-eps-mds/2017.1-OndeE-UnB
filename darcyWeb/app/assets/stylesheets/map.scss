@@ -164,3 +164,25 @@ html {
 .input-location:hover .input-current-location-btn {
   display: inline;
 }
+
+.badge {
+  font-size: 90%;
+  font-weight: 500;
+  border-radius: 0.125rem
+}
+
+.badge-classroom {
+  background-color: #2196F3;
+}
+
+.badge-laboratory {
+  background-color: #9C27B0
+}
+
+.bagde-professor_room {
+  background-color: #F44336
+}
+
+.bagde-study_room {
+  background-color: #00BCD4
+}
