@@ -1,8 +1,7 @@
 //= require leaflet/routing-machine
 //= require leaflet/lrm-mapzen
 
-// enable and set options to the contextmenu
-map.contextmenu.enable();
+// set options to the contextmenu
 map.contextmenu.addItem({
   text: 'Rotas a partir daqui',
   callback: routesFromHere

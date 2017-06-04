@@ -1,76 +1,105 @@
 //= require leaflet/draw
 //= require leaflet/map
-//= require leaflet/easy-button
 //= require leaflet/draw.translations
 
-const locationGeoData = {
-  element: $("input[id$='_geo_data']"),
-  save: function(geo_json){
-    this.element.val(JSON.stringify(geo_json.toGeoJSON()));
-  },
-  load: function(){
-    const geoJSON = this.element.val();
-    if (geoJSON) {
-      drawnLayer.addData(JSON.parse(geoJSON));
+var drawnLayer;
+var drawControl;
+
+$('#map').ready(function(){
+  map.init(mapOptions);
+
+  drawnLayer = L.geoJSON().addTo(map);
+  drawControl = new L.Control.Draw({
+    edit: {
+      featureGroup: drawnLayer
+    },
+    draw: {
+      polyline: false,
+      circle: false,
+      rectangle: false,
+      marker: false,
+      polygon: false
+    }
+  });
+
+  // enable drawing if there are no drawings on the map.
+  drawControl.enableDrawing = function enableDrawing(options) {
+    if (drawnLayer.getLayers().length == 0) {
+      drawControl.update(options);
     }
   }
-};
 
-const locationCoods = {
-  elementLat: $("input[id$='_latitude']"),
-  elementLng: $("input[id$='_longitude']"),
-  save: function(lat, lng){
-    this.elementLat.val(lat);
-    this.elementLng.val(lng);
-  },
-  load: function(){
-    const lat = this.elementLat.val();
-    const lng = this.elementLng.val();
-    if (lat && lng) {
-        map.flyTo(new L.LatLng(lat, lng));
+  // disable drawing if there are drawings on the map.
+  drawControl.disableDrawing = function disableDrawing(options) {
+    if (drawnLayer.getLayers().length > 0) {
+      drawControl.update(options);
     }
   }
-}
-locationCoods.load();
 
+  // updates the control by removing it and then adding it again
+  drawControl.update = function updatesControl(options) {
+    drawControl.setDrawingOptions(options);
+    map.removeControl(drawControl);
+    map.addControl(drawControl);
+  }
 
-var drawnLayer = L.geoJSON().addTo(map);
-map.addLayer(drawnLayer);
+  map.addControl(drawControl);
 
-// Load json from the form
-locationGeoData.load();
+  const locationGeoData = {
+    $element: $("input[id$='_geo_data']"),
+    save: function(geo_json) {
+      this.$element.val(JSON.stringify(geo_json.toGeoJSON()));
+    },
+    load: function() {
+      const geoJSON = this.$element.val();
+      if (geoJSON) {
+        drawnLayer.addData(JSON.parse(geoJSON));
+        map.setView(drawnLayer.getBounds().getCenter());
+      }
+    }
+  };
 
-// var drawControl = new L.Control.Draw({
-//     edit: {
-//         featureGroup: drawnLayer
-//     },
-//     draw: {
-//         polyline: false,
-//         circle: false,
-//         rectangle: false,
-//         polygon: {
-//             allowIntersection: false,
-//             showArea: true
-//         }
-//     }
-// });
+  const locationCoods = {
+    $elementLat: $("input[id$='_latitude']"),
+    $elementLng: $("input[id$='_longitude']"),
+    save: function(layer) {
+      var feature = layer.getLayers()[0];
+      var center;
 
-map.on(L.Draw.Event.CREATED, function(event) {
+      if (feature instanceof L.Marker) {
+        center = feature.getLatLng();
+      } else {
+        center = feature.getBounds().getCenter();
+      }
+
+      this.$elementLat.val(center.lat);
+      this.$elementLng.val(center.lng);
+    },
+    load: function() {
+      const lat = this.$elementLat.val();
+      const lng = this.$elementLng.val();
+    }
+  }
+  locationCoods.load();
+
+  // Load json from the form
+  locationGeoData.load();
+
+  map.on(L.Draw.Event.CREATED, function(event) {
     var layer = event.layer;
     drawnLayer.addLayer(layer);
     locationGeoData.save(drawnLayer);
-});
 
-map.on(L.Draw.Event.EDITED, function(event) {
+    // sets the center coordinates accoding to the drawn feature
+    locationCoods.save(drawnLayer);
+  });
+
+  map.on(L.Draw.Event.EDITED, function(event) {
     locationGeoData.save(drawnLayer);
-});
-map.on(L.Draw.Event.DELETED, function(event) {
+    // sets the center coordinates accoding to the drawn feature
+    locationCoods.save(drawnLayer);
+  });
+  map.on(L.Draw.Event.DELETED, function(event) {
     locationGeoData.save(drawnLayer);
+  });
 });
-
-map.addControl(drawControl);
-
-L.easyButton('fa-map-marker', function(btn, map){
-  const $center = map.getCenter();
-  locationCoods.save($center.lat, $center.lng);
-}).addTo(map);
