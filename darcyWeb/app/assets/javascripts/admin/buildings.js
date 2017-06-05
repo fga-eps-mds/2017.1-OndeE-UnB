@@ -3,6 +3,9 @@
 //= require leaflet/easy-button
 //= require leaflet/draw.translations
 
+//Those plants helps developers to insert new rooms
+//= require admin/plants
+
 const $building_geo_data = {
   element: $('#building_geo_data'),
   save: function(geo_json){

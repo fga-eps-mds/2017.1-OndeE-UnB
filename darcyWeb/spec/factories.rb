@@ -10,7 +10,12 @@ FactoryGirl.define do
   end
 
   factory :point do
-    
+    title "Bicicletario"
+    description "Bicicletario"
+    type_point "Bicicletario"
+    latitude 0.0
+    longitude 0.0
+    geo_data '{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[-47.86743164062501,-15.761300233230024]}}]}'
   end
 
   factory :building do
