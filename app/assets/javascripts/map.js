@@ -26,6 +26,7 @@ function onEachFeature(feature, layer) {
       $("#sidebar").load(numberToBuilding, function() {
         sidebar.toggle();
       });
+      // Load rooms for clicked building
       loadRooms(buildingKey);
     }
   });
