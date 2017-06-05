@@ -1,3 +1,4 @@
+// Set default color based on room type
 const roomColor = function color(type){
   var color = 'white';
   switch (type) {
@@ -11,6 +12,8 @@ const roomColor = function color(type){
 
   return color;
 }
+
+// Load rooms for specified building
 var loadRooms = function loadRooms(buildingKey){
   $.get('/map/data/roomsByBuilding/'+ buildingKey, function(data) { //getting the json data
 
@@ -55,9 +58,11 @@ var loadRooms = function loadRooms(buildingKey){
       levels: levels,
     });
 
+// Listener to level control
     levelControl.addEventListener("levelchange", indoorLayer.setLevel, indoorLayer);
     levelControl.addTo(map);
 
+// Clean indoor when toogled
     sidebar.on('hide', function(){
       indoorLayer.clean();
       map.removeControl(levelControl);
