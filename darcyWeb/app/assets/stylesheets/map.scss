@@ -171,6 +171,125 @@ background-color: black;
   display: none !important;
 }
 
+
+// Responsive screens ipad pro
+@media (max-width: 1024px) {
+  .leaflet-sidebar.left.visible ~ .leaflet-left {
+    left: 0;
+  }
+
+  .leaflet-control-zoom {
+    margin-top: 80px !important;
+  }
+
+  .leaflet-sidebar {
+    top: 50%;
+    height: 50%;
+    width: 49%;
+  }
+
+  .sidebar-body {
+    height: calc(100% - 30px);
+  }
+
+  #searchContainer {
+    width: 90%;
+    left: calc((100% - 90%) / 2);
+  }
+
+  #searchBox {
+    width: 73%;
+  }
+}
+
+// Responsive screens ipad
+@media (max-width: 768px) {
+  .leaflet-sidebar.left.visible ~ .leaflet-left {
+    left: 0;
+  }
+
+  .leaflet-control-zoom {
+    margin-top: 80px !important;
+  }
+
+  .leaflet-sidebar {
+    top: 50%;
+    height: 50%;
+    width: 60%;
+  }
+
+  .sidebar-body {
+    height: calc(100% - 30px);
+  }
+
+  #searchContainer {
+    width: 90%;
+    left: calc((100% - 90%) / 2);
+  }
+
+  #searchBox {
+    width: 73%;
+  }
+}
+
+// Responsive screens
+@media (max-width: 767px) {
+  .leaflet-sidebar.left.visible ~ .leaflet-left {
+    left: 0;
+  }
+
+  .leaflet-control-zoom {
+    margin-top: 80px !important;
+  }
+
+  .leaflet-sidebar {
+    top: 50%;
+    height: 50%;
+    width: 100%;
+  }
+
+  .sidebar-body {
+    height: calc(100% - 30px);
+  }
+
+  #searchContainer {
+    width: 90%;
+    left: calc((100% - 90%) / 2);
+  }
+
+  #searchBox {
+    width: 73%;
+  }
+}
+
+// Mobile resolution
+@media (max-width: 320px) {
+  //Click in sidebar button
+  .leaflet-sidebar.left.visible ~ .leaflet-left {
+    left: 0;
+  }
+
+  .leaflet-control-zoom {
+    margin-top: 80px !important;
+  }
+
+  .leaflet-sidebar {
+    overflow: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    transform: translate3d(0,0,0);
+  }
+
+
+  #searchContainer {
+    width: 90%;
+    left: calc((100% - 90%) / 2);
+  }
+
+  #searchBox {
+    width: 70%;
+  }
+
 .input-location {
   position: relative;
 
@@ -221,8 +340,6 @@ background-color: black;
 }
 }
 
-
-
 @media (min-width: 992px){
 .navbar-toggleable-md .navbar-collapse {
     display: -webkit-box!important;
@@ -244,4 +361,5 @@ background-color: black;
     border-color: white;
     color: white;
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='-11 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255, 255, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+
 }
