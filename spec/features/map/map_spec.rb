@@ -20,18 +20,16 @@ describe 'Map', type: :feature do
   end
 
   it 'should show the sidebar when click on building', js: true do
+    FactoryGirl.create :building
+
     visit root_path
+    wait_for_ajax
+
     page.execute_script("buildingLayer.getLayers()[0].fire('click')")
 		wait_for_ajax
+
     sidebar = page.evaluate_script('sidebar.isVisible()')
     expect(sidebar).to eq(true)
   end
 
-  it 'should show the indoor map when click on building', js: true do
-    visit root_path
-    page.execute_script("buildingLayer.getLayers()[0].fire('click')")
-		wait_for_ajax
-    control = page.evaluate_script('$(".leaflet-control").isVisible()')
-    expect(control).to eq(true)
-  end
 end
