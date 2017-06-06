@@ -8,7 +8,7 @@ describe 'Point', type: :feature do
             senha = "123456"
             before(:each) do
                   Capybara.raise_server_errors = false
-                  visit admin_session_path
+                  visit login_path
                   fill_in 'admin[email]', with: email
                   fill_in 'admin[password]', with: senha
                   find('input.btn.btn-success.btn-submit').click
@@ -98,4 +98,3 @@ describe 'Point', type: :feature do
             end
       end
 end
-
