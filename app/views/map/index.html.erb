@@ -8,11 +8,26 @@
     <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Roboto:400,500' %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <%= stylesheet_link_tag 'http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' %>
+    <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css' %>
     <%= stylesheet_link_tag 'https://unpkg.com/leaflet@1.0.3/dist/leaflet.css' %>
     <%= stylesheet_link_tag 'map' %>
   </head>
+
   <body>
+
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded navbar-fixed-top">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-haspopup aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-text">Onde É? Universidade de Brasília </a>
+        <div class="collapse navbar-collapse justify-content-end" id="nav-content">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="admin/login">Administração</a>
+              </li>
+          </ul>
+      </nav>
+
     <div id="sidebar"></div>
 
     <div id="map"></div>

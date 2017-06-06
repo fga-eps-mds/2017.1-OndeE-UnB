@@ -5,6 +5,7 @@
 //= require leaflet/lrm-mapzen
 //= require leaflet/sidebar
 //= require leaflet/geojsonautocomplete
+//= require font-awesome
 
 html body {
   height: 100%;
@@ -28,8 +29,36 @@ html {
   font-family: "Roboto", sans-serif !important;
 }
 
+.leaflet-top{
+  top: 55px;
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover{
+  color: lightgray;
+}
+
+.navbar-light .navbar-nav .nav-link{
+  color: white;
+}
+
+
+a:not([href]):not([tabindex]){
+  color: white;
+  font-weight: bold;
+}
+
+a:not([href]):not([tabindex]):hover{
+  color: white;
+  font-weight: bold;
+}
+
+.bg-faded{
+background-color: black;
+}
+
 .btn-reverse-route {
   margin-top: -8px;
+
   i {
     $rotate: 90deg;
     -ms-transform: rotate($rotate);
@@ -66,7 +95,6 @@ html {
   font-size: 14px;
 }
 
-
 .table thead th {
   font-size: 11px;
   text-transform: uppercase;
@@ -79,7 +107,7 @@ html {
   font-size: 12px;
   border-top: 1px dashed #F2F2F2;
   vertical-align: middle;
-  transition: background-color 0.5s linear
+  transition: background-color 0.5s linear;
 }
 
 #sidebar {
@@ -87,22 +115,22 @@ html {
   overflow: hidden;
 }
 
-
 .sidebar-body {
   padding: 15px;
   overflow: auto;
   height: 100%;
-  margin: 0px -24px;
+  margin: 0 -24px;
 }
+
 .sidebar-body::-webkit-scrollbar {
-    width: 0.5em;
+  width: 0.5em;
 }
 
 .sidebar-body::-webkit-scrollbar-track {}
 
 .sidebar-body::-webkit-scrollbar-thumb {
-    background-color: darkgrey;
-    outline: 1px solid slategrey;
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }
 
 .sidebar-header {
@@ -127,11 +155,13 @@ html {
   color: #FFF;
   background-color: #8fdc68;
   margin-bottom: 20px;
+
   b {
     font-weight: 500;
     display: block;
     text-transform: uppercase;
   }
+
   i {
     font-size: 20px;
   }
@@ -259,4 +289,77 @@ html {
   #searchBox {
     width: 70%;
   }
+
+.input-location {
+  position: relative;
+
+  .input-current-location-btn {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 0 10px;
+    border: none;
+    border-radius: 0 200px 200px 0;
+    background: 0 0;
+    transition: all 0.5s ease;
+  }
+}
+
+.input-location:hover .input-current-location-btn {
+  display: inline;
+}
+
+@media (min-width: 992px){
+.navbar-text {
+
+    display: inline-block;
+    padding-top: .425rem;
+    padding-bottom: .425rem;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: auto;
+    padding-top: 10px;
+    font-size: 16px;
+}
+}
+
+@media (min-width: 320px){
+.navbar-text {
+
+    display: inline-block;
+    padding-top: .425rem;
+    padding-bottom: .425rem;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: auto;
+    font-size: 16px;
+}
+}
+
+@media (min-width: 992px){
+.navbar-toggleable-md .navbar-collapse {
+    display: -webkit-box!important;
+    display: -webkit-flex!important;
+    display: -ms-flexbox!important;
+    display: flex!important;
+    width: 3%;
+}
+}
+
+.navbar{
+
+  position: absolute;
+  z-index: 2001;
+  width: 100%;
+}
+
+.navbar-light .navbar-toggler {
+    border-color: white;
+    color: white;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='-11 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255, 255, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+
 }

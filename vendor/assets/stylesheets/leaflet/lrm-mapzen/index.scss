@@ -90,7 +90,7 @@ html,body{
 .info::before{
     -webkit-background-size: 72px 18px;
     background-size: 72px 18px;
-    background-image:url('modes.icons.svg');
+    background-image:image-url('leaflet/lrm-mapzen/modes.icons.svg');
     margin: 0;
     content: '';
     display: inline-block;
@@ -109,7 +109,7 @@ html,body{
     -webkit-background-size: 684px 18px;
     background-size: 684px 18px;
     background-repeat: no-repeat;
-    background-image:url('leaflet.routing.icons.svg');
+    background-image:image-url('leaflet/lrm-mapzen/leaflet.routing.icons.svg');
     margin: 0;
     content: '';
     display: inline-block;
@@ -286,7 +286,7 @@ html,body{
     display: block;
     width: 26px;
     height: 23px;
-    background-image: url('routing-icon.png');
+    background-image: image-url('leaflet/lrm-mapzen/routing-icon.png');
 }
 
 .leaflet-routing-container-hide .leaflet-routing-collapse-btn:after {
