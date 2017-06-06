@@ -22,7 +22,7 @@ var loadRooms = function loadRooms(buildingKey){
       'features': [],
     };
 
-    data.forEach((room)=>{
+    data.forEach(function(room){
       try {
         var geo_json = JSON.parse(room.geo_data);
         geo_json.features[0].properties.level = room.level.toString();
@@ -31,7 +31,7 @@ var loadRooms = function loadRooms(buildingKey){
       } catch (err) {
         console.log(err);
       }
-    })
+    });
 
     var indoorLayer = new L.Indoor(rooms, {
       style: function(feature) {
@@ -46,7 +46,7 @@ var loadRooms = function loadRooms(buildingKey){
       }
     });
 
-    // set the default level
+    // Set the default level
     var levels = indoorLayer.getLevels();
     var level = levels[0];
 
@@ -58,11 +58,11 @@ var loadRooms = function loadRooms(buildingKey){
       levels: levels,
     });
 
-// Listener to level control
+    // Listener to level control
     levelControl.addEventListener("levelchange", indoorLayer.setLevel, indoorLayer);
     levelControl.addTo(map);
 
-// Clean indoor when toogled
+    // Clean indoor when toogled
     sidebar.on('hide', function(){
       indoorLayer.clean();
       map.removeControl(levelControl);

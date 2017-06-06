@@ -12,31 +12,35 @@
 //= require map/rooms
 
 
-//Method called when click on one building
-function onEachFeature(feature, layer) {
-  layer.on('click', function() {
-    //The key references to that building clicked
-    var buildingKey = this.feature.geometry.coordinates[0].key;
-
-    if (sidebar.isVisible()) {
-      sidebar.hide();
-    } else {
-      //selects the building clicked and shows sidebar
-      var numberToBuilding = '/map/data/building/' + buildingKey;
-      $("#sidebar").load(numberToBuilding, function() {
-        sidebar.toggle();
-      });
-      // Load rooms for clicked building
-      loadRooms(buildingKey);
-    }
-  });
-}
-
 var buildingLayer = L.geoJSON('', {
-  onEachFeature: onEachFeature
+  onEachFeature: function onEachBuilding(feature, layer) {
+    layer.setStyle({
+      fillColor: '#6a7c83',
+      fillOpacity: 1,
+      color: '#6a7c83',
+      weight: 3
+    });
+    // Trigger when user click on a building
+    layer.on('click', function() {
+      // The key references to that building clicked
+      var buildingKey = this.feature.geometry.coordinates[0].key;
+
+      if (sidebar.isVisible()) {
+        sidebar.hide();
+      } else {
+        //selects the building clicked and shows sidebar
+        var numberToBuilding = '/map/data/building/' + buildingKey;
+        $("#sidebar").load(numberToBuilding, function() {
+          sidebar.toggle();
+        });
+        // Load rooms for clicked building
+        loadRooms(buildingKey);
+      }
+    });
+  }
 }).addTo(map);
 
-//Insert each building on the layer of building
+// Insert each building on the layer of building
 $.getJSON("/map/data/buildings", function(buildings) { //getting the json data
   buildings.forEach(function(building) {
     try {
@@ -47,7 +51,6 @@ $.getJSON("/map/data/buildings", function(buildings) { //getting the json data
       //console.log(err);
     }
   });
-
 });
 
 //Bikes

@@ -1,40 +1,43 @@
 require 'rails_helper'
 
+def load_routes_form
+  visit root_path
+  page.execute_script("$('.ion-merge').click()")
+  wait_for_ajax
+end
+
+origin_field = 'route[origin]'
+destination_field = 'route[destination]'
+
 describe 'Route', type: :feature do
   it 'should show the route form when you click the route button', js: true do
-    visit root_path
-    page.execute_script("$('.ion-merge').click()")
+    load_routes_form
     expect(page).to have_content('TRAJETOS')
   end
 
   context 'Swap Locations of the route' do
     before(:each) do
-      visit root_path
-      page.execute_script("$('.ion-merge').click()")
-			sleep 1
+      load_routes_form
     end
 
     it 'should swap locations when there is origin and destination', js: true do
-      origin = '-15.76528581775335, -47.866482138633735'
-      destination = '-15.766824273744168, -47.867302894592285'
 
-      within('#sidebar form') do
-        fill_in 'route[origin]', with: origin
-        fill_in 'route[destination]', with: destination
-        find('.btn-reverse-route').click
-      end
+      origin = 'origin'
+      destination = 'destination'
 
-      expect(page).to have_field('route[origin]', with: destination)
-      expect(page).to have_field('route[destination]', with: origin)
+      fill_in origin_field, with: origin
+      fill_in destination_field, with: destination
+      find('.btn-reverse-route').click
+
+      expect(page).to have_field(origin_field, with: destination)
+      expect(page).to have_field(destination_field, with: origin)
     end
 
     it 'should swap origin even when destination is blank', js: true do
-      origin = '-15.76528581775335, -47.866482138633735'
+      origin = 'origin'
 
-      within('#sidebar form') do
-        fill_in 'route[origin]', with: origin
-        find('.btn-reverse-route').click
-      end
+      fill_in origin_field, with: origin
+      find('.btn-reverse-route').click
 
       expect(page).to have_field('route[origin]', with: '')
       expect(page).to have_field('route[destination]', with: origin)
@@ -55,10 +58,7 @@ describe 'Route', type: :feature do
 
   context 'Calculate the route' do
     before(:each) do
-      Capybara.raise_server_errors = false
-      visit root_path
-      page.evaluate_script("$('.ion-merge').click()")
-			sleep 1
+      load_routes_form
       within('#sidebar form') do
         fill_in 'route[origin]', with: '-15.76528581775335, -47.866482138633735'
         fill_in 'route[destination]', with: '-15.766824273744168, -47.867302894592285'

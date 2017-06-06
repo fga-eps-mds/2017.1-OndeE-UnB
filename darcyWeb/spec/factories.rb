@@ -31,14 +31,14 @@ FactoryGirl.define do
   end
 
   factory :room do
-    acronym "LABNEI"
+    acronym "Sala de Aula"
     building
     geo_data '{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[-47.867375314235694,-15.762756116441665],[-47.86702126264573,-15.762497981882012],[-47.866597473621376,-15.763055552119592],[-47.8669622540474,-15.763303360622453],[-47.867375314235694,-15.762756116441665]]]}}]}'
     latitude 0.0
     level 0
     longitude 0.0
     room_type :classroom
-    title "Laboratório de Eletrônica"
+    title "Sala de Aula"
 
   end
 end
