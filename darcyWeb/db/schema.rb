@@ -58,10 +58,9 @@ ActiveRecord::Schema.define(version: 20170521175630) do
     t.string   "longitude"
     t.string   "actable_type"
     t.integer  "actable_id"
+    t.json     "geo_data"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.json     "geo_data"
-    t.index ["actable_type", "actable_id"], name: "index_locations_on_actable_type_and_actable_id", using: :btree
   end
 
   create_table "points", force: :cascade do |t|

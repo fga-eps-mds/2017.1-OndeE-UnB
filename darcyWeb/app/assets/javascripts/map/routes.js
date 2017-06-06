@@ -12,6 +12,7 @@ map.contextmenu.addItem({
   callback: routesToHere
 });
 
+
 var route_form;
 
 var origin = {
@@ -27,6 +28,7 @@ var destination = {
   icon: 'arrow-down-c',
   color: 'red'
 };
+
 
 // starts the route options.
 var control = L.Routing.control({
@@ -314,6 +316,9 @@ function routesToHere(e) {
   setRouteLocation(e, destination);
   control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
 }
+
+
+
 
 function reverseRoute(e) {
   e.preventDefault();

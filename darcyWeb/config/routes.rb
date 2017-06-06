@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'map#index'
+  get 'findme', to: 'map#index'
 
   get 'admin', to: 'admin#index'
 
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
   namespace :map do
     namespace :data do
       get 'buildings', action: 'buildings'
+      get 'departments', action: 'departments'
       get 'building/:id', action: 'building'
       get 'bikes', action: 'bikes'
       get 'bathrooms', action: 'bathrooms'

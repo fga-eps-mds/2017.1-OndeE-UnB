@@ -24,6 +24,13 @@ describe 'Map', type: :feature do
     expect(sidebar).to eq(true)
   end
 
+  it 'should show the departments', js: true do
+    visit root_path
+    wait_for_ajax
+    departments = page.execute_script("departmentLayer.getLayers()")
+    expect(departments).not_to eq(0)
+  end
+
   it "Should find a navbar", js:true do
 
     visit root_path
