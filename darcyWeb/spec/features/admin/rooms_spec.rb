@@ -42,4 +42,52 @@ describe 'Rooms', type: :feature do
       # expect(page).to have_content('DESCRIÇÃO')
       # expect(page).to have_current_path(admin_points_path)
     end
+
+
+    it "Should Not save room if has not title", js: true  do
+      FactoryGirl.create :building
+      room = FactoryGirl.build :room
+
+      scpt = page.evaluate_script("$('#room_geo_data').val()")
+      puts scpt
+
+      find('#map').click
+      within("form") do
+        fill_in 'room[acronym]', with: room.acronym
+        fill_in 'room[title]', with: ''
+        select 'BSA', from: :room_building_id
+        select 'Laboratório', from: :room_room_type
+        fill_in 'room[level]', with: room.level
+        fill_in 'room[latitude]', with: room.latitude
+        fill_in 'room[longitude]', with: room.longitude
+        fill_in 'room[geo_data]', with: room.geo_data
+        page.save_screenshot
+        page.execute_script("$('form').submit()")
+      end
+      expect(page).to have_current_path(new_admin_room_path)
+    end
+
+    it "Should Not save room if has not acronym", js: true  do
+      FactoryGirl.create :building
+      room = FactoryGirl.build :room
+
+      scpt = page.evaluate_script("$('#room_geo_data').val()")
+      puts scpt
+
+      find('#map').click
+      within("form") do
+        fill_in 'room[acronym]', with: ''
+        fill_in 'room[title]', with: room.title
+        select 'BSA', from: :room_building_id
+        select 'Laboratório', from: :room_room_type
+        fill_in 'room[level]', with: room.level
+        fill_in 'room[latitude]', with: room.latitude
+        fill_in 'room[longitude]', with: room.longitude
+        fill_in 'room[geo_data]', with: room.geo_data
+        page.save_screenshot
+        page.execute_script("$('form').submit()")
+      end
+      expect(page).to have_current_path(new_admin_room_path)
+    end
+
   end
