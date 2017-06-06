@@ -19,4 +19,6 @@ Rails.application.config.assets.precompile += %w(admin/points.js)
 
 Rails.application.config.assets.precompile += %w(admin/buildings.js)
 
+Rails.application.config.assets.precompile += %w(admin/departments.js)
+
 Rails.application.config.assets.precompile += %w(sign.js sign.scss)

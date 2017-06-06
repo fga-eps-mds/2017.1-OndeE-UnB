@@ -4,6 +4,8 @@
 //= require leaflet/easy-button
 //= require map/routes
 //= require map/search
+//= require map/share_location
+
 
 //Bikes
 
@@ -30,6 +32,77 @@ $.getJSON( "/map/data/bikes", function(data) { //getting the json data
         }
     });
 });
+
+
+var departmentLayer = L.geoJSON('');
+
+var departmentIcon = L.icon({
+    iconUrl: 'http://icons.iconarchive.com/icons/icons8/ios7/24/Business-Department-icon.png'
+    //iconUrl: 'https://drive.google.com/uc?export=view&id=0B8jEDVP6IcfKOVJscS1LRHlMemc'
+});
+
+map.addLayer(departmentLayer);
+
+$.getJSON("/map/data/departments", function(data) { //getting the json data
+  console.log(data);
+  var items = [];
+  $.each(data, function(key, val) {
+    try {
+
+      console.log('Load Departments');
+      var geo_json = JSON.parse(val.geo_data);
+      var coordinates = geo_json.features[0].geometry.coordinates;
+      //console.log(geo_data);
+      //departmentLayer.addData(geo_json); //adding the json data to the departament layer
+      L.marker([coordinates[1], coordinates[0]], {icon: departmentIcon}).addTo(map);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+});
+
+
+
+
+
+var sharedLocation = {
+  marker: null,
+  title: 'sharedLocation',
+  icon: 'arrow-down-c',
+  color: 'blue'
+};
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+    function(m,key,value) {
+      vars[key] = value;
+    });
+    return vars;
+  }
+
+function createMarker(waypoint, latlng) {
+  //console.log("Lat and Lng");
+  if (! $.isEmptyObject(latlng) ) {
+    waypoint.marker = L.marker(latlng, {
+      icon: L.AwesomeMarkers.icon({
+        prefix: 'ion',
+        icon: waypoint.icon,
+        markerColor: waypoint.color
+      })
+    });
+    map.addLayer(waypoint.marker);
+
+    map.setView(latlng,32, {animate: true});
+    //map.setZoom(200, {animate: true});
+  }
+}
+
+createMarker(sharedLocation, getUrlVars());
+
+
+
+
 
 //Bathrooms
 

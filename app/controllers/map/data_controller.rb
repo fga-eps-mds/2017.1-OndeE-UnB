@@ -26,4 +26,8 @@ class Map::DataController < MapController
         @entrances = Point.where(type_point: "Entrada de Edificio")
         render json: @entrances
     end
+    def departments
+        @departments = Department.all
+        render json: @departments
+    end
 end
