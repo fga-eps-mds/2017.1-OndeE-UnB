@@ -7,7 +7,6 @@ describe 'Rooms', type: :feature do
     before(:each) do
       Capybara.raise_server_errors = false
       FactoryGirl.create :admin
-      FactoryGirl.create :building
       visit login_path
       fill_in 'admin[email]', with: 'mds@mds.com'
       fill_in 'admin[password]', with: 'mds123'
@@ -18,6 +17,7 @@ describe 'Rooms', type: :feature do
 
     it "Should create a new room", js: true  do
 
+      FactoryGirl.create :building
       room = FactoryGirl.build :room
 
       scpt = page.evaluate_script("$('#room_geo_data').val()")
@@ -27,7 +27,7 @@ describe 'Rooms', type: :feature do
       within("form") do
         fill_in 'room[acronym]', with: room.acronym
         fill_in 'room[title]', with: room.title
-        select 'BSA', from: :room_building
+        select 'BSA', from: :room_building_id
         select 'Laboratório', from: :room_room_type
         fill_in 'room[level]', with: room.level
         fill_in 'room[latitude]', with: room.latitude
@@ -43,4 +43,3 @@ describe 'Rooms', type: :feature do
       # expect(page).to have_current_path(admin_points_path)
     end
   end
-end
