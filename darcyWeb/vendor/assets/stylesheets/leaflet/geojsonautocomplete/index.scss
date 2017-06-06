@@ -4,7 +4,7 @@
 */
 .searchContainer {
     position: absolute;
-    top:15px;
+    top:66px;
     left:58px;
     z-index: 1001;
     width: 400px;
@@ -34,7 +34,7 @@
 }
 
 .searchButton {
-    background: url('search_double.png') no-repeat;
+    background: image-url('leaflet/geojsonautocomplete/search_double.png') no-repeat;
     cursor:pointer;
     width: 24px;
     height: 24px;
@@ -45,11 +45,11 @@
 }
 
 .searchButton:hover {
-    background: url('search_double.png') no-repeat -24px 0px;
+    background: image-url('leaflet/geojsonautocomplete/search_double.png') no-repeat -24px 0px;
 }
 
 .clearButton {
-    background:url('clear_multiple.png') no-repeat;
+    background:image-url('leaflet/geojsonautocomplete/clear_multiple.png') no-repeat;
     cursor:pointer;
     width: 24px;
     height: 24px;
@@ -61,7 +61,7 @@
 }
 
 .clearButton:hover {
-    background: url('clear_multiple.png') no-repeat -24px 0px;
+    background: image-url('leaflet/geojsonautocomplete/clear_multiple.png') no-repeat -24px 0px;
 }
 
 .divider {

@@ -3,6 +3,9 @@
 //= require leaflet/easy-button
 //= require leaflet/draw.translations
 
+//Those plants helps developers to insert new rooms
+//= require admin/plants
+
 const $building_geo_data = {
   element: $('#building_geo_data'),
   save: function(geo_json){
@@ -35,7 +38,6 @@ const $building_coords = {
 }
 $building_coords.load();
 
-
 var drawnLayer = L.geoJSON().addTo(map);
 map.addLayer(drawnLayer);
 
@@ -50,6 +52,7 @@ var drawControl = new L.Control.Draw({
         polyline: false,
         circle: false,
         rectangle: false,
+        marker: false,
         polygon: {
             allowIntersection: false,
             showArea: true
@@ -66,6 +69,7 @@ map.on(L.Draw.Event.CREATED, function(event) {
 map.on(L.Draw.Event.EDITED, function(event) {
     $building_geo_data.save(drawnLayer);
 });
+
 map.on(L.Draw.Event.DELETED, function(event) {
     $building_geo_data.save(drawnLayer);
 });
