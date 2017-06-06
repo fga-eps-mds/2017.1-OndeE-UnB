@@ -4,7 +4,7 @@
 //= require leaflet/easy-button
 //= require map/routes
 //= require map/search
-
+//= require map/share_location
 
 //Buildings
 
@@ -82,8 +82,8 @@ $.getJSON( "/map/data/bikes", function(data) { //getting the json data
 var departmentLayer = L.geoJSON('');
 
 var departmentIcon = L.icon({
-    //iconUrl: 'https://cdn0.iconfinder.com/data/icons/professionals-line/2048/1606_-_Secretary-512.png',
-    iconUrl: 'https://drive.google.com/uc?export=view&id=0B8jEDVP6IcfKOVJscS1LRHlMemc'
+    iconUrl: 'http://icons.iconarchive.com/icons/icons8/ios7/24/Business-Department-icon.png'
+    //iconUrl: 'https://drive.google.com/uc?export=view&id=0B8jEDVP6IcfKOVJscS1LRHlMemc'
 });
 
 map.addLayer(departmentLayer);
@@ -108,6 +108,8 @@ $.getJSON("/map/data/departments", function(data) { //getting the json data
 
 
 
+
+
 var sharedLocation = {
   marker: null,
   title: 'sharedLocation',
@@ -127,9 +129,6 @@ function getUrlVars() {
 function createMarker(waypoint, latlng) {
   //console.log("Lat and Lng");
   if (! $.isEmptyObject(latlng) ) {
-    //console.log('Create marker');
-    //console.log(waypoint);
-    //console.log(latlng);
     waypoint.marker = L.marker(latlng, {
       icon: L.AwesomeMarkers.icon({
         prefix: 'ion',
@@ -144,10 +143,7 @@ function createMarker(waypoint, latlng) {
   }
 }
 
-
 createMarker(sharedLocation, getUrlVars());
-
-
 
 
 
