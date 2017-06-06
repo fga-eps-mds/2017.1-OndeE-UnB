@@ -16,7 +16,7 @@ const $department_geo_data = {
   }
 };
 
-const $department_coods = {
+const $department_coords = {
   element_lat: $("#department_latitude"),
   element_lng: $("#department_longitude"),
   save: function(lat, lng){
@@ -31,7 +31,7 @@ const $department_coods = {
     }
   }
 }
-$department_coods.load();
+$department_coords.load();
 
 
 var drawnLayer = L.geoJSON().addTo(map);
@@ -48,29 +48,48 @@ var drawControl = new L.Control.Draw({
         polyline: false,
         circle: false,
         rectangle: false,
-        polygon: {
-            allowIntersection: false,
-            showArea: true
-        }
+        // polygon: {
+        //     allowIntersection: false,
+        //     showArea: false
+        // }
+        polygon: false,
+        marker: true
     }
 });
 
-map.on(L.Draw.Event.CREATED, function(event) {
-    var layer = event.layer;
-    drawnLayer.addLayer(layer);
+
+map.on(L.Draw.Event.CREATED, function (event) {
+    var pointLayer = event.layer;
+    //After put an point to create, the coordinates are displayed in the form of creation of points
+    const $centerPoint = pointLayer.getLatLng();
+    $department_coords.save($centerPoint.lat, $centerPoint.lng);
+
+    drawnLayer.addLayer(pointLayer);
     $department_geo_data.save(drawnLayer);
+
+    //This was the only way finded to remove marker option
+    drawControl.setDrawingOptions({
+      marker: false
+    });
+    map.removeControl(drawControl);
+    map.addControl(drawControl);
 });
 
 map.on(L.Draw.Event.EDITED, function(event) {
+    //takes the latitude and longitude and update according new edited point
+    const $centerPoint = drawnLayer.getLayers()[0].getLatLng();
+    $department_coords.save($centerPoint.lat, $centerPoint.lng);
     $department_geo_data.save(drawnLayer);
 });
+
 map.on(L.Draw.Event.DELETED, function(event) {
     $department_geo_data.save(drawnLayer);
+    //Puts again the marker as option
+    drawControl.setDrawingOptions({
+      marker: true
+    });
+    map.removeControl(drawControl);
+    map.addControl(drawControl);
 });
 
 map.addControl(drawControl);
-
-L.easyButton('fa-map-marker', function(btn, map){
-  const $center = map.getCenter();
-  $department_coods.save($center.lat, $center.lng);
-}).addTo(map);
