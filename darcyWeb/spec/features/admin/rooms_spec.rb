@@ -4,10 +4,10 @@ describe 'Admin', type: :feature do
 
   before(:each) do
     Capybara.raise_server_errors = false
-    FactoryGirl.create :admin
+    admin = FactoryGirl.create :admin
     visit login_path
-    fill_in 'admin[email]', with: 'mds@mds.com'
-    fill_in 'admin[password]', with: 'mds123'
+    fill_in 'admin[email]', with: admin.email
+    fill_in 'admin[password]', with: admin.password
 
     find('input.btn.btn-success.btn-submit').click
   end

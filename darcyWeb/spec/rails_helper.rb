@@ -20,7 +20,7 @@ Capybara.register_driver :poltergeist do |app|
     js_errors: true,  # turn on javascript errors on page
     timeout:   20000,
     inspector: true,
-    phantomjs_options: ['--load-images=yes', '--ignore-ssl-errors=yes', '--ssl-protocol=any']
+    phantomjs_options: ['--load-images=no', '--ignore-ssl-errors=yes', '--ssl-protocol=any']
   })
 end
 
