@@ -4,6 +4,7 @@ $('.buildings.new, .buildings.edit, .buildings.create, .buildings.update').ready
   var options = {
     polygon: true
   };
+  
   drawControl.enableDrawing(options);
 
   drawnLayer.on('layeradd', function(event) {

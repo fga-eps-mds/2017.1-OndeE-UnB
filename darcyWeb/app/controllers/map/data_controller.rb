@@ -1,37 +1,46 @@
 class Map::DataController < MapController
+  
     def buildings
         @buildings = Building.all
         render json: @buildings
     end
+
     def building
         @building = Building.find(params[:id])
     end
+
     def rooms
-        @rooms = Room.all
+        @rooms = Room.where(building_id: params[:building_id])
         render json: @rooms
     end
-    def roomsByBuilding
-        @rooms = Room.where(building_id: params[:id])
-        render json: @rooms
-    end
+
     def bikes
         @bikes = Point.where(type_point: "Bicicletario")
         render json: @bikes
     end
+
     def bathrooms
         @bathrooms = Point.where(type_point: "Banheiro")
         render json: @bathrooms
     end
+
     def snackbars
         @snackbars = Point.where(type_point: "Lanchonete")
         render json: @snackbars
     end
+
     def busstops
         @busstops = Point.where(type_point: "Parada de Onibus")
         render json: @busstops
     end
+
     def entrances
         @entrances = Point.where(type_point: "Entrada de Edificio")
         render json: @entrances
+    end
+
+    def departments
+        @departments = Department.all
+        render json: @departments
     end
 end
