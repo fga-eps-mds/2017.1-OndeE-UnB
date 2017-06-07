@@ -1,3 +1,4 @@
+# TODO Incluir mais testes para as outras actions
 require 'rails_helper'
 require 'spec_helper'
 require 'json'
