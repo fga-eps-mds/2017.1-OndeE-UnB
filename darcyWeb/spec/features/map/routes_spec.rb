@@ -69,6 +69,26 @@ describe 'Route', type: :feature do
     end
   end
 
+context 'Calculate the route without coordination' do
+    before(:each) do
+        load_routes_form
+      end
+
+      it 'should autocomplete orgin field', js: true do
+        within('#sidebar form') do
+          fill_in origin_field, with: 'a'
+        end
+      expect(page).to have_content('Biblioteca')
+    end
+    
+    it 'should autocomplete destination field', js: true do
+        within('#sidebar form') do
+          fill_in destination_field, with: 'a'
+        end
+      expect(page).to have_content('Biblioteca')
+    end
+
+end
   context 'Calculate the route' do
     before(:each) do
       load_routes_form
