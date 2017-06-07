@@ -2,6 +2,7 @@ require 'rails_helper'
 
 def load_routes_form
   visit root_path
+  wait_for_ajax
   page.execute_script("$('.ion-merge').click()")
   wait_for_ajax
 end
@@ -22,37 +23,49 @@ describe 'Route', type: :feature do
 
     it 'should swap locations when there is origin and destination', js: true do
 
-      origin = 'origin'
-      destination = 'destination'
+      origin_before_value = 'origin'
+      destination_before_value = 'destination'
 
-      fill_in origin_field, with: origin
-      fill_in destination_field, with: destination
-      find('.btn-reverse-route').click
+      fill_in origin_field, with: origin_before_value
+      fill_in destination_field, with: destination_before_value
 
-      expect(page).to have_field(origin_field, with: destination)
-      expect(page).to have_field(destination_field, with: origin)
+      page.execute_script('$(".btn-reverse-route").trigger("click")')
+
+      origin_after_value = page.evaluate_script('$("#route_origin").val()')
+      destination_after_value = page.evaluate_script('$("#route_destination").val()')
+
+      expect(origin_after_value).to eq(destination_before_value)
+      expect(destination_after_value).to eq(origin_before_value)
     end
 
     it 'should swap origin even when destination is blank', js: true do
-      origin = 'origin'
+      origin_before_value = 'origin'
 
-      fill_in origin_field, with: origin
-      find('.btn-reverse-route').click
+      fill_in origin_field, with: origin_before_value
 
-      expect(page).to have_field('route[origin]', with: '')
-      expect(page).to have_field('route[destination]', with: origin)
+      page.execute_script('$(".btn-reverse-route").trigger("click")')
+
+      origin_after_value = page.evaluate_script('$("#route_origin").val()')
+      destination_after_value = page.evaluate_script('$("#route_destination").val()')
+
+      expect(origin_after_value).to eq('')
+      expect(destination_after_value).to eq(origin_before_value)
+
     end
 
     it 'should swap destination even when origin is blank', js: true do
-      destination = '-15.76528581775335, -47.866482138633735'
+      destination_before_value = 'destination'
 
-      within('#sidebar form') do
-        fill_in 'route[destination]', with: destination
-        find('.btn-reverse-route').click
-      end
+      fill_in destination_field, with: destination_before_value
+      
+      page.execute_script('$(".btn-reverse-route").trigger("click")')
 
-      expect(page).to have_field('route[origin]', with: destination)
-      expect(page).to have_field('route[destination]', with: '')
+      origin_after_value = page.evaluate_script('$("#route_origin").val()')
+      destination_after_value = page.evaluate_script('$("#route_destination").val()')
+
+      expect(origin_after_value).to eq(destination_before_value)
+      expect(destination_after_value).to eq('')
+
     end
   end
 
@@ -60,16 +73,17 @@ describe 'Route', type: :feature do
     before(:each) do
       load_routes_form
       within('#sidebar form') do
-        fill_in 'route[origin]', with: '-15.76528581775335, -47.866482138633735'
-        fill_in 'route[destination]', with: '-15.766824273744168, -47.867302894592285'
+        fill_in origin_field, with: '-15.76528581775335, -47.866482138633735'
+        fill_in destination_field, with: '-15.766824273744168, -47.867302894592285'
       end
     end
 
     it 'should calculate the route for pedestrian', js: true do
       within('#sidebar form') do
         page.all('label.btn.btn-outline-info')[0].click
-        click_button 'Obter Trajeto'
+        page.execute_script('$("#route_submit").click()')
       end
+      page.save_screenshot
       expect(find('#mode_text')).to have_content('A pé')
       expect(page).to have_content('You have arrived at your destination.')
     end
@@ -77,7 +91,7 @@ describe 'Route', type: :feature do
     it 'should calculate the route for bicycle', js: true do
       within('#sidebar form') do
         page.all('label.btn.btn-outline-info')[1].click
-        click_button 'Obter Trajeto'
+        page.execute_script('$("#route_submit").click()')
       end
       expect(find('#mode_text')).to have_content('Bicicleta')
       expect(page).to have_content('You have arrived at your destination.')
@@ -86,7 +100,7 @@ describe 'Route', type: :feature do
     it 'should calculate the route for car', js: true do
       within('#sidebar form') do
         page.all('label.btn.btn-outline-info')[2].click
-        click_button 'Obter Trajeto'
+        page.execute_script('$("#route_submit").click()')
       end
       expect(find('#mode_text')).to have_content('Carro')
       expect(page).to have_content('You have arrived at your destination.')
