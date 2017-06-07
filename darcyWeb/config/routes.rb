@@ -6,10 +6,12 @@ Rails.application.routes.draw do
     get 'admin/login', to: 'devise/sessions#new', as: 'new_login'
     post 'admin/login', to: 'devise/sessions#create', as: 'login'
     get 'admin/logout', to: 'devise/sessions#destroy', as: 'logout'
+    get 'admin/edit', to: 'devise/registrations#edit', as: 'edit_admin_registration'
+    post 'admin/edit', to: 'devise/registrations#update', as: 'admin_registration'
     # get 'admin/registration', to: 'devise/registrations#new', as: 'new_registration'
     # post 'admin/registration', to: 'devise/registrations#create', as: 'registration'
   end
-  devise_for :admins, skip: [:sessions, :passwords]
+  devise_for :admins, skip: [:sessions, :registrations, :passwords]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -20,8 +22,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :buildings, except: [:show]
-    resources :rooms
-    resources :departments
+    resources :rooms, except: [:show]
+    resources :departments, except: [:show]
     resources :admins, except: [:show]
     resources :points, except: [:show]
   end
@@ -31,6 +33,7 @@ Rails.application.routes.draw do
       get 'buildings', action: 'buildings'
       get 'departments', action: 'departments'
       get 'building/:id', action: 'building'
+      get 'rooms/:building_id', action: 'rooms'
       get 'bikes', action: 'bikes'
       get 'bathrooms', action: 'bathrooms'
       get 'snackbars', action: 'snackbars'
@@ -60,6 +63,4 @@ Rails.application.routes.draw do
   # Provisory method to destroy points and buildings
   get 'admin/points/:id', to: 'admin/points#destroy'
   get 'admin/buildings/:id', to: 'admin/buildings#destroy'
-  get 'app/views/map/index.html.erb', to: 'map#index', as: 'map'
-  get 'app/views/about/about.html.erb', to: 'about#about', as: 'about'
 end

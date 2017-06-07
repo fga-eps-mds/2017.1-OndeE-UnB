@@ -18,8 +18,14 @@ describe 'Map', type: :feature do
   end
 
   it 'should show the sidebar when click on building', js: true do
+    FactoryGirl.create :building
+
+    visit root_path
+    wait_for_ajax
+
     page.execute_script("buildingLayer.getLayers()[0].fire('click')")
 	  wait_for_ajax
+
     sidebar = page.evaluate_script('sidebar.isVisible()')
     expect(sidebar).to eq(true)
   end
@@ -51,12 +57,5 @@ describe 'Map', type: :feature do
     expect(find('.navbar')).to have_link("Administração")
 
   end
-
-
-#  it "Should click on the link of admin", js:true do
-  #  visit root_path
-   # find('.navbar').find(:css, 'a[href="admins/sign_in"]').click
-
-  #end
 
 end

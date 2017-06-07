@@ -6,6 +6,7 @@ module WaitForAjax
   end
 
   def finished_all_ajax_requests?
+    # execute script to check current active ajax requests
     page.evaluate_script('$.active').zero?
   end
 end

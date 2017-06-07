@@ -14,19 +14,26 @@
   </head>
 
   <body>
-
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded navbar-fixed-top">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-haspopup aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-toggleable-md navbar-inverse">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-text">Onde É? UnB</a>
-        <div class="collapse navbar-collapse justify-content-end" id="nav-content">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="admin/login">Administração</a>
-              </li>
-          </ul>
-      </nav>
+      <a class="navbar-brand" href="#">Onde É? UnB</a>
+
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav mr-auto">
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Link 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link 1</a>
+          </li> -->
+        </ul>
+        <form class="form-inline">
+          <%= link_to '<i class="ion-log-in"></i> '.html_safe, login_path, class: 'btn btn-login' %>
+        </form>
+      </div>
+    </nav>
 
     <div id="sidebar"></div>
 
