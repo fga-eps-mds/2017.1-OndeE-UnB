@@ -3,10 +3,19 @@ const roomColor = function color(type){
   var color = 'white';
   switch (type) {
     case 'classroom':
-      color = '#169EC6';
+      color = '#2196F3';
       break;
     case 'laboratory':
-      color = '#0A485B';
+      color = '#9C27B0';
+      break;
+    case 'professor_room':
+      color = '#F44336';
+      break;
+    case 'study_room':
+      color = '#00BCD4';
+      break;
+    case 'amphitheater':
+      color = '#8BC34A';
       break;
   }
 
@@ -15,7 +24,7 @@ const roomColor = function color(type){
 
 // Load rooms for specified building
 var loadRooms = function loadRooms(buildingKey){
-  $.get('/map/data/roomsByBuilding/'+ buildingKey, function(data) { //getting the json data
+  $.get('/map/data/rooms/'+ buildingKey, function(data) { //getting the json data
 
     var rooms = {
       'type': 'FeatureCollection',

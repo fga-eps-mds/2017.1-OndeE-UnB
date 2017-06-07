@@ -11,11 +11,12 @@ Rails.application.routes.draw do
     # get 'admin/registration', to: 'devise/registrations#new', as: 'new_registration'
     # post 'admin/registration', to: 'devise/registrations#create', as: 'registration'
   end
-  devise_for :admins, skip: [:sessions, :passwords]
+  devise_for :admins, skip: [:sessions, :registrations, :passwords]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'map#index'
+  get 'findme', to: 'map#index'
 
   get 'admin', to: 'admin#index'
 
@@ -30,9 +31,9 @@ Rails.application.routes.draw do
   namespace :map do
     namespace :data do
       get 'buildings', action: 'buildings'
+      get 'departments', action: 'departments'
       get 'building/:id', action: 'building'
-      get 'rooms', action: 'rooms'
-      get 'roomsByBuilding/:id', action: 'roomsByBuilding'
+      get 'rooms/:building_id', action: 'rooms'
       get 'bikes', action: 'bikes'
       get 'bathrooms', action: 'bathrooms'
       get 'snackbars', action: 'snackbars'
@@ -62,6 +63,4 @@ Rails.application.routes.draw do
   # Provisory method to destroy points and buildings
   get 'admin/points/:id', to: 'admin/points#destroy'
   get 'admin/buildings/:id', to: 'admin/buildings#destroy'
-  get 'app/views/map/index.html.erb', to: 'map#index', as: 'map'
-  get 'app/views/about/about.html.erb', to: 'about#about', as: 'about'
 end

@@ -6,7 +6,7 @@ class Room < ApplicationRecord
   has_many :courses
 
   # types of rooms
-  enum room_type: [ :classroom, :laboratory, :professor_room, :study_room ]
+  enum room_type: [ :classroom, :laboratory, :professor_room, :study_room, :amphitheater ]
   translate_enum :room_type
 
   # validations
