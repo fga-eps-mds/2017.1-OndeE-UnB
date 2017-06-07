@@ -11,7 +11,7 @@ var entranceLayer = L.geoJSON('', {
       icon: smallIcon
     }).bindPopup("Entrada de Edifício");
   }
-}).addTo(map);
+});
 
 $.getJSON("/map/data/entrances", function(entrances) { //getting the json data
   entrances.forEach(function(entrance) {

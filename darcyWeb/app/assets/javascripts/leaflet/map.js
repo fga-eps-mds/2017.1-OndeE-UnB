@@ -1,4 +1,6 @@
 // this is the common setting to starting up the map
+//=require map/data/buildings
+
 const centerMap = [-15.763654422150273, -47.86942720413208];
 const south_west = L.latLng(-15.77963740364866, -47.879254817962654);
 const north_east = L.latLng(-15.74892996748966, -47.853977680206306);
@@ -20,6 +22,7 @@ var mapOptions = {
   zoom: 16,
   minZoom: 16,
   trackResize: true,
+  layers: buildingLayer,
 };
 
 var map = {};

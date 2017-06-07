@@ -11,13 +11,13 @@ var snackbarLayer = L.geoJSON('', {
       icon: smallIcon
     }).bindPopup("Alimentação");
   }
-}).addTo(map);
+});
 
 $.getJSON("/map/data/snackbars", function(snackbars) { //getting the json data
   snackbars.forEach(function(snackbar) {
     try {
       var geoJSON = JSON.parse(snackbar.geo_data);
-      entranceLayer.addData(geoJSON); //adding the json data to the building layer
+      snackbarLayer.addData(geoJSON); //adding the json data to the building layer
     } catch (err) {
       console.log(err);
     }
