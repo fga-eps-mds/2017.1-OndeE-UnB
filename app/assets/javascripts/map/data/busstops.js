@@ -11,7 +11,7 @@ var busstopLayer = L.geoJSON('', {
       icon: smallIcon
     }).bindPopup("Ponto de Ônibus");
   }
-}).addTo(map);
+});
 
 $.getJSON("/map/data/busstops", function(data) { //getting the json data
   data.forEach(function(busStop) {

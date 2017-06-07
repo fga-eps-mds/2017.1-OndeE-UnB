@@ -10,9 +10,9 @@ var bathroomLayer = L.geoJSON('', {
     });
     return L.marker(latlng, {
       icon: smallIcon
-    });
+    }).bindPopup("Banheiro");
   }
-}).addTo(map);
+});
 
 //Insert each bathroom on the layer of bathrooms
 $.getJSON("/map/data/bathrooms", function(bathrooms) { //getting the json data
