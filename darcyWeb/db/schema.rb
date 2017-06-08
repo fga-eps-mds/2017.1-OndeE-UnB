@@ -33,13 +33,6 @@ ActiveRecord::Schema.define(version: 20170602025210) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
   end
 
-  create_table "articles", force: :cascade do |t|
-    t.string   "title"
-    t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "buildings", force: :cascade do |t|
     t.string  "acronym"
     t.integer "phone"
@@ -58,9 +51,10 @@ ActiveRecord::Schema.define(version: 20170602025210) do
     t.string   "longitude"
     t.string   "actable_type"
     t.integer  "actable_id"
-    t.json     "geo_data"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.json     "geo_data"
+    t.index ["actable_type", "actable_id"], name: "index_locations_on_actable_type_and_actable_id", using: :btree
   end
 
   create_table "points", force: :cascade do |t|
