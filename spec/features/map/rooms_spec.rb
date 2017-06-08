@@ -74,7 +74,6 @@ describe 'Map', type: :feature do
       page.execute_script("buildingLayer.getLayers()[0].fire('click')")
       wait_for_ajax
 
-      page.save_screenshot
       level_control = page.evaluate_script('$(".leaflet-bottom.leaflet-right .leaflet-bar.leaflet-control a").is(":visible")')
       expect(level_control).to eq(false)
     end
