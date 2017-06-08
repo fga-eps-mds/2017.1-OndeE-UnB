@@ -8,15 +8,15 @@
 		<%= stylesheet_link_tag 'https://unpkg.com/leaflet@1.0.3/dist/leaflet.css' %>
 	</head>
 	<body>
-		<div class="app app-default">
+		<div class="app app-default <%= controller_name %> <%= action_name %>">
 			<%= render 'layouts/admin/sidebar' %>
 			<div class="app-container">
 				<%= render 'layouts/admin/header' %>
 				<%= yield %>
 			</div>
 		</div>
-		<%= javascript_include_tag 'https://use.fontawesome.com/84624258b7.js' %>
 		<%= javascript_include_tag 'https://unpkg.com/leaflet@1.0.3/dist/leaflet.js' %>
 		<%= javascript_include_tag 'admin' %>
+
 	</body>
 </html>
