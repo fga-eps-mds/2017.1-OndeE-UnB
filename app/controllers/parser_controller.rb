@@ -28,7 +28,10 @@ class ParserController < ApplicationController
     site = 'https://matriculaweb.unb.br/graduacao/'
     courses_urls = []
 
-    departaments.each do |departament|
+    departaments.each_with_index do |departament, index |
+        if(index > 3)
+          break
+        end
       html = open(site+departament)
       url = site+departament
       puts "Departamento:" + url
@@ -38,6 +41,9 @@ class ParserController < ApplicationController
 
       #Getting Courses links
       rows.each_with_index do |row, index|
+        if(index > 3)
+          break
+        end
         course = row.at('td[2] a')
         courses_urls.push(course['href'])
         puts "Cursos: " + course
@@ -62,7 +68,8 @@ class ParserController < ApplicationController
       datas_urls = []
       #Getting the time and places of courses
       rows.each_with_index do |row, index|
-          puts row.text
+          row.text.split('      ')
+          puts row.content
       end
    end
     return datas_urls
