@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :departments, except: [:show]
     resources :admins, except: [:show]
     resources :points, except: [:show]
+    resources :courses, except: [:show]
   end
 
   namespace :map do
@@ -59,6 +60,8 @@ Rails.application.routes.draw do
   get 'map/building'
 
   get 'map/point'
+
+
 
   # Provisory method to destroy points and buildings
   get 'admin/points/:id', to: 'admin/points#destroy'
