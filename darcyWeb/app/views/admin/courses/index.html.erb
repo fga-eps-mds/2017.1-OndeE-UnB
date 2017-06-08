@@ -14,14 +14,15 @@
                 <table class="table card-table">
                     <thead>
                         <tr>
-                            <th>Matéria</th>
                             <th>Código</th>
+                            <th>Matéria</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <% @courses.each do |course| %>
                         <tr>
+                            <td><%= course.cod %></td>
                             <td><%= course.name %></td>
                             </td>
                         </tr>
