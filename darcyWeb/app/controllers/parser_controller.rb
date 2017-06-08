@@ -58,20 +58,35 @@ class ParserController < ApplicationController
     require 'open-uri'
     site = 'https://matriculaweb.unb.br/graduacao/' # oferta_dados
     datas_urls = []
+    
     courses.each do |course|
       html = open(site+course)
       url = site+course
       puts "Curso: " + url
       doc = Nokogiri::HTML(html, nil, Encoding::UTF_8.to_s)
-      rows = doc.css('div')
-      rows.shift
+      rows = doc.css('td.padrao[width="200"] div')
       datas_urls = []
+      puts "Horários"
       #Getting the time and places of courses
       rows.each_with_index do |row, index|
-          row.text.split('      ')
-          puts row.content
+          day_of_week = row.at('b')
+          start_time = row.at('font[color="black"] b')
+          end_time = row.at('font[color="brown"]')
+          room = row.at('i')
+          if day_of_week.present? && start_time.present? && end_time.present? && room.present?
+            puts "Dia: #{day_of_week.text}"
+            puts "start_time: #{start_time.text}"
+            puts "end_time: #{end_time.text}"
+            puts "room: #{room.text}"
+          end
+          puts "#" * 10
+          # puts row.content
       end
    end
     return datas_urls
+ end
+
+ def fill_rooms
+
  end
 end
