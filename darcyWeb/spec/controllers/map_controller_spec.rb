@@ -1,3 +1,4 @@
+# TODO Incluir mais testes para as outras actions
 require 'rails_helper'
 require 'spec_helper'
 require 'json'
@@ -27,13 +28,6 @@ describe MapController do
     it 'responds with JSON' do
       building = FactoryGirl.create :building
       get :data, format: :json
-      expect(response).to be_success
-    end
-  end
-
-  describe 'Refactoring json of building for search' do
-    it 'responds with JSON' do
-      get :collect_building_data, format: :json
       expect(response).to be_success
     end
   end

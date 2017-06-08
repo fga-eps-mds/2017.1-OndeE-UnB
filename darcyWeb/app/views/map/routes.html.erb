@@ -2,15 +2,25 @@
 <div class="sidebar-body">
   <form>
     <div class="form-group">
-      <label>Local de Partida</label>
-      <input type="text" name="route[origin]" class="form-control">
+      <label for="route[origin]">Local de Partida</label>
+      <div class="input-location">
+        <button type="button" class="input-current-location-btn" data-toggle="tooltip" data-placement="top" title="Usar Minha Localização">
+          <i class="ion-navigate"></i>
+        </button>
+        <input type="text" id="route_origin" name="route[origin]" class="form-control">
+      </div>
     </div>
     <button class="btn btn-reverse-route btn-sm btn-primary float-sm-right">
       <i class="ion-arrow-swap"></i>
     </button>
     <div class="form-group">
-      <label>Local de Chegada</label>
-      <input type="text" name="route[destination]" class="form-control">
+      <label for="route[destination]">Local de Chegada</label>
+      <div class="input-location">
+        <button type="button" class="input-current-location-btn" data-toggle="tooltip" data-placement="top" title="Usar Minha Localização">
+          <i class="ion-navigate"></i>
+        </button>
+        <input type="text" id="route_destination" name="route[destination]" class="form-control">
+      </div>
     </div>
     <div class="form-group">
       <label>Modo de Descolamento</label>
@@ -39,17 +49,17 @@
 
   <div id="itinerary" class="hide">
     <div class="row">
-      <div class="col-sm-4 text-center">
+      <div class="col-4 text-center">
         <b>Modo</b>
         <i id="mode_icon" class="ion-android-car"></i>
         <p id="mode_text">Carro</p>
       </div>
-      <div class="col-sm-4 text-center">
+      <div class="col-4 text-center">
         <b>Distância</b>
         <i class="ion-arrow-return-right"></i>
         <p id="distance"></p>
       </div>
-      <div class="col-sm-4 text-center">
+      <div class="col-4 text-center">
         <b>Tempo</b>
         <i class="ion-android-time"></i>
         <p id="time"></p>

@@ -12,5 +12,7 @@
 Jasmine.configure do |config|
   if ENV['TRAVIS']
     config.prevent_phantom_js_auto_install = true
+    config.server_port = 8080
   end
+  config.server_port = 3000
 end

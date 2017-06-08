@@ -3,7 +3,7 @@
 $(document).ready(function() {
 
   var options = {
-    geojsonServiceAddress: "/map/collect_building_data"
+    geojsonServiceAddress: "/map/search"
   };
   $("#searchContainer").GeoJsonAutocomplete(options);
 

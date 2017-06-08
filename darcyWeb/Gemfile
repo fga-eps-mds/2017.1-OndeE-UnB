@@ -70,3 +70,6 @@ gem 'client_side_validations'
 group :development, :test do
   gem 'jasmine'
 end
+
+gem 'font-awesome-rails'
+gem 'translate_enum', require: 'translate_enum/active_record'

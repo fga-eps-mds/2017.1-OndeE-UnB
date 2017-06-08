@@ -10,14 +10,16 @@ SimpleCov.start
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
-require 'support/wait_for_ajax'
+
 Capybara.javascript_driver = :poltergeist
+Capybara.default_max_wait_time = 30
 
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new( app, {
     debug:     false,  # turn on poltergeist debug mode
     js_errors: true,  # turn on javascript errors on page
-    timeout:   10000,
+    timeout:   20000,
+    inspector: true,
     phantomjs_options: ['--load-images=no', '--ignore-ssl-errors=yes', '--ssl-protocol=any']
   })
 end
@@ -65,3 +67,6 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 end
+
+require 'support/wait_for_ajax'
+require 'support/database_cleaner'
