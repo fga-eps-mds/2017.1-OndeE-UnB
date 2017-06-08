@@ -8,7 +8,7 @@ class ParserController < ApplicationController
     require 'nokogiri'
     require 'open-uri'
     html = open('https://matriculaweb.unb.br/graduacao/oferta_dep.aspx?cod=1')
-    doc = Nokogiri::HTML(html, 'utf-8')
+    doc = Nokogiri::HTML(html, nil, Encoding::UTF_8.to_s)
     rows = doc.css('.FrameCinza tr')
     rows.shift
     departments_urls = []
@@ -16,7 +16,7 @@ class ParserController < ApplicationController
     rows.each_with_index do |row, index|
       department = row.at('td[3] a')
       departments_urls.push(department['href'])
-      puts "Departamento: " + department['href']
+      puts "Departamento: " + department
     end
     return departments_urls
   end
@@ -32,7 +32,7 @@ class ParserController < ApplicationController
       html = open(site+departament)
       url = site+departament
       puts "Departamento:" + url
-      doc = Nokogiri::HTML(html, 'utf-8')
+      doc = Nokogiri::HTML(html, nil, Encoding::UTF_8.to_s)
       rows = doc.css('.FrameCinza tr')
       rows.shift
 
@@ -40,7 +40,7 @@ class ParserController < ApplicationController
       rows.each_with_index do |row, index|
         course = row.at('td[2] a')
         courses_urls.push(course['href'])
-        puts "Cursos: " + course['href']
+        puts "Cursos: " + course
       end
     end
     return courses_urls
@@ -56,7 +56,7 @@ class ParserController < ApplicationController
       html = open(site+course)
       url = site+course
       puts "Curso: " + url
-      doc = Nokogiri::HTML(html, 'utf-8')
+      doc = Nokogiri::HTML(html, nil, Encoding::UTF_8.to_s)
       rows = doc.css('div')
       rows.shift
       datas_urls = []
