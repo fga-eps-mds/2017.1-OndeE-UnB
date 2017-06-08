@@ -20,7 +20,6 @@ describe 'Admin', type: :feature do
     end
 
     it 'should save changes', js: true do
-      page.save_screenshot
       page.execute_script("$('form').submit()")
       expect(page).to have_current_path(admin_points_path)
     end

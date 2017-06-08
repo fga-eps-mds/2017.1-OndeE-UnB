@@ -57,7 +57,7 @@ describe 'Route', type: :feature do
       destination_before_value = 'destination'
 
       fill_in destination_field, with: destination_before_value
-      
+
       page.execute_script('$(".btn-reverse-route").trigger("click")')
 
       origin_after_value = page.evaluate_script('$("#route_origin").val()')
@@ -83,7 +83,6 @@ describe 'Route', type: :feature do
         page.all('label.btn.btn-outline-info')[0].click
         page.execute_script('$("#route_submit").click()')
       end
-      page.save_screenshot
       expect(find('#mode_text')).to have_content('A pé')
       expect(page).to have_content('You have arrived at your destination.')
     end
