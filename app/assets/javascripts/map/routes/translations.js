@@ -32,7 +32,10 @@ const routesTranslations = {
   "Walk east on the walkway.": "Ande para o leste na calçada."
   "Walk south on the walkway.": "Ande para o sul na calçada."
   "Walk west on the walkway.": "Ande para o oeste na calçada."
-  "Walk north on the walkway.": "Ande para o norte na calçada."
+  "Walk northeast on the walkway.": "Ande para o nordeste na calçada."
+  "Walk northwest on the walkway.": "Ande para o noroeste na calçada."
+  "Walk southeast on the walkway.": "Ande para o sudeste na calçada."
+  "Walk southwest on the walkway.": "Ande para o sudoeste na calçada."
 
   "Bear left onto the walkway.": "Fique à esquerda na calçada."
   "Bear right onto the walkway.": "Fique à direta na calçada."
@@ -46,8 +49,10 @@ const routesTranslations = {
   "Make a left U-turn.": "Faça uma curva U para à esquerda."
   "Make a right U-turn.": "Faça uma curva U para à direita."
 
-  // "Turn sharp right onto the walkway.": ""
-  // "Turn sharp right.": ""
+  "Turn sharp right onto the walkway.": "Vire a curva à direita na calçada."
+  "Turn sharp left onto the walkway.": "Vire a curva à esquerda na calçada."
+  "Turn sharp right.": "Vire a curva à direita."
+  "Turn sharp left.": "Vire a curva à esquerda."
 
   // Routes for by car mode
   "Drive east.": "Siga em direção leste."
