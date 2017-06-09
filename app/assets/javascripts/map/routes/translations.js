@@ -68,4 +68,15 @@ const routesTranslations = {
   "Turn right onto the cycleway.": "Vire à direita na ciclovia."
   "Turn north onto the cycleway.": "Vire ao norte na ciclovia."
   "Turn south onto the cycleway.": "Vire ao sul na ciclovia."
+
+  "Bike east on the cycleway.": "Pedale em direção leste na ciclovia."
+  "Bike west on the cycleway.": "Pedale em direção oeste na ciclovia."
+  "Bike right on the cycleway.": "Pedale à direita na ciclovia."
+  "Bike left on the cycleway.": "Pedale à esquerda na ciclovia."
+  "Bike north on the cycleway.": "Pedale em direção norte na ciclovia."
+  "Bike south on the cycleway.": "Pedale em direção sul na ciclovia."
+  "Bike southeast on the cycleway.": "Pedale em direção sudeste na ciclovia."
+  "Bike northeast on the cycleway.": "Pedale em direção nordeste na ciclovia."
+  "Bike southwest on the cycleway.": "Pedale em direção sudeste na ciclovia."
+  "Bike northwest on the cycleway.": "Pedale em direção noroeste na ciclovia."
 };
