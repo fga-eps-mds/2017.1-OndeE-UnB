@@ -104,6 +104,12 @@ describe 'Route', type: :feature do
       expect(find('#mode_text')).to have_content('Carro')
       expect(page).to have_content('You have arrived at your destination.')
     end
+
+    # Routes translations test
+    it 'should translate the route', js: true do
+      page.execute_script('$("#route_submit").click()')
+      expect(page).to have_content('Você chegou ao seu destino.')
+    end
   end
 
   context 'Contextmenu' do
