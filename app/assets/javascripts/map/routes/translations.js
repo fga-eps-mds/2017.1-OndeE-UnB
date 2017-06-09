@@ -1,7 +1,8 @@
 const routesTranslations = {
   // Routes for to walk mode
   "You have arrived at your destination.": "Você chegou ao seu destino.",
-  "Your destination is on the left.": "Seu destino está à esquerda.",  "Your destination is on the right.": "Seu destino está à direita.",
+  "Your destination is on the left.": "Seu destino está à esquerda.",
+  "Your destination is on the right.": "Seu destino está à direita.",
   "Your destination is on the north.": "Seu destino está ao norte.",
   "Your destination is on the south.": "Seu destino está ao sul.",
 
@@ -26,7 +27,7 @@ const routesTranslations = {
   "Bear south.": "Fique ao sul.",
 
   "Continue on the walkway.": "Continue na calçada.",
-  "Turn right onto the walkway.": "Vire à direta na calçada.",
+  "Turn right onto the walkway.": "Vire à direita na calçada.",
   "Turn left onto the walkway.": "Vire à esquerda na calçada.",
   "Walk east on the walkway.": "Ande para o leste na calçada.",
   "Walk south on the walkway.": "Ande para o sul na calçada.",
@@ -37,18 +38,20 @@ const routesTranslations = {
   "Walk southwest on the walkway.": "Ande para o sudoeste na calçada.",
 
   "Bear left onto the walkway.": "Fique à esquerda na calçada.",
-  "Bear right onto the walkway.": "Fique à direta na calçada.",
+  "Bear right onto the walkway.": "Fique à direita na calçada.",
   "Bear north onto the walkway.": "Fique ao norte na calçada.",
   "Bear south onto the walkway.": "Fique ao sul na calçada.",
 
   "Enter the roundabout and take the 1st exit.": "Entre na rotatória e pegue a 1ª saída.",
   "Enter the roundabout and take the 2nd exit.": "Entre na rotatória e pegue a 2ª saída.",
+  "Enter the roundabout and take the 3rd exit.": "Entre na rotatória e pegue a 3ª saída.",
+  "Enter the roundabout and take the 4rd exit.": "Entre na rotatória e pegue a 4ª saída.",
   "Exit the roundabout.": "Saia da rotatória.",
 
   "Make a left U-turn.": "Faça uma curva para à esquerda.",
   "Make a right U-turn.": "Faça uma curva para à direita.",
-  "Make a left U-turn onto the walkway.": "Faça uma curva para à esquerda na calçada."
-  "Make a right U-turn onto the walkway.": "Faça uma curva para à direita na calçada."
+  "Make a left U-turn onto the walkway.": "Faça uma curva para à esquerda na calçada.",
+  "Make a right U-turn onto the walkway.": "Faça uma curva para à direita na calçada.",
 
   "Turn sharp right onto the walkway.": "Vire a curva à direita na calçada.",
   "Turn sharp left onto the walkway.": "Vire a curva à esquerda na calçada.",
@@ -83,6 +86,11 @@ const routesTranslations = {
   "Turn right onto the cycleway.": "Vire à direita na ciclovia.",
   "Turn north onto the cycleway.": "Vire ao norte na ciclovia.",
   "Turn south onto the cycleway.": "Vire ao sul na ciclovia.",
+
+  "Bear left onto the cycleway.": "Fique à esquerda na ciclovia.",
+  "Bear right onto the cycleway.": "Fique à direita na ciclovia.",
+  "Bear north onto the cycleway.": "Fique ao norte na ciclovia.",
+  "Bear south onto the cycleway.": "Fique ao sul na ciclovia.",
 
   "Bike east on the cycleway.": "Pedale em direção leste na ciclovia.",
   "Bike west on the cycleway.": "Pedale em direção oeste na ciclovia.",
