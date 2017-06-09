@@ -14,12 +14,11 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-toggleable-md navbar-inverse">
+    <nav class="navbar navbar-toggleable-md navbar-inverse" data-intro='Oi' data-step='1'>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">Onde É? UnB</a>
-
+      <a class="navbar-brand" href="#">Onde É? UnB </a>
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav mr-auto">
           <!-- <li class="nav-item">
@@ -38,7 +37,7 @@
     <div id="sidebar"></div>
 
     <div id="map"></div>
-    <div id="searchContainer"></div>
+    <div id="searchContainer" data-intro='dhufhdug' data-step='2'></div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
@@ -47,5 +46,6 @@
     <%= javascript_include_tag 'https://unpkg.com/leaflet@1.0.3/dist/leaflet.js' %>
     <%= javascript_include_tag 'http://hammerjs.github.io/dist/hammer.min.js' %>
     <%= javascript_include_tag 'map' %>
+</script>
   </body>
 </html>
