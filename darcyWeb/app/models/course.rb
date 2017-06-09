@@ -7,7 +7,7 @@ class Course < ApplicationRecord
   validates :day_of_week, inclusion: {in: day_of_weeks.keys }
   validates :start_time, presence: true
   validates :end_time, presence: true
-  validates :class, presence: true
+  validates :classroom, presence: true
 
   translate_enum :day_of_week
 
