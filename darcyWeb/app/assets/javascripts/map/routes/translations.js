@@ -45,8 +45,10 @@ const routesTranslations = {
   "Enter the roundabout and take the 2nd exit.": "Entre na rotatória e pegue a 2ª saída.",
   "Exit the roundabout.": "Saia da rotatória.",
 
-  "Make a left U-turn.": "Faça uma curva U para à esquerda.",
-  "Make a right U-turn.": "Faça uma curva U para à direita.",
+  "Make a left U-turn.": "Faça uma curva para à esquerda.",
+  "Make a right U-turn.": "Faça uma curva para à direita.",
+  "Make a left U-turn onto the walkway.": "Faça uma curva para à esquerda na calçada."
+  "Make a right U-turn onto the walkway.": "Faça uma curva para à direita na calçada."
 
   "Turn sharp right onto the walkway.": "Vire a curva à direita na calçada.",
   "Turn sharp left onto the walkway.": "Vire a curva à esquerda na calçada.",
