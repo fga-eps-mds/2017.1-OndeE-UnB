@@ -24,7 +24,7 @@ var buildingLayer = L.geoJSON('', {
       }
     });
   }
-});
+}).addTo(map);
 
 // Insert each building on the layer of building
 $.getJSON("/map/data/buildings", function(buildings) { //getting the json data
