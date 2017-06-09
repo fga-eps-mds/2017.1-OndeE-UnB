@@ -73,3 +73,5 @@ end
 
 gem 'font-awesome-rails'
 gem 'translate_enum', require: 'translate_enum/active_record'
+
+gem "introjs-rails"
