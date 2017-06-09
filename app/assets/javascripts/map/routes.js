@@ -1,5 +1,6 @@
 //= require leaflet/routing-machine
 //= require leaflet/lrm-mapzen
+//= require ./routes/translations
 
 // set options to the contextmenu
 map.contextmenu.addItem({
@@ -85,8 +86,15 @@ control.on('routesfound', function(e) {
     // get every route instruction
     var itinerary = $('.leaflet-routing-alt').find('tbody').find('tr');
 
-    // load it into the sidebar table.
-    $('#itinerary').find('table').find('tbody').html(itinerary);
+    // load it into the sidebar table
+    var $itinerarySidebar = $('#itinerary').find('table').find('tbody');
+    $itinerarySidebar.html(itinerary);
+    // get routes translations
+    $itinerarySidebar.find('tr').each(function(index, instructionRow) {
+      var $instruction = $(instructionRow).find('td').eq(1);
+      var instructionTranslated = routesTranslations[$instruction.text()];
+      $instruction.text(instructionTranslated);
+    });
 
     $('#itinerary').fadeIn();
 
