@@ -50,7 +50,16 @@ const routesTranslations = {
   // "Turn sharp right.": ""
 
   // Routes for by car mode
-
+  "Drive east.": "Siga em direção leste."
+  "Drive west.": "Siga em direção oeste."
+  "Drive right.": "Siga à direita."
+  "Drive left.": "Siga à esquerda."
+  "Drive north.": "Siga em direção norte."
+  "Drive south.": "Siga em direção sul."
+  "Drive southeast.": "Siga em direção sudeste."
+  "Drive northeast.": "Siga em direção nordeste."
+  "Drive northwest.": "Siga em direção noroeste."
+  "Drive southwest.": "Siga em direção sudeste."
 
   // Routes for by bike mode
   "Bike east.": "Pedale em direção leste."
