@@ -1,5 +1,5 @@
 const routesTranslations = {
-  // Routes for option to walk
+  // Routes for to walk mode
   "You have arrived at your destination.": "Você chegou ao seu destino."
   "Your destination is on the left.": "Seu destino está à esquerda."
   "Your destination is on the right.": "Seu destino está à direita."
@@ -48,4 +48,24 @@ const routesTranslations = {
 
   // "Turn sharp right onto the walkway.": ""
   // "Turn sharp right.": ""
+
+  // Routes for by car mode
+
+
+  // Routes for by bike mode
+  "Bike east.": "Pedale em direção leste."
+  "Bike west.": "Pedale em direção oeste."
+  "Bike right.": "Pedale à direita."
+  "Bike left.": "Pedale à esquerda."
+  "Bike north.": "Pedale em direção norte."
+  "Bike south.": "Pedale em direção sul."
+  "Bike southeast.": "Pedale em direção sudeste."
+  "Bike northeast.": "Pedale em direção nordeste."
+  "Bike northwest.": "Pedale em direção noroeste."
+  "Bike southwest.": "Pedale em direção sudeste."
+
+  "Turn left onto the cycleway.": "Vire à esquerda na ciclovia."
+  "Turn right onto the cycleway.": "Vire à direita na ciclovia."
+  "Turn north onto the cycleway.": "Vire ao norte na ciclovia."
+  "Turn south onto the cycleway.": "Vire ao sul na ciclovia."
 };
