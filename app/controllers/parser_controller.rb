@@ -3,20 +3,29 @@ class ParserController < ApplicationController
     render plain: schedules
   end
 
+  def geo_data
+    '{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[-47.867375314235694,-15.762756116441665],[-47.86702126264573,-15.762497981882012],[-47.866597473621376,-15.763055552119592],[-47.8669622540474,-15.763303360622453],[-47.867375314235694,-15.762756116441665]]]}}]}'
+  end
+
   def exclude_departments
-    %(CDT FGA FCE FUP CET DAN CEN VIS CEL BOT)
+    %w(CDT FGA FCE FUP CET DAN CEN VIS CEL BOT)
   end
 
   def allowed_buildings
-    %(ICC PAT PJC)
+    %w(ICC PAT PJC)
   end
 
   def replace_building_name(building)
     buildings = [ ['BSA N', 'BSAN'], ['BSA S', 'BSAS'] ]
     buildings.each do |replace|
-      #building.gsub!(replace[0], replace[1])
+      building.gsub(replace[0], replace[1])
     end
     building
+  end
+
+  def clean_room_name(room_name)
+    room_name.gsub('.', '')
+    room_name
   end
 
   def define_room_type(room)
@@ -27,6 +36,12 @@ class ParserController < ApplicationController
     else
       :classroom
     end
+  end
+
+  def valid_schedule_and_room?(day_of_week, start_time, end_time, room)
+    valid_times = day_of_week.present? && start_time.present? && end_time.present?
+    valid_room = room.present? && (room != "Local a Designar")
+    valid_times && valid_room
   end
 
   # Departments parser
@@ -66,7 +81,7 @@ class ParserController < ApplicationController
     require 'nokogiri'
     require 'open-uri'
 
-    data = []
+    courses = []
     departments.each_with_index do |department, _index|
 
       html = open(department[:url])
@@ -77,25 +92,21 @@ class ParserController < ApplicationController
       # Ignore the first course row
       courses_rows.shift
 
-      courses = []
-
       # Getting courses data
       courses_rows.each_with_index do |courses_row, _index|
         course = courses_row.at('td[2] a')
         course_data = {
+          department: department,
           title: course.text,
           url: "https://matriculaweb.unb.br/graduacao/#{course['href']}"
         }
 
-        # puts course_data
+        # puts in the courses list course_data
         courses.push(course_data)
       end
-      department[:courses] = courses
-
-      data.push(department)
     end
 
-    data
+    courses
   end
 
   # Data parser
@@ -103,76 +114,70 @@ class ParserController < ApplicationController
     require 'nokogiri'
     require 'open-uri'
 
-    data = []
+    courses.each_with_index do |course, index|
+      html = open(course[:url])
+      html_tree = Nokogiri::HTML(html, nil, Encoding::UTF_8.to_s)
+      schedules_rows = html_tree.css('td.padrao[width="200"] div')
 
-    courses.each do |department|
-      department[:courses].each_with_index do |course, index|
-        html = open(course[:url])
-        html_tree = Nokogiri::HTML(html, nil, Encoding::UTF_8.to_s)
-        schedules_rows = html_tree.css('td.padrao[width="200"] div')
+      # Getting the time and places of courses
+      schedules_rows.each_with_index do |schedule_row, _index|
 
-        # Getting the time and places of courses
-        schedules = []
-        schedules_rows.each_with_index do |schedule_row, _index|
+        day_of_week = schedule_row.at('b')
+        start_time = schedule_row.at('font[color="black"] b')
+        end_time = schedule_row.at('font[color="brown"]')
+        room = schedule_row.at('i')
 
-          day_of_week = schedule_row.at('b')
-          start_time = schedule_row.at('font[color="black"] b')
-          end_time = schedule_row.at('font[color="brown"]')
-          room = schedule_row.at('i')
+        if valid_schedule_and_room?(day_of_week, start_time, end_time, room)
+          room = clean_room_name(room.text.strip)
 
-          if day_of_week.present? &&
-            start_time.present? &&
-            end_time.present? &&
-            room.present?
+          building = replace_building_name(room.split.first)
 
-            room = room.text.strip
+          if allowed_buildings.include? building
 
-            building = replace_building_name(room.split.first)
+            schedule_data = {
+              course: course,
+              day_of_week: day_of_week.text,
+              start_time: start_time.text,
+              end_time: end_time.text,
+              building: building,
+              room: room,
+              room_type: define_room_type(room)
+            }
 
-            if allowed_buildings.include? 'PAT'
+            create_schedules(schedule_data)
 
-              schedule_data = {
-                day_of_week: day_of_week.text,
-                start_time: start_time.text,
-                end_time: end_time.text,
-                building: building,
-                room: room,
-                room_type: define_room_type(room)
-              }
-
-              fill_rooms(schedule_data)
-
-              puts schedule_data
-              # schedules.push(schedule_data)
-            end
+            puts schedule_data
+            # schedules.push(schedule_data)
           end
         end
-
-        department[:courses][index][:schedules]  = schedules
       end
-      data.push(department)
     end
-    data
  end
 
-  def fill_rooms(args)
-    room = Room.where(acronym: args[:room]).first_or_create do |create_room|
-        building = Building.where(acronym: args[:building]).first_or_create do |create_building|
-          create_building.title = args[:building]
-          create_building.acronym = args[:building]
-          create_building.latitude = 0
-          create_building.longitude = 0
-          create_building.phone = 0
-          create_building.geo_data = "[]"
-        end
-        create_room.building = building
-        create_room.title = args[:room]
-        create_room.room_type = args[:room_type]
-        create_room.level = 0
-        create_room.latitude = 0
-        create_room.longitude = 0
-        create_room.geo_data = "[]"
+  def create_schedules(params)
+    room = create_room(params)
+  end
+
+  def create_room(params)
+    Room.where(acronym: params[:room]).first_or_create do |room|
+       room.building = create_building(params)
+       room.title = params[:room]
+       room.room_type = params[:room_type]
+       room.level = 0
+       room.latitude = 0
+       room.longitude = 0
+       room.geo_data = geo_data
+   end
+  end
+
+  def create_building(params)
+    Building.where(acronym: params[:building]).first_or_create do |building|
+      building.title = params[:building]
+      building.acronym = params[:building]
+      building.latitude = 0
+      building.longitude = 0
+      building.phone = 0
+      building.geo_data = geo_data
     end
-    puts room.errors.messages
   end
 end
