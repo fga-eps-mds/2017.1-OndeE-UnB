@@ -66,7 +66,9 @@ class SearchController < MapController
         popupContent: "MDS",
         title: building.acronym,
         description: building.title,
-        image: 'fa-building'
+        image: 'fa-building',
+        latitude: building.latitude,
+        longitude: building.longitude
       }
 
       geo_data = JSON.parse building.geo_data
