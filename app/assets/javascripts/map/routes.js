@@ -92,8 +92,35 @@ control.on('routesfound', function(e) {
     // get routes translations
     $itinerarySidebar.find('tr').each(function(index, instructionRow) {
       var $instruction = $(instructionRow).find('td').eq(1);
-      var instructionTranslated = routesTranslations[$instruction.text()];
-      $instruction.text(instructionTranslated);
+      
+      if ($instruction.text() in routesTranslations) {
+        var instructionTranslated = routesTranslations[$instruction.text()];
+        $instruction.text(instructionTranslated);
+      } else {
+
+        // routesCustomTranslations.forEach(function(item, key, mapObj) {
+        //     console.log(item);
+            
+        // });
+
+        for (var englishInstr in routesCustomTranslations) {
+            if (routesCustomTranslations.hasOwnProperty(englishInstr)) {
+                
+                //console.log(routesCustomTranslations[englishInstr]);
+                //console.log($instruction.text());
+                var originalInstr = $instruction.text();
+                if(originalInstr.indexOf(englishInstr) != -1) {
+                  originalInstr = originalInstr.replace(englishInstr,routesCustomTranslations[englishInstr]);
+                  //console.log(englishInstr);
+                  //console.log(routesCustomTranslations[englishInstr]);
+                  //console.log(originalInstr);
+                  $instruction.text(originalInstr);
+                }
+            }
+        }
+                //$instruction.text("No translation");
+      }
+
     });
 
     $('#itinerary').fadeIn();

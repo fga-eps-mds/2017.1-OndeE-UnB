@@ -103,3 +103,29 @@ const routesTranslations = {
   "Bike southwest on the cycleway.": "Pedale em direção sudeste na ciclovia.",
   "Bike northwest on the cycleway.": "Pedale em direção noroeste na ciclovia.",
 };
+
+
+
+const routesCustomTranslations = {
+
+  "Turn right onto": "Vire a direita em",
+  "Turn left onto": "Vire a esquerda em",
+
+  "Turn right to stay on": "Vire a direita para ficar em",
+  "Turn left to stay on": "Vire a esquerda para ficar em",
+
+  "Make a right U-turn to stay on":"Faça uma curva à direita para ficar em" ,
+  "Make a left U-turn to stay on":"Faça uma curva à esquerda para ficar em" ,
+}
+
+// const routesCustomTranslations = new Map([
+
+//   ["Turn right onto", "Vire a direita em"],
+//   ["Turn left onto", "Vire a esquerda em"],
+
+//   ["Turn right to stay on", "Vire a direita para ficar em"],
+//   ["Turn left to stay on", "Vire a esquerda para ficar em"],
+
+//   ["Make a right U-turn to stay on","Faça uma curva à direita para ficar em"] ,
+//   ["Make a left U-turn to stay on","Faça uma curva à esquerda para ficar em"] ,
+// ]);
