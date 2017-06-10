@@ -3,8 +3,9 @@
 
 class Route {
 
-  constructor(options) {
+  constructor(form) {
 
+  this.form = form;
     // Set origin and destination points
     this.origin = {
       marker: null,
@@ -20,6 +21,7 @@ class Route {
       color: 'red'
     };
 
+    // Set and init Control
     this.control = L.Routing.control({
      plan: L.Routing.plan([], {
        createMarker: function() {
@@ -35,7 +37,62 @@ class Route {
 
   }
 
+// Set Route Location
+  setRouteLocation(e, waypoint) {
+    var lat = e.latlng.lat;
+    var lng = e.latlng.lng;
 
+    var data = {};
+    data[waypoint.title] = lat + ", " + lng;
+
+    if (sidebar.isVisible()) {
+      this.fillFormRouteLocations(data);
+    } else {
+      this.load(data);
+    }
+    if (waypoint.marker == null) {
+      createMarker(waypoint, e.latlng);
+    } else {
+      waypoint.marker.setLatLng(e.latlng);
+    }
+  }
+
+// ReverseRoute
+  reverseRoute(e) {
+    e.preventDefault();
+
+    // reverse waypoints to route
+    var waypoints = control.getWaypoints();
+    control.setWaypoints(waypoints.reverse());
+
+    // NOTE reverse markers was so hard to figure out
+    if (origin.marker != null && destination.marker == null) {
+      console.log('Destination in blank.');
+      createMarker(destination, origin.marker.getLatLng());
+      removeMarker(origin);
+    } else if (destination.marker != null && origin.marker == null) {
+      console.log('Origin in blank');
+      createMarker(origin, destination.marker.getLatLng());
+      removeMarker(destination);
+    }
+
+    if (origin.marker != null && destination.marker != null) {
+      var latlng = origin.marker.getLatLng();
+      origin.marker.setLatLng(destination.marker.getLatLng());
+      destination.marker.setLatLng(latlng);
+    }
+
+    var origin_latlng = route_form.origin.val();
+    var destination_latlng = route_form.destination.val();
+
+    // swap values in form
+    route_form.origin.val(destination_latlng);
+    route_form.destination.val(origin_latlng);
+
+  }
+
+
+// Register control events used on map
   registerControlEvents() {
 
     // This function is triggered when a route is successfully calculated
