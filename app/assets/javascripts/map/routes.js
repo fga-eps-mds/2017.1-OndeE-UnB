@@ -1,102 +1,15 @@
 //= require leaflet/routing-machine
 //= require leaflet/lrm-mapzen
+//= require map/route
+//= require map/map
 
-// enable and set options to the contextmenu
-map.contextmenu.enable();
-map.contextmenu.addItem({
-  text: 'Rotas a partir daqui',
-  callback: routesFromHere
-});
-map.contextmenu.addItem({
-  text: 'Rotas para cá',
-  callback: routesToHere
-});
+Map = new Map();
+
+Route = new Route();
+Route.initControl();
 
 var route_form;
 
-var origin = {
-  marker: null,
-  title: 'origin',
-  icon: 'arrow-up-c',
-  color: 'green'
-};
-
-var destination = {
-  marker: null,
-  title: 'destination',
-  icon: 'arrow-down-c',
-  color: 'red'
-};
-
-// starts the route options.
-var control = L.Routing.control({
-  plan: L.Routing.plan([], {
-    createMarker: function() {
-      return null;
-    },
-  }),
-  autoRoute: false,
-  router: L.Routing.mapzen('mapzen-CEq2eYW', {
-    costing: 'pedestrian'
-  }),
-  formatter: new L.Routing.mapzenFormatter()
-}).addTo(map);
-
-// This function is triggered when a route is successfully calculated
-control.on('routesfound', function(e) {
-
-  console.debug("Routes found");
-
-  // enable autoRoute
-  control.options.autoRoute = true;
-
-  // hides the route form
-  route_form.form.fadeOut();
-
-  // waits 1 sec to get the route instructions and load it
-  // into the sidebar
-  setTimeout(function() {
-
-    var summary = function() {
-      // gets the time and distance from route
-      this.summary = $('.leaflet-routing-alt').find('h3').text().split(',');
-      console.log(this.summary);
-      this.distance = this.summary[0];
-      this.time = this.summary[1];
-
-      // gets the route mode from route form.
-      this.mode = function() {
-        this.mode = route_form.mode.parent('.btn.active');
-        this.icon = this.mode.find('i').attr('class');
-        this.text = this.mode.text();
-        return this;
-      }.call({});
-
-      return this;
-    }.call({});
-
-    // set route information
-    $('#mode_icon').removeClass().addClass(summary.mode.icon);
-    $('#mode_text').text(summary.mode.text);
-    $('#distance').text(summary.distance);
-    $('#time').text(summary.time);
-
-    // get every route instruction
-    var itinerary = $('.leaflet-routing-alt').find('tbody').find('tr');
-
-    // load it into the sidebar table.
-    $('#itinerary').find('table').find('tbody').html(itinerary);
-
-    $('#itinerary').fadeIn();
-
-  }, 300);
-
-});
-
-control.on('routingerror', function() {
-  // TODO Show message when it's not possible to calculate routes
-
-});
 
 // adds the route button to map
 L.easyButton('ion-merge', function(btn, map) {
@@ -290,9 +203,6 @@ function removeMarker(waypoint) {
 }
 
 function createMarker(waypoint, latlng) {
-  console.log('Create marker');
-  console.log(waypoint);
-  console.log(latlng);
   waypoint.marker = L.marker(latlng, {
     icon: L.AwesomeMarkers.icon({
       prefix: 'ion',
@@ -347,6 +257,7 @@ function reverseRoute(e) {
   route_form.destination.val(origin_latlng);
 
 }
+
 // TODO Require to fill out origin and destination in the form, before calculate route
 // TODO Add button to create a new route
 // TODO Suggest locations on whe form
