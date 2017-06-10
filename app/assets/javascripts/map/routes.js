@@ -2,152 +2,14 @@
 //= require leaflet/lrm-mapzen
 //= require map/route
 //= require map/map
+//= require map/form
 
 Map = new Map();
+Map.addButton();
 
-Route = new Route();
-Route.initControl();
+Form = new Form();
 
 var route_form;
-
-
-// adds the route button to map
-L.easyButton('ion-merge', function(btn, map) {
-  // triggered when user clicks the routes button.
-  if (sidebar.isVisible()) {
-    unLoadRoute();
-  } else {
-    loadRouteForm({});
-  }
-
-}).addTo(map);
-
-// get the user's current position
-function getLocation(point) {
-  try {
-    navigator.geolocation.getCurrentPosition(function(position){
-      positionSuccess(position, point);
-    }, positionError);
-  } catch (error) {
-    console.warn(error);
-    alert("Recurso não disponível no seu browser.");
-  }
-}
-
-// process the user's current position to create the route
-function positionSuccess(position, point) {
-  var location = {
-    latlng: {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    }
-  }
-  var inside_bounds = map.getBounds().contains(location.latlng);
-  if(inside_bounds){
-    if(point == 'origin'){
-      routesFromHere(location);
-    } else {
-      routesToHere(location);
-    }
-  } else {
-    alert("Ops... Parece que você não está no campus.");
-  }
-
-}
-
-// process the error when it is not possible to get user position
-function positionError(error) {
-  switch (error.code) {
-    case error.PERMISSION_DENIED:
-      alert("Habilite o uso da localização no browser.");
-      break;
-    case error.POSITION_UNAVAILABLE:
-      alert("Localização não disponível.");
-      break;
-    case error.TIMEOUT:
-      alert("Não foi possível obter a localização no tempo esperado.");
-      break;
-    case error.UNKNOWN_ERROR:
-      alert("Ocorreu um erro desconhecido. Tente novamente.")
-      break;
-  }
-}
-
-// loads the routes form into the sidebar
-function loadRouteForm(data) {
-
-  $("#sidebar").load("/map/routes", function() {
-
-    $('.btn-reverse-route').on('click', function(e) {
-      reverseRoute(e);
-    });
-
-
-    // instantiate route form elements when the page is loaded
-    route_form = function() {
-      this.form = $('#sidebar').find('form');
-      this.origin = this.form.find('input[name="route[origin]"]');
-      this.destination = this.form.find('input[name="route[destination]"]');
-      this.mode = this.form.find('input[name="route[mode]"]');
-      this.submit = this.form.find('button[type=submit]');
-      return this;
-    }.call({});
-
-    fillFormRouteLocations(data);
-
-    // when user clicks the button to use the current location in origin input
-    route_form.origin.parent().find('button').on('click', function() {
-      getLocation('origin');
-    });
-
-    // when user clicks the button to use the current location in destination input
-    route_form.destination.parent().find('button').on('click', function() {
-      getLocation('destination');
-    });
-
-    // calculate route when user clicks submit button
-    route_form.submit.on('click', function(e) {
-      console.debug('Clicked submit button');
-      // prevent default behavior
-      e.preventDefault();
-
-      // get route mode from the form and set into the control
-      control.options.router.options.costing = route_form.mode.parent('.btn.active').find('input').val();
-
-      var origin_latlng = route_form.origin.val().split(',');
-      var destination_latlng = route_form.destination.val().split(',');
-
-      console.info(origin_latlng);
-      console.info(destination_latlng);
-
-      if (origin_latlng != null && destination_latlng != null) {
-
-        control.spliceWaypoints(0, 1, origin_latlng);
-        control.spliceWaypoints(control.getWaypoints().length - 1, 1, destination_latlng);
-
-        // TODO refactor
-        if (origin.marker == null) {
-          createMarker(origin, origin_latlng);
-        } else {
-          origin.marker.setLatLng(origin_latlng);
-        }
-
-        // TODO refactor
-        if (destination.marker == null) {
-          createMarker(destination, destination_latlng);
-        } else {
-          destination.marker.setLatLng(destination_latlng);
-        }
-
-        console.debug("Calculate route!");
-        control.route();
-      }
-
-    });
-
-    sidebar.show();
-  });
-}
 
 function unLoadRoute() {
   sidebar.hide();
@@ -163,16 +25,6 @@ function unLoadRoute() {
   control.options.autoRoute = false;
 }
 
-// set values to location in the route form
-// when sidebar is already loaded
-function fillFormRouteLocations(data) {
-  if ('origin' in data) {
-    route_form.origin.val(data.origin);
-  }
-  if ('destination' in data) {
-    route_form.destination.val(data.destination);
-  }
-}
 
 function setRouteLocation(e, waypoint) {
   var lat = e.latlng.lat;
