@@ -1,7 +1,11 @@
 //= require introjs
 
 L.easyButton('fa-question-circle', function(btn, map) {
-  introJs().setOption('showProgress', true).setOption("showStepNumbers", false).start();
+  introJs().setOption('showProgress', true)
+  .setOption("nextLabel", " Próximo ")
+  .setOption("prevLabel", "Anterior")
+  .setOption("skipLabel", "Fechar")
+  .setOption("showStepNumbers", false).start();
 }).addTo(map);
 
 $(".leaflet-control-zoom")
@@ -21,4 +25,8 @@ $(".leaflet-control-layers.leaflet-control")
   .attr("data-step", "5")
   .attr("data-position", "auto");
 
-introJs().setOption('showProgress', true).setOption("showStepNumbers", false).start();
+  introJs().setOption('showProgress', true)
+  .setOption("nextLabel", " Próximo ")
+  .setOption("prevLabel", "Anterior")
+  .setOption("skipLabel", "Fechar")
+  .setOption("showStepNumbers", false).start();
