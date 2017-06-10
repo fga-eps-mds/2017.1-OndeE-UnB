@@ -36,7 +36,7 @@ class Route {
   }
 
 
-  initControl() {
+  registerControlEvents() {
 
     // This function is triggered when a route is successfully calculated
     this.control.on('routesfound', function(e) {
@@ -94,8 +94,5 @@ class Route {
     });
 
   }
-
-
-
 
 }
