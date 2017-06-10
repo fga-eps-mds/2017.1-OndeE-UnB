@@ -1,0 +1,69 @@
+<h1 class="sidebar-header"><%= "#{@room.acronym} - #{@room.title}" %></h1>
+<div class="sidebar-body">
+  <div class="row">
+    <div class="col-8 form-group">
+      <label>
+        <b>Sala</b>
+      </label>
+      <p class="form-control-static"><%= @room.title %></p>
+    </div>
+    <div class="col-4 form-group">
+      <label>
+        <b>Tipo</b>
+      </label>
+      <p class="form-control-static"><%= @room.room_type %></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>
+      <b>Matérias</b>
+    </label>
+
+
+    <div>
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-pills" role="tablist">
+        <% @days_of_week.each do |day_of_week| %>
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><%= day_of_week %></a></li>
+        <% end %>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">..</div>
+        <div role="tabpanel" class="tab-pane" id="profile">...</div>
+        <div role="tabpanel" class="tab-pane" id="messages">...</div>
+        <div role="tabpanel" class="tab-pane" id="settings">...</div>
+      </div>
+
+    </div>
+
+
+    <% if @room.courses.length > 0 %>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Sala</th>
+          <th>Nível</th>
+          <th>Tipo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @building.rooms.each do |room| %>
+        <tr>
+          <td><%= room.title %></td>
+          <td><%= room.level %></td>
+          <td>
+            <span class="badge badge-danger <%= "badge-#{room.room_type}" %>"><%= room.translated_room_type %></span>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="alert alert-warning">
+      Nenhuma sala disponível para este edifício.
+    </div>
+    <% end %>
+  </div>
+</div>

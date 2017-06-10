@@ -14,7 +14,7 @@ class MapController < ApplicationController
   #   geo_json = json_building_search
   #   render plain: geo_json.to_json
   # end
-  
+
   # def json_building_search
   #   @buildings = Building.all
   #   features = []
@@ -40,9 +40,14 @@ class MapController < ApplicationController
   #     features: features
   #   }
 
-    
+
   def point
     @point = Point.find(params[:id])
+  end
+
+  def room
+    @room = Room.find(params[:id])
+    @days_of_week = Course.day_of_weeks.keys
   end
 
   def data
