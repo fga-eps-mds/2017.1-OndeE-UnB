@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       get 'buildings', action: 'buildings'
       get 'departments', action: 'departments'
       get 'building/:id', action: 'building'
+      get 'room/:id', action: 'room'
       get 'rooms/:building_id', action: 'rooms'
       get 'bikes', action: 'bikes'
       get 'bathrooms', action: 'bathrooms'

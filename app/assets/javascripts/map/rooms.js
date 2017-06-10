@@ -43,6 +43,24 @@ var loadRooms = function loadRooms(buildingKey){
     });
 
     var indoorLayer = new L.Indoor(rooms, {
+      onEachFeature: function(feature, layer) {
+          // Trigger when user click on a building
+          layer.on('click', function() {
+            // The key references to that building clicked
+            var roomKey = 1;
+
+            if (sidebar.isVisible()) {
+              sidebar.hide();
+            } else {
+              //selects the building clicked and shows sidebar
+              var numberToRoom = '/map/data/room/' + roomKey;
+              $("#sidebar").load(numberToRoom, function() {
+                sidebar.toggle();
+              });
+            }
+          });
+  },
+
       style: function(feature) {
         var fillColor = roomColor(feature.properties.roomType);
 
