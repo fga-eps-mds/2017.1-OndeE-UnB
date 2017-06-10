@@ -12,11 +12,11 @@ $(".leaflet-control-zoom")
   .attr("data-intro", "Oi")
   .attr("data-step", "3")
   .attr("data-position", "auto");
-$(".leaflet-bar.easy-button-container.leaflet-control")
+$(".leaflet-bar.easy-button-container.leaflet-control").eq(0)
   .attr("data-intro", "Rota")
   .attr("data-step", "4")
   .attr("data-position", "auto");
-  $(".leaflet-bar.easy-button-container.leaflet-control")
+  $(".leaflet-bar.easy-button-container.leaflet-control").eq(1)
     .attr("data-intro", "Rota")
     .attr("data-step", "6")
     .attr("data-position", "auto");
