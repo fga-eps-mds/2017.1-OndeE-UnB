@@ -29,6 +29,11 @@ html {
   font-family: "Roboto", sans-serif !important;
 }
 
+.input-location.searchContainer{
+  left:inherit;
+  top:inherit;
+}
+
 .leaflet-top {
   top: 55px;
 }
