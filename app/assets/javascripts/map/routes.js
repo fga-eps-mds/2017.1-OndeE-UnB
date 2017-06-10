@@ -93,33 +93,19 @@ control.on('routesfound', function(e) {
     $itinerarySidebar.find('tr').each(function(index, instructionRow) {
       var $instruction = $(instructionRow).find('td').eq(1);
       
-      if ($instruction.text() in routesTranslations) {
-        var instructionTranslated = routesTranslations[$instruction.text()];
-        $instruction.text(instructionTranslated);
-      } else {
 
-        // routesCustomTranslations.forEach(function(item, key, mapObj) {
-        //     console.log(item);
-            
-        // });
-
-        for (var englishInstr in routesCustomTranslations) {
-            if (routesCustomTranslations.hasOwnProperty(englishInstr)) {
-                
-                //console.log(routesCustomTranslations[englishInstr]);
-                //console.log($instruction.text());
-                var originalInstr = $instruction.text();
-                if(originalInstr.indexOf(englishInstr) != -1) {
-                  originalInstr = originalInstr.replace(englishInstr,routesCustomTranslations[englishInstr]);
-                  //console.log(englishInstr);
-                  //console.log(routesCustomTranslations[englishInstr]);
-                  //console.log(originalInstr);
-                  $instruction.text(originalInstr);
-                }
-            }
-        }
-                //$instruction.text("No translation");
+      for (var englishInstr in routesTranslations) {
+          if (routesTranslations.hasOwnProperty(englishInstr)) {
+              
+              var originalInstr = $instruction.text();
+              if(originalInstr.indexOf(englishInstr) != -1) {
+                originalInstr = originalInstr.replace(englishInstr,routesTranslations[englishInstr]);
+                $instruction.text(originalInstr);
+              }
+          }
       }
+
+
 
     });
 
