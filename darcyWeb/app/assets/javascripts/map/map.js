@@ -4,32 +4,33 @@
 class Map {
 
 
-  constructor() {
+  constructor(route) {
 
-    // enable and set options to the contextmenu
+  // this.route = route;
+  // console.log(this.route);
+  // enable and set options to the contextmenu
     map.contextmenu.enable();
     map.contextmenu.addItem({
       text: 'Rotas a partir daqui',
-      callback: routesFromHere
+      callback: this.routesFromHere
     });
     map.contextmenu.addItem({
       text: 'Rotas para cá',
-      callback: routesToHere
+      callback: this.routesToHere
     });
+
 
   }
 
-  addButton() {
-    // adds the route button to map
-    L.easyButton('ion-merge', function(btn, map) {
-      // triggered when user clicks the routes button.
-      if (sidebar.isVisible()) {
-        unLoadRoute();
-      } else {
-        loadRouteForm({});
-      }
+  routesFromHere(e) {
+    console.log(this.route);
+    this.route.setRouteLocation(e, origin);
+    this.route.control.spliceWaypoints(0, 1, e.latlng);
+  }
 
-    }).addTo(map);
+  routesToHere(e) {
+    this.route.setRouteLocation(e, destination);
+    this.route.control.spliceWaypoints(this.route.control.getWaypoints().length - 1, 1, e.latlng);
   }
 
   location() {
@@ -82,10 +83,24 @@ class Map {
     }
   }
 
+  removeMarker(waypoint) {
+    try {
+      map.removeLayer(waypoint.marker);
+      waypoint.marker = null;
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
 
-
-
-
-
+  createMarker(waypoint, latlng) {
+    waypoint.marker = L.marker(latlng, {
+      icon: L.AwesomeMarkers.icon({
+        prefix: 'ion',
+        icon: waypoint.icon,
+        markerColor: waypoint.color
+      })
+    });
+    map.addLayer(waypoint.marker);
+  }
 
 }
