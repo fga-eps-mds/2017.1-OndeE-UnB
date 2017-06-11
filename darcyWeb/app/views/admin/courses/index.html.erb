@@ -22,8 +22,9 @@
                     <tbody>
                         <% @courses.each do |course| %>
                         <tr>
-                            <td><%= course.cod %></td>
-                            <td><%= course.name %></td>
+                            <td><%= course.room.title %></td>
+                            <td><%= course.code %></td>
+                            <td><%= course.title %></td>
                             </td>
                         </tr>
                         <% end %>

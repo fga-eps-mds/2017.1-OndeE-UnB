@@ -25,17 +25,19 @@
       <!-- Nav tabs -->
       <ul class="nav nav-pills" role="tablist">
         <% @days_of_week.each do |day_of_week| %>
-        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><%= day_of_week %></a></li>
+        <li class="nav-item">
+          <a href="#home" class="nav-link" aria-controls="home" role="tab" data-toggle="tab"><%=
+          day_of_week %></a>
+        </li>
         <% end %>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="home">..</div>
+        <div role="tabpanel" class="tab-pane active" id="home"></div>
         <div role="tabpanel" class="tab-pane" id="profile">...</div>
         <div role="tabpanel" class="tab-pane" id="messages">...</div>
         <div role="tabpanel" class="tab-pane" id="settings">...</div>
       </div>
-
     </div>
 
 
