@@ -38,6 +38,25 @@ class ParserController < ApplicationController
     end
   end
 
+  def set_day_of_week(day_of_week)
+    case day_of_week
+    when "Segunda"
+      :monday
+    when "Terça"
+      :tuesday
+    when "Quarta"
+      :wednesday
+    when "Quinta"
+      :thursday
+    when "Sexta"
+      :friday
+    when "Sábado"
+      :saturday
+    when "Domingo"
+      :sunday
+    end
+  end
+
   def valid_schedule_and_room?(day_of_week, start_time, end_time, room)
     valid_times = day_of_week.present? && start_time.present? && end_time.present?
     valid_room = room.present? && (room != "Local a Designar")
@@ -136,7 +155,7 @@ class ParserController < ApplicationController
 
             schedule_data = {
               course: course,
-              day_of_week: day_of_week.text,
+              day_of_week: set_day_of_week(day_of_week.text),
               start_time: start_time.text,
               end_time: end_time.text,
               building: building,
@@ -144,7 +163,7 @@ class ParserController < ApplicationController
               room_type: define_room_type(room)
             }
 
-            create_schedules(schedule_data)
+            create_course(schedule_data)
 
             puts schedule_data
             # schedules.push(schedule_data)
@@ -154,8 +173,13 @@ class ParserController < ApplicationController
     end
  end
 
-  def create_schedules(params)
+  def create_course(params)
     room = create_room(params)
+    Course.where(room: room, day_of_week: params[:day_of_week], start_time: params[:start_time], end_time: params[:end_time]).first_or_create do |course|
+      course.title = params[:course][:title]
+      course.code = 1
+      course.classroom = 'A'
+    end
   end
 
   def create_room(params)
