@@ -35,6 +35,7 @@ var loadRooms = function loadRooms(buildingKey){
       try {
         var geo_json = JSON.parse(room.geo_data);
         geo_json.features[0].properties.level = room.level.toString();
+        geo_json.features[0].properties.id = room.id;
         geo_json.features[0].properties.roomType = room.room_type;
         rooms.features.push(geo_json.features[0]);
       } catch (err) {
@@ -47,14 +48,14 @@ var loadRooms = function loadRooms(buildingKey){
           // Trigger when user click on a building
           layer.on('click', function() {
             // The key references to that building clicked
-            var roomKey = 1;
+            var roomKey = feature.properties.id ;
 
             if (sidebar.isVisible()) {
               sidebar.hide();
             } else {
               //selects the building clicked and shows sidebar
               var numberToRoom = '/map/data/room/' + roomKey;
-              $("#sidebar").load(numberToRoom, function() {
+              $("#sidebar").load(urlToRoom, function() {
                 sidebar.toggle();
               });
             }
