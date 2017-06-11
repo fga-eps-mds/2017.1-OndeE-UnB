@@ -132,6 +132,10 @@ describe 'Route', type: :feature do
       expect(translation).to eq('Vire a direita em ABCDE')
     end
 
+    it 'should not fail if there is no translation, it should return the original string', js: true do
+      translation = page.evaluate_script('translateRoute("There is no translation!")')
+      expect(translation).to eq('There is no translation!')
+    end
   end
 
   context 'Contextmenu' do

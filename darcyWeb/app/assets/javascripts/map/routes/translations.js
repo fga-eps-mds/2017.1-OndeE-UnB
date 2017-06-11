@@ -33,6 +33,7 @@ const routesTranslations = {
   "Walk east on the walkway.": "Ande para o leste na calçada.",
   "Walk south on the walkway.": "Ande para o sul na calçada.",
   "Walk west on the walkway.": "Ande para o oeste na calçada.",
+  "Walk north on the walkway.": "Ande para o norte na calçada.",
   "Walk northeast on the walkway.": "Ande para o nordeste na calçada.",
   "Walk northwest on the walkway.": "Ande para o noroeste na calçada.",
   "Walk southeast on the walkway.": "Ande para o sudeste na calçada.",
@@ -106,6 +107,8 @@ const routesTranslations = {
 
   "Take the ramp on the left.": "Pegue a rampa à esquerda",
   "Take the ramp on the right.": "Pegue a rampa à direita",
+  "Turn right to take the ramp.": "Vire a direita para pegar a rampa",
+  "Turn left to take the ramp.": "Vire a esquerda para pegar a rampa",
 
   // Custom Routes
   "Turn right onto": "Vire a direita em",
@@ -120,23 +123,54 @@ const routesTranslations = {
   "Bear left onto": "Fique à esquerda em",
   "Bear right onto": "Fique à direita em",
 
-  "Exit the roundabout onto": "Saia da rotatória para",
-}
+  "Turn sharp right onto": "Vire à direita para",
+  "Turn sharp left onto": "Vire à esquerda para",
+
+  "Drive southeast on": "Siga para o sudeste em",
+  "Drive northeast on": "Siga para o nordeste em",
+  "Drive northwest on ": "Siga para o noroeste em",
+  "Drive southwest on": "Siga para o sudoeste em",
+  "Drive east on": "Siga para o leste em",
+  "Drive south on": "Siga para o sul em",
+  "Drive west on": "Siga para o oeste em",
+  "Drive north on": "Siga para o norte em",
+
+  "Walk southeast on": "Ande para o sudeste em",
+  "Walk northeast on": "Ande para o nordeste em",
+  "Walk northwest on ": "Ande para o noroeste em",
+  "Walk southwest on": "Ande para o sudoeste em",
+  "Walk east on": "Ande para o leste em",
+  "Walk south on": "Ande para o sul em",
+  "Walk west on": "Ande para o oeste em",
+  "Walk north on": "Ande para o norte em",
+
+  "Bike southeast on": "Pedale para o sudeste em",
+  "Bike northeast on": "Pedale para o nordeste em",
+  "Bike northwest on": "Pedale para o noroeste em",
+  "Bike southwest on": "Pedale para o sudoeste em",
+  "Bike east on": "Pedale para o leste em",
+  "Bike west on": "Pedale para o oeste em",
+  "Bike north on": "Pedale para o norte em",
+  "Bike south on": "Pedale para o sul em",
+
+  "Exit the roundabout onto": "Saia da rotatória para"
+};
 
 
 function translateRoute(input) {
-      for (var englishInstr in routesTranslations) {
-          if (routesTranslations.hasOwnProperty(englishInstr)) {
-              
-              var originalInstr = input;
-              if(originalInstr.indexOf(englishInstr) != -1) {
-                originalInstr = originalInstr.replace(englishInstr,routesTranslations[englishInstr]);
-                break;
-              }
+  var originalInstr = input;
+
+  var translatedInstr = originalInstr;
+  for (var englishInstr in routesTranslations) {
+      if (routesTranslations.hasOwnProperty(englishInstr)) {
+          
+          if(originalInstr.indexOf(englishInstr) !== -1) {
+            translatedInstr = originalInstr.replace(englishInstr,routesTranslations[englishInstr]);
+            break;
           }
       }
-      return originalInstr;
+  }
+
+  return translatedInstr;
 }
-
-
 
