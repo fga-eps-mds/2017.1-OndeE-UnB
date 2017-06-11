@@ -1,4 +1,5 @@
 const routesTranslations = {
+
   // Routes for to walk mode
   "You have arrived at your destination.": "Você chegou ao seu destino.",
   "Your destination is on the left.": "Seu destino está à esquerda.",
@@ -48,10 +49,10 @@ const routesTranslations = {
   "Enter the roundabout and take the 4rd exit.": "Entre na rotatória e pegue a 4ª saída.",
   "Exit the roundabout.": "Saia da rotatória.",
 
-  "Make a left U-turn.": "Faça uma curva para à esquerda.",
-  "Make a right U-turn.": "Faça uma curva para à direita.",
-  "Make a left U-turn onto the walkway.": "Faça uma curva para à esquerda na calçada.",
-  "Make a right U-turn onto the walkway.": "Faça uma curva para à direita na calçada.",
+  "Make a left U-turn.": "Faça uma curva para a esquerda.",
+  "Make a right U-turn.": "Faça uma curva para a direita.",
+  "Make a left U-turn onto the walkway.": "Faça uma curva para a esquerda na calçada.",
+  "Make a right U-turn onto the walkway.": "Faça uma curva para a direita na calçada.",
 
   "Turn sharp right onto the walkway.": "Vire a curva à direita na calçada.",
   "Turn sharp left onto the walkway.": "Vire a curva à esquerda na calçada.",
@@ -103,9 +104,8 @@ const routesTranslations = {
   "Bike southwest on the cycleway.": "Pedale em direção sudeste na ciclovia.",
   "Bike northwest on the cycleway.": "Pedale em direção noroeste na ciclovia.",
 
-
-
-
+  "Take the ramp on the left.": "Pegue a rampa à esquerda",
+  "Take the ramp on the right.": "Pegue a rampa à direita",
 
   // Custom Routes
   "Turn right onto": "Vire a direita em",
@@ -114,6 +114,29 @@ const routesTranslations = {
   "Turn right to stay on": "Vire a direita para ficar em",
   "Turn left to stay on": "Vire a esquerda para ficar em",
 
-  "Make a right U-turn to stay on":"Faça uma curva à direita para ficar em" ,
-  "Make a left U-turn to stay on":"Faça uma curva à esquerda para ficar em" ,
+  "Make a right U-turn to stay on": "Faça uma curva à direita para ficar em" ,
+  "Make a left U-turn to stay on": "Faça uma curva à esquerda para ficar em" ,
+
+  "Bear left onto": "Fique à esquerda em",
+  "Bear right onto": "Fique à direita em",
+
+  "Exit the roundabout onto": "Saia da rotatória para",
 }
+
+
+function translateRoute(input) {
+      for (var englishInstr in routesTranslations) {
+          if (routesTranslations.hasOwnProperty(englishInstr)) {
+              
+              var originalInstr = input;
+              if(originalInstr.indexOf(englishInstr) != -1) {
+                originalInstr = originalInstr.replace(englishInstr,routesTranslations[englishInstr]);
+                break;
+              }
+          }
+      }
+      return originalInstr;
+}
+
+
+

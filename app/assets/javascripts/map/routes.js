@@ -94,18 +94,7 @@ control.on('routesfound', function(e) {
       var $instruction = $(instructionRow).find('td').eq(1);
       
 
-      for (var englishInstr in routesTranslations) {
-          if (routesTranslations.hasOwnProperty(englishInstr)) {
-              
-              var originalInstr = $instruction.text();
-              if(originalInstr.indexOf(englishInstr) != -1) {
-                originalInstr = originalInstr.replace(englishInstr,routesTranslations[englishInstr]);
-                $instruction.text(originalInstr);
-              }
-          }
-      }
-
-
+      $instruction.text(translateRoute($instruction.text()));
 
     });
 
