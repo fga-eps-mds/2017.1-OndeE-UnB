@@ -1,5 +1,5 @@
 // Set default color based on room type
-const roomColor = function color(type){
+const roomColor = function color(type) {
   var color = 'white';
   switch (type) {
     case 'classroom':
@@ -23,15 +23,15 @@ const roomColor = function color(type){
 }
 
 // Load rooms for specified building
-var loadRooms = function loadRooms(buildingKey){
-  $.get('/map/data/rooms/'+ buildingKey, function(data) { //getting the json data
+var loadRooms = function loadRooms(buildingKey) {
+  $.get('/map/data/rooms/' + buildingKey, function(data) { //getting the json data
 
     var rooms = {
       'type': 'FeatureCollection',
       'features': [],
     };
 
-    data.forEach(function(room){
+    data.forEach(function(room) {
       try {
         var geo_json = JSON.parse(room.geo_data);
         geo_json.features[0].properties.level = room.level.toString();
@@ -45,22 +45,19 @@ var loadRooms = function loadRooms(buildingKey){
 
     var indoorLayer = new L.Indoor(rooms, {
       onEachFeature: function(feature, layer) {
-          // Trigger when user click on a building
-          layer.on('click', function() {
-            // The key references to that building clicked
-            var roomKey = feature.properties.id ;
-
-            if (sidebar.isVisible()) {
-              sidebar.hide();
-            } else {
-              //selects the building clicked and shows sidebar
-              var numberToRoom = '/map/data/room/' + roomKey;
-              $("#sidebar").load(urlToRoom, function() {
-                sidebar.toggle();
-              });
+        // Trigger when user click on a building
+        layer.on('click', function() {
+          // The key references to that building clicked
+          var roomId = feature.properties.id;
+          var urlToRoom = '/map/data/room/' + roomId;
+          $("#sidebar").load(urlToRoom, function() {
+            // shows the clicked room in the sidebar
+            if (!sidebar.isVisible()) {
+              sidebar.show();
             }
           });
-  },
+        });
+      },
 
       style: function(feature) {
         var fillColor = roomColor(feature.properties.roomType);
@@ -91,7 +88,7 @@ var loadRooms = function loadRooms(buildingKey){
     levelControl.addTo(map);
 
     // Clean indoor when toogled
-    sidebar.on('hide', function(){
+    sidebar.on('hide', function() {
       indoorLayer.clean();
       map.removeControl(levelControl);
     });
