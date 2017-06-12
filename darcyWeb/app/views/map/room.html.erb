@@ -16,56 +16,54 @@
   </div>
   <div class="form-group">
     <label>
-      <b>Matérias</b>
+      <b>Programação</b>
     </label>
 
-
-    <div>
-
-      <!-- Nav tabs -->
-      <ul class="nav nav-pills" role="tablist">
-        <% @days_of_week.each do |day_of_week| %>
-        <li class="nav-item">
-          <a href="#home" class="nav-link" aria-controls="home" role="tab" data-toggle="tab"><%=
-          day_of_week %></a>
-        </li>
-        <% end %>
-      </ul>
-      <!-- Tab panes -->
-      <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="home"></div>
-        <div role="tabpanel" class="tab-pane" id="profile">...</div>
-        <div role="tabpanel" class="tab-pane" id="messages">...</div>
-        <div role="tabpanel" class="tab-pane" id="settings">...</div>
-      </div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs nav-justified nav-days-of-week" role="tablist">
+      <% @days_of_week.map do |translated, day_of_week, index| %>
+      <li class="nav-item">
+        <a href="#dow<%= index %>" class="nav-link" data-toggle="tab"><%= translated %></a>
+      </li>
+      <% end %>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <% @schedule.each_with_index do |day_schedule, index| %>
+        <div class="tab-pane pt-3" id="dow<%= index %>">
+          <% if day_schedule.length > 0 %>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Atividade</th>
+                <th>Inicio</th>
+                <th>Fim</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% day_schedule.each do |schedule| %>
+              <tr>
+                <td>
+                  <p class="mb-0"><%= schedule.title %></p>
+                  <span class="small"><%= "Turma: #{schedule.classroom}" %></span>
+                </td>
+                <td>
+                  <span class="badge badge-success"><%= schedule.start_time %></span>
+                </td>
+                <td>
+                  <span class="badge badge-danger"><%= schedule.end_time %></span>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <div class="alert alert-warning">
+            Não há nada programado para este dia.
+          </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
-
-
-    <% if @room.courses.length > 0 %>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Sala</th>
-          <th>Nível</th>
-          <th>Tipo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @building.rooms.each do |room| %>
-        <tr>
-          <td><%= room.title %></td>
-          <td><%= room.level %></td>
-          <td>
-            <span class="badge badge-danger <%= "badge-#{room.room_type}" %>"><%= room.translated_room_type %></span>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <div class="alert alert-warning">
-      Nenhuma sala disponível para este edifício.
-    </div>
-    <% end %>
   </div>
 </div>
