@@ -15,6 +15,9 @@ class Map::DataController < MapController
     end
 
     def room
+
+      @today = Time.now.wday
+
       @room = Room.find(params[:id])
       @days_of_week = Course.translated_day_of_weeks
 
