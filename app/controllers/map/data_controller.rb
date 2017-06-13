@@ -17,7 +17,7 @@ class Map::DataController < MapController
     def room
       @room = Room.find(params[:id])
       @days_of_week = Course.translated_day_of_weeks
-
+      
       @schedule = []
       @days_of_week.map do |translated, day,  index|
         @schedule[index] = @room.courses.where(day_of_week: day)
