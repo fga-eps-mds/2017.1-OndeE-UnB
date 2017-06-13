@@ -7,7 +7,8 @@ def load_routes_form
   wait_for_ajax
 end
 
-origin_field = 'route[origin]'
+FactoryGirl.create :building
+origin_field = 'searchBox'
 destination_field = 'route[destination]'
 
 describe 'Route', type: :feature do
@@ -75,10 +76,12 @@ context 'Calculate the route without coordination' do
       end
 
       it 'should autocomplete orgin field', js: true do
-        within('#sidebar form') do
-          fill_in origin_field, with: 'a'
-        end
-      expect(page).to have_content('Biblioteca')
+       FactoryGirl.create :building
+       within(:css, "input#route_origin.form-control") do
+            fill_in 'Local de Partida', with: 'B'
+      end
+      wait_for_ajax
+      expect(page).to have_content('Bloco')
     end
     
     it 'should autocomplete destination field', js: true do
