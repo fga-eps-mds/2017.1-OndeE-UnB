@@ -72,26 +72,27 @@ describe 'Route', type: :feature do
 
 context 'Calculate the route without coordination' do
     before(:each) do
-        load_routes_form
-      end
+      load_routes_form
+    end
 
-      it 'should autocomplete orgin field', js: true do
-       FactoryGirl.create :building
-       within(:css, "input#route_origin.form-control") do
-            fill_in 'Local de Partida', with: 'B'
-      end
+   it 'should autocomplete orgin field', js: true do
+      FactoryGirl.create :building
+      page.execute_script('$(".input-location.origin").find(".searchBox").val("Bl").trigger("keyup")')
       wait_for_ajax
       expect(page).to have_content('Bloco')
     end
-    
-    it 'should autocomplete destination field', js: true do
-        within('#sidebar form') do
-          fill_in destination_field, with: 'a'
-        end
-      expect(page).to have_content('Biblioteca')
+
+   it 'should autocomplete destination field', js: true do
+      FactoryGirl.create :building
+      page.execute_script('$(".input-location.destination").find(".searchBox").val("Bl").trigger("keyup")')
+      wait_for_ajax
+      expect(page).to have_content('Bloco')
     end
 
-end
+    
+
+  end
+
   context 'Calculate the route' do
     before(:each) do
       load_routes_form
