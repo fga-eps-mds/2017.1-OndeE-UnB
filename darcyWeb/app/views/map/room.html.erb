@@ -30,7 +30,7 @@
     <!-- Tab panes -->
     <div class="tab-content">
       <% @schedule.each_with_index do |day_schedule, index| %>
-        <div class="tab-pane pt-3" id="dow<%= index %>">
+        <div class="tab-pane pt-3 <%= 'active' if @today == day_schedule %>" id="dow<%= index %>">
           <% if day_schedule.length > 0 %>
           <table class="table table-hover">
             <thead>

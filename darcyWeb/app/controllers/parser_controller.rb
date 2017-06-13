@@ -8,7 +8,7 @@ class ParserController < ApplicationController
   end
 
   def exclude_departments
-    %w(CDT FGA FCE FUP CET DAN CEN VIS CEL BOT)
+    %w(FGA FCE FUP)
   end
 
   def allowed_buildings
@@ -57,9 +57,9 @@ class ParserController < ApplicationController
     end
   end
 
-  def valid_schedule_and_room?(day_of_week, start_time, end_time, room)
+  def valid_schedule_and_room?(day_of_week, start_time, end_time, room, classroom)
     valid_times = day_of_week.present? && start_time.present? && end_time.present?
-    valid_room = room.present? && (room != "Local a Designar")
+    valid_room = room.present? && (room != "Local a Designar") && classroom.present?
     valid_times && valid_room
   end
 
@@ -77,7 +77,7 @@ class ParserController < ApplicationController
     departments = []
 
     # Getting department data
-    departments_rows.each_with_index do |department_row, _index|
+    departments_rows.each do |department_row|
       acronym = department_row.at('td[2]').text
       department = department_row.at('td[3] a')
 
@@ -87,7 +87,7 @@ class ParserController < ApplicationController
           title: department.text,
           url: "https://matriculaweb.unb.br/graduacao/#{department['href']}"
         }
-        # puts department_data
+        puts department_data
         departments.push(department_data)
       end
     end
@@ -101,7 +101,7 @@ class ParserController < ApplicationController
     require 'open-uri'
 
     courses = []
-    departments.each_with_index do |department, _index|
+    departments.each do |department|
 
       html = open(department[:url])
       html_tree = Nokogiri::HTML(html, nil, Encoding::UTF_8.to_s)
@@ -112,7 +112,7 @@ class ParserController < ApplicationController
       courses_rows.shift
 
       # Getting courses data
-      courses_rows.each_with_index do |courses_row, _index|
+      courses_rows.each do |courses_row|
         course = courses_row.at('td[2] a')
         course_data = {
           department: department,
@@ -120,6 +120,7 @@ class ParserController < ApplicationController
           url: "https://matriculaweb.unb.br/graduacao/#{course['href']}"
         }
 
+        puts course_data
         # puts in the courses list course_data
         courses.push(course_data)
       end
@@ -133,40 +134,45 @@ class ParserController < ApplicationController
     require 'nokogiri'
     require 'open-uri'
 
-    courses.each_with_index do |course, index|
+    courses.each do |course|
       html = open(course[:url])
       html_tree = Nokogiri::HTML(html, nil, Encoding::UTF_8.to_s)
-      schedules_rows = html_tree.css('td.padrao[width="200"] div')
+      schedules_rows = html_tree.css('.framecinza tr')
 
       # Getting the time and places of courses
-      schedules_rows.each_with_index do |schedule_row, _index|
+      schedules_rows.each do |schedule_row|
+        if schedule_row.content.include? "Total"
+          classroom = schedule_row.at_css('td[1] b')
+          schedule_row.css('td[4] div').each do |schedule|
 
-        day_of_week = schedule_row.at('b')
-        start_time = schedule_row.at('font[color="black"] b')
-        end_time = schedule_row.at('font[color="brown"]')
-        room = schedule_row.at('i')
+            day_of_week = schedule.at_css('b')
+            start_time = schedule.at_css('font[color="black"] b')
+            end_time = schedule.at_css('font[color="brown"]')
+            room = schedule.at_css('i')
 
-        if valid_schedule_and_room?(day_of_week, start_time, end_time, room)
-          room = clean_room_name(room.text.strip)
+            if valid_schedule_and_room?(day_of_week, start_time, end_time, room, classroom)
+              room = clean_room_name(room.text.strip)
 
-          building = replace_building_name(room.split.first)
+              building = replace_building_name(room.split.first)
 
-          if allowed_buildings.include? building
+              if allowed_buildings.include? building
 
-            schedule_data = {
-              course: course,
-              day_of_week: set_day_of_week(day_of_week.text),
-              start_time: start_time.text,
-              end_time: end_time.text,
-              building: building,
-              room: room,
-              room_type: define_room_type(room)
-            }
+                schedule_data = {
+                  course: course,
+                  day_of_week: set_day_of_week(day_of_week.text),
+                  start_time: start_time.text,
+                  end_time: end_time.text,
+                  building: building,
+                  room: room,
+                  room_type: define_room_type(room),
+                  classroom: classroom.text
+                }
 
-            create_course(schedule_data)
+                puts schedule_data
+                create_course(schedule_data)
 
-            puts schedule_data
-            # schedules.push(schedule_data)
+              end
+            end
           end
         end
       end
@@ -177,8 +183,8 @@ class ParserController < ApplicationController
     room = create_room(params)
     Course.where(room: room, day_of_week: params[:day_of_week], start_time: params[:start_time], end_time: params[:end_time]).first_or_create do |course|
       course.title = params[:course][:title]
-      course.code = 1
-      course.classroom = 'A'
+      course.code = 0
+      course.classroom = params[:classroom]
     end
   end
 
