@@ -1,4 +1,4 @@
-class Course < ApplicationRecord
+class Schedule < ApplicationRecord
   belongs_to :room
 
   enum day_of_week: [:sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday]

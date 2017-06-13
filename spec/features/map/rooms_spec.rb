@@ -6,9 +6,9 @@ describe 'Map', type: :feature do
     if RSpec.current_example.metadata[:room]
       # Creates the room and its associated building
       FactoryGirl.create :room
-    elsif RSpec.current_example.metadata[:course]
+    elsif RSpec.current_example.metadata[:schedule]
       # Creates the room and its associated building
-      FactoryGirl.create :course
+      FactoryGirl.create :schedule
     else
       # Creates a building (for cases when there are no rooms)
       FactoryGirl.create :building
@@ -54,7 +54,7 @@ describe 'Map', type: :feature do
       expect(page).to have_css("#sidebar table")
     end
 
-    it 'should show the schedule when click on room', js: true, course: true do
+    it 'should show the schedule when click on room', js: true, schedule: true do
 
       # clicks the building layer feature
       page.execute_script("buildingLayer.getLayers()[0].fire('click')")

@@ -26,7 +26,6 @@ Rails.application.routes.draw do
     resources :departments, except: [:show]
     resources :admins, except: [:show]
     resources :points, except: [:show]
-    resources :courses, except: [:show]
   end
 
   namespace :map do
