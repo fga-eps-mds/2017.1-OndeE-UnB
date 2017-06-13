@@ -23,6 +23,7 @@ const roomColor = function color(type) {
 }
 
 // Load rooms for specified building
+var indoorLayer;
 var loadRooms = function loadRooms(buildingKey) {
   $.get('/map/data/rooms/' + buildingKey, function(data) { //getting the json data
 
@@ -43,7 +44,7 @@ var loadRooms = function loadRooms(buildingKey) {
       }
     });
 
-    var indoorLayer = new L.Indoor(rooms, {
+    indoorLayer = new L.Indoor(rooms, {
       onEachFeature: function(feature, layer) {
         // Trigger when user click on a building
         layer.on('click', function() {
