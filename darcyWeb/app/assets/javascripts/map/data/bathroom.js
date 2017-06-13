@@ -1,6 +1,5 @@
 //Bathrooms
 
-//Layer with bathroom icon personalized
 var bathroomLayer = L.geoJSON('', {
   pointToLayer: function(feature, latlng) {
     var smallIcon = new L.Icon({

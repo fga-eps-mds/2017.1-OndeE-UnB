@@ -57,7 +57,7 @@ describe 'Route', type: :feature do
       destination_before_value = 'destination'
 
       fill_in destination_field, with: destination_before_value
-      
+
       page.execute_script('$(".btn-reverse-route").trigger("click")')
 
       origin_after_value = page.evaluate_script('$("#route_origin").val()')
@@ -124,9 +124,8 @@ context 'Calculate the route without coordination' do
         page.all('label.btn.btn-outline-info')[0].click
         page.execute_script('$("#route_submit").click()')
       end
-      page.save_screenshot
       expect(find('#mode_text')).to have_content('A pé')
-      expect(page).to have_content('You have arrived at your destination.')
+      expect(page).to have_content('Você chegou ao seu destino.')
     end
 
     it 'should calculate the route for bicycle', js: true do
@@ -135,7 +134,7 @@ context 'Calculate the route without coordination' do
         page.execute_script('$("#route_submit").click()')
       end
       expect(find('#mode_text')).to have_content('Bicicleta')
-      expect(page).to have_content('You have arrived at your destination.')
+      expect(page).to have_content('Você chegou ao seu destino.')
     end
 
     it 'should calculate the route for car', js: true do
@@ -144,7 +143,39 @@ context 'Calculate the route without coordination' do
         page.execute_script('$("#route_submit").click()')
       end
       expect(find('#mode_text')).to have_content('Carro')
-      expect(page).to have_content('You have arrived at your destination.')
+      expect(page).to have_content('Você chegou ao seu destino.')
+    end
+
+  end
+
+  context 'Translate Routes' do
+    before(:each) do
+      visit root_path
+    end
+
+    it 'should translate routes from english - test1', js: true do
+      translation = page.evaluate_script('translateRoute("Turn left.")')
+      expect(translation).to eq('Vire à esquerda.')
+    end
+
+    it 'should translate routes from english - test2', js: true do
+      translation = page.evaluate_script('translateRoute("Turn right.")')
+      expect(translation).to eq('Vire à direita.')
+    end
+
+    it 'should translate routes from english - test3', js: true do
+      translation = page.evaluate_script('translateRoute("Drive east.")')
+      expect(translation).to eq('Siga em direção leste.')
+    end
+
+    it 'should translate routes from english - test4', js: true do
+      translation = page.evaluate_script('translateRoute("Turn right onto ABCDE")')
+      expect(translation).to eq('Vire a direita em ABCDE')
+    end
+
+    it 'should not fail if there is no translation, it should return the original string', js: true do
+      translation = page.evaluate_script('translateRoute("There is no translation!")')
+      expect(translation).to eq('There is no translation!')
     end
   end
 

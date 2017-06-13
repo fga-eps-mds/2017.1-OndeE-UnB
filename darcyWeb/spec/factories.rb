@@ -16,6 +16,31 @@ FactoryGirl.define do
     longitude 0.0
     title "Bicicletario"
     type_point "Bicicletario"
+
+    factory :bike do
+      title "Bicicletario"
+      type_point "Bicicletario"
+    end
+
+    factory :snackbar do
+      title "Lanchonete"
+      type_point "Lanchonete"
+    end
+
+    factory :bathroom do
+      title "Banheiro"
+      type_point "Banheiro"
+    end
+
+    factory :busstop do
+      title "Parada de Onibus"
+      type_point "Parada de Onibus"
+    end
+
+    factory :entrance do
+      title "Entrada de Edificio"
+      type_point "Entrada de Edificio"
+    end
   end
 
 

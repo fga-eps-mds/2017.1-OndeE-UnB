@@ -3,7 +3,11 @@ require 'rails_helper'
 describe "Map filter", type: :feature do
 
 	before(:each) do
+		[:building, :bike, :snackbar, :bathroom, :busstop, :entrance].each do |factory|
+			FactoryGirl.create factory
+		end
 		visit root_path
+		wait_for_ajax
 	end
 
 	it "should show filter button", js: true do
