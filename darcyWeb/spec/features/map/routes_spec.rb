@@ -7,7 +7,7 @@ def load_routes_form
   wait_for_ajax
 end
 
-origin_field = 'route[origin]'
+origin_field = 'searchBox'
 destination_field = 'route[destination]'
 
 describe 'Route', type: :feature do
@@ -57,7 +57,7 @@ describe 'Route', type: :feature do
       destination_before_value = 'destination'
 
       fill_in destination_field, with: destination_before_value
-      
+
       page.execute_script('$(".btn-reverse-route").trigger("click")')
 
       origin_after_value = page.evaluate_script('$("#route_origin").val()')
@@ -65,30 +65,42 @@ describe 'Route', type: :feature do
 
       expect(origin_after_value).to eq(destination_before_value)
       expect(destination_after_value).to eq('')
-
     end
   end
 
 context 'Calculate the route without coordination' do
     before(:each) do
-        load_routes_form
-      end
 
-      it 'should autocomplete orgin field', js: true do
-        within('#sidebar form') do
-          fill_in origin_field, with: 'a'
-        end
-      expect(page).to have_content('Biblioteca')
-    end
-    
-    it 'should autocomplete destination field', js: true do
-        within('#sidebar form') do
-          fill_in destination_field, with: 'a'
-        end
-      expect(page).to have_content('Biblioteca')
+      load_routes_form
     end
 
-end
+   it 'should autocomplete orgin field', js: true do
+      FactoryGirl.create :building
+      page.execute_script('$(".input-location.origin").find(".searchBox").val("Bl").trigger("keyup")')
+      wait_for_ajax
+      expect(page).to have_content('Bloco')
+    end
+
+   it 'should autocomplete destination field', js: true do
+      FactoryGirl.create :building
+      page.execute_script('$(".input-location.destination").find(".searchBox").val("Bl").trigger("keyup")')
+      wait_for_ajax
+      expect(page).to have_content('Bloco')
+    end
+
+    it 'should create foot route with origin and destination made by autocomplete', js: true do
+      FactoryGirl.create :building
+      FactoryGirl.create :building2
+      page.execute_script('$(".input-location.origin").find(".searchBox").val("Bl").trigger("keyup")')
+      page.execute_script('$(".input-location.destination").find(".searchBox").val("IC").trigger("keyup")')
+      wait_for_ajax
+      page.execute_script('$("#route_submit").click()')
+      expect(page).to have_content('TEMPO')
+
+    end
+
+  end
+
   context 'Calculate the route' do
     before(:each) do
       load_routes_form
