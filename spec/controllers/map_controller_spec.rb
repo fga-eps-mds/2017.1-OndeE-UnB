@@ -31,11 +31,4 @@ describe MapController do
       expect(response).to be_success
     end
   end
-
-  describe 'Refactoring json of building for search' do
-    it 'responds with JSON' do
-      get :collect_building_data, format: :json
-      expect(response).to be_success
-    end
-  end
 end

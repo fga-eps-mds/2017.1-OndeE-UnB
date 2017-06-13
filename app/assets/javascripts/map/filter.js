@@ -1,11 +1,3 @@
-//= require map/data/bathroom
-//= require map/data/bikes
-//= require map/data/buildings
-//= require map/data/busstops
-//= require map/data/department
-//= require map/data/entrance
-//= require map/data/snackbar
-
 var urlWorld = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
 
 var esri_WorldImagery = L.tileLayer(urlWorld, {
