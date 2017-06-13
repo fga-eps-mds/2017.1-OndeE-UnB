@@ -18,7 +18,6 @@ require 'json'
 # 	end
 # end
 
-
 RSpec.describe AdminController, :type => :controller do
   describe "GET admin" do
     it "should get a new admin" do
