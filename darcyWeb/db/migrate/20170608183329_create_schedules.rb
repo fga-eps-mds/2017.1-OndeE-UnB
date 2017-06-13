@@ -1,6 +1,6 @@
-class CreateCourses < ActiveRecord::Migration[5.0]
+class CreateSchedules < ActiveRecord::Migration[5.0]
   def change
-    create_table :courses do |t|
+    create_table :schedules do |t|
       t.references :room, foreign_key: true
       t.string :title
       t.decimal :code

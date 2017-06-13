@@ -1,4 +1,5 @@
 class ParserController < ApplicationController
+  before_action :authenticate_admin!
   def index
     render plain: schedules
   end
@@ -169,7 +170,7 @@ class ParserController < ApplicationController
                 }
 
                 puts schedule_data
-                create_course(schedule_data)
+                create_schedule(schedule_data)
 
               end
             end
@@ -179,12 +180,12 @@ class ParserController < ApplicationController
     end
  end
 
-  def create_course(params)
+  def create_schedule(params)
     room = create_room(params)
-    Course.where(room: room, day_of_week: params[:day_of_week], start_time: params[:start_time], end_time: params[:end_time]).first_or_create do |course|
-      course.title = params[:course][:title]
-      course.code = 0
-      course.classroom = params[:classroom]
+    Schedule.where(room: room, day_of_week: params[:day_of_week], start_time: params[:start_time], end_time: params[:end_time]).first_or_create do |schedule|
+      schedule.title = params[:course][:title]
+      schedule.code = 0
+      schedule.classroom = params[:classroom]
     end
   end
 

@@ -38,17 +38,6 @@ ActiveRecord::Schema.define(version: 20170608183329) do
     t.integer "phone"
   end
 
-  create_table "courses", force: :cascade do |t|
-    t.integer "room_id"
-    t.string  "title"
-    t.decimal "code"
-    t.string  "start_time"
-    t.string  "end_time"
-    t.integer "day_of_week"
-    t.string  "classroom"
-    t.index ["room_id"], name: "index_courses_on_room_id", using: :btree
-  end
-
   create_table "departments", force: :cascade do |t|
     t.string   "acronym"
     t.integer  "phone"
@@ -81,6 +70,17 @@ ActiveRecord::Schema.define(version: 20170608183329) do
     t.index ["building_id"], name: "index_rooms_on_building_id", using: :btree
   end
 
-  add_foreign_key "courses", "rooms"
+  create_table "schedules", force: :cascade do |t|
+    t.integer "room_id"
+    t.string  "title"
+    t.decimal "code"
+    t.string  "start_time"
+    t.string  "end_time"
+    t.integer "day_of_week"
+    t.string  "classroom"
+    t.index ["room_id"], name: "index_schedules_on_room_id", using: :btree
+  end
+
   add_foreign_key "rooms", "buildings"
+  add_foreign_key "schedules", "rooms"
 end

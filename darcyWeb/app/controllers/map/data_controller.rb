@@ -19,11 +19,11 @@ class Map::DataController < MapController
       @today = Time.now.wday
 
       @room = Room.find(params[:id])
-      @days_of_week = Course.translated_day_of_weeks
-      
+      @days_of_week = Schedule.translated_day_of_weeks
+
       @schedule = []
       @days_of_week.map do |translated, day,  index|
-        @schedule[index] = @room.courses.where(day_of_week: day)
+        @schedule[index] = @room.schedules.where(day_of_week: day)
       end
 
     end

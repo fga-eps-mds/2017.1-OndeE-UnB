@@ -72,7 +72,7 @@ FactoryGirl.define do
     title "Sala de Aula"
   end
 
-  factory :course do
+  factory :schedule do
     room
     title "Calculo 1"
     code 1234
