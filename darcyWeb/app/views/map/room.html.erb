@@ -23,14 +23,14 @@
     <ul class="nav nav-tabs nav-justified nav-days-of-week" role="tablist">
       <% @days_of_week.map do |translated, day_of_week, index| %>
       <li class="nav-item">
-        <a href="#dow<%= index %>" class="nav-link" data-toggle="tab"><%= translated %></a>
+        <a href="#dow<%= index %>" class="nav-link <%= 'active' if @today == index %>" data-toggle="tab"><%= translated %></a>
       </li>
       <% end %>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
       <% @schedule.each_with_index do |day_schedule, index| %>
-        <div class="tab-pane pt-3" id="dow<%= index %>">
+        <div class="tab-pane pt-3 <%= 'active' if @today == index %> " id="dow<%= index %>">
           <% if day_schedule.length > 0 %>
           <table class="table table-hover">
             <thead>
