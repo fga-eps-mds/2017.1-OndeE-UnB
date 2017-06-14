@@ -4,7 +4,7 @@
 $(document).ready(function() {
 
   var options = {
-    geojsonServiceAddress: "/map/search"
+    geojsonServiceAddress: "/map/search/geo"
   };
   $("#searchContainer").GeoJsonAutocomplete(options);
 
@@ -14,7 +14,7 @@ $(document).ready(function() {
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       prefetch: '/map/search',
       remote: {
-        url: '/map/search',
+        url: '/map/search?search=%QUERY',
         wildcard: '%QUERY'
       }
     });
