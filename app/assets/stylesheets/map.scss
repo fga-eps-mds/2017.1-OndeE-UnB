@@ -332,3 +332,14 @@ html {
     opacity: 0.8;
   }
 }
+
+.tutorialStyle {
+  text-align: center;
+}
+.tutorialStyle h2 {
+  font-weight: bold;
+  background-image: radial-gradient(circle at 1.98% 85.01%,#134E5E,transparent 100%),radial-gradient(circle at 98.02% 18.98%,#71B280,transparent 100%),radial-gradient(circle at 50% 50%,#0cc285,#0cc285 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
