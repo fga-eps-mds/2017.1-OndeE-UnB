@@ -70,33 +70,30 @@ describe 'Route', type: :feature do
 
 context 'Calculate the route without coordination' do
     before(:each) do
-
+      FactoryGirl.create :building
       load_routes_form
     end
 
-   it 'should autocomplete orgin field', js: true do
-      FactoryGirl.create :building
+   it 'should autocomplete origin field', js: true do
       page.execute_script('$(".input-location.origin").find(".searchBox").val("Bl").trigger("keyup")')
       wait_for_ajax
       expect(page).to have_content('Bloco')
     end
 
    it 'should autocomplete destination field', js: true do
-      FactoryGirl.create :building
       page.execute_script('$(".input-location.destination").find(".searchBox").val("Bl").trigger("keyup")')
       wait_for_ajax
       expect(page).to have_content('Bloco')
     end
 
     it 'should create foot route with origin and destination made by autocomplete', js: true do
-      FactoryGirl.create :building
       FactoryGirl.create :building2
       page.execute_script('$(".input-location.origin").find(".searchBox").val("Bl").trigger("keyup")')
+      wait_for_ajax
       page.execute_script('$(".input-location.destination").find(".searchBox").val("IC").trigger("keyup")')
       wait_for_ajax
       page.execute_script('$("#route_submit").click()')
       expect(page).to have_content('TEMPO')
-
     end
 
   end
