@@ -13,38 +13,45 @@ L.easyButton('fa-question-circle', function(btn, map) {
 
 $(".navbar")
   .attr("data-intro",
-  "<h2>Welcome!</h2><b> ao Onde é? Unb Aqui iremos mostrar como utilizar o nosso site")
+  "<h2>WELCOME!</h2> Facilite seu trajeto pela universidade com o <b>Onde é? UnB</b>, através dele você será capaz de traçar rotas entre edifícios, localizar salas, prédios, departamentos e muito mais. Para conhecer mais sobre a aplicação clique em <b>Próximo</b>.")
   .attr("data-step", "1")
   .attr("data-tooltipClass", "tutorialStyle")
   .attr("data-position", "auto");
 $("#searchContainer")
   .attr("data-intro",
-  "Aqui é possível pesquisar qualquer prédio, sala e departamento")
+  "<h2>PESQUISA</h2> Aqui é possível pesquisar qualquer <b>prédio</b>, <b>sala</b> e <b>departamento</b> da universidade!")
   .attr("data-step", "2")
+  .attr("data-tooltipClass", "tutorialStyle")
   .attr("data-position", "auto");
 $(".leaflet-control-zoom")
-  .attr("data-intro", "Oi")
+  .attr("data-intro",
+  "<h2>ZOOM</h2> Para interagir melhor com o mapa é possível dar zoom nos lugares do seu interesse. Basta clicar nos sinais de <b>+</b> e <b>-</b>.")
   .attr("data-step", "3")
+  .attr("data-tooltipClass", "tutorialStyle")
   .attr("data-position", "auto");
 $(".leaflet-bar.easy-button-container.leaflet-control").eq(0)
-  .attr("data-intro", "Rota")
+  .attr("data-intro",
+  "<h2>ROTAS</h2> Clicando nesse botão e inserindo o <b>Local de Partida</b> e o <b>Local de chegada</b>, uma rota será traçada e você vai conseguir navegar pela universidade sem nenhum problema!")
   .attr("data-step", "4")
+  .attr("data-tooltipClass", "tutorialStyle")
   .attr("data-position", "auto");
 $(".leaflet-control-layers.leaflet-control")
-  .attr("data-intro", "Filtro")
+  .attr("data-intro",
+  "<h2>PONTOS</h2> Aqui você será capaz de localizar diversos pontos da universidade, como <b>bicicletários</b>, <b>banheiros</b>, <b>lanchonetes</b>, <b>pontos de acesso</b> e <b>pontos de ônibus</b>!")
   .attr("data-step", "5")
-  .attr("data-position", "auto");
-$(".leaflet-bar.easy-button-container.leaflet-control").eq(1)
-  .attr("data-intro", "Rota")
-  .attr("data-step", "6")
+  .attr("data-tooltipClass", "tutorialStyle")
   .attr("data-position", "auto");
 $(".leaflet-contextmenu")
-  .attr("data-intro", "Context")
-  .attr("data-step", "7")
+  .attr("data-intro",
+  "<h2>MENU</h2> Clicando com o botão direito do mouse um menu irá aparecerá com opções para selecionar <b>rotas</b> e <b>compartilhar sua posição</b>!")
+  .attr("data-step", "6")
+  .attr("data-tooltipClass", "tutorialStyle")
   .attr("data-position", "auto");
 $(".leaflet-bar.easy-button-container.leaflet-control").eq(1)
-  .attr("data-intro", "Botão Tutorial")
-  .attr("data-step", "8")
+  .attr("data-intro",
+  "<h2>FIM!</h2> Chegamos ao fim! Caso tenha alguma <b>dúvida</b> ou queira ver o tutorial denovo clique nesse <b>botão</b>")
+  .attr("data-step", "7")
+  .attr("data-tooltipClass", "tutorialStyle")
   .attr("data-position", "auto");
 
 introJs.oncomplete(function() {
@@ -63,7 +70,7 @@ window.addEventListener("load", function() {
 
 introJs.onchange(function(element){
   var step = $(element).data("step");
-  if (step == 7){
+  if (step == 6){
     var center = map.getCenter();
     map.contextmenu.showAt(center);
   } else {
