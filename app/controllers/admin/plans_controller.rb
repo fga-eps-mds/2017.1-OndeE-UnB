@@ -1,5 +1,6 @@
 class Admin::PlansController < AdminController
   before_action :set_plans, only: [:destroy, :edit, :update]
+  before_action :set_buildings, only: [:new, :edit, :update, :create]
 
   def index
     @plans = Plan.all
@@ -16,7 +17,7 @@ class Admin::PlansController < AdminController
     if @plan.update(plans_params)
       redirect_to admin_plans_path, notice: helpers.alert_success('Planta editada com êxito.')
     else
-      render: edit
+      render :edit
     end
   end
 
@@ -34,11 +35,17 @@ class Admin::PlansController < AdminController
     redirect_to admin_plans_path, notice: helpers.alert_success('Planta excluída com êxito.')
   end
 
+  private
+
+  def set_buildings
+    @buildings = Building.all
+  end
+
   def set_plans
     @plan = Plan.find(params[:id])
   end
 
   def plans_params
-    params.require(:building).permit(:building, :level, :geo_data, :image)
+    params.require(:plan).permit(:building_id, :level, :geo_data, :image)
   end
 end

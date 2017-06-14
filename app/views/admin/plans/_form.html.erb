@@ -1,0 +1,36 @@
+<div class="card">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card-header">
+                <%= title %>
+            </div>
+            <div class="card-body">
+                <%= form_for(plan, url: url, validate: true) do |f| %>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <%= f.label :building_id %>
+                        <%= f.select :building_id, options_from_collection_for_select(@buildings, :id, :acronym), {}, { class: 'form-control' } %>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <%= f.label :level %>
+                      <%= f.number_field :level, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <%= f.hidden_field :image, value: plan.cached_image_data %>
+                    <%= f.file_field :image %>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <%= f.hidden_field :geo_data %>
+                    <%= f.submit 'Salvar', class: 'btn btn-sm btn-success', id: "Salvar"  %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div id="map" style="float: left;"></div>
+        </div>
+    </div>
+</div>
