@@ -5,11 +5,12 @@
   <form>
     <div class="form-group">
       <label for="route[origin]">Local de Partida</label>
-      <div class="input-location origin">
+      <div class="input-location">
         <button type="button" class="input-current-location-btn" data-toggle="tooltip" data-placement="top" title="Usar Minha Localização">
           <i class="ion-navigate"></i>
         </button>
-        <input type="text" id="route_origin" name="route[origin]" class="form-control">
+        <input type="text" class="origin form-control">
+        <input type="hidden" id="route_origin" name="route[origin]" class="form-control">
       </div>
     </div>
     <button class="btn btn-reverse-route btn-sm btn-primary float-sm-right">
@@ -17,11 +18,12 @@
     </button>
     <div class="form-group">
       <label for="route[destination]">Local de Chegada</label>
-      <div class="input-location destination">
+      <div class="input-location">
         <button type="button" class="input-current-location-btn" data-toggle="tooltip" data-placement="top" title="Usar Minha Localização">
           <i class="ion-navigate"></i>
         </button>
-        <input type="text" id="route_destination" name="route[destination]"  class="form-control">
+        <input type="text" class="destination form-control">
+        <input type="hidden" id="route_destination" name="route[destination]"  class="form-control">
       </div>
     </div>
     <div class="form-group">
