@@ -71,17 +71,14 @@ class ParserController < ApplicationController
     html = open('https://matriculaweb.unb.br/graduacao/oferta_dep.aspx?cod=1')
     html_tree = Nokogiri::HTML(html, nil, Encoding::UTF_8.to_s)
     departments_rows = html_tree.css('.FrameCinza tr')
-
-    # Pop the first department row
-    departments_rows.shift
-
+    departments_rows.shift # Remove the first department row
     departments = []
 
-    # Getting department data
     departments_rows.each do |department_row|
       acronym = department_row.at('td[2]').text
       department = department_row.at('td[3] a')
 
+      # Adds the department only if its not in the exclude list.
       unless exclude_departments.include? acronym
         department_data = {
           acronym: acronym,
