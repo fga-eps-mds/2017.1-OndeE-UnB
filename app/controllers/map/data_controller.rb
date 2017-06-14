@@ -22,7 +22,7 @@ class Map::DataController < MapController
       @days_of_week = Schedule.translated_day_of_weeks
 
       @schedule = []
-      @days_of_week.map do |translated, day,  index|
+      @days_of_week.map do |_translated, day,  index|
         @schedule[index] = @room.schedules.where(day_of_week: day)
       end
 
