@@ -6,10 +6,6 @@ describe "Tutorial", type: :feature do
 		visit root_path
 	end
 
-  # it "Should show a tutorial button", js: true do
-  #   # control = page.evaluate_script("$('.leaflet-bar.easy-button-container.leaflet-control').length")
-  #   # expect(control).to be(1)
-  # end
   it "Should show the tutorial", js:true do
     control = page.evaluate_script("$('.introjs-tooltip').length")
     expect(control).to be(1)
@@ -26,5 +22,42 @@ describe "Tutorial", type: :feature do
     control = page.evaluate_script("$('.introjs-skipbutton').length")
     expect(control).to be(1)
   end
+ it "Should show the text of step 1", js:true do
+ 	expect(page).to have_content("WELCOME!");
+ end
+ it "Should go to step 2", js:true do
+	 page.find('.introjs-nextbutton').click
+	 expect(page).to have_content("PESQUISA");
+ end
+ it "Should go to step 3", js:true do
+	 2.times do
+	 	page.find('.introjs-nextbutton').click
+	 end
+	 expect(page).to have_content("ZOOM");
+ end
+ it "Should go to step 4", js:true do
+	 3.times do
+	 	page.find('.introjs-nextbutton').click
+	 end
+	 expect(page).to have_content("ROTAS");
+ end
+ it "Should go to step 5", js:true do
+	 4.times do
+	 	page.find('.introjs-nextbutton').click
+	 end
+	 expect(page).to have_content("PONTOS");
+ end
+ it "Should go to step 6", js:true do
+	 5.times do
+	 	page.find('.introjs-nextbutton').click
+	 end
+	 expect(page).to have_content("MENU");
+ end
+ it "Should go to step 7", js:true do
+	 6.times do
+	 	page.find('.introjs-nextbutton').click
+	 end
+	 expect(page).to have_content("FIM!");
+ end
 
 end
