@@ -37,6 +37,7 @@ var loadRooms = function loadRooms(buildingKey) {
         var geoJSON = JSON.parse(room.geo_data);
         geoJSON.features[0].properties.level = room.level.toString();
         geoJSON.features[0].properties.id = room.id;
+        geoJSON.features[0].properties.acronym = room.acronym;
         geoJSON.features[0].properties.roomType = room.room_type;
         rooms.features.push(geoJSON.features[0]);
       } catch (err) {
@@ -46,6 +47,13 @@ var loadRooms = function loadRooms(buildingKey) {
 
     indoorLayer = new L.Indoor(rooms, {
       onEachFeature: function(feature, layer) {
+
+        layer.on('add', function(ev) {
+          console.log(ev);
+          layer.bindTooltip(function(layer) {
+            return layer.feature.properties.acronym; // Needs to be a string
+          }, tooltipOptions)
+        });
         // Trigger when user click on a building
         layer.on("click", function() {
           // The key references to that building clicked

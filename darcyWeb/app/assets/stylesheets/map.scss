@@ -331,3 +331,17 @@ html {
     opacity: 0.8;
   }
 }
+.tooltip{
+  background-color: transparent;
+  box-shadow: inherit;
+  border: none;
+  font-size: 0.7rem;
+  color: white;
+  margin: 0;
+}
+.leaflet-tooltip-left.tooltip::before {
+  display: none;
+}
+.leaflet-tooltip-right.tooltip::before {
+  display: none;
+}
