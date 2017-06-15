@@ -2,20 +2,24 @@
 //= require leaflet/lrm-mapzen
 //= require map/form
 //= require map/route
+//= require map/util
+
 
 class Map {
 
   constructor() {
 
+    const self = this;
+
     // enable and set options to the contextmenu
     map.contextmenu.enable();
     map.contextmenu.addItem({
       text: 'Rotas a partir daqui',
-      callback: routesFromHere
+      callback: self.routesFromHere
     });
     map.contextmenu.addItem({
       text: 'Rotas para cá',
-      callback: routesToHere
+      callback: self.routesToHere
     });
 
     this.control = L.Routing.control({
@@ -46,6 +50,56 @@ class Map {
     }).addTo(map);
 
   }
+
+  getLocation() {
+      try {
+      navigator.geolocation.getCurrentPosition(function(position){
+        positionSuccess(position, point);
+      }, positionError);
+    } catch (error) {
+      console.warn(error);
+      alert("Recurso não disponível no seu browser.");
+    }
+  }
+
+  positionSuccess(position, point) {
+  var location = {
+    latlng: {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    }
+  }
+  var inside_bounds = map.getBounds().contains(location.latlng);
+  if(inside_bounds){
+    if(point == 'origin'){
+      self.routesFromHere(location);
+    } else {
+      self.routesToHere(location);
+    }
+  } else {
+    alert("Ops... Parece que você não está no campus.");
+  }
+
+  }
+
+  positionError(error) {
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      alert("Habilite o uso da localização no browser.");
+      break;
+    case error.POSITION_UNAVAILABLE:
+      alert("Localização não disponível.");
+      break;
+    case error.TIMEOUT:
+      alert("Não foi possível obter a localização no tempo esperado.");
+      break;
+    case error.UNKNOWN_ERROR:
+      alert("Ocorreu um erro desconhecido. Tente novamente.")
+      break;
+  }
+}
+
+
 
 
 }

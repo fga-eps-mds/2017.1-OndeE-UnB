@@ -1,5 +1,7 @@
 //= require leaflet/routing-machine
 //= require leaflet/lrm-mapzen
+//= require map/util
+
 
 class Route {
 
