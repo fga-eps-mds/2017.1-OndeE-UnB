@@ -54,10 +54,16 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
+gem 'sweet-alert2-rails'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'active_record-acts_as'
 gem 'devise'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'sweet-alert'
+gem 'sweet-alert-confirm'
 
 # Gem responsible for test coverage
 gem 'simplecov', group: :test

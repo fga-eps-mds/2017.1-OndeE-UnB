@@ -1,10 +1,13 @@
+//= require sweetalert2
+//= require sweet-alert2-rails
+
 $('.buildings.new, .buildings.edit, .buildings.create, .buildings.update').ready(function() {
   // show floor plans
 
   var options = {
     polygon: true
   };
-  
+
   drawControl.enableDrawing(options);
 
   drawnLayer.on('layeradd', function(event) {
