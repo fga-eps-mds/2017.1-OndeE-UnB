@@ -1,12 +1,9 @@
-//= require leaflet/draw
-//= require leaflet/map
-//= require leaflet/draw.translations
-
 var drawnLayer;
 var drawControl;
 
-$('#map').ready(function(){
-  map.init(mapOptions);
+$(locationsPages).ready(function() {
+
+  //map.init(mapOptions);
 
   drawnLayer = L.geoJSON().addTo(map);
   drawControl = new L.Control.Draw({
