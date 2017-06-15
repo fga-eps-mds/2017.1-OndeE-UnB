@@ -1,26 +1,33 @@
-var buildingLayer = L.geoJSON('', {
+var buildingLayer = L.geoJSON(false, {
   onEachFeature: function onEachBuilding(feature, layer) {
     layer.setStyle({
-      fillColor: '#6a7c83',
+      fillColor: "#6a7c83",
       fillOpacity: 1,
-      color: '#6a7c83',
+      color: "#6a7c83",
       weight: 3
     });
+
+    layer.on('add', function(ev){
+      console.log(ev);
+      layer.bindTooltip(function(layer) {
+        return layer.feature.properties.building.title; // Needs to be a string
+      }, tooltipOptions)
+    });
     // Trigger when user click on a building
-    layer.on('click', function() {
+    layer.on("click", function() {
       // The key references to that building clicked
-      var buildingKey = this.feature.geometry.coordinates[0].key;
+      var buildingID = this.feature.properties.building.id;
 
       if (sidebar.isVisible()) {
         sidebar.hide();
       } else {
         //selects the building clicked and shows sidebar
-        var numberToBuilding = '/map/data/building/' + buildingKey;
+        var numberToBuilding = "/map/data/building/" + buildingID;
         $("#sidebar").load(numberToBuilding, function() {
           sidebar.toggle();
         });
         // Load rooms for clicked building
-        loadRooms(buildingKey);
+        loadRooms(buildingID);
       }
     });
   }
@@ -30,11 +37,16 @@ var buildingLayer = L.geoJSON('', {
 $.getJSON("/map/data/buildings", function(buildings) { //getting the json data
   buildings.forEach(function(building) {
     try {
-      var geo_json = JSON.parse(building.geo_data);
-      geo_json.features[0].geometry.coordinates[0].key = building.id;
-      buildingLayer.addData(geo_json); //adding the json data to the building layer
+      var geoJSON = JSON.parse(building.geo_data);
+      geoJSON.features[0].properties.building = {
+        id: building.id,
+        title: building.title
+      };
+      console.log(geoJSON);
+      buildingLayer.addData(geoJSON);
     } catch (err) {
-      //console.log(err);
+      console.log("Adding building");
+      console.log(err);
     }
   });
 });
