@@ -16,13 +16,13 @@ $(".navbar")
   "<h2>WELCOME!</h2> Facilite seu trajeto pela universidade com o <b>Onde é? UnB</b>, através dele você será capaz de traçar rotas entre edifícios, localizar salas, prédios, departamentos e muito mais. Para conhecer mais sobre a aplicação clique em <b>Próximo</b>.")
   .attr("data-step", "1")
   .attr("data-tooltipClass", "tutorialStyle")
-  .attr("data-position", "auto");
+  .attr("data-position", "bottom-middle-aligned");
 $("#searchContainer")
   .attr("data-intro",
   "<h2>PESQUISA</h2> Aqui é possível pesquisar qualquer <b>prédio</b>, <b>sala</b> e <b>departamento</b> da universidade!")
   .attr("data-step", "2")
   .attr("data-tooltipClass", "tutorialStyle")
-  .attr("data-position", "auto");
+  .attr("data-position", "bottom-middle-aligne");
 $(".leaflet-control-zoom")
   .attr("data-intro",
   "<h2>ZOOM</h2> Para interagir melhor com o mapa é possível dar zoom nos lugares do seu interesse. Basta clicar nos sinais de <b>+</b> e <b>-</b>.")
@@ -43,10 +43,10 @@ $(".leaflet-control-layers.leaflet-control")
   .attr("data-position", "auto");
 $(".leaflet-contextmenu")
   .attr("data-intro",
-  "<h2>MENU</h2> Clicando com o botão direito do mouse um menu irá aparecerá com opções para selecionar <b>rotas</b> e <b>compartilhar sua posição</b>!")
+  "<h2>MENU</h2> Clicando com o botão direito do mouse no mapa um menu irá aparecerá com opções para selecionar <b>rotas</b> e <b>compartilhar sua posição</b>!")
   .attr("data-step", "6")
   .attr("data-tooltipClass", "tutorialStyle")
-  .attr("data-position", "auto");
+  .attr("data-position", "bottom-middle-aligne");
 $(".leaflet-bar.easy-button-container.leaflet-control").eq(1)
   .attr("data-intro",
   "<h2>FIM!</h2> Chegamos ao fim! Caso tenha alguma <b>dúvida</b> ou queira ver o tutorial denovo clique nesse <b>botão</b>")
@@ -71,8 +71,8 @@ window.addEventListener("load", function() {
 introJs.onchange(function(element){
   var step = $(element).data("step");
   if (step == 6){
-    var center = map.getCenter();
-    map.contextmenu.showAt(center);
+    // var center = map.getCenter();
+    map.contextmenu.showAt(L.latLng(-15.759648154527714, -47.86931991577149));
   } else {
     map.contextmenu.hide();
   }
