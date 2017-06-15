@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170602025210) do
+ActiveRecord::Schema.define(version: 20170608183329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,5 +70,17 @@ ActiveRecord::Schema.define(version: 20170602025210) do
     t.index ["building_id"], name: "index_rooms_on_building_id", using: :btree
   end
 
+  create_table "schedules", force: :cascade do |t|
+    t.integer "room_id"
+    t.string  "title"
+    t.decimal "code"
+    t.string  "start_time"
+    t.string  "end_time"
+    t.integer "day_of_week"
+    t.string  "classroom"
+    t.index ["room_id"], name: "index_schedules_on_room_id", using: :btree
+  end
+
   add_foreign_key "rooms", "buildings"
+  add_foreign_key "schedules", "rooms"
 end
