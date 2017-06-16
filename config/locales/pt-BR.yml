@@ -65,6 +65,15 @@ pt-BR:
           professor_room: 'Sala de Professor'
           study_room: 'Sala de Estudo'
           amphitheater: Anfietatro
+      schedule:
+        day_of_week_list:
+          sunday: 'DOM'
+          monday: 'SEG'
+          tuesday: 'TER'
+          wednesday: 'QUA'
+          thursday: 'QUI'
+          friday: 'SEX'
+          saturday: 'SAB'
       admin:
         name: "Nome"
         password: "Senha"

@@ -1,5 +1,5 @@
 class Map::DataController < MapController
-  
+
     def buildings
         @buildings = Building.all
         render json: @buildings
@@ -12,6 +12,20 @@ class Map::DataController < MapController
     def rooms
         @rooms = Room.where(building_id: params[:building_id])
         render json: @rooms
+    end
+
+    def room
+
+      @today = Time.now.wday
+
+      @room = Room.find(params[:id])
+      @days_of_week = Schedule.translated_day_of_weeks
+
+      @schedule = []
+      @days_of_week.map do |_translated, day,  index|
+        @schedule[index] = @room.schedules.where(day_of_week: day)
+      end
+
     end
 
     def bikes
