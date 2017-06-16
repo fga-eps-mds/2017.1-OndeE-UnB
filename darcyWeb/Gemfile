@@ -76,3 +76,6 @@ gem 'translate_enum', require: 'translate_enum/active_record'
 
 # Gem for file attachments 
 gem "shrine"
+
+gem "introjs-rails"
+
