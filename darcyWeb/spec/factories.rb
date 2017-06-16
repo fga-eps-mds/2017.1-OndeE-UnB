@@ -77,6 +77,16 @@ FactoryGirl.define do
     longitude 0.0
     room_type :classroom
     title "Sala de Aula"
-
   end
+
+  factory :schedule do
+    room
+    title "Calculo 1"
+    code 1234
+    day_of_week :monday
+    start_time "08:00"
+    end_time "10:00"
+    classroom "A"
+  end
+
 end
