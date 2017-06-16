@@ -11,7 +11,7 @@ describe Plan do
 		expect(plan).to be_invalid
 	end
 
-	pending "should be invalid when geo data is blank" do
+	it "should be invalid when geo data is blank" do
 		plan = FactoryGirl.build :plan, geo_data: ''
 		expect(plan).to be_invalid
 	end

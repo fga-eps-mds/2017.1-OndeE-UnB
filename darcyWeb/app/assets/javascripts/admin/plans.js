@@ -87,7 +87,7 @@ $(plansPages).ready(function() {
     }).addTo(map);
   }
 
-  $("input[name='plan[image]'").change(function() {
+  $(".plan_image_file").change(function() {
 
     var image = this.files[0];
     if (image) {

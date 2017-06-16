@@ -15,6 +15,7 @@ describe 'Admin', type: :feature do
   context 'edit a room' do
 
     before(:each) do
+      FactoryGirl.create :plan
       @room = FactoryGirl.create :room
       visit edit_admin_room_path(@room)
     end
@@ -37,9 +38,8 @@ describe 'Admin', type: :feature do
       within('form') do
         fill_in 'room[acronym]', with: @room.acronym
         fill_in 'room[title]', with: @room.title
-        select 'BSA', from: :room_building_id
+        select 'BSA - Nivel 0', from: :room_building_id
         select 'Laboratório', from: :room_room_type
-        fill_in 'room[level]', with: @room.level
         fill_in 'room[latitude]', with: @room.latitude
         fill_in 'room[longitude]', with: @room.longitude
         first('#room_geo_data', visible: false).set(@room.geo_data)
