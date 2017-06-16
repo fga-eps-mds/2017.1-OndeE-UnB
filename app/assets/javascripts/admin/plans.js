@@ -106,6 +106,8 @@ $(plansPages).ready(function() {
 
         enableMarkersDrag();
 
+        geoData.save(overlay);
+
       }
       reader.readAsDataURL(image);
     }
