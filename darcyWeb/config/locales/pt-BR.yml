@@ -48,6 +48,18 @@ pt-BR:
               blank: "Insira a latitude."
             longitude:
               blank: "Insira a longitude"
+        plan:
+          attributes:
+            building:
+              blank: "Informe o edifício."
+            level:
+              blank: "Informe o nível."
+              not_a_number: "Insira um número."
+              not_an_integer: "Insira um número inteiro."
+            image:
+              blank: "Insira a imagem."
+            geo_data:
+              blank: "Geo Data é obrigatório."
     models:
     attributes:
       location:
@@ -59,6 +71,8 @@ pt-BR:
         title: "Título"
         acronym: "Acrônimo"
         level: "Nível"
+        building_id: "Edifício"
+        room_type: "Tipo de Sala"
         room_type_list:
           classroom: 'Sala de Aula'
           laboratory: 'Laboratório'
@@ -78,3 +92,7 @@ pt-BR:
         name: "Nome"
         password: "Senha"
         password_confirmation: "Confirmação da senha"
+      plan:
+        building_id: "Edifício"
+        level: "Nível"
+        image: "Imagem"
