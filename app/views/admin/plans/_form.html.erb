@@ -17,7 +17,7 @@
         <div class="form-group">
           <%= f.label :image %>
           <%= f.hidden_field :image, value: plan.cached_image_data, data: { image: plan.image_url } %>
-          <%= f.file_field :image, class: 'form-control' %>
+          <%= f.file_field :image, class: 'form-control plan_image_file'%>
         </div>
         <div class="form-group">
           <%= f.hidden_field :geo_data %>
