@@ -276,7 +276,6 @@ html {
   position: relative;
 
   .input-current-location-btn {
-    display: none;
     position: absolute;
     top: 0;
     right: 0;
@@ -286,11 +285,8 @@ html {
     border-radius: 0 200px 200px 0;
     background: 0 0;
     transition: all 0.5s ease;
+    z-index: 1;
   }
-}
-
-.input-location:hover .input-current-location-btn {
-  display: inline;
 }
 
 .badge {
@@ -346,4 +342,8 @@ html {
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
+}
+
+span.twitter-typeahead .tt-menu{
+  width: 100%;
 }
