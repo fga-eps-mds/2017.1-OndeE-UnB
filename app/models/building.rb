@@ -1,4 +1,5 @@
 class Building < ApplicationRecord
+  include ImageUploader[:image]
   has_many :rooms
   has_many :entrances
   has_many :plans
@@ -9,4 +10,5 @@ class Building < ApplicationRecord
   validates :latitude, numericality: true, presence: true
   validates :longitude, numericality: true, presence: true
   validates :geo_data, presence: true
+  validates :image, presence: true
 end
