@@ -3,9 +3,7 @@ class ImageUploader < Shrine
   plugin :determine_mime_type
 
  Attacher.validate do
-    validate_extension_inclusion ["png"]
-    validate_extension_inclusion ["jpg"]
-    validate_mime_type_inclusion ["image/png"]
-    validate_mime_type_inclusion ["image/jpg"]
+    validate_extension_inclusion ['png']
+    validate_mime_type_inclusion ['image/png']
   end
 end
