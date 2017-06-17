@@ -26,7 +26,12 @@ $(document).ready(function() {
     }, {
       name: 'locations',
       display: 'title',
-      source: locations
+      source: locations,
+      templates: {
+        suggestion: function(data) {
+          return '<p><strong>' + data.acronym + '</strong> - ' + data.title + '</p>';
+        }
+      }
     }).bind('typeahead:select', function(ev, suggestion) {
       var latLng = L.latLng(suggestion.latitude, suggestion.longitude);
       latLng['latlng'] = {
