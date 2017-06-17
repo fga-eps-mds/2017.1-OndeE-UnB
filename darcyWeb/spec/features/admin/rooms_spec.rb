@@ -15,12 +15,12 @@ describe 'Admin', type: :feature do
   context 'edit a room' do
 
     before(:each) do
+      FactoryGirl.create :plan
       @room = FactoryGirl.create :room
       visit edit_admin_room_path(@room)
     end
 
     it 'should save changes', js: true do
-      page.save_screenshot
       page.execute_script("$('form').submit()")
       expect(page).to have_current_path(admin_rooms_path)
     end
@@ -30,6 +30,7 @@ describe 'Admin', type: :feature do
   context 'create a new room' do
 
     before(:each) do
+      FactoryGirl.create :plan
       @room = FactoryGirl.build :room
       visit new_admin_room_path
     end
@@ -38,9 +39,8 @@ describe 'Admin', type: :feature do
       within('form') do
         fill_in 'room[acronym]', with: @room.acronym
         fill_in 'room[title]', with: @room.title
-        select 'BSA', from: :room_building_id
+        select 'BSA - Nível 0', from: :room_building_id
         select 'Laboratório', from: :room_room_type
-        fill_in 'room[level]', with: @room.level
         fill_in 'room[latitude]', with: @room.latitude
         fill_in 'room[longitude]', with: @room.longitude
         first('#room_geo_data', visible: false).set(@room.geo_data)
@@ -76,7 +76,7 @@ describe 'Admin', type: :feature do
     it 'should not create room if has not level', js: true do
 
       within('form') do
-        fill_in 'room[level]', with: ''
+        first("#room_level", visible: false).set("")
       end
 
       page.execute_script("$('form').submit()")

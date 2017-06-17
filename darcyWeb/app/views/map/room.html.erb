@@ -1,0 +1,70 @@
+<h1 class="sidebar-header"><%= "#{@room.acronym} - #{@room.title}" %></h1>
+<div class="sidebar-body">
+  <div class="row">
+    <div class="col-8 form-group">
+      <label>
+        <b>Sala</b>
+      </label>
+      <p class="form-control-static"><%= @room.title %></p>
+    </div>
+    <div class="col-4 form-group">
+      <label>
+        <b>Tipo</b>
+      </label>
+      <p class="form-control-static"><%= @room.room_type %></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>
+      <b>Programação</b>
+    </label>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs nav-justified nav-days-of-week" role="tablist">
+      <% @days_of_week.map do |translated, day_of_week, index| %>
+      <li class="nav-item">
+        <a href="#dow<%= index %>" class="nav-link <%= 'active' if @today == index %>" data-toggle="tab"><%= translated %></a>
+      </li>
+      <% end %>
+    </ul>
+    <!-- Tab panes -->
+    
+    <div class="tab-content">
+      <% @schedule.each_with_index do |day_schedule, index| %>
+        <div class="tab-pane pt-3 <%= 'active' if @today == index %> " id="dow<%= index %>">
+          <% if day_schedule.length > 0 %>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Atividade</th>
+                <th>Inicio</th>
+                <th>Fim</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% day_schedule.each do |schedule| %>
+              <tr>
+                <td>
+                  <p class="mb-0"><%= schedule.title %></p>
+                  <span class="small"><%= "Turma: #{schedule.classroom}" %></span>
+                </td>
+                <td>
+                  <span class="badge badge-success"><%= schedule.start_time %></span>
+                </td>
+                <td>
+                  <span class="badge badge-danger"><%= schedule.end_time %></span>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <div class="alert alert-warning">
+            Não há nada programado para este dia.
+          </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
