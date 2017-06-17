@@ -1,6 +1,6 @@
 class Admin::RoomsController < AdminController
   before_action :set_room, only: [:destroy, :edit, :update]
-  before_action :set_room_types, :set_buildings, only: [:new, :edit, :update, :create]
+  before_action :set_room_types, :set_plans, only: [:new, :edit, :update, :create]
 
   def index
     @rooms = Room.all
@@ -37,8 +37,8 @@ class Admin::RoomsController < AdminController
 
   private
 
-  def set_buildings
-    @buildings = Building.all
+  def set_plans
+    @plans = Plan.includes(:building).all
   end
 
   def set_room_types

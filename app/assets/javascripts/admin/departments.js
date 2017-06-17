@@ -1,4 +1,4 @@
-$('.departments.new, .departments.edit, .departments.create, .departments.update').ready(function() {
+$(departmentsPages).ready(function() {
   // show floor plans
 
   // enable drawing department
@@ -7,7 +7,7 @@ $('.departments.new, .departments.edit, .departments.create, .departments.update
   };
   drawControl.enableDrawing(options);
 
-  drawnLayer.on('layeradd', function(event) {
+  drawnLayer.on("layeradd", function(event) {
     options.polyline = false;
     drawControl.disableDrawing(options);
   });

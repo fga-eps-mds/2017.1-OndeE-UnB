@@ -16,6 +16,7 @@ describe "Search", type: :feature do
 	it "Should in delete string in search box field", js: true do
 
 		visit root_path
+		page.execute_script("introJs.exit()")
 		fill_in 'searchBox', with: string
 		find('.clearButton').click
 		expect(page).to have_no_field('searchBox', with: string)

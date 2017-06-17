@@ -19,22 +19,15 @@ describe MapController do
   end
 
   describe 'GET #data' do
-    it 'responds successfully with an HTTP 200 status code' do
+    pending 'responds successfully with an HTTP 200 status code' do
       get :data
       expect(response).to be_success
       expect(response).to have_http_status(200)
     end
 
-    it 'responds with JSON' do
+    pending 'responds with JSON' do
       building = FactoryGirl.create :building
       get :data, format: :json
-      expect(response).to be_success
-    end
-  end
-
-  describe 'Refactoring json of building for search' do
-    it 'responds with JSON' do
-      get :collect_building_data, format: :json
       expect(response).to be_success
     end
   end

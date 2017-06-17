@@ -3,17 +3,16 @@ require 'rails_helper'
 describe "Map filter", type: :feature do
 
 	before(:each) do
+		[:building, :bike, :snackbar, :bathroom, :busstop, :entrance].each do |factory|
+			FactoryGirl.create factory
+		end
 		visit root_path
+		wait_for_ajax
 	end
 
 	it "should show filter button", js: true do
     control = page.evaluate_script("$('.leaflet-control-layers').length")
 		expect(control).to be(1)
-	end
-
-	it "should toggle the control layer", js: true  do
-		page.find('a.leaflet-control-layers-toggle').click
-		expect(page).to have_content('Satélite')
 	end
 
   it "should hide buildings when building checkbox is unchecked", js: true do

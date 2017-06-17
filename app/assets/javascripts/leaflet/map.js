@@ -1,5 +1,4 @@
 // this is the common setting to starting up the map
-//=require map/data/buildings
 
 const centerMap = [-15.763654422150273, -47.86942720413208];
 const south_west = L.latLng(-15.77963740364866, -47.879254817962654);
@@ -10,8 +9,8 @@ var urlMapbox = "https://api.mapbox.com/styles/v1/kaironvzb/cj1y3dkki00042sn074l
 
 //Creating the default base layer for when the map loads
 var mapBox = L.tileLayer(urlMapbox, {
-  maxZoom: 20,
-  maxNativeZoom: 22,
+  maxZoom: 22,
+  maxNativeZoom: 20,
   attribution: '&copy; <a href="https://www.mapbox.com/map-feedback/">Mapbox</a>\
                 &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
@@ -21,8 +20,7 @@ var mapOptions = {
   center: centerMap,
   zoom: 16,
   minZoom: 16,
-  trackResize: true,
-  layers: buildingLayer,
+  trackResize: true
 };
 
 var map = {};
