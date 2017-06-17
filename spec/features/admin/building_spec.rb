@@ -20,7 +20,7 @@ describe 'Admin', type: :feature do
     end
 
     it 'should save changes', js: true do
-      page.execute_("$('form').submit()")
+      page.execute_script("$('form').submit()")
       expect(page).to have_current_path(admin_buildings_path)
     end
 
@@ -47,7 +47,7 @@ describe 'Admin', type: :feature do
 
     it 'should create a new building', js: true do
 
-      page.execute_("$('form').submit()")
+      page.execute_script("$('form').submit()")
       expect(page).to have_current_path(admin_buildings_path)
     end
 
@@ -57,7 +57,7 @@ describe 'Admin', type: :feature do
         fill_in 'building[acronym]', with: ''
       end
 
-      page.execute_("$('form').submit()")
+      page.execute_script("$('form').submit()")
       expect(page).to have_current_path(new_admin_building_path)
     end
 
@@ -67,7 +67,7 @@ describe 'Admin', type: :feature do
         fill_in 'building[title]', with: ''
       end
 
-      page.execute_("$('form').submit()")
+      page.execute_script("$('form').submit()")
       expect(page).to have_current_path(new_admin_building_path)
     end
 
@@ -77,7 +77,7 @@ describe 'Admin', type: :feature do
         fill_in 'building[phone]', with: ''
       end
 
-      page.execute_("$('form').submit()")
+      page.execute_script("$('form').submit()")
       expect(page).to have_current_path(new_admin_building_path)
     end
 
@@ -87,7 +87,7 @@ describe 'Admin', type: :feature do
         fill_in 'building[latitude]', with: ''
       end
 
-      page.execute_("$('form').submit()")
+      page.execute_script("$('form').submit()")
       expect(page).to have_current_path(new_admin_building_path)
     end
 
@@ -97,7 +97,7 @@ describe 'Admin', type: :feature do
         fill_in 'building[longitude]', with: ''
       end
 
-      page.execute_("$('form').submit()")
+      page.execute_script("$('form').submit()")
       expect(page).to have_current_path(new_admin_building_path)
     end
 
@@ -107,15 +107,15 @@ describe 'Admin', type: :feature do
         first('#building_geo_data', visible: false).set('')
       end
 
-      page.execute_("$('form').submit()")
+      page.execute_script("$('form').submit()")
       expect(page).to have_current_path(new_admin_building_path)
     end
 
     it 'should not create building without an image', js: true do
 
-      page.execute_('$("#building_image").remove()')
-      page.execute_('$("#building_image").remove()')
-      page.execute_("$('form').submit()")
+      page.execute_script('$("#building_image").remove()')
+      page.execute_script('$("#building_image").remove()')
+      page.execute_script("$('form').submit()")
       expect(page).to have_current_path(new_admin_building_path)
     end
   end
