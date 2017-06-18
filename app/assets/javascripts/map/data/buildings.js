@@ -8,9 +8,13 @@ var buildingLayer = L.geoJSON(false, {
     });
 
     layer.on('add', function(ev){
-      console.log(ev);
+
+      var content = layer.feature.properties.building.acronym;
+      // Define the offset of the label based on the word length
+      tooltipOptions.offset[0] = -(content.length) * acronymTooltipOffset;
+
       layer.bindTooltip(function(layer) {
-        return layer.feature.properties.building.title; // Needs to be a string
+        return content;
       }, tooltipOptions)
     });
     // Trigger when user click on a building
@@ -40,7 +44,8 @@ $.getJSON("/map/data/buildings", function(buildings) { //getting the json data
       var geoJSON = JSON.parse(building.geo_data);
       geoJSON.features[0].properties.building = {
         id: building.id,
-        title: building.title
+        title: building.title,
+        acronym: building.acronym
       };
       console.log(geoJSON);
       buildingLayer.addData(geoJSON);

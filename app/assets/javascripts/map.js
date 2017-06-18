@@ -14,3 +14,4 @@
 //= require_tree ./map/data
 
 //= require map/filter
+//= require map/labels
