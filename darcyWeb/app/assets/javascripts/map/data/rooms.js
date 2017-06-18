@@ -106,7 +106,7 @@ var loadRooms = function loadRooms(buildingKey) {
 
     // Clean indoor when toogled
     sidebar.on("hide", function() {
-      indoorLayer.clean();
+      indoorLayer.onRemove(map);
       map.removeControl(levelControl);
     });
 
