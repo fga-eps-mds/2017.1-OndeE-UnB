@@ -15,11 +15,11 @@ class Map {
     map.contextmenu.enable();
     map.contextmenu.addItem({
       text: 'Rotas a partir daqui',
-      callback: self.routesFromHere
+      callback: self.routesFromHere(self)
     });
     map.contextmenu.addItem({
       text: 'Rotas para cá',
-      callback: self.routesToHere
+      callback: self.routesToHere(self)
     });
 
     this.control = L.Routing.control({
@@ -35,8 +35,8 @@ class Map {
       formatter: new L.Routing.mapzenFormatter()
     }).addTo(map);
 
-    this.form = new Form();
-    this.route = new Route();
+    this.form = null;
+    this.route = null;
 
     // adds the route button to map
     L.easyButton('ion-merge', function(btn, map) {
@@ -49,6 +49,14 @@ class Map {
 
     }).addTo(map);
 
+  }
+
+  attachForm(form) {
+    this.form = form;
+  }
+
+  attachRoute(route) {
+    this.route = route;
   }
 
   getLocation() {
@@ -97,6 +105,22 @@ class Map {
       alert("Ocorreu um erro desconhecido. Tente novamente.")
       break;
   }
+}
+
+routesFromHere(e, self) {
+  console.log(self);
+  this.setRouteLocation(e, this.route.origin);
+  this.control.spliceWaypoints(0, 1, e.latlng);
+}
+
+routesToHere(e, self) {
+  console.log(self);
+  this.setRouteLocation(e, this.route.destination);
+  this.control.spliceWaypoints(this.control.getWaypoints().length - 1, 1, e.latlng);
+}
+
+setRouteLocation() {
+  alert('123132');
 }
 
 

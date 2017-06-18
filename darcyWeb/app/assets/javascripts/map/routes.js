@@ -1,42 +1,33 @@
 //= require leaflet/routing-machine
 //= require leaflet/lrm-mapzen
 //= require map/map
-
-
+//= require map/route
+//= require map/form
 
 var MapObj = new Map();
-console.log(MapObj.form);
-console.log(MapObj.route);
+var FormObj = new Form();
+var RouteObj = new Route();
+
+MapObj.attachForm(FormObj);
+MapObj.attachRoute(RouteObj);
+
+console.log('####');
+console.log(MapObj);
+console.log('####');
 
 
-// var route_form;
-
-
-
-// starts the route options.
-var control = L.Routing.control({
-  plan: L.Routing.plan([], {
-    createMarker: function() {
-      return null;
-    },
-  }),
-  autoRoute: false,
-  router: L.Routing.mapzen('mapzen-CEq2eYW', {
-    costing: 'pedestrian'
-  }),
-  formatter: new L.Routing.mapzenFormatter()
-}).addTo(map);
+// Registering Events
 
 // This function is triggered when a route is successfully calculated
-control.on('routesfound', function(e) {
+MapObj.control.on('routesfound', function(e) {
 
   console.debug("Routes found");
 
   // enable autoRoute
-  control.options.autoRoute = true;
+  MapObj.control.options.autoRoute = true;
 
   // hides the route form
-  route_form.form.fadeOut();
+  FormObj.fadeOut();
 
   // waits 1 sec to get the route instructions and load it
   // into the sidebar
@@ -51,7 +42,7 @@ control.on('routesfound', function(e) {
 
       // gets the route mode from route form.
       this.mode = function() {
-        this.mode = route_form.mode.parent('.btn.active');
+        this.mode = MapObj.form.mode.parent('.btn.active');
         this.icon = this.mode.find('i').attr('class');
         this.text = this.mode.text();
         return this;
@@ -78,72 +69,12 @@ control.on('routesfound', function(e) {
 
 });
 
-control.on('routingerror', function() {
+
+MapObj.control.on('routingerror', function() {
   // TODO Show message when it's not possible to calculate routes
 
 });
 
-// adds the route button to map
-L.easyButton('ion-merge', function(btn, map) {
-  // triggered when user clicks the routes button.
-  if (sidebar.isVisible()) {
-    unLoadRoute();
-  } else {
-    loadRouteForm({});
-  }
-
-}).addTo(map);
-
-// get the user's current position
-function getLocation(point) {
-  try {
-    navigator.geolocation.getCurrentPosition(function(position){
-      positionSuccess(position, point);
-    }, positionError);
-  } catch (error) {
-    console.warn(error);
-    alert("Recurso não disponível no seu browser.");
-  }
-}
-
-// process the user's current position to create the route
-function positionSuccess(position, point) {
-  var location = {
-    latlng: {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    }
-  }
-  var inside_bounds = map.getBounds().contains(location.latlng);
-  if(inside_bounds){
-    if(point == 'origin'){
-      routesFromHere(location);
-    } else {
-      routesToHere(location);
-    }
-  } else {
-    alert("Ops... Parece que você não está no campus.");
-  }
-
-}
-
-// process the error when it is not possible to get user position
-function positionError(error) {
-  switch (error.code) {
-    case error.PERMISSION_DENIED:
-      alert("Habilite o uso da localização no browser.");
-      break;
-    case error.POSITION_UNAVAILABLE:
-      alert("Localização não disponível.");
-      break;
-    case error.TIMEOUT:
-      alert("Não foi possível obter a localização no tempo esperado.");
-      break;
-    case error.UNKNOWN_ERROR:
-      alert("Ocorreu um erro desconhecido. Tente novamente.")
-      break;
-  }
-}
 
 // loads the routes form into the sidebar
 function loadRouteForm(data) {
@@ -155,15 +86,6 @@ function loadRouteForm(data) {
     });
 
 
-    // instantiate route form elements when the page is loaded
-    route_form = function() {
-      this.form = $('#sidebar').find('form');
-      this.origin = this.form.find('input[name="route[origin]"]');
-      this.destination = this.form.find('input[name="route[destination]"]');
-      this.mode = this.form.find('input[name="route[mode]"]');
-      this.submit = this.form.find('button[type=submit]');
-      return this;
-    }.call({});
 
     fillFormRouteLocations(data);
 
@@ -288,18 +210,6 @@ function createMarker(waypoint, latlng) {
   map.addLayer(waypoint.marker);
 }
 
-// this is performed when user clicks "Rotas a partir daqui"
-function routesFromHere(e) {
-  setRouteLocation(e, origin);
-  control.spliceWaypoints(0, 1, e.latlng);
-}
-
-// this is performed when user clicks "Rotas para cá"
-function routesToHere(e) {
-  setRouteLocation(e, destination);
-  control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
-}
-
 function reverseRoute(e) {
   e.preventDefault();
 
@@ -332,6 +242,7 @@ function reverseRoute(e) {
   route_form.destination.val(origin_latlng);
 
 }
+
 // TODO Require to fill out origin and destination in the form, before calculate route
 // TODO Add button to create a new route
 // TODO Suggest locations on whe form
