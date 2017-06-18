@@ -29,7 +29,10 @@
                             <td>
                                 <%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_admin_building_path(building) %>
                                 <%= link_to '<i class="fa fa-remove"></i>'.html_safe, admin_building_path(building), method: :delete, data: {
-                                  confirm: 'Are you ready?'
+                                  'sweet-alert-confirm': 'Alerta',
+                                  'confirm-button-text': 'Sim',
+                                  'cancel-button-text': 'Cancelar',
+                                  'text': 'Tem certeza que deseja apagar este prédio?'
                                 } %>
                             </td>
                         </tr>

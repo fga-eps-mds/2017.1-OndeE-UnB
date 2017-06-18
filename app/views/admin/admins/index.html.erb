@@ -27,7 +27,12 @@
                             <td><%= admin.name %></td>
                             <td>
                                 <%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_admin_admin_path(admin) %>
-                                <%= link_to '<i class="fa fa-remove"></i>'.html_safe, admin_admin_path(admin), method: :delete %>
+                                <%= link_to '<i class="fa fa-remove"></i>'.html_safe, admin_admin_path(admin), method: :delete, data: {
+                                  'sweet-alert-confirm': 'Alerta',
+                                  'confirm-button-text': 'Sim',
+                                  'cancel-button-text': 'Cancelar',
+                                  'text': 'Tem certeza que deseja apagar este administrador?'
+                                } %>
                             </td>
                         </tr>
                         <% end %>
