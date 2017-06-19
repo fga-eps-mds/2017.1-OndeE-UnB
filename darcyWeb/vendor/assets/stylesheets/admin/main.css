@@ -2502,7 +2502,7 @@ aside.app-sidebar {
   bottom: auto;
   right: auto;
   width: auto;
-  height: 100%;
+  /*height: 100%;*/
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
