@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608183329) do
+ActiveRecord::Schema.define(version: 20170614011033) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +58,14 @@ ActiveRecord::Schema.define(version: 20170608183329) do
     t.index ["actable_type", "actable_id"], name: "index_locations_on_actable_type_and_actable_id", using: :btree
   end
 
+  create_table "plans", force: :cascade do |t|
+    t.integer "building_id"
+    t.integer "level"
+    t.text    "geo_data"
+    t.text    "image_data"
+    t.index ["building_id"], name: "index_plans_on_building_id", using: :btree
+  end
+
   create_table "points", force: :cascade do |t|
     t.integer "type_point"
     t.text    "description"
@@ -70,6 +79,7 @@ ActiveRecord::Schema.define(version: 20170608183329) do
     t.index ["building_id"], name: "index_rooms_on_building_id", using: :btree
   end
 
+
   create_table "schedules", force: :cascade do |t|
     t.integer "room_id"
     t.string  "title"
@@ -81,6 +91,7 @@ ActiveRecord::Schema.define(version: 20170608183329) do
     t.index ["room_id"], name: "index_schedules_on_room_id", using: :btree
   end
 
+  add_foreign_key "plans", "buildings"
   add_foreign_key "rooms", "buildings"
   add_foreign_key "schedules", "rooms"
 end

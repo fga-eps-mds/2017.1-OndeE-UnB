@@ -79,28 +79,22 @@ describe 'Route', type: :feature do
     end
 
     it 'should calculate the route for pedestrian', js: true do
-      within('#sidebar form') do
-        page.all('label.btn.btn-outline-info')[0].click
-        page.execute_script('$("#route_submit").click()')
-      end
+      page.execute_script("$('label.btn.btn-outline-info').eq(0).trigger('click')")
+      page.execute_script('$("#route_submit").click()')
       expect(find('#mode_text')).to have_content('A pé')
       expect(page).to have_content('Você chegou ao seu destino.')
     end
 
     it 'should calculate the route for bicycle', js: true do
-      within('#sidebar form') do
-        page.all('label.btn.btn-outline-info')[1].click
-        page.execute_script('$("#route_submit").click()')
-      end
+      page.execute_script("$('label.btn.btn-outline-info').eq(1).trigger('click')")
+      page.execute_script('$("#route_submit").click()')
       expect(find('#mode_text')).to have_content('Bicicleta')
       expect(page).to have_content('Você chegou ao seu destino.')
     end
 
     it 'should calculate the route for car', js: true do
-      within('#sidebar form') do
-        page.all('label.btn.btn-outline-info')[2].click
-        page.execute_script('$("#route_submit").click()')
-      end
+      page.execute_script("$('label.btn.btn-outline-info').eq(2).trigger('click')")
+      page.execute_script('$("#route_submit").click()')
       expect(find('#mode_text')).to have_content('Carro')
       expect(page).to have_content('Você chegou ao seu destino.')
     end

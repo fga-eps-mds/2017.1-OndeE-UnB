@@ -9,8 +9,8 @@ var urlMapbox = "https://api.mapbox.com/styles/v1/kaironvzb/cj1y3dkki00042sn074l
 
 //Creating the default base layer for when the map loads
 var mapBox = L.tileLayer(urlMapbox, {
-  maxZoom: 20,
-  maxNativeZoom: 22,
+  maxZoom: 22,
+  maxNativeZoom: 20,
   attribution: '&copy; <a href="https://www.mapbox.com/map-feedback/">Mapbox</a>\
                 &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
