@@ -6,6 +6,7 @@
 //= require leaflet/sidebar
 //= require leaflet/geojsonautocomplete
 //= require font-awesome
+//= require introjs
 
 html body {
   height: 100%;
@@ -331,6 +332,7 @@ html {
     opacity: 0.8;
   }
 }
+
 .tooltip{
   background-color: transparent;
   box-shadow: inherit;
@@ -344,4 +346,18 @@ html {
 }
 .leaflet-tooltip-right.tooltip::before {
   display: none;
+}
+
+.tutorialStyle {
+  text-align: justify;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+}
+.tutorialStyle h2 {
+  font-weight: bold;
+  text-align: center;
+  background-image: radial-gradient(circle at 1.98% 85.01%,#134E5E,transparent 100%),radial-gradient(circle at 98.02% 18.98%,#71B280,transparent 100%),radial-gradient(circle at 50% 50%,#0cc285,#0cc285 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
 }

@@ -15,3 +15,4 @@
 
 //= require map/filter
 //= require map/labels
+//= require map/tutorial
