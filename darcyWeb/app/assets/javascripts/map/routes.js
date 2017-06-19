@@ -44,7 +44,7 @@ MapObj.control.on('routesfound', function(e) {
     // get routes translations
     $itinerarySidebar.find('tr').each(function(index, instructionRow) {
       var $instruction = $(instructionRow).find('td').eq(1);
-      
+
 
       $instruction.text(translateRoute($instruction.text()));
 
@@ -83,7 +83,7 @@ function positionSuccess(position, point) {
       lat: position.coords.latitude,
       lng: position.coords.longitude
     }
-  }
+  };
   var inside_bounds = map.getBounds().contains(location.latlng);
   if(inside_bounds){
     if(point == 'origin'){
@@ -147,14 +147,14 @@ function loadRouteForm(data) {
         MapObj.control.spliceWaypoints(MapObj.control.getWaypoints().length - 1, 1, destination_latlng);
 
         // TODO refactor
-        if (RouteObj.origin.marker == null) {
+        if (RouteObj.origin.marker === null) {
           MapObj.createMarker(Routeobj.origin, origin_latlng);
         } else {
           RouteObj.origin.marker.setLatLng(origin_latlng);
         }
 
         // TODO refactor
-        if (RouteObj.destination.marker == null) {
+        if (RouteObj.destination.marker === null) {
           MapObj.createMarker(destination, destination_latlng);
         } else {
           RouteObj.destination.marker.setLatLng(destination_latlng);
@@ -209,12 +209,12 @@ function setRouteLocation(e, waypoint) {
   } else {
     loadRouteForm(data);
   }
-  if (waypoint.marker == null) {
+  if (waypoint.marker === null) {
     MapObj.createMarker(waypoint, e.latlng);
   } else {
     waypoint.marker.setLatLng(e.latlng);
   }
-};
+}
 
 // this is performed when user clicks "Rotas a partir daqui"
 function routesFromHere(e) {
@@ -239,17 +239,17 @@ function reverseRoute(e) {
   MapObj.control.setWaypoints(waypoints.reverse());
 
   // NOTE reverse markers was so hard to figure out
-  if (RouteObj.origin.marker != null && RouteObj.destination.marker == null) {
+  if (RouteObj.origin.marker !== null && RouteObj.destination.marker === null) {
     console.log('Destination in blank.');
     MapObj.createMarker(RouteObj.destination, RouteObj.origin.marker.getLatLng());
     MapObj.removeMarker(RouteObj.origin);
-  } else if (RouteObj.destination.marker != null && RouteObj.origin.marker == null) {
+  } else if (RouteObj.destination.marker !== null && RouteObj.origin.marker === null) {
     console.log('Origin in blank');
     MapObj.createMarker(RouteObj.origin, RouteObj.destination.marker.getLatLng());
     MapObj.removeMarker(RouteObj.destination);
   }
 
-  if (RouteObj.origin.marker != null && RouteObj.destination.marker != null) {
+  if (RouteObj.origin.marker !== null && RouteObj.destination.marker !== null) {
     var latlng = RouteObj.origin.marker.getLatLng();
     RouteObj.origin.marker.setLatLng(RouteObj.destination.marker.getLatLng());
     RouteObj.destination.marker.setLatLng(latlng);
