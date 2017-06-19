@@ -15,11 +15,6 @@ describe "Map filter", type: :feature do
 		expect(control).to be(1)
 	end
 
-	it "should toggle the control layer", js: true  do
-		page.find('a.leaflet-control-layers-toggle').click
-		expect(page).to have_content('Satélite')
-	end
-
   it "should hide buildings when building checkbox is unchecked", js: true do
     # clicks the buildings checkbox
     page.execute_script("$('.leaflet-control-layers-selector').eq(2).trigger('click')")
