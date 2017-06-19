@@ -51,6 +51,7 @@ FactoryGirl.define do
     latitude 0.0
     longitude 0.0
     geo_data '{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[-47.867375314235694,-15.762756116441665],[-47.86702126264573,-15.762497981882012],[-47.866597473621376,-15.763055552119592],[-47.8669622540474,-15.763303360622453],[-47.867375314235694,-15.762756116441665]]]}}]}'
+    image_data '{"id":"6fdf0b2f6cbb6ce1ad45009a436bed30.png","storage":"cache","metadata":{"filename":"planta.png","size":1106728,"mime_type":"image/png"}}'
   end
 
 
