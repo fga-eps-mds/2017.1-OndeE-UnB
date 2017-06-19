@@ -39,4 +39,26 @@ class Map {
     }).addTo(map);
 
   }
+
+  createMarker(waypoint, latlng) {
+    waypoint.marker = L.marker(latlng, {
+      icon: L.AwesomeMarkers.icon({
+        prefix: 'ion',
+        icon: waypoint.icon,
+        markerColor: waypoint.color
+      })
+    });
+    map.addLayer(waypoint.marker);
+  }
+
+  removeMarker(waypoint) {
+    try {
+      map.removeLayer(waypoint.marker);
+      waypoint.marker = null;
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
+
 }

@@ -10,8 +10,8 @@ const MapObj = new Map();
 const RouteObj = new Route();
 let FormObj;
 
-// var route_form;
 
+/**************** REGISTERING EVENTS ****************/
 
 // This function is triggered when a route is successfully calculated
 MapObj.control.on('routesfound', function(e) {
@@ -53,6 +53,9 @@ MapObj.control.on('routingerror', function() {
 
 });
 
+/**************** POSITION ****************/
+
+
 // get the user's current position
 function getLocation(point) {
   try {
@@ -85,6 +88,9 @@ function positionSuccess(position, point) {
   }
 
 }
+
+/**************** FORM ****************/
+
 
 // loads the routes form into the sidebar
 function loadRouteForm(data) {
@@ -134,14 +140,14 @@ function loadRouteForm(data) {
 
         // TODO refactor
         if (RouteObj.origin.marker == null) {
-          createMarker(Routeobj.origin, origin_latlng);
+          MapObj.createMarker(Routeobj.origin, origin_latlng);
         } else {
           RouteObj.origin.marker.setLatLng(origin_latlng);
         }
 
         // TODO refactor
         if (RouteObj.destination.marker == null) {
-          createMarker(destination, destination_latlng);
+          MapObj.createMarker(destination, destination_latlng);
         } else {
           RouteObj.destination.marker.setLatLng(destination_latlng);
         }
@@ -156,12 +162,14 @@ function loadRouteForm(data) {
   });
 }
 
+/**************** ROUTES ****************/
+
 function unLoadRoute() {
   sidebar.hide();
 
   // remove markers from map
-  removeMarker(RouteObj.origin);
-  removeMarker(RouteObj.destination);
+  MapObj.removeMarker(RouteObj.origin);
+  MapObj.removeMarker(RouteObj.destination);
 
   // removes route from map
   MapObj.control.spliceWaypoints(0, 2);
@@ -194,31 +202,11 @@ function setRouteLocation(e, waypoint) {
     loadRouteForm(data);
   }
   if (waypoint.marker == null) {
-    createMarker(waypoint, e.latlng);
+    MapObj.createMarker(waypoint, e.latlng);
   } else {
     waypoint.marker.setLatLng(e.latlng);
   }
 };
-
-function removeMarker(waypoint) {
-  try {
-    map.removeLayer(waypoint.marker);
-    waypoint.marker = null;
-  } catch (err) {
-    console.error(err.message);
-  }
-}
-
-function createMarker(waypoint, latlng) {
-  waypoint.marker = L.marker(latlng, {
-    icon: L.AwesomeMarkers.icon({
-      prefix: 'ion',
-      icon: waypoint.icon,
-      markerColor: waypoint.color
-    })
-  });
-  map.addLayer(waypoint.marker);
-}
 
 // this is performed when user clicks "Rotas a partir daqui"
 function routesFromHere(e) {
@@ -242,12 +230,12 @@ function reverseRoute(e) {
   // NOTE reverse markers was so hard to figure out
   if (RouteObj.origin.marker != null && RouteObj.destination.marker == null) {
     console.log('Destination in blank.');
-    createMarker(RouteObj.destination, RouteObj.origin.marker.getLatLng());
-    removeMarker(RouteObj.origin);
+    MapObj.createMarker(RouteObj.destination, RouteObj.origin.marker.getLatLng());
+    MapObj.removeMarker(RouteObj.origin);
   } else if (RouteObj.destination.marker != null && RouteObj.origin.marker == null) {
     console.log('Origin in blank');
-    createMarker(RouteObj.origin, RouteObj.destination.marker.getLatLng());
-    removeMarker(RouteObj.destination);
+    MapObj.createMarker(RouteObj.origin, RouteObj.destination.marker.getLatLng());
+    MapObj.removeMarker(RouteObj.destination);
   }
 
   if (RouteObj.origin.marker != null && RouteObj.destination.marker != null) {
