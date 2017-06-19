@@ -80,8 +80,7 @@ end
 gem 'font-awesome-rails'
 gem 'translate_enum', require: 'translate_enum/active_record'
 
-# Gem for file attachments 
+# Gem for file attachments
 gem "shrine"
 
 gem "introjs-rails"
-
