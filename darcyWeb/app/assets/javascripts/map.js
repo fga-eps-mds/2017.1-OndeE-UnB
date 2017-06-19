@@ -1,3 +1,4 @@
+//= require sweetalert2
 // load leaflet libraries
 //= require leaflet/map
 //= require leaflet/context-menu
