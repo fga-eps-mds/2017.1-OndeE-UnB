@@ -1,6 +1,6 @@
 <aside class="app-sidebar" id="sidebar">
     <div class="sidebar-header">
-        <a class="sidebar-brand" href="#">
+        <a class="sidebar-brand" href="<% admin_path %>">
             <span class="highlight">Onde É</span>
             UnB</a>
         <button type="button" class="sidebar-toggle">
@@ -34,7 +34,7 @@
                 </a>
             </li>
             <li>
-                <a href="<%= admin_buildings_path %>">
+                <a href="<%= admin_rooms_path %>">
                     <div class="icon">
                         <i class="fa fa-building" aria-hidden="true"></i>
                     </div>
@@ -47,6 +47,14 @@
                         <i class="fa fa-building" aria-hidden="true"></i>
                     </div>
                     <div class="title">Pontos</div>
+                </a>
+            </li>
+            <li>
+                <a href="<%= admin_plans_path %>">
+                    <div class="icon">
+                        <i class="fa fa-building" aria-hidden="true"></i>
+                    </div>
+                    <div class="title">Plantas</div>
                 </a>
             </li>
             <li>

@@ -64,14 +64,9 @@ L.Indoor = L.Class.extend({
                 }
             }
         };
-
         this.addData(data);
     },
     addTo: function (map) {
-        map.addLayer(this);
-        return this;
-    },
-    onAdd: function (map) {
         this._map = map;
 
         if (this._level === null) {
@@ -92,26 +87,30 @@ L.Indoor = L.Class.extend({
     },
     onRemove: function (map) {
         if (this._level in this._layers) {
-            this._map.removeLayer(this._layers[this._level]);
+            for(layer in this._layers){
+              this._map.removeLayer(this._layers[this._level]);
+            }
         }
 
         this._map = null;
+    },
+    clean: function(){
+      for(level in this.getLevels()){
+        var layer = this._layers[level];
+        this._map.removeLayer(layer);
+      }
     },
     addData: function(data) {
         var layers = this._layers,
             options = this.options,
             features = L.Util.isArray(data) ? data : data.features;
-
         features.forEach(function (part) {
-
             var level = options.getLevel(part);
-
             var layer;
 
             if (typeof level === 'undefined' ||
                 level === null) {
                 // TODO: Display warning
-
                 return;
             }
 

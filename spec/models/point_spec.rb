@@ -1,69 +1,54 @@
 require 'rails_helper'
 
-describe Point do
-    it "is valid when it contains all fields inserted description" do
-        allfields = FactoryGirl.build :point, title:"Bicicletario1",latitude:"-15.761300233230024",longitude:"-47.86743164062501",geo_data:"{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Point\",\"coordinates\":[-47.86743164062501,-15.761300233230024]}}]}","type_point":"Bicicletario","description":"Bicicletario1"
-        expect(allfields).to be_valid
-    end
+describe "Point" do
+	it "is valid when it contains valid data" do
+		point = FactoryGirl.build :point
+		expect(point).to be_valid
+	end
 
-    it "is invalid when if type point is empty" do
-        typempt = FactoryGirl.build :point, title:"Bicicletario2",latitude:"-15.761300233230024",longitude:"-47.86743164062501",geo_data:"{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Point\",\"coordinates\":[-47.86743164062501,-15.761300233230024]}}]}","description":"Bicicletario1"
-        expect(typempt).to be_invalid
-    end
+	it "should be invalid when description is blank" do
+		point = FactoryGirl.build :point, description: ''
+		expect(point).to be_invalid
+	end
 
-    it "is invalid when if type point is null" do
-        typnul = FactoryGirl.build :point, title:"Bicicletario3",latitude:"-15.761300233230024",longitude:"-47.86743164062501",geo_data:"{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Point\",\"coordinates\":[-47.86743164062501,-15.761300233230024]}}]}","type_point":"","description":"Bicicletario1"
-        expect(typnul).to be_invalid
-    end
+	it "should be invalid when geo data is blank" do
+		point = FactoryGirl.build :point, geo_data: ''
+		expect(point).to be_invalid
+	end
 
-    it "is invalid when if description of point is empty" do
-        empt = FactoryGirl.build :point, title:"Bicicletario4",latitude:"-15.761300233230024",longitude:"-47.86743164062501",geo_data:"{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Point\",\"coordinates\":[-47.86743164062501,-15.761300233230024]}}]}","type_point":"Bicicletario","description":""
-        expect(empt).to be_invalid
-    end
+	it "should be invalid when latitude is blank" do
+		point = FactoryGirl.build :point, latitude: ''
+		expect(point).to be_invalid
+	end
 
-    it "is invalid when if description of point is null" do
-        nul = FactoryGirl.build :point, title:"Bicicletario5",latitude:"-15.761300233230024",longitude:"-47.86743164062501",geo_data:"{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Point\",\"coordinates\":[-47.86743164062501,-15.761300233230024]}}]}","type_point":"Bicicletario"
-        expect(nul).to be_invalid
-    end
+	it "should be invalid when latitude is not a number" do
+		point = FactoryGirl.build :point, latitude: 'NOT A NUMBER'
+		expect(point).to be_invalid
+	end
 
-    it "is invalid when geo_data is blank" do
-        icc = FactoryGirl.build :point, title:"Bicicletario3",latitude:"-15.761300233230024",longitude:"-47.86743164062501",geo_data:"","type_point":"","description":"Bicicletario1"
-        expect(icc).to be_invalid
-    end
+  it "should be invalid when longitude is blank" do
+    point = FactoryGirl.build :point, longitude: ''
+    expect(point).to be_invalid
+  end
 
-    it "is invalid when geo_data is null" do
-        icc = FactoryGirl.build :point, title:"Bicicletario3",latitude:"-15.761300233230024",longitude:"-47.86743164062501","type_point":"","description":"Bicicletario1"
-        expect(icc).to be_invalid
-    end
+	it "should be invalid when longitude is not a number" do
+		point = FactoryGirl.build :point, longitude: 'NOT A NUMBER'
+		expect(point).to be_invalid
+	end
 
-    it "is invalid when latitude is blank" do
-        icc = FactoryGirl.build :point, title:"Bicicletario1",latitude:"",longitude:"-47.86743164062501",geo_data:"{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Point\",\"coordinates\":[-47.86743164062501,-15.761300233230024]}}]}","type_point":"Bicicletario","description":"Bicicletario1"
-        expect(icc).to be_invalid
-    end
+  # it "should should raise e when point type is unknown" do
+  #   point = FactoryGirl.build :point, point_type: :some_unknown_type
+  #   expect { point }.to raise_error
+  # end
 
-    it "is invalid when latitude is null" do
-        icc = FactoryGirl.build :point, title:"Bicicletario1",longitude:"-47.86743164062501",geo_data:"{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Point\",\"coordinates\":[-47.86743164062501,-15.761300233230024]}}]}","type_point":"Bicicletario","description":"Bicicletario1"
-        expect(icc).to be_invalid
-    end
+	it "should be invalid when the title is blank" do
+		point = FactoryGirl.build :point, title: ''
+		expect(point).to be_invalid
+	end
 
-    it "is invalid when longitude is blank" do
-        icc = FactoryGirl.build :point, title:"Bicicletario1",latitude:"-15.761300233230024",longitude:"",geo_data:"{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Point\",\"coordinates\":[-47.86743164062501,-15.761300233230024]}}]}","type_point":"Bicicletario","description":"Bicicletario1"
-        expect(icc).to be_invalid
-    end
-
-    it "is invalid when longitude is blank" do
-        icc = FactoryGirl.build :point, title:"Bicicletario1",latitude:"-15.761300233230024",geo_data:"{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Point\",\"coordinates\":[-47.86743164062501,-15.761300233230024]}}]}","type_point":"Bicicletario","description":"Bicicletario1"
-        expect(icc).to be_invalid
-    end
-
-    it "is invalid when title is blank" do
-        icc = FactoryGirl.build :point, title:"",latitude:"-15.761300233230024",longitude:"-47.86743164062501",geo_data:"{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Point\",\"coordinates\":[-47.86743164062501,-15.761300233230024]}}]}","type_point":"Bicicletario","description":"Bicicletario1"
-        expect(icc).to be_invalid
-    end
-
-    it "is invalid when title is null" do
-        icc = FactoryGirl.build :point,latitude:"-15.761300233230024",longitude:"-47.86743164062501",geo_data:"{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Point\",\"coordinates\":[-47.86743164062501,-15.761300233230024]}}]}","type_point":"Bicicletario","description":"Bicicletario1"
-        expect(icc).to be_invalid
-    end
+  it "should be invalid when the title is too long" do
+    point = FactoryGirl.build :point, title: 'A TOO LONG TITLE FOR A POINT HAS MORE THAN 50 CHARACTERS'
+    expect(point).to be_invalid
+  end
 
 end

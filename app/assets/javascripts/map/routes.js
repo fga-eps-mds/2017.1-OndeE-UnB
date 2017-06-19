@@ -12,7 +12,6 @@ let FormObj;
 
 
 /**************** REGISTERING EVENTS ****************/
-
 // This function is triggered when a route is successfully calculated
 MapObj.control.on('routesfound', function(e) {
 
@@ -39,8 +38,17 @@ MapObj.control.on('routesfound', function(e) {
     // get every route instruction
     var itinerary = $('.leaflet-routing-alt').find('tbody').find('tr');
 
-    // load it into the sidebar table.
-    $('#itinerary').find('table').find('tbody').html(itinerary);
+    // load it into the sidebar table
+    var $itinerarySidebar = $('#itinerary').find('table').find('tbody');
+    $itinerarySidebar.html(itinerary);
+    // get routes translations
+    $itinerarySidebar.find('tr').each(function(index, instructionRow) {
+      var $instruction = $(instructionRow).find('td').eq(1);
+      
+
+      $instruction.text(translateRoute($instruction.text()));
+
+    });
 
     $('#itinerary').fadeIn();
 
@@ -219,6 +227,9 @@ function routesToHere(e) {
   setRouteLocation(e, RouteObj.destination);
   MapObj.control.spliceWaypoints(MapObj.control.getWaypoints().length - 1, 1, e.latlng);
 }
+
+
+
 
 function reverseRoute(e) {
   e.preventDefault();
