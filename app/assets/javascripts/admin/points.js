@@ -1,5 +1,4 @@
-//Loads and save points
-$('.points.new, .points.edit, .points.create, .points.update').ready(function() {
+$(pointsPages).ready(function() {
   // show floor plans
 
   var options = {
@@ -7,7 +6,7 @@ $('.points.new, .points.edit, .points.create, .points.update').ready(function() 
   };
   drawControl.enableDrawing(options);
 
-  drawnLayer.on('layeradd', function(event) {
+  drawnLayer.on("layeradd", function(event) {
     options.marker = false;
     drawControl.disableDrawing(options);
   });

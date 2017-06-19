@@ -61,6 +61,13 @@ FactoryGirl.define do
     password_confirmation "mds123"
   end
 
+  factory :plan do
+    building
+    level 0
+    geo_data '{"bottomLeft":{"lat":-15.758891485086423,"lng":-47.86995258182288},"topLeft":{"lat":-15.758961828036115,"lng":-47.87022884935141},"topRight":{"lat":-15.75793152725953,"lng":-47.870516180992134}}'
+    image_data '{"id":"6fdf0b2f6cbb6ce1ad45009a436bed30.png","storage":"cache","metadata":{"filename":"planta.png","size":1106728,"mime_type":"image/png"}}'
+  end
+
   factory :room do
     acronym "Sala de Aula"
     building
@@ -70,6 +77,16 @@ FactoryGirl.define do
     longitude 0.0
     room_type :classroom
     title "Sala de Aula"
-
   end
+
+  factory :schedule do
+    room
+    title "Calculo 1"
+    code 1234
+    day_of_week :monday
+    start_time "08:00"
+    end_time "10:00"
+    classroom "A"
+  end
+
 end
