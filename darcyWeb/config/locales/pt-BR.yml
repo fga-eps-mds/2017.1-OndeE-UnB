@@ -1,4 +1,8 @@
 pt-BR:
+  devise:
+    sessions:
+      admin:
+        signed_in: "Seja bem-vindo!"
   activerecord:
     errors:
       messages:
@@ -25,25 +29,70 @@ pt-BR:
               blank: "Insira a sigla do edifício."
             phone:
               blank: "Insira o número de telefone."
+        room:
+          attributes:
+            acronym:
+              blank: "Insira a sigla da sala."
+              too_long: "A sigla é muito grande."
+            room_type:
+              blank: "Insira o tipo de sala."
+            level:
+              blank: "Insira o nível da sala."
+              not_a_number: "Insira um número."
+              not_an_integer: "Insira um número inteiro."
         location:
           attributes:
             title:
-              blank: "Insira o título do edifício."
+              blank: "Insira o título."
             latitude:
               blank: "Insira a latitude."
             longitude:
               blank: "Insira a longitude"
+        plan:
+          attributes:
+            building:
+              blank: "Informe o edifício."
+            level:
+              blank: "Informe o nível."
+              not_a_number: "Insira um número."
+              not_an_integer: "Insira um número inteiro."
+            image:
+              blank: "Insira a imagem."
+            geo_data:
+              blank: "Geo Data é obrigatório."
     models:
     attributes:
       location:
         title: "Título do Local"
-        latitude: "Latitude"
-        longitude: "Longitude"
       building:
         acronym: "Sigla"
         phone: "Telefone"
-        latitude: "Latitude"
+      room:
+        title: "Título"
+        acronym: "Acrônimo"
+        level: "Nível"
+        building_id: "Edifício"
+        room_type: "Tipo de Sala"
+        room_type_list:
+          classroom: 'Sala de Aula'
+          laboratory: 'Laboratório'
+          professor_room: 'Sala de Professor'
+          study_room: 'Sala de Estudo'
+          amphitheater: Anfietatro
+      schedule:
+        day_of_week_list:
+          sunday: 'DOM'
+          monday: 'SEG'
+          tuesday: 'TER'
+          wednesday: 'QUA'
+          thursday: 'QUI'
+          friday: 'SEX'
+          saturday: 'SAB'
       admin:
         name: "Nome"
         password: "Senha"
         password_confirmation: "Confirmação da senha"
+      plan:
+        building_id: "Edifício"
+        level: "Nível"
+        image: "Imagem"

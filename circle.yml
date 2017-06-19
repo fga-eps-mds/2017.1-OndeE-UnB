@@ -13,7 +13,7 @@ dependencies:
     - cd darcyWeb && bundle exec rake db:migrate
 test:
   override:
-    - cd darcyWeb && bundle exec rake test
+    - cd darcyWeb && rspec
 deployment:
   production:
     branch: master
