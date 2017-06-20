@@ -26,43 +26,23 @@ $(document).ready(function() {
     }, {
       name: 'locations',
       display: 'title',
-      source: locations
+      source: locations,
+      templates: {
+        suggestion: function(data) {
+          return '<p><strong>' + data.acronym + '</strong> - ' + data.title + '</p>';
+        }
+      }
+    }).bind('typeahead:select', function(ev, suggestion) {
+      var latLng = L.latLng(suggestion.latitude, suggestion.longitude);
+      latLng['latlng'] = {
+        lat: latLng.lat,
+        lng: latLng.lng
+      };
+      if ($(this).hasClass('origin')) {
+        routesFromHere(latLng);
+      } else {
+        routesToHere(latLng);
+      }
     });
   });
 });
-//   sidebar.on('show', function() {
-//     $('#route_origin, #route_destination').hide();
-//     $('.input-location').GeoJsonAutocomplete(options);
-//
-//     $('#sidebar').find('.searchButton, .divider, .clearButton').remove();
-//     $('#sidebar').find('.searchContainer').removeClass('searchContainer');
-//     $('#sidebar').find('.searchBox').removeClass('searchBox').addClass('form-control');
-//
-//     $('#sidebar .form-control').find(".input-location.origin")
-//       .find(".form-control").attr("autocomplete", "off").attr("placeholder", "Partindo de onde?");
-//
-//       $('#sidebar .form-control').find(".input-location.destination")
-//         .find(".form-control").attr("autocomplete", "off").attr("placeholder", "Para onde?");
-//
-//     $('.input-location').each(function(index, input){
-//       $(input).on('DOMSubtreeModified', function() {
-//         console.log($(this).find("ul").html())
-//         $(this).find("li").each(function(index, listItem)){
-//
-//           $(listItem)
-//             var latLng = L.latLng($(this).data('latitude'), $(this).data('longitude'));
-//             latLng['latlng'] = {
-//               lat: latLng.lat,
-//               lng: latLng.lng
-//             };
-//             if($(input).hasClass('origin')){
-//               routesFromHere(latLng);
-//             } else {
-//               routesToHere(latLng);
-//             }
-//
-//         });
-//       });
-//     });
-//   });
-// });
