@@ -1,10 +1,6 @@
 //= require leaflet/routing-machine
 //= require leaflet/lrm-mapzen
-//= require map/map
-//= require map/route
-//= require map/form
-//= require map/summary
-
+//= require_tree .
 
 const MapObj = new Map();
 const RouteObj = new Route();
@@ -69,7 +65,7 @@ function getLocation(point) {
   try {
     navigator.geolocation.getCurrentPosition(function(position){
       positionSuccess(position, point);
-    } );
+    }, );
   } catch (error) {
     console.warn(error);
     alert("Recurso não disponível no seu browser.");
