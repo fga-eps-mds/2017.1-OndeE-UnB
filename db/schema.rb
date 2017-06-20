@@ -12,7 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20170614011033) do
 
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -78,7 +77,6 @@ ActiveRecord::Schema.define(version: 20170614011033) do
     t.integer "level"
     t.index ["building_id"], name: "index_rooms_on_building_id", using: :btree
   end
-
 
   create_table "schedules", force: :cascade do |t|
     t.integer "room_id"
