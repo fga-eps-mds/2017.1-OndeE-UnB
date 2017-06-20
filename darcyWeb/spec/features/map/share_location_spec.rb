@@ -25,7 +25,7 @@ describe 'Route', type: :feature do
     end
 
     it 'should show the contextmenu share location', js: true do
-      expect(page).to have_content('Compartilhar Localizacao')
+      expect(page).to have_content('Compartilhar localização')
     end
   end
 
