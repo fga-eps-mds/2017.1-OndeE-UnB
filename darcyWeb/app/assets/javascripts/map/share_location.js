@@ -1,8 +1,7 @@
 map.contextmenu.addItem({
-  text: 'Compartilhar Localizacao',
+  text: 'Compartilhar localização',
   callback: shareLocation
 });
-
 
 
 
