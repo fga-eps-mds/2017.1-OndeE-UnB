@@ -69,7 +69,7 @@ function getLocation(point) {
   try {
     navigator.geolocation.getCurrentPosition(function(position){
       positionSuccess(position, point);
-    }, );
+    } );
   } catch (error) {
     console.warn(error);
     alert("Recurso não disponível no seu browser.");
