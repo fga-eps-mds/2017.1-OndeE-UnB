@@ -1,8 +1,7 @@
 //= require leaflet/routing-machine
 //= require leaflet/lrm-mapzen
 
-class Map {
-  constructor() {
+function Map() {
     // enable and set options to the contextmenu
     map.contextmenu.enable();
     map.contextmenu.addItem({
@@ -40,7 +39,7 @@ class Map {
 
   }
 
-  createMarker(waypoint, latlng) {
+  Map.prototype.createMarker = function(waypoint, latlng) {
     waypoint.marker = L.marker(latlng, {
       icon: L.AwesomeMarkers.icon({
         prefix: 'ion',
@@ -51,7 +50,7 @@ class Map {
     map.addLayer(waypoint.marker);
   }
 
-  removeMarker(waypoint) {
+  Map.prototype.removeMarker = function(waypoint) {
     try {
       map.removeLayer(waypoint.marker);
       waypoint.marker = null;
@@ -59,6 +58,3 @@ class Map {
       console.error(err.message);
     }
   }
-
-
-}

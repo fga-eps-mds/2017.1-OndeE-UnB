@@ -4,7 +4,7 @@
 //= require map/route
 //= require map/form
 //= require map/summary
-
+//= require map/routes/translations
 
 const MapObj = new Map();
 const RouteObj = new Route();

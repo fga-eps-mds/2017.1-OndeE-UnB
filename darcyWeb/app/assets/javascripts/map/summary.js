@@ -1,8 +1,7 @@
 //= require leaflet/routing-machine
 //= require leaflet/lrm-mapzen
 
-class Summary {
-  constructor() {
+function Summary() {
     this.summary = $('.leaflet-routing-alt').find('h3').text().split(',');
     this.distance = this.summary[0];
     this.time = this.summary[1];
@@ -13,6 +12,4 @@ class Summary {
       this.text = this.mode.text();
       return this;
     };
-
-  }
 }

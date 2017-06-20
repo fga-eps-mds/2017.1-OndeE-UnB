@@ -1,8 +1,7 @@
 //= require leaflet/routing-machine
 //= require leaflet/lrm-mapzen
 
-class Route {
-  constructor() {
+function Route() {
 
     this.origin = {
       marker: null,
@@ -20,7 +19,8 @@ class Route {
 
   }
 
-  positionError(error) {
+
+  Route.prototype.positionError = function(error) {
     switch (error.code) {
       case error.PERMISSION_DENIED:
         alert("Habilite o uso da localização no browser.");
@@ -36,5 +36,3 @@ class Route {
         break;
     }
   }
-
-}
