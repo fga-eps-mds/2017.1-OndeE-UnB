@@ -92,7 +92,7 @@ control.on('routesfound', function(e) {
     // get routes translations
     $itinerarySidebar.find('tr').each(function(index, instructionRow) {
       var $instruction = $(instructionRow).find('td').eq(1);
-      
+
 
       $instruction.text(translateRoute($instruction.text()));
 

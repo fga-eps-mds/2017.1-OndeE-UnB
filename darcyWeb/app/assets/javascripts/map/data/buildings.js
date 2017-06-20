@@ -1,10 +1,10 @@
 var buildingLayer = L.geoJSON(false, {
   onEachFeature: function onEachBuilding(feature, layer) {
     layer.setStyle({
-      fillColor: "#6a7c83",
-      fillOpacity: 1,
-      color: "#6a7c83",
-      weight: 3
+      fillColor: '#856FC1',
+      fillOpacity: 0.5,
+      color: '#856FC1',
+      weight: 1.5
     });
 
     layer.on('add', function(ev){
@@ -35,7 +35,7 @@ var buildingLayer = L.geoJSON(false, {
       }
     });
   }
-}).addTo(map);
+});
 
 // Insert each building on the layer of building
 $.getJSON("/map/data/buildings", function(buildings) { //getting the json data

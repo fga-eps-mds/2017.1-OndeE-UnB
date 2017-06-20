@@ -83,7 +83,7 @@ var loadRooms = function loadRooms(buildingKey) {
           fillColor: fillColor,
           weight: 1,
           color: "#666",
-          fillOpacity: 1
+          fillOpacity: .3
         };
       }
     });
