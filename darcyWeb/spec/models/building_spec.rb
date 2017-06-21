@@ -72,9 +72,9 @@ describe Building do
 		expect(icc).to be_invalid
 	end
 
-	it "is invalid when image is blank" do
+	it "is valid even when image is blank" do
 		icc = FactoryGirl.build :building, image_data: ''
-		expect(icc).to be_invalid
+		expect(icc).to be_valid
 	end
 
 end
