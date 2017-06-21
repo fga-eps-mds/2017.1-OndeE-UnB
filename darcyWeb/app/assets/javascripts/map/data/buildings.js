@@ -1,13 +1,13 @@
 var buildingLayer = L.geoJSON(false, {
   onEachFeature: function onEachBuilding(feature, layer) {
     layer.setStyle({
-      fillColor: '#856FC1',
+      fillColor: "#856FC1",
       fillOpacity: 0.5,
-      color: '#856FC1',
+      color: "#856FC1",
       weight: 1.5
     });
 
-    layer.on('add', function(ev){
+    layer.on("add", function(ev){
 
       var content = layer.feature.properties.building.acronym;
       // Define the offset of the label based on the word length
@@ -15,7 +15,7 @@ var buildingLayer = L.geoJSON(false, {
 
       layer.bindTooltip(function(layer) {
         return content;
-      }, tooltipOptions)
+      }, tooltipOptions);
     });
     // Trigger when user click on a building
     layer.on("click", function() {
@@ -35,11 +35,12 @@ var buildingLayer = L.geoJSON(false, {
       }
     });
   }
-});
+}).addTo(map);
 
 // Insert each building on the layer of building
 $.getJSON("/map/data/buildings", function(buildings) { //getting the json data
   buildings.forEach(function(building) {
+    console.info("Adding building");
     try {
       var geoJSON = JSON.parse(building.geo_data);
       geoJSON.features[0].properties.building = {
@@ -47,11 +48,10 @@ $.getJSON("/map/data/buildings", function(buildings) { //getting the json data
         title: building.title,
         acronym: building.acronym
       };
-      console.log(geoJSON);
+      console.info(geoJSON);
       buildingLayer.addData(geoJSON);
     } catch (err) {
-      console.log("Adding building");
-      console.log(err);
+      console.error(err);
     }
   });
 });
