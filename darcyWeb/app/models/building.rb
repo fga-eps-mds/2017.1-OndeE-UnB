@@ -1,4 +1,5 @@
 class Building < ApplicationRecord
+  include ImageUploader[:image]
   has_many :rooms
   has_many :entrances
   has_many :plans
