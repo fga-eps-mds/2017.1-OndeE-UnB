@@ -11,7 +11,7 @@ describe 'Map', type: :feature do
   it 'should map zoom be at 16', js: true do
     visit root_path
     zoom = page.evaluate_script('map.getZoom()')
-    expect(zoom).to eq(16)
+    expect(zoom).to eq(14)
   end
 
   it 'should not show the sidebar when you open the map', js: true do
