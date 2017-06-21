@@ -6,9 +6,9 @@ map.init(mapOptions);
 var tooltipOptions = {
   offset: [0, 0],
   permanent: true,
-  direction: 'right',
+  direction: "right",
   opacity: 1,
-  className: 'tooltip'
+  className: "tooltip"
 };
 
 const acronymTooltipOffset = 6;

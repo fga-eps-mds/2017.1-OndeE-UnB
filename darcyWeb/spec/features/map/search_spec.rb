@@ -23,7 +23,7 @@ describe "Search", type: :feature do
 
 	end
 
-	it "Should find a department by title" , js:true do
+	pending "Should find a department by title" , js:true do
 
 		FactoryGirl.create :department
 		visit root_path
@@ -33,7 +33,7 @@ describe "Search", type: :feature do
 
 	end
 
-	it "Should find a department by acronym" , js:true do
+	pending "Should find a department by acronym" , js:true do
 
 		FactoryGirl.create :department
 		visit root_path
