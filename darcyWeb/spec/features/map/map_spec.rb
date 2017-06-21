@@ -11,7 +11,7 @@ describe 'Map', type: :feature do
   it 'should map zoom be at 16', js: true do
     visit root_path
     zoom = page.evaluate_script('map.getZoom()')
-    expect(zoom).to eq(16)
+    expect(zoom).to eq(14)
   end
 
   it 'should not show the sidebar when you open the map', js: true do
@@ -40,14 +40,18 @@ describe 'Map', type: :feature do
     expect(departments).not_to eq(0)
   end
 
-  pending "Should find a navbar", js:true do
+  it "Should find a navbar", js:true do
     visit root_path
-    expect(find('.navbar')).to have_content("Onde É? Universidade de Brasília")
+    expect(find('.navbar')).to have_content("Onde É? UnB")
   end
 
-  pending "Should find admin link on the navbar", js:true do
+  it "Should find admin link on the navbar", js:true do
     visit root_path
-    expect(find('.navbar')).to have_content("Administração")
+    page.execute_script('$(".navbar-toggler").trigger("click")')
+    wait_for_ajax
+    page.execute_script('$("#navbar a")[0].click()')
+    wait_for_ajax
+    expect(page).to have_content("Onde É UnB")
   end
 
 end

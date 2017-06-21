@@ -45,7 +45,7 @@ L.Map.ContextMenu = L.Handler.extend({
         container.style.position = 'absolute';
 
         if (map.options.contextmenuWidth) {
-            container.style.width = map.options.contextmenuWidth + 'px';
+            container.style.width = map.options.contextmenuWidth + 20 +'px';
         }
 
         this._createItems();
