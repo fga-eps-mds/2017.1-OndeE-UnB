@@ -41,6 +41,11 @@ FactoryGirl.define do
       title "Entrada de Edificio"
       type_point "Entrada de Edificio"
     end
+
+    factory :informationpoints do
+      title "Ponto de Informacao"
+      type_point "Ponto de Informacao"
+    end
   end
 
 
