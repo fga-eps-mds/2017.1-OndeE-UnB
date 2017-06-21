@@ -1,21 +1,55 @@
 //= require leaflet/routing-machine
 //= require leaflet/lrm-mapzen
-//= require map/map
-//= require map/route
-//= require map/form
-//= require map/summary
-
+//= require_tree .
 
 const MapObj = new Map();
 const RouteObj = new Route();
-let FormObj;
+var FormObj;
 
+
+sidebar.on('show', function() {
+  var locations = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: '/map/search',
+    remote: {
+      url: '/map/search?search=%QUERY',
+      wildcard: '%QUERY'
+    }
+  });
+
+  $('.input-location .origin, .input-location .destination').typeahead({
+    hint: true,
+    highlight: true,
+    minLength: 1
+  }, {
+    name: 'locations',
+    display: 'title',
+    source: locations,
+    templates: {
+      suggestion: function(data) {
+        return '<p><strong>' + data.acronym + '</strong> - ' + data.title + '</p>';
+      }
+    }
+  }).bind('typeahead:select', function(ev, suggestion) {
+    var latLng = L.latLng(suggestion.latitude, suggestion.longitude);
+    latLng['latlng'] = {
+      lat: latLng.lat,
+      lng: latLng.lng
+    };
+    if ($(this).hasClass('origin')) {
+      routesFromHere(latLng);
+    } else {
+      routesToHere(latLng);
+    }
+  });
+});
 
 /**************** REGISTERING EVENTS ****************/
 // This function is triggered when a route is successfully calculated
-MapObj.control.on('routesfound', function(e) {
+MapObj.control.on("routesfound", function(e) {
 
-  console.debug("Routes found");
+  console.info("Routes found");
 
   // enable autoRoute
   MapObj.control.options.autoRoute = true;
@@ -27,47 +61,47 @@ MapObj.control.on('routesfound', function(e) {
   // into the sidebar
   setTimeout(function() {
 
-    let summary = new Summary();
+    const summary = new Summary();
 
     // set route information
-    $('#mode_icon').removeClass().addClass(summary.mode.icon);
-    $('#mode_text').text(summary.mode.text);
-    $('#distance').text(summary.distance);
-    $('#time').text(summary.time);
+    $("#mode_icon").removeClass().addClass(summary.mode(FormObj.mode).icon);
+    $("#mode_text").text(summary.mode(FormObj.mode).text);
+    $("#distance").text(summary.distance);
+    $("#time").text(summary.time);
 
     // get every route instruction
-    var itinerary = $('.leaflet-routing-alt').find('tbody').find('tr');
+    var itinerary = $(".leaflet-routing-alt").find("tbody").find("tr");
 
     // load it into the sidebar table
-    var $itinerarySidebar = $('#itinerary').find('table').find('tbody');
+    var $itinerarySidebar = $("#itinerary").find("table").find("tbody");
     $itinerarySidebar.html(itinerary);
     // get routes translations
-    $itinerarySidebar.find('tr').each(function(index, instructionRow) {
-      var $instruction = $(instructionRow).find('td').eq(1);
+    $itinerarySidebar.find("tr").each(function(index, instructionRow) {
+      var $instruction = $(instructionRow).find("td").eq(1);
 
       $instruction.text(translateRoute($instruction.text()));
     });
 
-    $('#itinerary').fadeIn();
+    $("#itinerary").fadeIn();
 
   }, 300);
 
 });
 
-MapObj.control.on('routingerror', function() {
-  // TODO Show message when it's not possible to calculate routes
+MapObj.control.on("routingerror", function() {
+  // TODO Show message when it"s not possible to calculate routes
 
 });
 
 /**************** POSITION ****************/
 
 
-// get the user's current position
+// get the user"s current position
 function getLocation(point) {
   try {
-    navigator.geolocation.getCurrentPosition(function(position){
+    navigator.geolocation.getCurrentPosition(function(position) {
       positionSuccess(position, point);
-    }, );
+    }, RouteObj.positionError);
   } catch (error) {
     console.warn(error);
     swal("Oops...", "Recurso não disponível no seu browser.", "error");
@@ -75,7 +109,7 @@ function getLocation(point) {
 
 }
 
-// process the user's current position to create the route
+// process the user"s current position to create the route
 function positionSuccess(position, point) {
   var location = {
     latlng: {
@@ -84,8 +118,8 @@ function positionSuccess(position, point) {
     }
   };
   var inside_bounds = map.getBounds().contains(location.latlng);
-  if(inside_bounds){
-    if(point == 'origin'){
+  if (inside_bounds) {
+    if (point == "origin") {
       routesFromHere(location);
     } else {
       routesToHere(location);
@@ -104,7 +138,7 @@ function loadRouteForm(data) {
 
   $("#sidebar").load("/map/routes", function() {
 
-    $('.btn-reverse-route').on('click', function(e) {
+    $(".btn-reverse-route").on("click", function(e) {
       reverseRoute(e);
     });
 
@@ -116,50 +150,54 @@ function loadRouteForm(data) {
     fillFormRouteLocations(data);
 
     // when user clicks the button to use the current location in origin input
-    FormObj.origin.parent().find('button').on('click', function() {
-      getLocation('origin');
+    FormObj.origin.parent().find("button").on("click", function() {
+      getLocation("origin");
     });
 
     // when user clicks the button to use the current location in destination input
-    FormObj.destination.parent().find('button').on('click', function() {
-      getLocation('destination');
+    FormObj.destination.parent().find("button").on("click", function() {
+      getLocation("destination");
     });
 
     // calculate route when user clicks submit button
-    FormObj.submit.on('click', function(e) {
-      console.debug('Clicked submit button');
+    FormObj.submit.on("click", function(e) {
+
+      // Gets current selected mode.
+      FormObj.setMode();
+
+      // console.debug("Clicked submit button");
       // prevent default behavior
       e.preventDefault();
 
       // get route mode from the form and set into the control
-      MapObj.control.options.router.options.costing = FormObj.mode.parent('.btn.active').find('input').val();
+      MapObj.control.options.router.options.costing = FormObj.mode.find("input").val();
 
-      var origin_latlng = FormObj.origin.val().split(',');
-      var destination_latlng = FormObj.destination.val().split(',');
+      var originLatLng = FormObj.origin.val().split(",");
+      var destinationLatLng = FormObj.destination.val().split(",");
 
-      console.info(origin_latlng);
-      console.info(destination_latlng);
+      console.info(originLatLng);
+      console.info(destinationLatLng);
 
-      if (origin_latlng != null && destination_latlng != null) {
+      if (originLatLng != null && destinationLatLng != null) {
 
-        MapObj.control.spliceWaypoints(0, 1, origin_latlng);
-        MapObj.control.spliceWaypoints(MapObj.control.getWaypoints().length - 1, 1, destination_latlng);
+        MapObj.control.spliceWaypoints(0, 1, originLatLng);
+        MapObj.control.spliceWaypoints(MapObj.control.getWaypoints().length - 1, 1, destinationLatLng);
 
         // TODO refactor
         if (RouteObj.origin.marker === null) {
-          MapObj.createMarker(Routeobj.origin, origin_latlng);
+          MapObj.createMarker(RouteObj.origin, originLatLng);
         } else {
-          RouteObj.origin.marker.setLatLng(origin_latlng);
+          RouteObj.origin.marker.setLatLng(originLatLng);
         }
 
         // TODO refactor
         if (RouteObj.destination.marker === null) {
-          MapObj.createMarker(destination, destination_latlng);
+          MapObj.createMarker(RouteObj.destination, destinationLatLng);
         } else {
-          RouteObj.destination.marker.setLatLng(destination_latlng);
+          RouteObj.destination.marker.setLatLng(destinationLatLng);
         }
 
-        console.debug("Calculate route!");
+        console.info("Calculate route!");
         MapObj.control.route();
       }
 
@@ -188,10 +226,10 @@ function unLoadRoute() {
 // set values to location in the route form
 // when sidebar is already loaded
 function fillFormRouteLocations(data) {
-  if ('origin' in data) {
+  if ("origin" in data) {
     FormObj.origin.val(data.origin);
   }
-  if ('destination' in data) {
+  if ("destination" in data) {
     FormObj.destination.val(data.destination);
   }
 }
@@ -239,11 +277,11 @@ function reverseRoute(e) {
 
   // NOTE reverse markers was so hard to figure out
   if (RouteObj.origin.marker !== null && RouteObj.destination.marker === null) {
-    console.log('Destination in blank.');
+    console.info("Destination in blank.");
     MapObj.createMarker(RouteObj.destination, RouteObj.origin.marker.getLatLng());
     MapObj.removeMarker(RouteObj.origin);
   } else if (RouteObj.destination.marker !== null && RouteObj.origin.marker === null) {
-    console.log('Origin in blank');
+    console.info("Origin in blank");
     MapObj.createMarker(RouteObj.origin, RouteObj.destination.marker.getLatLng());
     MapObj.removeMarker(RouteObj.destination);
   }
@@ -254,12 +292,8 @@ function reverseRoute(e) {
     RouteObj.destination.marker.setLatLng(latlng);
   }
 
-  var origin_latlng = FormObj.origin.val();
-  var destination_latlng = FormObj.destination.val();
-
   // swap values in form
-  FormObj.origin.val(destination_latlng);
-  FormObj.destination.val(origin_latlng);
+  FormObj.swap();
 
 }
 // TODO Require to fill out origin and destination in the form, before calculate route

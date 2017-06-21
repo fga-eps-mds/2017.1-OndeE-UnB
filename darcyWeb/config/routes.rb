@@ -30,6 +30,12 @@ Rails.application.routes.draw do
   end
 
   namespace :map do
+
+    namespace :search do
+      get '/', action: 'search'
+      get '/geo', action: 'search_geo'
+    end
+
     namespace :data do
       get 'buildings', action: 'buildings'
       get 'departments', action: 'departments'
@@ -54,7 +60,6 @@ Rails.application.routes.draw do
   get 'map/point/:id', to: 'map#point'
 
   get 'map/routes'
-  get 'map/search', to: 'search#index'
   get 'map/building'
 
   get 'map/point'

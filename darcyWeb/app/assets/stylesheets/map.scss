@@ -7,7 +7,11 @@
 //= require leaflet/geojsonautocomplete
 //= require font-awesome
 //= require introjs
+
 //= require sweetalert2
+
+//= require jquery/typeahead
+
 
 html body {
   height: 100%;
@@ -276,7 +280,6 @@ html {
   position: relative;
 
   .input-current-location-btn {
-    display: none;
     position: absolute;
     top: 0;
     right: 0;
@@ -286,11 +289,8 @@ html {
     border-radius: 0 200px 200px 0;
     background: 0 0;
     transition: all 0.5s ease;
+    z-index: 1;
   }
-}
-
-.input-location:hover .input-current-location-btn {
-  display: inline;
 }
 
 .badge {
@@ -334,6 +334,21 @@ html {
   }
 }
 
+.tooltip{
+  background-color: transparent;
+  box-shadow: inherit;
+  border: none;
+  font-size: 0.7rem;
+  color: white;
+  margin: 0;
+}
+.leaflet-tooltip-left.tooltip::before {
+  display: none;
+}
+.leaflet-tooltip-right.tooltip::before {
+  display: none;
+}
+
 .tutorialStyle {
   text-align: justify;
   font-family: "Roboto", sans-serif;
@@ -353,3 +368,8 @@ html {
 .swal2-container {
   z-index: 10000;
 }
+
+span.twitter-typeahead .tt-menu{
+  width: 100%;
+}
+
