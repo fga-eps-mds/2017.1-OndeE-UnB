@@ -7,6 +7,44 @@ const RouteObj = new Route();
 var FormObj;
 
 
+sidebar.on('show', function() {
+  var locations = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: '/map/search',
+    remote: {
+      url: '/map/search?search=%QUERY',
+      wildcard: '%QUERY'
+    }
+  });
+
+  $('.input-location .origin, .input-location .destination').typeahead({
+    hint: true,
+    highlight: true,
+    minLength: 1
+  }, {
+    name: 'locations',
+    display: 'title',
+    source: locations,
+    templates: {
+      suggestion: function(data) {
+        return '<p><strong>' + data.acronym + '</strong> - ' + data.title + '</p>';
+      }
+    }
+  }).bind('typeahead:select', function(ev, suggestion) {
+    var latLng = L.latLng(suggestion.latitude, suggestion.longitude);
+    latLng['latlng'] = {
+      lat: latLng.lat,
+      lng: latLng.lng
+    };
+    if ($(this).hasClass('origin')) {
+      routesFromHere(latLng);
+    } else {
+      routesToHere(latLng);
+    }
+  });
+});
+
 /**************** REGISTERING EVENTS ****************/
 // This function is triggered when a route is successfully calculated
 MapObj.control.on("routesfound", function(e) {
@@ -255,12 +293,8 @@ function reverseRoute(e) {
     RouteObj.destination.marker.setLatLng(latlng);
   }
 
-  var originLatLng = FormObj.origin.val();
-  var destinationLatLng = FormObj.destination.val();
-
   // swap values in form
-  FormObj.origin.val(destinationLatLng);
-  FormObj.destination.val(originLatLng);
+  FormObj.swap();
 
 }
 // TODO Require to fill out origin and destination in the form, before calculate route
