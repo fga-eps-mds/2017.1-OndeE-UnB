@@ -1,9 +1,9 @@
 var buildingLayer = L.geoJSON(false, {
   onEachFeature: function onEachBuilding(feature, layer) {
     layer.setStyle({
-      fillColor: "#856FC1",
-      fillOpacity: 0.5,
-      color: "#856FC1",
+      fillColor: buildingStyles[mapOptions.baseLayer].color,
+      fillOpacity: buildingStyles[mapOptions.baseLayer].fillOpacity,
+      color: buildingStyles[mapOptions.baseLayer].color,
       weight: 1.5
     });
 
