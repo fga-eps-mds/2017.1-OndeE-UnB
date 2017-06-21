@@ -14,7 +14,7 @@ var setLabelContent = function setLabelContent(tooltip, content, offset) {
   tooltip.setContent(content);
 }
 
-map.on('moveend', function(e) {
+map.on("moveend", function(e) {
 
   buildingLayer.getLayers().forEach(function(building) {
 
