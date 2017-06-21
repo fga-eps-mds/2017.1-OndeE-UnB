@@ -23,4 +23,5 @@
 
 coverage
 
-public/uploads
+
+/public/uploads/*

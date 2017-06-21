@@ -45,7 +45,7 @@ var loadRooms = function loadRooms(buildingKey) {
         }
         rooms.features.push(geoJSON.features[0]);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     });
 
@@ -83,7 +83,7 @@ var loadRooms = function loadRooms(buildingKey) {
           fillColor: fillColor,
           weight: 1,
           color: "#666",
-          fillOpacity: .3
+          fillOpacity: roomStyles[mapOptions.baseLayer].fillOpacity
         };
       }
     });

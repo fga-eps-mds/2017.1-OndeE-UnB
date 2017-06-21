@@ -1,5 +1,4 @@
 // this is the common setting to starting up the map
-//= require map/data/buildings
 //= require leaflet/mask
 
 const centerMap = [-15.758140620981214, -47.87189483642578];
@@ -23,8 +22,7 @@ var mapOptions = {
   center: centerMap,
   zoom: 13.5,
   minZoom: 13.5,
-  trackResize: true,
-  layers: buildingLayer,
+  trackResize: true
 };
 
 var map = {};
