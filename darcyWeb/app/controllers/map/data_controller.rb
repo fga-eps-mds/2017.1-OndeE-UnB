@@ -53,6 +53,11 @@ class Map::DataController < MapController
         render json: @entrances
     end
 
+    def informationpoints
+        @informationpoints = Point.where(type_point: "Ponto de Informacao")
+        render json: @informationpoints
+    end
+
     def departments
         @departments = Department.all
         render json: @departments

@@ -1,4 +1,4 @@
-<p align="center"><a href="https://vuejs.org" target="_blank"><img width="340"src="http://i.imgur.com/MXSzQCq.jpg"></a></p>
+<p align="center"><img width="300" src="https://s11.postimg.org/wvguvenmb/Captura_de_tela_de_2017-06-05_17-22-56.png"></p>
 
 <p align="center">
 <a href="https://circleci.com/gh/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://circleci.com/gh/fga-gpp-mds/2017.1-OndeE-UnB.svg?style=shield&circle-token=:circle-token" alt="Build Status"></a>
