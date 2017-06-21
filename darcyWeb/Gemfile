@@ -79,3 +79,5 @@ gem "shrine"
 
 gem "introjs-rails"
 
+# Dump database
+gem 'seed_dump'
