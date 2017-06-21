@@ -55,9 +55,9 @@ $(plansPages).ready(function() {
   geoData.load();
 
   function enableMarkersDrag() {
-    markerTopLeft.on('drag dragend', repositionImage);
-    markerTopRight.on('drag dragend', repositionImage);
-    markerBottomLeft.on('drag dragend', repositionImage);
+    markerTopLeft.on("drag dragend", repositionImage);
+    markerTopRight.on("drag dragend", repositionImage);
+    markerBottomLeft.on("drag dragend", repositionImage);
   }
 
   // Removes the current overlay and the markers

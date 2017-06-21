@@ -1,10 +1,10 @@
 //Bathrooms
 
-var bathroomLayer = L.geoJSON('', {
+var bathroomLayer = L.geoJSON("", {
   pointToLayer: function(feature, latlng) {
     var smallIcon = new L.Icon({
       // TODO Remove direct link to image
-      iconUrl: 'http://icons.iconarchive.com/icons/rokey/smooth/32/toilet-paper-icon.png',
+      iconUrl: "http://icons.iconarchive.com/icons/rokey/smooth/32/toilet-paper-icon.png",
       iconSize: [24, 24],
     });
     return L.marker(latlng, {
@@ -20,7 +20,7 @@ $.getJSON("/map/data/bathrooms", function(bathrooms) { //getting the json data
       var geoJSON = JSON.parse(bathroom.geo_data);
       bathroomLayer.addData(geoJSON); //adding the json data to the building layer
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   });
 });
