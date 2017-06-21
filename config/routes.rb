@@ -26,13 +26,21 @@ Rails.application.routes.draw do
     resources :departments, except: [:show]
     resources :admins, except: [:show]
     resources :points, except: [:show]
+    resources :plans, except: [:show]
   end
 
   namespace :map do
+
+    namespace :search do
+      get '/', action: 'search'
+      get '/geo', action: 'search_geo'
+    end
+
     namespace :data do
       get 'buildings', action: 'buildings'
       get 'departments', action: 'departments'
       get 'building/:id', action: 'building'
+      get 'room/:id', action: 'room', as: :room
       get 'rooms/:building_id', action: 'rooms'
       get 'bikes', action: 'bikes'
       get 'bathrooms', action: 'bathrooms'
@@ -48,17 +56,15 @@ Rails.application.routes.draw do
 
   get "parse", to:"parser#index"
 
-  get 'map/building/:id', to: 'map#building'
-  get 'parse', to:'parser#get_departaments'
-
   get 'map/datapoint'
   get 'map/point/:id', to: 'map#point'
 
   get 'map/routes'
-  get 'map/search', to: 'search#index'
   get 'map/building'
 
   get 'map/point'
+
+
 
   # Provisory method to destroy points and buildings
   get 'admin/points/:id', to: 'admin/points#destroy'

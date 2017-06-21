@@ -1,6 +1,8 @@
 class Building < ApplicationRecord
+  include ImageUploader[:image]
   has_many :rooms
   has_many :entrances
+  has_many :plans
   acts_as :location
   validates :acronym, length: { maximum: 20 }, presence: true
   validates :title, length: { maximum: 50 }, presence: true
