@@ -45,7 +45,7 @@ var loadRooms = function loadRooms(buildingKey) {
         }
         rooms.features.push(geoJSON.features[0]);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     });
 
