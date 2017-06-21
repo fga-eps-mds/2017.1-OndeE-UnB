@@ -7,7 +7,7 @@ var introJs = introJs().setOption("nextLabel", " Próximo ")
 .setOption("showStepNumbers", false);
 
 
-L.easyButton('fa-question-circle', function(btn, map) {
+L.easyButton("fa-question-circle", function(btn, map) {
   introJs.start();
 }).addTo(map);
 
@@ -63,7 +63,7 @@ introJs.onexit(function(){
 });
 
 window.addEventListener("load", function() {
-  if(!localStorage.hasOwnProperty('hideTutorial')){
+  if(!localStorage.hasOwnProperty("hideTutorial")){
     introJs.start();
   }
 });
