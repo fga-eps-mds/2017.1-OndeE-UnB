@@ -10,4 +10,5 @@ class Building < ApplicationRecord
   validates :latitude, numericality: true, presence: true
   validates :longitude, numericality: true, presence: true
   validates :geo_data, presence: true
+  validates :acronym , uniqueness: true
 end

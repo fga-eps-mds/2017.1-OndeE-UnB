@@ -1,0 +1,5 @@
+class AddUniqueIndexToRooms < ActiveRecord::Migration[5.0]
+  def change
+  	add_index :rooms, [:acronym], unique: true
+  end
+end
