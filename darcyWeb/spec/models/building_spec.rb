@@ -41,6 +41,11 @@ describe Building do
 		expect(icc).to be_valid
 	end
 
+	it "should return valid if there is the presence of a string image" do
+		icc = FactoryGirl.build :building, image_data: '{"id":"6fdf0b2f6cbb6ce1ad45009a436bed30.png","storage":"cache","metadata":{"filename":"planta.png","size":1106728,"mime_type":"image/png"}}'
+		expect(icc).to be_valid
+	end
+
 
 	it "is invalid when geo_data is blank" do
 		icc = FactoryGirl.build :building, geo_data: ''
@@ -65,6 +70,11 @@ describe Building do
 	it "is invalid when acronym is blank" do
 		icc = FactoryGirl.build :building, acronym: ''
 		expect(icc).to be_invalid
+	end
+
+	it "is valid even when image is blank" do
+		icc = FactoryGirl.build :building, image_data: ''
+		expect(icc).to be_valid
 	end
 
 end
