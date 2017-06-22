@@ -79,9 +79,7 @@ MapObj.control.on("routesfound", function(e) {
     $itinerarySidebar.find("tr").each(function(index, instructionRow) {
       var $instruction = $(instructionRow).find("td").eq(1);
 
-
       $instruction.text(translateRoute($instruction.text()));
-
     });
 
     $("#itinerary").fadeIn();
@@ -106,8 +104,9 @@ function getLocation(point) {
     }, RouteObj.positionError);
   } catch (error) {
     console.warn(error);
-    alert("Recurso não disponível no seu browser.");
+    swal("Oops...", "Recurso não disponível no seu browser.", "error");
   }
+
 }
 
 // process the user"s current position to create the route
@@ -126,7 +125,7 @@ function positionSuccess(position, point) {
       routesToHere(location);
     }
   } else {
-    alert("Ops... Parece que você não está no campus.");
+    swal('Oops...', 'Parece que você não está no campus.', 'error');
   }
 
 }

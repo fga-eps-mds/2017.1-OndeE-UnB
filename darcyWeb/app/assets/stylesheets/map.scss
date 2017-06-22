@@ -7,7 +7,11 @@
 //= require leaflet/geojsonautocomplete
 //= require font-awesome
 //= require introjs
+
+//= require sweetalert2
+
 //= require jquery/typeahead
+
 
 html body {
   height: 100%;
@@ -358,7 +362,14 @@ html {
   -webkit-background-clip: text;
   background-clip: text;
 }
+.swal2-container.fade {
+  opacity: inherit;
+}
+.swal2-container {
+  z-index: 10000;
+}
 
 span.twitter-typeahead .tt-menu{
   width: 100%;
 }
+
