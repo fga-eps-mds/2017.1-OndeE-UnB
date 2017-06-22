@@ -8,6 +8,7 @@
 //= require font-awesome
 //= require introjs
 //= require jquery/typeahead
+//= require sweetalert2
 
 html body {
   height: 100%;
@@ -361,4 +362,8 @@ html {
 
 span.twitter-typeahead .tt-menu{
   width: 100%;
+}
+
+.swal2-container.fade {
+ opacity: inherit;
 }
