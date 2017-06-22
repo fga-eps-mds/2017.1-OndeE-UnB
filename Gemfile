@@ -61,6 +61,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Gem responsible for test coverage
 gem 'simplecov', group: :test
+gem 'coveralls', require: false
 
 gem 'rails-controller-testing'
 
