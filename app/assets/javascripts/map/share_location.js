@@ -50,7 +50,7 @@ function setSharedLocation(e, waypoint) {
   var linkUrl = window.location.host;
   linkUrl += "/findme?lat=" + lat + "&lng=" + lng;
   copyToClipboard(linkUrl);
-  alert("Link copiado, cole onde desejar e envie para seu colega!");
+  swal("Link copiado", "Cole onde desejar e envie para seu colega!", "success")
 };
 
 

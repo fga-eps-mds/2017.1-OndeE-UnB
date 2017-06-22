@@ -4,6 +4,7 @@
 //= require leaflet/awesome-markers
 //= require leaflet/indoor-map
 //= require leaflet/easy-button
+//= require sweetalert2
 
 //= require map/init
 //= require map/sidebar

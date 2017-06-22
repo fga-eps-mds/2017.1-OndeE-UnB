@@ -18,16 +18,16 @@ function Route() {
 Route.prototype.positionError = function(error) {
   switch (error.code) {
     case error.PERMISSION_DENIED:
-      alert("Habilite o uso da localização no browser.");
+      swal("Oops...", "Habilite o uso da localização no browser.", "error");
       break;
     case error.POSITION_UNAVAILABLE:
-      alert("Localização não disponível.");
+      swal("Oops...", "Localização não disponível.", "error");
       break;
     case error.TIMEOUT:
-      alert("Não foi possível obter a localização no tempo esperado.");
+      swal("Oops...", "Não foi possível obter a localização no tempo esperado.", "error");
       break;
     case error.UNKNOWN_ERROR:
-      alert("Ocorreu um erro desconhecido. Tente novamente.")
+      swal("Oops...", "Ocorreu um erro desconhecido. Tente novamente.", "error");
       break;
   }
 }
