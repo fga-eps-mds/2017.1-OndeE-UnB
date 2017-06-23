@@ -17,6 +17,18 @@ const roomColor = function color(type) {
     case "amphitheater":
       color = "#8BC34A";
       break;
+    case "academic_center":
+      color = "#2A7E43";
+      break;
+    case "kitchen":
+      color = "#A56300";
+      break;
+    case "SAA":
+      color = "#AA3939";
+      break;
+    case "others":
+      color = "#000";
+      break;
   }
 
   return color;
