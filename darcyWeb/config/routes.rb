@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 
   devise_scope :admin do
@@ -30,7 +29,6 @@ Rails.application.routes.draw do
   end
 
   namespace :map do
-
     namespace :search do
       get '/', action: 'search'
       get '/geo', action: 'search_geo'
@@ -51,10 +49,10 @@ Rails.application.routes.draw do
   end
 
   get 'map/data'
-  get "map/building/:id", to:"map#building"
-  get "map/routes"
+  get 'map/building/:id', to: 'map#building'
+  get 'map/routes'
 
-  get "parse", to:"parser#index"
+  get 'parse', to: 'parser#index'
 
   get 'map/datapoint'
   get 'map/point/:id', to: 'map#point'
@@ -63,8 +61,6 @@ Rails.application.routes.draw do
   get 'map/building'
 
   get 'map/point'
-
-
 
   # Provisory method to destroy points and buildings
   get 'admin/points/:id', to: 'admin/points#destroy'
