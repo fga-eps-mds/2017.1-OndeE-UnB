@@ -3,7 +3,7 @@
 <p align="center">
 <a href="https://circleci.com/gh/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://circleci.com/gh/fga-gpp-mds/2017.1-OndeE-UnB.svg?style=shield&circle-token=:circle-token" alt="Build Status"></a>
 <a href="https://codeclimate.com/github/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://img.shields.io/codeclimate/github/fga-gpp-mds/2017.1-OndeE-UnB.svg" alt="Build Status"></a>
-<a href='https://coveralls.io/github/fga-gpp-mds/2017.1-OndeE-UnB?branch=devel'><imgsrc='https://coveralls.io/repos/github/fga-gpp-mds/2017.1-OndeE-UnB/badge.svg?branch=devel' alt='Coverage Status' /></a>
+<a href='https://coveralls.io/github/fga-gpp-mds/2017.1-OndeE-UnB?branch=devel'><img src='https://coveralls.io/repos/github/fga-gpp-mds/2017.1-OndeE-UnB/badge.svg?branch=devel' alt='Coverage Status' /></a>
 <a href="(https://github.com/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://img.shields.io/badge/ruby-2.3.1-blue.svg"></a>
 <a href="(https://github.com/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://img.shields.io/badge/rails-5.0.2-blue.svg"></a>
 <a href="http://www.gnu.org/licenses/agpl-3.0"><img src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg" alt="License: AGPL v3"></a>
