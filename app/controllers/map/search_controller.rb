@@ -3,9 +3,8 @@ class Map::SearchController < MapController
   def locations
     puts params[:search]
     buildings = search_buildings(params[:search])
-    departments = search_deparments(params[:search])
     rooms = search_rooms(params[:search])
-    buildings + departments + rooms
+    buildings + rooms
   end
 
   def search
@@ -29,9 +28,6 @@ class Map::SearchController < MapController
         title = feature.acronym
         description = feature.title
         image = 'fa-building'
-      when 'Department'
-        title = feature.acronym
-        description = feature.title
       when 'Room'
         title = feature.title
         description = feature.room_type
@@ -66,11 +62,6 @@ class Map::SearchController < MapController
   def search_rooms(search)
     search = "%#{search}%"
     Room.joins(:location).where("locations.title ILIKE ? OR acronym ILIKE ? ", search, search)
-  end
-
-  def search_deparments(search)
-    search = "%#{search}%"
-    Department.joins(:location).where("locations.title ILIKE ? OR acronym ILIKE ? ", search, search)
   end
 
   def search_buildings(search)
