@@ -41,68 +41,69 @@
 
         $(this).each(function () {
             var element = $(this);
+            console.log()
             element.addClass("searchContainer");
             element.append('<input id="searchBox" class="searchBox" placeholder="' + options.placeholderMessage + '"/>');
             element.append('<input id="searchButton" class="searchButton" type="submit" value="" title="' + options.searchButtonTitle + '"/>');
             element.append('<span class="divider"></span>');
             element.append('<input id="clearButton" class="clearButton" type="submit"  value="" title="' + options.clearButtonTitle + '">');
 
-            $("#searchBox")[0].value = "";
-            $("#searchBox").delayKeyup(function (event) {
+            element.find("#searchBox")[0].value = "";
+            element.find("#searchBox").delayKeyup(function (event) {
                 switch (event.keyCode) {
                     case 13: // enter
-                        searchButtonClick();
+                        searchButtonClick(element);
                         break;
                     case 38: // up arrow
-                        prevResult();
+                        prevResult(element);
                         break;
                     case 40: // down arrow
-                        nextResult();
+                        nextResult(element);
                         break;
                     case 37: //left arrow, Do Nothing
                     case 39: //right arrow, Do Nothing
                         break;
                     default:
-                        if ($("#searchBox")[0].value.length > 0) {
+                        if (element.find("#searchBox")[0].value.length > 0) {
                             offset = 0;
-                            getValuesAsGeoJson(false);
+                            getValuesAsGeoJson(false, element);
                         }
                         else {
-                            clearButtonClick();
+                            clearButtonClick(element);
                         }
                         break;
                 }
             }, 300);
 
-            $("#searchBox").focus(function () {
-                if ($("#resultsDiv")[0] !== undefined) {
-                    $("#resultsDiv")[0].style.visibility = "visible";
+            element.find("#searchBox").focus(function () {
+                if (element.find("#resultsDiv")[0] !== undefined) {
+                    element.find("#resultsDiv")[0].style.visibility = "visible";
                 }
             });
 
-            $("#searchBox").blur(function () {
-                if ($("#resultsDiv")[0] !== undefined) {
+            element.find("#searchBox").blur(function () {
+                if (element.find("#resultsDiv")[0] !== undefined) {
                     if (collapseOnBlur) {
-                        $("#resultsDiv")[0].style.visibility = "collapse";
+                        element.find("#resultsDiv")[0].style.visibility = "collapse";
                     }
                     else {
                         collapseOnBlur = true;
 
                         window.setTimeout(function ()
                         {
-                            $("#searchBox").focus();
+                            element.find("#searchBox").focus();
                         }, 0);
                     }
                 }
 
             });
 
-            $("#searchButton").click(function () {
-                searchButtonClick();
+            element.find("#searchButton").click(function () {
+                searchButtonClick(element);
             });
 
-            $("#clearButton").click(function () {
-                clearButtonClick();
+            element.find("#clearButton").click(function () {
+                clearButtonClick(element);
             });
         });
     };
@@ -124,7 +125,7 @@
         return $(this);
     };
 
-    function getValuesAsGeoJson(withPaging) {
+    function getValuesAsGeoJson(withPaging, element) {
 
         activeResult = -1;
         features = [];
@@ -133,7 +134,7 @@
         if (withPaging) {
             limitToSend++;
         }
-        lastSearch = $("#searchBox")[0].value;
+        lastSearch = element.find("#searchBox")[0].value;
 
         if (lastSearch === "") {
             return;
@@ -169,28 +170,28 @@
                     else
                         featureCollection = json.features;
                 }
-                createDropDown(withPaging);
+                createDropDown(withPaging, element);
                 searchLayerType = (withPaging ? 1 : 0);
             },
             error: function () {
-                processNoRecordsFoundOrError();
+                processNoRecordsFoundOrError(element);
             }
         });
 
     }
 
-    function createDropDown(withPaging) {
-        var parent = $("#searchBox").parent();
+    function createDropDown(withPaging, element) {
+        var parent = element.find("#searchBox").parent();
 
-        $("#resultsDiv").remove();
+        element.find("#resultsDiv").remove();
         parent.append("<div id='resultsDiv' class='result'><ul id='resultList' class='list'></ul><div>");
 
-        $("#resultsDiv")[0].style.position = $("#searchBox")[0].style.position;
-        $("#resultsDiv")[0].style.left = (parseInt($("#searchBox")[0].style.left) - 10) + "px";
-        $("#resultsDiv")[0].style.bottom = $("#searchBox")[0].style.bottom;
-        $("#resultsDiv")[0].style.right = $("#searchBox")[0].style.right;
-        $("#resultsDiv")[0].style.top = (parseInt($("#searchBox")[0].style.top) + 25) + "px";
-        $("#resultsDiv")[0].style.zIndex = $("#searchBox")[0].style.zIndex;
+        element.find("#resultsDiv")[0].style.position = element.find("#searchBox")[0].style.position;
+        element.find("#resultsDiv")[0].style.left = (parseInt(element.find("#searchBox")[0].style.left) - 10) + "px";
+        element.find("#resultsDiv")[0].style.bottom = element.find("#searchBox")[0].style.bottom;
+        element.find("#resultsDiv")[0].style.right = element.find("#searchBox")[0].style.right;
+        element.find("#resultsDiv")[0].style.top = (parseInt(element.find("#searchBox")[0].style.top) + 25) + "px";
+        element.find("#resultsDiv")[0].style.zIndex = element.find("#searchBox")[0].style.zIndex;
 
         var loopCount = features.length;
         var hasMorePages = false;
@@ -201,23 +202,23 @@
         }
 
         for (var i = 0; i < loopCount; i++) {
-
-            var html = "<li id='listElement" + i + "' class='listResult'>";
+            console.log(features);
+            var html = "<li id='listElement" + i + "' class='listResult' data-latitude='"+ features[i].properties.latitude +"' data-longitude='"+ features[i].properties.longitude +"'>";
             //html += "<span id='listElementContent" + i + "' class='content'><img src='./image/" + features[i].properties.image + "' class='iconStyle' align='middle'>";
             html += "<font size='2' color='#333' class='title'>" + features[i].properties.title + "</font><font size='1' color='#8c8c8c'> " + features[i].properties.description + "<font></span></li>";
 
-            $("#resultList").append(html);
+            element.find("#resultList").append(html);
 
-            $("#listElement" + i).mouseenter(function () {
-                listElementMouseEnter(this);
+            element.find("#listElement" + i).mouseenter(function () {
+                listElementMouseEnter(this, element);
             });
 
-            $("#listElement" + i).mouseleave(function () {
-                listElementMouseLeave(this);
+            element.find("#listElement" + i).mouseleave(function () {
+                listElementMouseLeave(this, element);
             });
 
-            $("#listElement" + i).mousedown(function () {
-                listElementMouseDown(this);
+            element.find("#listElement" + i).mousedown(function () {
+                listElementMouseDown(this, element);
             });
         }
 
@@ -240,50 +241,50 @@
             var htmlPaging = "<div align='right' class='pagingDiv'>" + (offset + 1) + " - " + (offset + loopCount) + " " + options.foundRecordsMessage + " ";
             htmlPaging += "<input id='pagingPrev' type='image' src='../dist/image/" + prevPic + "' width='16' height='16' class='pagingArrow' " + prevDisabled + ">";
             htmlPaging += "<input id='pagingNext' type='image' src='../dist/image/" + nextPic + "' width='16' height='16' class='pagingArrow' " + nextDisabled + "></div>";
-            $("#resultsDiv").append(htmlPaging);
+            element.find("#resultsDiv").append(htmlPaging);
 
-            $("#pagingPrev").mousedown(function () {
-                prevPaging();
+            element.find("#pagingPrev").mousedown(function () {
+                prevPaging(element);
             });
 
-            $("#pagingNext").mousedown(function () {
-                nextPaging();
+            element.find("#pagingNext").mousedown(function () {
+                nextPaging(element);
             });
 
-            drawGeoJsonList();
+            drawGeoJsonList(element);
         }
     }
 
-    function listElementMouseEnter(listElement) {
+    function listElementMouseEnter(listElement, element) {
 
         var index = parseInt(listElement.id.substr(11));
 
         if (index !== activeResult) {
-            $('#listElement' + index).toggleClass('mouseover');
+            element.find('#listElement' + index).toggleClass('mouseover');
         }
     }
 
-    function listElementMouseLeave(listElement) {
+    function listElementMouseLeave(listElement, element) {
         var index = parseInt(listElement.id.substr(11));
 
         if (index !== activeResult) {
-            $('#listElement' + index).removeClass('mouseover');
+            element.find('#listElement' + index).removeClass('mouseover');
         }
     }
 
-    function listElementMouseDown(listElement) {
+    function listElementMouseDown(listElement, element) {
         var index = parseInt(listElement.id.substr(11));
 
         if (index !== activeResult) {
             if (activeResult !== -1) {
-                $('#listElement' + activeResult).removeClass('active');
+                element.find('#listElement' + activeResult).removeClass('active');
             }
 
-            $('#listElement' + index).removeClass('mouseover');
-            $('#listElement' + index).addClass('active');
+            element.find('#listElement' + index).removeClass('mouseover');
+            element.find('#listElement' + index).addClass('active');
 
             activeResult = index;
-            fillSearchBox();
+            fillSearchBox(element);
 
             if (searchLayerType === 0) {
                 drawGeoJson(activeResult);
@@ -403,31 +404,31 @@
 
 
 
-    function fillSearchBox() {
+    function fillSearchBox(element) {
         if (activeResult === -1) {
-            $("#searchBox")[0].value = lastSearch;
+            element.find("#searchBox")[0].value = lastSearch;
         }
         else {
-            $("#searchBox")[0].value = features[activeResult].properties.title;
+            element.find("#searchBox")[0].value = features[activeResult].properties.title;
         }
     }
 
-    function nextResult() {
+    function nextResult(element) {
 
         if (resultCount > 0) {
             if (activeResult !== -1) {
-                $('#listElement' + activeResult).toggleClass('active');
+                element.find('#listElement' + activeResult).toggleClass('active');
             }
 
             if (activeResult < resultCount - 1) {
-                $('#listElement' + (activeResult + 1)).toggleClass('active');
+                element.find('#listElement' + (activeResult + 1)).toggleClass('active');
                 activeResult++;
             }
             else {
                 activeResult = -1;
             }
 
-            fillSearchBox();
+            fillSearchBox(element);
 
             if (activeResult !== -1) {
                 if (searchLayerType === 0) {
@@ -441,25 +442,25 @@
         }
     }
 
-    function prevResult() {
+    function prevResult(element) {
         if (resultCount > 0) {
             if (activeResult !== -1) {
-                $('#listElement' + activeResult).toggleClass('active');
+                element.find('#listElement' + activeResult).toggleClass('active');
             }
 
             if (activeResult === -1) {
-                $('#listElement' + (resultCount - 1)).toggleClass('active');
+                element.find('#listElement' + (resultCount - 1)).toggleClass('active');
                 activeResult = resultCount - 1;
             }
             else if (activeResult === 0) {
                 activeResult--;
             }
             else {
-                $('#listElement' + (activeResult - 1)).toggleClass('active');
+                element.find('#listElement' + (activeResult - 1)).toggleClass('active');
                 activeResult--;
             }
 
-            fillSearchBox();
+            fillSearchBox(element);
 
             if (activeResult !== -1) {
                 if (searchLayerType === 0) {
@@ -472,13 +473,13 @@
         }
     }
 
-    function clearButtonClick() {
-        $("#searchBox")[0].value = "";
+    function clearButtonClick(element) {
+        element.find("#searchBox")[0].value = "";
         lastSearch = "";
         resultCount = 0;
         features = [];
         activeResult = -1;
-        $("#resultsDiv").remove();
+        element.find("#resultsDiv").remove();
         if (searchLayer !== undefined) {
             map.removeLayer(searchLayer);
             searchLayer = undefined;
@@ -489,38 +490,38 @@
         }
     }
 
-    function searchButtonClick() {
-        getValuesAsGeoJson(options.pagingActive);
+    function searchButtonClick(element) {
+        getValuesAsGeoJson(options.pagingActive, element);
 
     }
 
-    function processNoRecordsFoundOrError() {
+    function processNoRecordsFoundOrError(element) {
         resultCount = 0;
         features = [];
         activeResult = -1;
-        $("#resultsDiv").remove();
+        element.find("#resultsDiv").remove();
         if (searchLayer !== undefined) {
             map.removeLayer(searchLayer);
             searchLayer = undefined;
         }
 
-        var parent = $("#searchBox").parent();
-        $("#resultsDiv").remove();
+        var parent = element.find("#searchBox").parent();
+        element.find("#resultsDiv").remove();
         parent.append("<div id='resultsDiv' class='result'><i>" + lastSearch + " " + options.notFoundMessage + " <p><small>" + options.notFoundHint + "</small></i><div>");
     }
 
-    function prevPaging() {
-        $("#searchBox")[0].value = lastSearch;
+    function prevPaging(element) {
+        element.find("#searchBox")[0].value = lastSearch;
         offset = offset - options.limit;
-        getValuesAsGeoJson(true);
+        getValuesAsGeoJson(true, element);
         collapseOnBlur = false;
         activeResult = -1;
     }
 
-    function nextPaging() {
-        $("#searchBox")[0].value = lastSearch;
+    function nextPaging(element) {
+        element.find("#searchBox")[0].value = lastSearch;
         offset = offset + options.limit;
-        getValuesAsGeoJson(true);
+        getValuesAsGeoJson(true, element);
         collapseOnBlur = false;
         activeResult = -1;
     }

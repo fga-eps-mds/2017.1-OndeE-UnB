@@ -1,3 +1,5 @@
+<!--style="display:none;" -->
+
 <h1 class="sidebar-header">Trajetos</h1>
 <div class="sidebar-body">
   <form>
@@ -7,7 +9,8 @@
         <button type="button" class="input-current-location-btn" data-toggle="tooltip" data-placement="top" title="Usar Minha Localização">
           <i class="ion-navigate"></i>
         </button>
-        <input type="text" id="route_origin" name="route[origin]" class="form-control">
+        <input type="text" class="origin form-control">
+        <input type="hidden" id="route_origin" name="route[origin]" class="form-control">
       </div>
     </div>
     <button class="btn btn-reverse-route btn-sm btn-primary float-sm-right">
@@ -19,23 +22,24 @@
         <button type="button" class="input-current-location-btn" data-toggle="tooltip" data-placement="top" title="Usar Minha Localização">
           <i class="ion-navigate"></i>
         </button>
-        <input type="text" id="route_destination" name="route[destination]" class="form-control">
+        <input type="text" class="destination form-control">
+        <input type="hidden" id="route_destination" name="route[destination]"  class="form-control">
       </div>
     </div>
     <div class="form-group">
       <label>Modo de Descolamento</label>
       <div class="btn-group btn-group-justified" data-toggle="buttons">
-        <label class="btn btn-outline-info active">
+        <label class="btn btn-outline-info active route_mode">
           <input type="radio" name="route[mode]" value="pedestrian">
           <i class="ion-android-walk"></i>
           A pé
         </label>
-        <label class="btn btn-outline-info">
+        <label class="btn btn-outline-info route_mode">
           <input type="radio" name="route[mode]" value="bicycle">
           <i class="ion-android-bicycle"></i>
           Bicicleta
         </label>
-        <label class="btn btn-outline-info">
+        <label class="btn btn-outline-info route_mode">
           <input type="radio" name="route[mode]" value="auto">
           <i class="ion-android-car"></i>
           Carro

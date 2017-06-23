@@ -67,6 +67,7 @@ gem 'sweet-alert-confirm'
 
 # Gem responsible for test coverage
 gem 'simplecov', group: :test
+gem 'coveralls', require: false
 
 gem 'rails-controller-testing'
 
@@ -84,3 +85,7 @@ gem 'translate_enum', require: 'translate_enum/active_record'
 gem "shrine"
 
 gem "introjs-rails"
+gem "aws-sdk", "~> 2.1"
+gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
+gem 'sweet-alert2-rails'
+
