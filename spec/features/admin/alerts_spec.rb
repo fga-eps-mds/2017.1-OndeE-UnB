@@ -35,7 +35,7 @@ end
    end
    it "Should have a alert when deleting a building", js:true do
      visit admin_buildings_path
-     first('i.fa.fa-remove').click
+     page.execute_script("$('i.fa.fa-remove').eq(0).trigger('click')")
      expect(page).to have_content("Alerta");
    end
  end
