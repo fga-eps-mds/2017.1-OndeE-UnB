@@ -19,7 +19,6 @@ unless ARGV.any? { |a| a =~ /^gems/ } # Don't load anything when running the gem
         t.profile = 'default'
       end
 
-
       Cucumber::Rake::Task.new({ wip: 'test:prepare' }, 'Run features that are being worked on') do |t|
         t.binary = vendored_cucumber_bin
         t.fork = true # You may get faster startup if you set this to false
