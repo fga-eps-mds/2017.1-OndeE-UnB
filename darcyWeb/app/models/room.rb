@@ -19,4 +19,5 @@ class Room < ApplicationRecord
   validates :room_type, inclusion: { in: room_types.keys }
   validates :title, length: { maximum: 50 }, presence: true
 
+  validates :acronym , uniqueness: true
 end

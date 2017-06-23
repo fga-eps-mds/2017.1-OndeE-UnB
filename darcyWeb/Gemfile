@@ -79,6 +79,10 @@ gem 'translate_enum', require: 'translate_enum/active_record'
 gem "shrine"
 
 gem "introjs-rails"
+
+# Dump database
+gem 'seed_dump'
+
 gem "aws-sdk", "~> 2.1"
 gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
 gem 'sweet-alert2-rails'

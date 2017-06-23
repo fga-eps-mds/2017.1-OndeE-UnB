@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616201743) do
+ActiveRecord::Schema.define(version: 20170622172500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20170616201743) do
     t.string  "acronym"
     t.integer "phone"
     t.text    "image_data"
+    t.index ["acronym"], name: "index_buildings_on_acronym", unique: true, using: :btree
   end
 
   create_table "departments", force: :cascade do |t|
@@ -76,6 +77,7 @@ ActiveRecord::Schema.define(version: 20170616201743) do
     t.integer "building_id"
     t.integer "room_type"
     t.integer "level"
+    t.index ["acronym"], name: "index_rooms_on_acronym", unique: true, using: :btree
     t.index ["building_id"], name: "index_rooms_on_building_id", using: :btree
   end
 

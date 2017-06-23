@@ -187,25 +187,41 @@ class ParserController < ApplicationController
   end
 
   def create_room(params)
-    Room.where(acronym: params[:room]).first_or_create do |room|
-       room.building = create_building(params)
-       room.title = params[:room]
-       room.room_type = params[:room_type]
-       room.level = 0
-       room.latitude = 0
-       room.longitude = 0
-       room.geo_data = geo_data
-   end
+
+    begin
+      Room.where(acronym: params[:room]).first_or_create do |room|
+         room.building = create_building(params)
+         room.title = params[:room]
+         room.room_type = params[:room_type]
+         room.level = 0
+         room.latitude = 0
+         room.longitude = 0
+         room.geo_data = geo_data
+      end
+    rescue => error
+      sleep(0.5)
+      @save_retry_count =  (@save_retry_count || 5)
+      retry if( (@save_retry_count -= 1) > 0 )
+      raise error
+    end
+
   end
 
   def create_building(params)
-    Building.where(acronym: params[:building]).first_or_create do |building|
-      building.title = params[:building]
-      building.acronym = params[:building]
-      building.latitude = 0
-      building.longitude = 0
-      building.phone = 0
-      building.geo_data = geo_data
+    begin
+      Building.where(acronym: params[:building]).first_or_create do |building|
+        building.title = params[:building]
+        building.acronym = params[:building]
+        building.latitude = 0
+        building.longitude = 0
+        building.phone = 0
+        building.geo_data = geo_data
+      end
+    rescue => error
+      sleep(0.5)
+      @save_retry_count =  (@save_retry_count || 5)
+      retry if( (@save_retry_count -= 1) > 0 )
+      raise error
     end
   end
 end
