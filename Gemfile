@@ -39,7 +39,6 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'capybara'
   gem 'poltergeist'
-  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 3.5.0'
@@ -54,10 +53,16 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
+gem 'sweet-alert2-rails'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'active_record-acts_as'
 gem 'devise'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'sweet-alert'
+gem 'sweet-alert-confirm'
 
 # Gem responsible for test coverage
 gem 'simplecov', group: :test
@@ -82,3 +87,6 @@ gem "introjs-rails"
 gem "aws-sdk", "~> 2.1"
 gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
 gem 'sweet-alert2-rails'
+gem 'es6-promise-rails'
+gem 'seed_dump'
+

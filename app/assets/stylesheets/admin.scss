@@ -3,6 +3,7 @@
 //= require leaflet/draw/leaflet.draw.css
 //= require leaflet/easy-button
 //= require font-awesome
+//= require sweetalert2
 
 // TODO:40 change the border color to one more softer
 .navbar {
@@ -36,4 +37,8 @@ input.form-control{
     background: #666 !important;
     border-radius: 50%;
     margin: -5px !important;
+}
+
+.swal2-container.in {
+    z-index: 99999999999;
 }

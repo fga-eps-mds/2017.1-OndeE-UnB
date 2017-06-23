@@ -14,8 +14,7 @@ dependencies:
 test:
   override:
     - cd darcyWeb && COVERALLS_REPO_TOKEN=togFVZcnCwIEezRsMHecWBzSIhr7dFS8x bundle exec rspec spec
-    - cd darcyWeb && rspec
-    
+
 deployment:
   production:
     branch: master

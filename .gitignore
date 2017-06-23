@@ -19,6 +19,7 @@ config/initializers/secret_token.rb
 
 # dotenv
 .env
+.DS_Store
 
 ## Environment normalization:
 /.bundle
