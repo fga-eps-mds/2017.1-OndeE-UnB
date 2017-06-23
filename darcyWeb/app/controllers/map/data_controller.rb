@@ -53,8 +53,4 @@ class Map::DataController < MapController
         render json: @entrances
     end
 
-    def departments
-        @departments = Department.all
-        render json: @departments
-    end
 end
