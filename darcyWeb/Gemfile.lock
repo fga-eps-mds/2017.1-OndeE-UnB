@@ -111,6 +111,8 @@ GEM
     docile (1.1.5)
     down (3.0.0)
     erubis (2.7.0)
+    es6-promise-rails (3.2.1)
+      railties (>= 3.1.0)
     execjs (2.7.0)
     factory_girl (4.8.0)
       activesupport (>= 3.0.0)
@@ -300,6 +302,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   devise
+  es6-promise-rails
   factory_girl_rails
   font-awesome-rails
   introjs-rails

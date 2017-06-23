@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery/readyselector
+//= require promise
 
 // require admin/vendor
 // require admin/app
