@@ -151,7 +151,7 @@ class ParserController < ApplicationController
             if valid_schedule_and_room?(day_of_week, start_time, end_time, room, classroom)
               room = clean_room_name(room.text.strip)
 
-              building = replace_building_name(room.split.first)
+              building = replace_building_name(room.split.first).strip
 
               if allowed_buildings.include? building
 

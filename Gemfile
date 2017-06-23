@@ -81,3 +81,4 @@ gem "introjs-rails"
 gem "aws-sdk", "~> 2.1"
 gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
 gem 'sweet-alert2-rails'
+gem 'seed_dump'
