@@ -14,7 +14,6 @@
 //= require admin/init
 //= require admin/locations
 //= require admin/buildings
-//= require admin/departments
 //= require admin/rooms
 //= require admin/plans
 //= require admin/points

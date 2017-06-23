@@ -39,7 +39,6 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'capybara'
   gem 'poltergeist'
-  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 3.5.0'
