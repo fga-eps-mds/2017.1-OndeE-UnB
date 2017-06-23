@@ -31,6 +31,10 @@
                         <%= f.label :longitude %>
                         <%= f.text_field :longitude, class: 'form-control' %>
                     </div>
+                    <div class="form-group col-md-6">
+                        <%= f.label :image %>
+                        <%= f.file_field :image, class: 'form-control' %>
+                    </div>
                 </div>
                 <div class="form-group">
                     <%= f.hidden_field :geo_data %>
