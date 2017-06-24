@@ -51,7 +51,8 @@ Rails.application.routes.draw do
   get 'map/building/:id', to: 'map#building'
   get 'map/routes'
 
-  get 'parse', to: 'parser#index'
+  #This route run the parse for catch the data of buildings and rooms of matriculaweb page
+  #get 'parse', to: 'parser#index'
 
   get 'map/datapoint'
   get 'map/point/:id', to: 'map#point'
