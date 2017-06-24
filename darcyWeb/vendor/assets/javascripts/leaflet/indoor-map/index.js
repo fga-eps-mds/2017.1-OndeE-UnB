@@ -92,13 +92,7 @@ L.Indoor = L.Class.extend({
             }
         }
 
-        this._map = null;
-    },
-    clean: function(){
-      for(level in this.getLevels()){
-        var layer = this._layers[level];
-        this._map.removeLayer(layer);
-      }
+        //this._map = null;
     },
     addData: function(data) {
         var layers = this._layers,

@@ -26,7 +26,7 @@ $(plansPages).ready(function() {
       var geoJSON = {
         bottomLeft: overlay._bottomLeft,
         topLeft: overlay._topLeft,
-        topRight: overlay._topRight,
+        topRight: overlay._topRight
       };
       this.$element.val(JSON.stringify(geoJSON));
     },
@@ -55,9 +55,9 @@ $(plansPages).ready(function() {
   geoData.load();
 
   function enableMarkersDrag() {
-    markerTopLeft.on('drag dragend', repositionImage);
-    markerTopRight.on('drag dragend', repositionImage);
-    markerBottomLeft.on('drag dragend', repositionImage);
+    markerTopLeft.on("drag dragend", repositionImage);
+    markerTopRight.on("drag dragend", repositionImage);
+    markerBottomLeft.on("drag dragend", repositionImage);
   }
 
   // Removes the current overlay and the markers
