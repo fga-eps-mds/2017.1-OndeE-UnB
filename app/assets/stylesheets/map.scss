@@ -372,7 +372,24 @@ html {
   }
 }
 
-.tooltip {
+
+.btn-about {
+  color: #000;
+  background-color: #FFF;
+  &:hover{
+    opacity: 0.8;
+  }
+}
+
+.team-photo {
+    max-width:80px;
+    max-height:80px;
+    width: auto;
+    height: auto;
+}
+
+
+.tooltip{
   background-color: transparent;
   box-shadow: inherit;
   border: none;

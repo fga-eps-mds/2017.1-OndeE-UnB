@@ -33,7 +33,7 @@ class Map::SearchController < MapController
       end
 
       properties = {
-        popupContent: 'MDS',
+        popupContent: '',
         title: title,
         description: description,
         image: image,

@@ -8,6 +8,7 @@
 
 //= require map/init
 //= require map/sidebar
+//= require map/about
 //= require map/routes
 //= require map/search
 //= require map/share_location

@@ -38,7 +38,7 @@ describe 'Map', type: :feature do
     visit root_path
     page.execute_script('$(".navbar-toggler").trigger("click")')
     wait_for_ajax
-    page.execute_script('$("#navbar a")[0].click()')
+    page.execute_script('$("#navbar a")[1].click()')
     wait_for_ajax
     expect(page).to have_content("Onde É UnB")
   end
