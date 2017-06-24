@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+ .team-photo {
+    height: 50px;
+}

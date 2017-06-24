@@ -6,7 +6,7 @@ class Room < ApplicationRecord
   has_many :schedules
 
   # types of rooms
-  enum room_type: [ :classroom, :laboratory, :professor_room, :study_room, :amphitheater ]
+  enum room_type: [ :classroom, :laboratory, :professor_room, :study_room, :amphitheater, :academic_center, :kitchen, :SAA, :others]
   translate_enum :room_type
 
   # validations

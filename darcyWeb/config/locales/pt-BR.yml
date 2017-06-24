@@ -1,5 +1,8 @@
 pt-BR:
   devise:
+    registrations:
+      admin:
+        updated: "Cadastrado editado com sucesso."
     sessions:
       admin:
         signed_in: "Seja bem-vindo!"
@@ -83,7 +86,11 @@ pt-BR:
           laboratory: 'Laboratório'
           professor_room: 'Sala de Professor'
           study_room: 'Sala de Estudo'
-          amphitheater: Anfietatro
+          amphitheater: 'Anfiteatro'
+          academic_center: 'Centro Acadêmico'
+          kitchen: 'Cozinha'
+          SAA: 'Secretaria'
+          others: 'Outros'
       schedule:
         day_of_week_list:
           sunday: 'DOM'

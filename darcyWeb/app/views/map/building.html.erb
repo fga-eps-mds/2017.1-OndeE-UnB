@@ -1,5 +1,12 @@
-<h1 class="sidebar-header"><%= "#{@building.acronym} - #{@building.title}" %></h1>
+<h1 class="sidebar-header"><%= "#{@building.acronym} - #{@building.title}" %>
+  <a class="close">
+    <i class="ion-close"></i>
+  </a>
+</h1>
 <div class="sidebar-body">
+  <%if @building.image_data? %>
+  <%= image_tag @building.image_url, class: "building-image"  %>
+  <% end %>
   <div class="row">
     <div class="col-8 form-group">
       <label>
@@ -14,46 +21,34 @@
       <p class="form-control-static"><%= @building.phone %></p>
     </div>
   </div>
-    <div class="col-4 form-group">
+  <label>
+    <b>Salas</b>
+  </label>
+  <% if @building.rooms.length > 0 %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Sala</th>
+        <th>Nível</th>
+        <th>Tipo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @building.rooms.each do |room| %>
+      <tr>
+        <td><%= room.title %></td>
+        <td><%= room.level %></td>
+        <td>
+          <span class="badge <%= " badge-#{room.room_type}" %>"><%= room.translated_room_type %></span>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-warning">
+    Nenhuma sala disponível para este edifício.
   </div>
-  <div class="form-group">
-      <label>
-        <b>Foto</b>
-      </label>
-      <p class="form-control-static">
-        <%if @building.image_data? %>
-          <%= image_tag(@building.image_url, :width => 320, :height=>240)  %>
-        <% end %>
-      </p>
-    </div>
-    <label>
-      <b>Salas</b>
-    </label>
-    <% if @building.rooms.length > 0 %>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Sala</th>
-          <th>Nível</th>
-          <th>Tipo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @building.rooms.each do |room| %>
-        <tr>
-          <td><%= room.title %></td>
-          <td><%= room.level %></td>
-          <td>
-            <span class="badge badge-danger <%= "badge-#{room.room_type}" %>"><%= room.translated_room_type %></span>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <div class="alert alert-warning">
-      Nenhuma sala disponível para este edifício.
-    </div>
-    <% end %>
-  </div>
+  <% end %>
+</div>
 </div>

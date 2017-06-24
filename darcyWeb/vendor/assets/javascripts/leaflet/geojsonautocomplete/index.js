@@ -304,7 +304,7 @@
 
         searchLayer = L.geoJson(featureCollection, {
             style: function (feature) {
-                return {color: "#D0473B"};
+                return {color: "#008000"};
             },
             pointToLayer: function (feature, latlng) {
                 return new L.CircleMarker(latlng, {radius: 5, fillOpacity: 0.85});

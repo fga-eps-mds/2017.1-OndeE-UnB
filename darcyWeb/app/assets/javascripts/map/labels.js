@@ -16,12 +16,14 @@ var setLabelContent = function setLabelContent(tooltip, content, offset) {
 
 map.on("moveend", function(e) {
 
+  var zoom = map.getZoom();
+
   buildingLayer.getLayers().forEach(function(building) {
 
     var properties = building.feature.properties.building;
     var tooltip = building.getTooltip();
 
-    if (map.getZoom() >= zoomTooltipBuilding) {
+    if (zoom >= zoomTooltipBuilding) {
       setLabelContent(tooltip, properties.title, titleTooltipOffset);
     } else {
       setLabelContent(tooltip, properties.acronym, acronymTooltipOffset);
@@ -38,7 +40,7 @@ map.on("moveend", function(e) {
         var properties = room.feature.properties.room;
         var tooltip = room.getTooltip();
 
-        if (map.getZoom() >= zoomTooltipRoom) {
+        if (zoom >= zoomTooltipRoom) {
           setLabelContent(tooltip, properties.title, titleTooltipOffset);
         } else {
           setLabelContent(tooltip, properties.acronym, acronymTooltipOffset);
