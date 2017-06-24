@@ -93,10 +93,15 @@ html {
   vertical-align: middle;
   transition: background-color 0.5s linear;
 }
-
+.leaflet-sidebar {
+  padding: 0;
+}
 #sidebar {
-  margin-top: 10%;
+  margin-top: 55px;
   overflow: hidden;
+  border: none;
+  border-radius: 0;
+  height: calc(100% - 55px);
 }
 
 .sidebar-body {
@@ -400,6 +405,7 @@ span.twitter-typeahead .tt-menu{
 
 .swal2-container.fade {
  opacity: inherit;
+ z-index: 100000;
 }
 
 .logo{

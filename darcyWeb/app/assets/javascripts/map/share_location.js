@@ -89,7 +89,7 @@ function createMarker(waypoint, latlng) {
     });
     map.addLayer(waypoint.marker);
 
-    map.setView(latlng, 32, {
+    map.setView(latlng, 16, {
       animate: true
     });
     //map.setZoom(200, {animate: true});
