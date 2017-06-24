@@ -1,5 +1,8 @@
 pt-BR:
   devise:
+    registrations:
+      admin:
+        updated: "Cadastrado editado com sucesso."
     sessions:
       admin:
         signed_in: "Seja bem-vindo!"
@@ -27,8 +30,6 @@ pt-BR:
           attributes:
             acronym:
               blank: "Insira a sigla do edifício."
-            phone:
-              blank: "Insira o número de telefone."
         room:
           attributes:
             acronym:
@@ -48,6 +49,13 @@ pt-BR:
               blank: "Insira a latitude."
             longitude:
               blank: "Insira a longitude"
+            image:
+                blank: "É necessária uma foto do edifício."
+            name:
+              too_long: "O nome do edifício é muito longo."
+            phone:
+              blank: "Insira o número de telefone."
+              not_a_number: "O telefone deve conter apenas números."
         plan:
           attributes:
             building:
