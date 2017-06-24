@@ -28,7 +28,7 @@
       <% end %>
     </ul>
     <!-- Tab panes -->
-    
+
     <div class="tab-content">
       <% @schedule.each_with_index do |day_schedule, index| %>
         <div class="tab-pane pt-3 <%= 'active' if @today == index %> " id="dow<%= index %>">
