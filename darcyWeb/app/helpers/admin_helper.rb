@@ -22,5 +22,4 @@ module AdminHelper
 
     options_for_select(options).html_safe
   end
-
 end

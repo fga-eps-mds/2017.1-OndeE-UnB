@@ -13,7 +13,8 @@ dependencies:
     - cd darcyWeb && bundle exec rake db:migrate
 test:
   override:
-    - cd darcyWeb && rspec
+    - cd darcyWeb && COVERALLS_REPO_TOKEN=togFVZcnCwIEezRsMHecWBzSIhr7dFS8x bundle exec rspec spec
+
 deployment:
   production:
     branch: master

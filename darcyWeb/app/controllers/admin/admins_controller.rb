@@ -44,9 +44,9 @@ class Admin::AdminsController < AdminController
       redirect_to admin_admins_path,
       notice: helpers.alert_danger('Você não pode se excluir.')
     else
-    @admin.destroy
-    redirect_to admin_admins_path,
-    notice: helpers.alert_success('Administrador excluído com êxito.')
+      @admin.destroy
+      redirect_to admin_admins_path,
+      notice: helpers.alert_success('Administrador excluído com êxito.')
     end
   end
 
