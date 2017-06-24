@@ -92,7 +92,7 @@ MapObj.control.on("routesfound", function(e) {
 
 MapObj.control.on("routingerror", function() {
   // TODO Show message when it"s not possible to calculate routes
-
+  swal("Oops...", "Não foi possível obter o trajeto desejado.", "error");
 });
 
 /**************** POSITION ****************/
@@ -141,6 +141,10 @@ function loadRouteForm(data) {
 
     $(".btn-reverse-route").on("click", function(e) {
       reverseRoute(e);
+    });
+
+    $(".close.routes").click(function() {
+      unLoadRoute();
     });
 
 
@@ -214,9 +218,13 @@ function unLoadRoute() {
   sidebar.hide();
 
   // remove markers from map
-  MapObj.removeMarker(RouteObj.origin);
-  MapObj.removeMarker(RouteObj.destination);
+  if(RouteObj.origin.marker !==  "null") {
+    MapObj.removeMarker(RouteObj.origin);
+  }
 
+  if(RouteObj.destination.marker !== "null") {
+    MapObj.removeMarker(RouteObj.destination);
+  }
   // removes route from map
   MapObj.control.spliceWaypoints(0, 2);
 
@@ -229,9 +237,11 @@ function unLoadRoute() {
 function fillFormRouteLocations(data) {
   if ("origin" in data) {
     FormObj.origin.val(data.origin);
+    FormObj.originText.val(data.origin);
   }
   if ("destination" in data) {
     FormObj.destination.val(data.destination);
+    FormObj.destinationText.val(data.destination);
   }
 }
 

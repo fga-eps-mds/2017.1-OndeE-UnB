@@ -94,9 +94,16 @@ html {
   transition: background-color 0.5s linear;
 }
 
+.leaflet-sidebar {
+  padding: 0;
+}
+
 #sidebar {
-  margin-top: 10%;
+  margin-top: 55px;
   overflow: hidden;
+  border: none;
+  border-radius: 0;
+  height: calc(100% - 55px);
 }
 
 .sidebar-body {
@@ -104,6 +111,7 @@ html {
   overflow: auto;
   height: 100%;
   margin: 0 -24px;
+  overflow-x: hidden;
 }
 
 .sidebar-body::-webkit-scrollbar {
@@ -128,28 +136,46 @@ html {
   font-weight: 500;
 }
 
+.sidebar-header .close {
+  right: 16px;
+  top: 9px;
+  opacity: 0.9;
+  background: transparent;
+}
+
+.sidebar-header .close i {
+  font-size: 1rem;
+  color: #fff;
+}
+
 .btn.btn-outline-info {
   color: white;
   border-color: white;
-  &:hover{
-  background: #0cc285;
+
+  &:hover {
+    background: #0cc285;
   }
 }
+
 .btn-group.btn-group-justified {
   background: radial-gradient(circle at 1.98% 85.01%,#134E5E,transparent 100%),radial-gradient(circle at 98.02% 18.98%,#71B280,transparent 100%),radial-gradient(circle at 50% 50%,#0cc285,#0cc285 100%);
   background-color: white;
   border-color: #134E5E;
 }
-.btn.btn-outline-info.route_mode.active{
-    background-color: #134E5E;
-    border-color: #134E5E;
+
+.btn.btn-outline-info.route_mode.active {
+  background-color: #134E5E;
+  border-color: #134E5E;
 }
+
 .btn.btn-info.btn-block {
   background: radial-gradient(circle at 1.98% 85.01%,#134E5E,transparent 100%),radial-gradient(circle at 98.02% 18.98%,#71B280,transparent 100%),radial-gradient(circle at 50% 50%,#0cc285,#0cc285 100%);
 }
+
 .btn.btn-reverse-route.btn-sm.btn-primary.float-sm-right {
   background: #134E5E;
 }
+
 #itinerary {
   display: none;
   margin-top: -15px;
@@ -177,10 +203,15 @@ html {
   display: none !important;
 }
 // Responsive screens ipad pro
-@media (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .leaflet-sidebar.left.visible ~ .leaflet-left {
     left: 0;
   }
+
+  .leaflet-sidebar.left {
+    left: -100%;
+  }
+
 
   .leaflet-control-zoom {
     margin-top: 80px !important;
@@ -193,7 +224,7 @@ html {
   .leaflet-sidebar {
     top: 50%;
     height: 50%;
-    width: 49%;
+    width: 100%;
   }
 
   .sidebar-body {
@@ -201,41 +232,12 @@ html {
   }
 
   #searchContainer {
-    width: 90%;
-    left: calc((100% - 90%) / 2);
+    width: 95%;
+    left: calc((100% - 95%) / 2);
   }
 
   #searchBox {
-    width: 73%;
-  }
-}
-// Responsive screens ipad
-@media (max-width: 768px) {
-  .leaflet-sidebar.left.visible ~ .leaflet-left {
-    left: 0;
-  }
-
-  .leaflet-control-zoom {
-    margin-top: 80px !important;
-  }
-
-  .leaflet-sidebar {
-    top: 50%;
-    height: 50%;
-    width: 60%;
-  }
-
-  .sidebar-body {
-    height: calc(100% - 30px);
-  }
-
-  #searchContainer {
-    width: 90%;
-    left: calc((100% - 90%) / 2);
-  }
-
-  #searchBox {
-    width: 73%;
+    width: 88%;
   }
 }
 // Responsive screens
@@ -326,16 +328,32 @@ html {
   background-color: #9C27B0;
 }
 
-.bagde-professor_room {
+.badge-professor_room {
   background-color: #F44336;
 }
 
-.bagde-study_room {
+.badge-study_room {
   background-color: #00BCD4;
 }
 
-.bagde-amphitheater {
+.badge-amphitheater {
   background-color: #8BC34A;
+}
+
+.badge-academic_center {
+  background-color: #2A7E43;
+}
+
+.badge-kitchen {
+  background-color: #A56300;
+}
+
+.badge-SAA {
+  background-color: #AA3939;
+}
+
+.badge-others {
+  background-color: #000;
 }
 
 .navbar {
@@ -348,10 +366,12 @@ html {
 .btn-login {
   color: #777;
   background-color: #FFF;
-  &:hover{
+
+  &:hover {
     opacity: 0.8;
   }
 }
+
 
 .btn-about {
   color: #000;
@@ -377,9 +397,11 @@ html {
   color: white;
   margin: 0;
 }
+
 .leaflet-tooltip-left.tooltip::before {
   display: none;
 }
+
 .leaflet-tooltip-right.tooltip::before {
   display: none;
 }
@@ -389,6 +411,7 @@ html {
   font-family: "Roboto", sans-serif;
   font-weight: normal;
 }
+
 .tutorialStyle h2 {
   font-weight: bold;
   text-align: center;
@@ -398,10 +421,23 @@ html {
   background-clip: text;
 }
 
-span.twitter-typeahead .tt-menu{
+span.twitter-typeahead .tt-menu {
   width: 100%;
 }
 
 .swal2-container.fade {
- opacity: inherit;
+  opacity: inherit;
+  z-index: 100000;
+}
+
+.logo {
+  filter: brightness(0) invert(1);
+  height: 28px;
+}
+
+.building-image {
+  width: 120%;
+  margin-left: -15px;
+  margin-top: -15px;
+  margin-bottom: 15px;
 }
