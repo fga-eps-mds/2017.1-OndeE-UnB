@@ -1,5 +1,8 @@
 pt-BR:
   devise:
+    registrations:
+      admin:
+        updated: "Cadastrado editado com sucesso."
     sessions:
       admin:
         signed_in: "Seja bem-vindo!"

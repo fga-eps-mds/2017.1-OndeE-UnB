@@ -6,15 +6,18 @@ Rails.application.routes.draw do
     post 'admin/login', to: 'devise/sessions#create', as: 'login'
     get 'admin/logout', to: 'devise/sessions#destroy', as: 'logout'
     get 'admin/edit', to: 'devise/registrations#edit', as: 'edit_admin_registration'
-    post 'admin/edit', to: 'devise/registrations#update', as: 'admin_registration'
+    put 'admin/edit', to: 'registrations#update', as: 'admin_registration'
     # get 'admin/registration', to: 'devise/registrations#new', as: 'new_registration'
     # post 'admin/registration', to: 'devise/registrations#create', as: 'registration'
   end
-  devise_for :admins, skip: [:sessions, :registrations, :passwords]
+   devise_for :admins #, skip: [:sessions, :registrations, :passwords]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'map#index'
+
+  get 'about', to: 'about#index'
+  
   get 'findme', to: 'map#index'
 
   get 'admin', to: 'admin#index'
@@ -51,7 +54,8 @@ Rails.application.routes.draw do
   get 'map/building/:id', to: 'map#building'
   get 'map/routes'
 
-  get 'parse', to: 'parser#index'
+  #This route run the parse for catch the data of buildings and rooms of matriculaweb page
+  #get 'parse', to: 'parser#index'
 
   get 'map/datapoint'
   get 'map/point/:id', to: 'map#point'
