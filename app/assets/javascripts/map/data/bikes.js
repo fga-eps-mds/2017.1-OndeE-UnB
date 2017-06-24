@@ -4,7 +4,7 @@
 var bikesLayer = L.geoJSON("", {
   pointToLayer: function(feature, latlng) {
     var smallIcon = new L.Icon({
-      iconUrl: "http://icons.iconarchive.com/icons/elegantthemes/beautiful-flat/24/bike-icon.png",
+      iconUrl: "http://icons.iconarchive.com/icons/elegantthemes/beautiful-flat/24/bike-icon.png"
     });
     return L.marker(latlng, {
       icon: smallIcon

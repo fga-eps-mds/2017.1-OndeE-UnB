@@ -5,7 +5,7 @@ var busstopLayer = L.geoJSON("", {
     var smallIcon = new L.Icon({
       // TODO Remove direct link to image
       iconUrl: "http://icons.iconarchive.com/icons/elegantthemes/beautiful-flat/32/school-bus-icon.png",
-      iconSize: [24, 24],
+      iconSize: [24, 24]
     });
     return L.marker(latlng, {
       icon: smallIcon
