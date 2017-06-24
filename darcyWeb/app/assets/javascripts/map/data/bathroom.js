@@ -5,7 +5,7 @@ var bathroomLayer = L.geoJSON("", {
     var smallIcon = new L.Icon({
       // TODO Remove direct link to image
       iconUrl: "http://icons.iconarchive.com/icons/rokey/smooth/32/toilet-paper-icon.png",
-      iconSize: [24, 24],
+      iconSize: [24, 24]
     });
     return L.marker(latlng, {
       icon: smallIcon

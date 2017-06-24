@@ -26,7 +26,14 @@
                             <td><%= plan.level %></td>
                             <td>
                                 <%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_admin_plan_path(plan) %>
-                                <%= link_to '<i class="fa fa-remove"></i>'.html_safe, admin_plan_path(plan), method: :delete %>
+                                <%= link_to '<i class="fa fa-remove"></i>'.html_safe, admin_plan_path(plan), method: :delete, data: {
+                                  confirm: 'Are you ready?',
+                                  'sweet-alert-confirm': 'Alerta',
+                                  'confirm-button-text': 'Sim',
+                                  'confirm-button-color': '#DD6B55',
+                                  'cancel-button-text': 'Cancelar',
+                                  'text': 'Tem certeza que deseja apagar esta planta?'
+                                } %>
                             </td>
                         </tr>
                         <% end %>

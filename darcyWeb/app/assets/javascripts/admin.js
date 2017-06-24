@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery/readyselector
+//= require promise
 
 // require admin/vendor
 // require admin/app
@@ -13,7 +14,6 @@
 //= require admin/init
 //= require admin/locations
 //= require admin/buildings
-//= require admin/departments
 //= require admin/rooms
 //= require admin/plans
 //= require admin/points

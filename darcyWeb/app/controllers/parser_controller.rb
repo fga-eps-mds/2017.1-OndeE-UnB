@@ -25,14 +25,14 @@ class ParserController < ApplicationController
   end
 
   def clean_room_name(room_name)
-    room_name.gsub('.', '')
+    room_name.delete('.', '')
     room_name
   end
 
   def define_room_type(room)
-    if room.include? "ANF"
+    if room.include? 'ANF'
       :amphitheater
-    elsif room.include? "LAB"
+    elsif room.include? 'LAB'
       :laboratory
     else
       :classroom
@@ -41,26 +41,26 @@ class ParserController < ApplicationController
 
   def set_day_of_week(day_of_week)
     case day_of_week
-    when "Segunda"
+    when 'Segunda'
       :monday
-    when "Terça"
+    when 'Terça'
       :tuesday
-    when "Quarta"
+    when 'Quarta'
       :wednesday
-    when "Quinta"
+    when 'Quinta'
       :thursday
-    when "Sexta"
+    when 'Sexta'
       :friday
-    when "Sábado"
+    when 'Sábado'
       :saturday
-    when "Domingo"
+    when 'Domingo'
       :sunday
     end
   end
 
   def valid_schedule_and_room?(day_of_week, start_time, end_time, room, classroom)
     valid_times = day_of_week.present? && start_time.present? && end_time.present?
-    valid_room = room.present? && (room != "Local a Designar") && classroom.present?
+    valid_room = room.present? && (room != 'Local a Designar') && classroom.present?
     valid_times && valid_room
   end
 
@@ -100,7 +100,6 @@ class ParserController < ApplicationController
 
     courses = []
     departments.each do |department|
-
       html = open(department[:url])
       html_tree = Nokogiri::HTML(html, nil, Encoding::UTF_8.to_s)
 
@@ -139,10 +138,9 @@ class ParserController < ApplicationController
 
       # Getting the time and places of courses
       schedules_rows.each do |schedule_row|
-        if schedule_row.content.include? "Total"
+        if schedule_row.content.include? 'Total'
           classroom = schedule_row.at_css('td[1] b')
           schedule_row.css('td[4] div').each do |schedule|
-
             day_of_week = schedule.at_css('b')
             start_time = schedule.at_css('font[color="black"] b')
             end_time = schedule.at_css('font[color="brown"]')
@@ -188,13 +186,13 @@ class ParserController < ApplicationController
 
   def create_room(params)
     Room.where(acronym: params[:room]).first_or_create do |room|
-       room.building = create_building(params)
-       room.title = params[:room]
-       room.room_type = params[:room_type]
-       room.level = 0
-       room.latitude = 0
-       room.longitude = 0
-       room.geo_data = geo_data
+    room.building = create_building(params)
+    room.title = params[:room]
+    room.room_type = params[:room_type]
+    room.level = 0
+    room.latitude = 0
+    room.longitude = 0
+    room.geo_data = geo_data
    end
   end
 
