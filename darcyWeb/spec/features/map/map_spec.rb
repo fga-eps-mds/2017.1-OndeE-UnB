@@ -34,11 +34,6 @@ describe 'Map', type: :feature do
   end
 
 
-  it "Should find a navbar", js:true do
-    visit root_path
-    expect(find('.navbar')).to have_content("Onde É? UnB")
-  end
-
   it "Should find admin link on the navbar", js:true do
     visit root_path
     page.execute_script('$(".navbar-toggler").trigger("click")')
