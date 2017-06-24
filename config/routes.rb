@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       get 'snackbars', action: 'snackbars'
       get 'busstops', action: 'busstops'
       get 'entrances', action: 'entrances'
+      get 'informationpoints', action: 'informationpoints'
     end
   end
 
