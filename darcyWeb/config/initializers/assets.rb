@@ -14,3 +14,5 @@ Rails.application.config.assets.precompile += %w(map.scss map.js)
 Rails.application.config.assets.precompile += %w(admin.js admin.scss)
 
 Rails.application.config.assets.precompile += %w(sign.js sign.scss)
+
+Rails.application.config.assets.precompile += %w(about.js about.scss)
