@@ -5,6 +5,10 @@
     <title>Onde É UnB</title>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel="icon" type="image/png" href="logo.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Roboto:400,500' %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
@@ -18,7 +22,7 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">Onde É? UnB </a>
+      <a class="navbar-brand" href="#"><%= image_tag "logo-text", class: "logo" %></a>
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav mr-auto">
           <!-- <li class="nav-item">
@@ -29,7 +33,9 @@
           </li> -->
         </ul>
         <form class="form-inline">
-          <%= link_to '<i class="ion-log-in"></i> '.html_safe, login_path, class: 'btn btn-login' %>
+          <%= link_to '<i class="ion-android-happy"></i> '.html_safe, about_path, class: 'btn btn-login btn-about' %>
+          <%= link_to '<i class="ion-log-in"></i> '.html_safe, login_path, class: 'btn btn-login ml-2' %>
+          
         </form>
       </div>
     </nav>
