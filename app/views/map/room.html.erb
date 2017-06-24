@@ -13,7 +13,7 @@
       <label>
         <b>Tipo</b>
       </label>
-      <p class="form-control-static"><%= @room.room_type %></p>
+      <p class="form-control-static"><span class="badge <%= " badge-#{@room.room_type}" %>"><%= @room.translated_room_type %></span></p>
     </div>
   </div>
   <div class="form-group">
