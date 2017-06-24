@@ -1,13 +1,13 @@
 //= require leaflet/sidebar
 
 var sidebar = L.control.sidebar("sidebar", {
-    position: "left",
-    autoPan: false,
-    closeButton: false
+  position: "left",
+  autoPan: false,
+  closeButton: false
 }).addTo(map);
 
-sidebar.on("show", function(){
-  $(".close").click(function(){
+$("#sidebar").bind("DOMSubtreeModified", function() {
+  $(".close").click(function() {
     sidebar.hide();
   });
 });
