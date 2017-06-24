@@ -1,4 +1,5 @@
-  L.easyButton("ion-android-happy", function(btn, map) {
+  $(".btn-about").click(function(e){
+  	e.preventDefault();
   	$("#sidebar").load("about", function(){
   		if(!sidebar.isVisible()){
   		   sidebar.show();
@@ -8,4 +9,4 @@
   	})
    
 
-  }).addTo(map);
+  })
