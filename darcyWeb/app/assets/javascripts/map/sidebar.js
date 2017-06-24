@@ -9,5 +9,8 @@ var sidebar = L.control.sidebar("sidebar", {
 //var visible = sidebar.isVisible();
 
 sidebar.on("show", function(){
+  $(".close").click(function(){
+    sidebar.hide();
+  });
   //$(".leaflet-map-pane").css("height", "50%");
 });
