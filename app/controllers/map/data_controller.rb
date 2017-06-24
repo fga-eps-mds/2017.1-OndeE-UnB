@@ -21,7 +21,7 @@ class Map::DataController < MapController
 
     @schedule = []
     @days_of_week.map do |_translated, day,  index|
-    @schedule[index] = @room.schedules.where(day_of_week: day)
+    @schedule[index] = @room.schedules.where(day_of_week: day).order(:start_time)
     end
   end
 
@@ -50,4 +50,8 @@ class Map::DataController < MapController
     render json: @entrances
   end
 
+    def informationpoints
+        @informationpoints = Point.where(type_point: "Ponto de Informacao")
+        render json: @informationpoints
+    end
 end

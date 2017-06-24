@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "Map filter", type: :feature do
 
 	before(:each) do
-		[:building, :bike, :snackbar, :bathroom, :busstop, :entrance].each do |factory|
+		[:building, :bike, :snackbar, :bathroom, :busstop, :entrance, :informationpoints].each do |factory|
 			FactoryGirl.create factory
 		end
 		visit root_path
@@ -49,6 +49,12 @@ describe "Map filter", type: :feature do
 	it "should show the busstop when the busstops checkbox is checked", js: true do
 		page.execute_script("$('.leaflet-control-layers-selector').eq(7).trigger('click')")
 		layer = page.evaluate_script("map.hasLayer(busstopLayer)")
+		expect(layer).to be(true)
+	end
+
+	it "should show the information point when information point checkbox is checked", js: true do
+		page.execute_script("$('.leaflet-control-layers-selector').eq(8).trigger('click')")
+		layer = page.evaluate_script("map.hasLayer(informationPointsLayer)")
 		expect(layer).to be(true)
 	end
 
