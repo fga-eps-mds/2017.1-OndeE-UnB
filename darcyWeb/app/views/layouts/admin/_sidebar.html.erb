@@ -1,6 +1,6 @@
 <aside class="app-sidebar" id="sidebar">
     <div class="sidebar-header">
-        <a class="sidebar-brand" href="<% admin_path %>">
+        <a class="sidebar-brand" href="<%= root_path %>">
             <span class="highlight">Onde É</span>
             UnB</a>
         <button type="button" class="sidebar-toggle">
@@ -9,14 +9,6 @@
     </div>
     <div class="sidebar-menu">
         <ul class="sidebar-nav">
-            <li>
-                <a href="<%= admin_path %>">
-                    <div class="icon">
-                        <i class="fa fa-tasks" aria-hidden="true"></i>
-                    </div>
-                    <div class="title">Dashboard</div>
-                </a>
-            </li>
             <li>
                 <a href="<%= admin_buildings_path %>">
                     <div class="icon">
@@ -36,7 +28,7 @@
             <li>
                 <a href="<%= admin_points_path %>">
                     <div class="icon">
-                        <i class="fa fa-building" aria-hidden="true"></i>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
                     </div>
                     <div class="title">Pontos</div>
                 </a>
@@ -44,7 +36,7 @@
             <li>
                 <a href="<%= admin_plans_path %>">
                     <div class="icon">
-                        <i class="fa fa-building" aria-hidden="true"></i>
+                        <i class="fa fa-map" aria-hidden="true"></i>
                     </div>
                     <div class="title">Plantas</div>
                 </a>
