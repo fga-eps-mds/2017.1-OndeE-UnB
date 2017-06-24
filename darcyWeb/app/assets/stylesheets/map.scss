@@ -331,6 +331,14 @@ html {
   }
 }
 
+.btn-about {
+  color: #777;
+  background-color: #FFF;
+  &:hover{
+    opacity: 0.8;
+  }
+}
+
 .tooltip{
   background-color: transparent;
   box-shadow: inherit;
