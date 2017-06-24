@@ -23,26 +23,6 @@ describe "Search", type: :feature do
 
 	end
 
-	it "Should find a department by title" , js:true do
-
-		FactoryGirl.create :department
-		visit root_path
-		fill_in 'searchBox', with: 'Departamento'
-		wait_for_ajax
-		expect(find('#resultsDiv')).to have_content('Departamento de Administração')
-
-	end
-
-	it "Should find a department by acronym" , js:true do
-
-		FactoryGirl.create :department
-		visit root_path
-		fill_in 'searchBox', with: 'DA'
-		wait_for_ajax
-		expect(find('#resultsDiv')).to have_content('Departamento de Administração')
-
-	end
-
 	it "Should find a building by title" , js:true do
 
 		FactoryGirl.create :building
