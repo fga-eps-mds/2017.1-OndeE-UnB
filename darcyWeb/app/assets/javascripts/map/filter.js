@@ -20,7 +20,8 @@ var overlayMaps = {
   "Banheiros": bathroomLayer,
   "Lanchonete": snackbarLayer,
   "Ponto de Acesso": entranceLayer,
-  "Ponto de Ônibus": busstopLayer
+  "Ponto de Ônibus": busstopLayer,
+  "Ponto de Informação": informationPointsLayer
 }
 
 //Adding the control to choose which layer you want
