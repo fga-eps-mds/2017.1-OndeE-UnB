@@ -93,9 +93,11 @@ html {
   vertical-align: middle;
   transition: background-color 0.5s linear;
 }
+
 .leaflet-sidebar {
   padding: 0;
 }
+
 #sidebar {
   margin-top: 55px;
   overflow: hidden;
@@ -131,6 +133,18 @@ html {
   background: radial-gradient(circle at 1.98% 85.01%,#134E5E,transparent 100%),radial-gradient(circle at 98.02% 18.98%,#71B280,transparent 100%),radial-gradient(circle at 50% 50%,#0cc285,#0cc285 100%);
   text-transform: uppercase;
   font-weight: 500;
+}
+
+.sidebar-header .close {
+  right: 16px;
+  top: 9px;
+  opacity: 0.9;
+  background: transparent;
+}
+
+.sidebar-header .close i {
+  font-size: 1rem;
+  color: #fff;
 }
 
 .btn.btn-outline-info {
