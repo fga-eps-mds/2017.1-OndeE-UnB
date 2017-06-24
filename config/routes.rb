@@ -6,11 +6,11 @@ Rails.application.routes.draw do
     post 'admin/login', to: 'devise/sessions#create', as: 'login'
     get 'admin/logout', to: 'devise/sessions#destroy', as: 'logout'
     get 'admin/edit', to: 'devise/registrations#edit', as: 'edit_admin_registration'
-    post 'admin/edit', to: 'devise/registrations#update', as: 'admin_registration'
+    put 'admin/edit', to: 'registrations#update', as: 'admin_registration'
     # get 'admin/registration', to: 'devise/registrations#new', as: 'new_registration'
     # post 'admin/registration', to: 'devise/registrations#create', as: 'registration'
   end
-  devise_for :admins, skip: [:sessions, :registrations, :passwords]
+   devise_for :admins #, skip: [:sessions, :registrations, :passwords]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
