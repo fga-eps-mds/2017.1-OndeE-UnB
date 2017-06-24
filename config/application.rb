@@ -12,6 +12,7 @@ module DarcyWeb
     config.to_prepare do
       # Configure single controller layout
       Devise::SessionsController.layout "sign"
+      Devise::RegistrationsController.layout "admin"
     end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
