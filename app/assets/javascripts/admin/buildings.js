@@ -1,4 +1,8 @@
+//= require sweetalert2
+//= require sweet-alert2-rails
+
 $(buildingsPages).ready(function() {
+
   // show floor plans
 
   var options = {

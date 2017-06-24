@@ -1,8 +1,9 @@
-<p align="center"><a href="https://vuejs.org" target="_blank"><img width="340"src="http://i.imgur.com/MXSzQCq.jpg"></a></p>
+<p align="center"><img width="300" src="https://s11.postimg.org/wvguvenmb/Captura_de_tela_de_2017-06-05_17-22-56.png"></p>
 
 <p align="center">
 <a href="https://circleci.com/gh/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://circleci.com/gh/fga-gpp-mds/2017.1-OndeE-UnB.svg?style=shield&circle-token=:circle-token" alt="Build Status"></a>
 <a href="https://codeclimate.com/github/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://img.shields.io/codeclimate/github/fga-gpp-mds/2017.1-OndeE-UnB.svg" alt="Build Status"></a>
+<a href='https://coveralls.io/github/fga-gpp-mds/2017.1-OndeE-UnB?branch=devel'><img src='https://coveralls.io/repos/github/fga-gpp-mds/2017.1-OndeE-UnB/badge.svg?branch=devel' alt='Coverage Status' /></a>
 <a href="(https://github.com/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://img.shields.io/badge/ruby-2.3.1-blue.svg"></a>
 <a href="(https://github.com/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://img.shields.io/badge/rails-5.0.2-blue.svg"></a>
 <a href="http://www.gnu.org/licenses/agpl-3.0"><img src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg" alt="License: AGPL v3"></a>
@@ -15,7 +16,10 @@
 
 <p align="justify">O "Onde É? UnB" tem a finalidade de facilitar a localização, via mapa interativo, de algumas das instalações e estabelecimentos do Campus Darcy Ribeiro da UnB. A plataforma web é um serviço de localização dentro do campus que pretende auxiliar os diversos frequentadores da UnB a encontrar edifícios, departamentos e salas.</p>
 
+## Links do Site / Deploy Contínuo
 
+* [Site Oficial](https://ondeeunb-prod.herokuapp.com/)
+* [Ambiente de Homologação](https://ondeeunb-dev.herokuapp.com/)
 
 ## Instalação
 
@@ -122,6 +126,23 @@ Rode o servidor
 $ rails s
 ```
 Abra seu navegador em localhost:8080
+
+## Principais Features
+
+O projeto OndeÉ?UnB tem como principais features:
+
+* Traçar Rotas
+* Tutorial da aplicação
+* Gerenciamento de Edifícios, Salas, Administradores e Plantas
+* Compartilhar Localização
+* Visualizar Lanchonetes, Banheiros, Paradas de Ônibus, Bicicletários, Pontos de Informação e Por Satélite.
+* Pesquisas otimizadas com autocomplete
+* Sidebar com informações de Edifícios e Salas
+
+
+## Documentação do Projeto
+
+Visualize a documentação na nossa [wiki](https://github.com/fga-gpp-mds/2017.1-OndeE-UnB/wiki).
 
 ## Licença
 
