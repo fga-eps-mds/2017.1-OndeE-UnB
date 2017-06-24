@@ -1,14 +1,13 @@
-
-<section class="content-header">
-	<h1>Onde é UnB</h1>
-</section>
-<!-- Main content -->
-	<div class="container">
-		<div class="row" style="margin:10px">
+<h1 class="sidebar-header"> Sobre
+  <a class="close">
+    <i class="ion-close"></i>
+  </a>
+</h1>
+<div class="sidebar-body">
 			<% @contributors.each do |contributor| %>
-				<div class="col-sm-4">
+				<div class="col-sm-2">
 					<div class="team-member">
-						<img src= <%= contributor[:avatar] %> class="img-responsive img-circle" alt="">
+						<img src= <%= contributor[:avatar] %> class="team-photo img-responsive img-circle" alt="">
 						<h4 class="text-center"><%= contributor[:name] %></h4>
 						<p class="text-muted text-center"><%= contributor[:role] %></p>
 						<ul class="list-inline social-buttons text-center">
@@ -23,3 +22,4 @@
 			<p class="large text-muted"><%= @description %></p>
 		</div>
 	</div>
+</div>
