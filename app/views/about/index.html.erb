@@ -1,0 +1,27 @@
+
+<section class="content-header">
+	<h1>Onde é UnB</h1>
+</section>
+<!-- Main content -->
+<section id="team" class="bg-light-gray content">
+	<div class="container">
+		<div class="row" style="margin:30px">
+			<% @contributors.each do |contributor| %>
+				<div class="col-sm-4">
+					<div class="team-member">
+						<img src= <%= contributor[:avatar] %> class="img-responsive img-circle" alt="">
+						<h4 class="text-center"><%= contributor[:name] %></h4>
+						<p class="text-muted text-center"><%= contributor[:role] %></p>
+						<ul class="list-inline social-buttons text-center">
+							<li><a href= <%= contributor[:git] %> ><i class="fa fa-github"></i></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			<% end %>
+		</div>
+		<div class="col-lg-8 col-lg-offset-2 text-center">
+			<p class="large text-muted"><%= @description %></p>
+		</div>
+	</div>
+</section>
