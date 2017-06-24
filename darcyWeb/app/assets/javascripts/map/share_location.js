@@ -51,7 +51,7 @@ function setSharedLocation(e, waypoint) {
   linkUrl += "/findme?lat=" + lat + "&lng=" + lng;
   copyToClipboard(linkUrl);
   alert("Link copiado, cole onde desejar e envie para seu colega!");
-};
+}
 
 
 
