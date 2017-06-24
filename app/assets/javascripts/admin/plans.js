@@ -26,7 +26,7 @@ $(plansPages).ready(function() {
       var geoJSON = {
         bottomLeft: overlay._bottomLeft,
         topLeft: overlay._topLeft,
-        topRight: overlay._topRight,
+        topRight: overlay._topRight
       };
       this.$element.val(JSON.stringify(geoJSON));
     },
