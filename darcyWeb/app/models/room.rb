@@ -18,5 +18,4 @@ class Room < ApplicationRecord
   validates :longitude, numericality: true, presence: true
   validates :room_type, inclusion: { in: room_types.keys }
   validates :title, length: { maximum: 50 }, presence: true
-
 end
