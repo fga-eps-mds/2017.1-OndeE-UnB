@@ -1,4 +1,6 @@
-<h1 class="sidebar-header"><%= "#{@room.acronym} - #{@room.title}" %></h1>
+<h1 class="sidebar-header"><%= "#{@room.acronym} - #{@room.title}" %> <a class="close">
+  <i class="ion-close"></i>
+</a></h1>
 <div class="sidebar-body">
   <div class="row">
     <div class="col-8 form-group">
@@ -28,7 +30,7 @@
       <% end %>
     </ul>
     <!-- Tab panes -->
-    
+
     <div class="tab-content">
       <% @schedule.each_with_index do |day_schedule, index| %>
         <div class="tab-pane pt-3 <%= 'active' if @today == index %> " id="dow<%= index %>">
