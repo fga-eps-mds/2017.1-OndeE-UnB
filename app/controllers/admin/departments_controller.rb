@@ -34,7 +34,6 @@ class Admin::DepartmentsController < AdminController
     redirect_to admin_departments_path, notice: alert_success('Departmento excluído com êxito.')
   end
 
-
   private
 
   def alert_success(message)
@@ -52,5 +51,4 @@ class Admin::DepartmentsController < AdminController
   def department_params
     params.require(:department).permit(:acronym, :title, :phone, :latitude, :longitude, :geo_data)
   end
-
 end
