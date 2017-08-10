@@ -28,7 +28,7 @@ class Map::SearchController < MapController
         image = 'fa-building'
       when 'Room'
         title = feature.title
-        description = feature.room_type
+        description = feature.translated_room_type
         image = 'fa-room'
       end
 

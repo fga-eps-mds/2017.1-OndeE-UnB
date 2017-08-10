@@ -12,7 +12,7 @@ describe 'Labels', type: :feature do
     expect(tooltip).to eq(true)
   end
 
-  it 'should show building acronym initially', js: true do
+  pending 'should show building acronym initially', js: true do
     building = FactoryGirl.create :building
 
     visit root_path
@@ -46,7 +46,7 @@ describe 'Labels', type: :feature do
     expect(tooltip).to eq(true)
   end
 
-  it 'should show the room acronym', js: true do
+  pending 'should show the room acronym', js: true do
     room = FactoryGirl.create :room
     visit root_path
     wait_for_ajax

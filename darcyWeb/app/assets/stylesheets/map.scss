@@ -28,6 +28,10 @@ html {
   overflow: hidden;
 }
 
+#sidebar label, #sidebar label b {
+  font-weight: 500;
+}
+
 .leaflet-control-container {
   font-family: "Roboto", sans-serif !important;
 }
@@ -148,24 +152,20 @@ html {
   color: #fff;
 }
 
-.btn.btn-outline-info {
-  color: white;
-  border-color: white;
+.btn.route_mode {
+  color: #134E5E;
+  border-color: rgba(19, 78, 94, 0.4);
+  font-weight: 400 !important;
 
   &:hover {
-    background: #0cc285;
+    background: #134E5E;
+    color: #fff
   }
 }
-
-.btn-group.btn-group-justified {
-  background: radial-gradient(circle at 1.98% 85.01%,#134E5E,transparent 100%),radial-gradient(circle at 98.02% 18.98%,#71B280,transparent 100%),radial-gradient(circle at 50% 50%,#0cc285,#0cc285 100%);
-  background-color: white;
-  border-color: #134E5E;
-}
-
-.btn.btn-outline-info.route_mode.active {
+.btn.route_mode.active {
   background-color: #134E5E;
   border-color: #134E5E;
+  color: #fff;
 }
 
 .btn.btn-info.btn-block {
@@ -246,7 +246,7 @@ html {
     left: 0;
   }
 
-  .leaflet-control-zoom {
+  .leaflet-control-zoom, .leaflet-control-layers {
     margin-top: 80px !important;
   }
 
@@ -276,7 +276,7 @@ html {
     left: 0;
   }
 
-  .leaflet-control-zoom {
+  .leaflet-control-zoom, .leaflet-control-layers {
     margin-top: 80px !important;
   }
 
@@ -353,7 +353,7 @@ html {
 }
 
 .badge-others {
-  background-color: #000;
+  background-color: #134E5E;
 }
 
 .navbar {
@@ -396,6 +396,7 @@ html {
   font-size: 0.7rem;
   color: white;
   margin: 0;
+  visibility: hidden;
 }
 
 .leaflet-tooltip-left.tooltip::before {
@@ -423,6 +424,10 @@ html {
 
 span.twitter-typeahead .tt-menu {
   width: 100%;
+}
+
+span.twitter-typeahead strong {
+  font-weight: 500;
 }
 
 .swal2-container.fade {
