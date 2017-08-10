@@ -27,7 +27,7 @@ const roomColor = function color(type) {
       color = "#AA3939";
       break;
     case "others":
-      color = "#000";
+      color = "#134E5E";
       break;
   }
 
