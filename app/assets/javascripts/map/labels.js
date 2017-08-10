@@ -9,14 +9,25 @@
 //     return Math.round(Math.abs(brng)) + 51;
 // }
 
-var setLabelContent = function setLabelContent(tooltip, content, offset) {
-  tooltip.options.offset[0] = -(content.length) * offset;
-  tooltip.setContent(content);
+var setLabelContent = function setLabelContent(tooltip, content, offset, visibility) {
+  try {
+    tooltip.options.offset[0] = -(content.length) * offset;
+    tooltip.setContent(content);
+    $(".tooltip").css("visibility", visibility);
+
+  } catch (e) {
+    //console.log(e);
+  }
 }
 
 map.on("moveend", function(e) {
 
   var zoom = map.getZoom();
+  var visibility = "hidden";
+
+  if (zoom >= zoomTooltipShow) {
+    visibility = "visible";
+  }
 
   buildingLayer.getLayers().forEach(function(building) {
 
@@ -24,9 +35,9 @@ map.on("moveend", function(e) {
     var tooltip = building.getTooltip();
 
     if (zoom >= zoomTooltipBuilding) {
-      setLabelContent(tooltip, properties.title, titleTooltipOffset);
+      setLabelContent(tooltip, properties.title, titleTooltipOffset, visibility);
     } else {
-      setLabelContent(tooltip, properties.acronym, acronymTooltipOffset);
+      setLabelContent(tooltip, properties.acronym, acronymTooltipOffset, visibility);
     }
 
 
@@ -41,9 +52,9 @@ map.on("moveend", function(e) {
         var tooltip = room.getTooltip();
 
         if (zoom >= zoomTooltipRoom) {
-          setLabelContent(tooltip, properties.title, titleTooltipOffset);
+          setLabelContent(tooltip, properties.title, titleTooltipOffset, visibility);
         } else {
-          setLabelContent(tooltip, properties.acronym, acronymTooltipOffset);
+          setLabelContent(tooltip, properties.acronym, acronymTooltipOffset, visibility);
         }
 
       }
