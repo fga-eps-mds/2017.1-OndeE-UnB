@@ -6,13 +6,15 @@ const south_west = L.latLng(-15.826278199357942, -47.93429374694824);
 const north_east = L.latLng(-15.682212561298117, -47.76615142822265);
 const bounds = L.latLngBounds(south_west, north_east);
 
-var urlMapbox = "https://api.mapbox.com/styles/v1/kaironvzb/cj1y3dkki00042sn074lbuo5k/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2Fpcm9udnpiIiwiYSI6ImNpd21mbW0wbDAwNXMyenFpanlmbHZ6ZXAifQ.RtMAGQj_0ho54Rw6D812hw";
-
+var urlMapbox = "";
+<% unless Rails.env == "test" %>
+urlMapbox = "https://api.mapbox.com/styles/v1/kaironvzb/cj1y3dkki00042sn074lbuo5k/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2Fpcm9udnpiIiwiYSI6ImNpd21mbW0wbDAwNXMyenFpanlmbHZ6ZXAifQ.RtMAGQj_0ho54Rw6D812hw";
+<% end %>
 //Creating the default base layer for when the map loads
 var mapBox = L.tileLayer(urlMapbox, {
   boundary: unb,
-  maxZoom: 20,
-  maxNativeZoom: 22,
+  maxZoom: 22,
+  maxNativeZoom: 20,
   attribution: '&copy; <a href="https://www.mapbox.com/map-feedback/">Mapbox</a>\
                 &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
