@@ -14,6 +14,7 @@ var tooltipOptions = {
 
 const acronymTooltipOffset = 6;
 const titleTooltipOffset = 3;
+const zoomTooltipShow = 16; // the zoom which the tooltip will be shown
 const zoomTooltipRoom = 20; // the zoom which the tooltip content will be changed
 const zoomTooltipBuilding = 18; // the zoom which the tooltip content will be changed
 
