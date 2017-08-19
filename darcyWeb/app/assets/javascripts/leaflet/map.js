@@ -6,10 +6,7 @@ const south_west = L.latLng(-15.826278199357942, -47.93429374694824);
 const north_east = L.latLng(-15.682212561298117, -47.76615142822265);
 const bounds = L.latLngBounds(south_west, north_east);
 
-var urlMapbox = "";
-<% unless Rails.env == "test" %>
-urlMapbox = "https://api.mapbox.com/styles/v1/kaironvzb/cj1y3dkki00042sn074lbuo5k/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2Fpcm9udnpiIiwiYSI6ImNpd21mbW0wbDAwNXMyenFpanlmbHZ6ZXAifQ.RtMAGQj_0ho54Rw6D812hw";
-<% end %>
+var urlMapbox = "https://api.mapbox.com/styles/v1/kaironvz/cj4cxz9nr5n1u2rp53imvn9tu/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2Fpcm9udnoiLCJhIjoiY2o0Y3h5YmJhMGU1MzJxbXh2dmczN2w0eSJ9.iOK4aTg-UWinlS0prZPDnA";
 //Creating the default base layer for when the map loads
 var mapBox = L.tileLayer(urlMapbox, {
   boundary: unb,
