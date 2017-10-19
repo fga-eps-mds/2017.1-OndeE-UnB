@@ -1,0 +1,15 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    command: bundle exec rails s -p 8080 -b '0.0.0.0'
+    volumes:
+      - .:/darcyWeb
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
