@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20170623173320) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "admins", force: :cascade do |t|
+  create_table "admins", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -33,13 +33,13 @@ ActiveRecord::Schema.define(version: 20170623173320) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "buildings", force: :cascade do |t|
+  create_table "buildings", id: :serial, force: :cascade do |t|
     t.string "acronym"
     t.integer "phone"
     t.text "image_data"
   end
 
-  create_table "locations", force: :cascade do |t|
+  create_table "locations", id: :serial, force: :cascade do |t|
     t.string "title"
     t.string "latitude"
     t.string "longitude"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20170623173320) do
     t.index ["actable_type", "actable_id"], name: "index_locations_on_actable_type_and_actable_id"
   end
 
-  create_table "plans", force: :cascade do |t|
+  create_table "plans", id: :serial, force: :cascade do |t|
     t.integer "building_id"
     t.integer "level"
     t.text "geo_data"
@@ -59,12 +59,12 @@ ActiveRecord::Schema.define(version: 20170623173320) do
     t.index ["building_id"], name: "index_plans_on_building_id"
   end
 
-  create_table "points", force: :cascade do |t|
+  create_table "points", id: :serial, force: :cascade do |t|
     t.integer "type_point"
     t.text "description"
   end
 
-  create_table "rooms", force: :cascade do |t|
+  create_table "rooms", id: :serial, force: :cascade do |t|
     t.string "acronym"
     t.integer "building_id"
     t.integer "room_type"
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 20170623173320) do
     t.index ["building_id"], name: "index_rooms_on_building_id"
   end
 
-  create_table "schedules", force: :cascade do |t|
+  create_table "schedules", id: :serial, force: :cascade do |t|
     t.integer "room_id"
     t.string "title"
     t.decimal "code"

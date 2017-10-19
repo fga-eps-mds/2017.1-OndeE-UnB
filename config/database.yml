@@ -6,8 +6,12 @@
 #
 default: &default
   adapter: postgresql
-  pool: 5
-  timeout: 5000
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # Apenas acrescentamos o nosso container como Host
+  host: db
+  # E colocamos o usuário default do postgreSQL
+  user: postgres
 
 development:
   <<: *default
