@@ -5,7 +5,7 @@ services:
     image: postgres
   webpacker:
     build: .
-    command: bundle exec bin/webpack-dev-server
+    command: bundle exec bin/webpack-dev-server --host 0.0.0.0
     volumes:
       - .:/ondeeunb
     ports:
