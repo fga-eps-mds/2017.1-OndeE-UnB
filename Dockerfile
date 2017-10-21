@@ -1,28 +1,14 @@
-FROM ruby:2.3.1
-
-RUN mkdir -p /darcyWeb
-
+FROM ruby:2.3.3
 RUN apt-get update
-
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
-RUN apt-get install -y git curl automake build-essential bison
-RUN apt-get install -y libpq-dev libssl-dev libtool libcurl4-openssl-dev
-RUN apt-get install -y libyaml-dev libreadline-dev libxml2-dev libxslt1-dev
-RUN apt-get install -y libffi-dev libffi-dev libgdbm-dev libncurses5-dev
-RUN apt-get install -y libsqlite3-dev sqlite3 zlib1g-dev
-RUN apt-get install -y python-software-properties
-
+RUN apt-get install -y apt-utils git build-essential libpq-dev curl
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt-get install -y nodejs
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update -qq
+RUN apt-get install -y yarn
+RUN mkdir /ondeeunb
+ADD . /ondeeunb
+WORKDIR /ondeeunb/darcyWeb
 RUN gem install bundler
-RUN gem install nokogiri -v '1.6.8'
-RUN gem install rails
-RUN apt-get autoremove
-RUN apt-get autoclean
-RUN apt-get update
-
-WORKDIR /darcyWeb
-
-ADD Gemfile /darcyWeb/Gemfile
-ADD Gemfile.lock /darcyWeb/Gemfile.lock
-
 RUN bundle install
-ADD . /darcyWeb
