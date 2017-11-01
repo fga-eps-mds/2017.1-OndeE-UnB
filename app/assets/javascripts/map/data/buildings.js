@@ -7,16 +7,16 @@ var buildingLayer = L.geoJSON(false, {
       weight: 1.5
     });
 
-    layer.on("add", function(ev){
+    // layer.on("add", function(ev){
 
-      var content = layer.feature.properties.building.acronym;
-      // Define the offset of the label based on the word length
-      tooltipOptions.offset[0] = -(content.length) * acronymTooltipOffset;
+    //   var content = layer.feature.properties.building.acronym;
+    //   // Define the offset of the label based on the word length
+    //   tooltipOptions.offset[0] = -(content.length) * acronymTooltipOffset;
 
-      layer.bindTooltip(function(layer) {
-        return content;
-      }, tooltipOptions);
-    });
+    //   layer.bindTooltip(function(layer) {
+    //     return content;
+    //   }, tooltipOptions);
+    // });
     // Trigger when user click on a building
     layer.on("click", function() {
       // The key references to that building clicked
