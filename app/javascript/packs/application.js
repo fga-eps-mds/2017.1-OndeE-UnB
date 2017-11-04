@@ -8,3 +8,6 @@
 // layout file, like app/views/layouts/application.html.erb
 
 console.log('Hello World from Webpacker');
+import Buildings from "../map/buildings"
+const buildings = new Buildings();
+buildings.getBuildings();
