@@ -1,4 +1,5 @@
 import axios from 'axios'
+import layer from "./buildingsLayer"
 
 export default class Buildings {
   constructor() {
@@ -10,7 +11,7 @@ export default class Buildings {
     return axios.get(this.endpoint);
   }
 
-  addToMap(layer) {
+  addToMap() {
     this.buildings.then(response => {
       let buildings = response.data;
 

@@ -1,4 +1,4 @@
-const buildingsLayer = L.geoJSON(false, {
+const layer = L.geoJSON(false, {
   onEachFeature: (feature, layer) => {
     layer.setStyle({
       fillColor: buildingStyles[mapOptions.baseLayer].color,
@@ -19,23 +19,21 @@ const buildingsLayer = L.geoJSON(false, {
     });
     // Trigger when user click on a building
     layer.on("click", () => {
+
       // The key references to that building clicked
-
       const buildingID = feature.properties.building.id;
+      const buildingUrl = "/map/data/building/" + buildingID;
 
-      if (sidebar.isVisible()) {
-        sidebar.hide();
-      } else {
-        //selects the building clicked and shows sidebar
-        const buildingUrl = "/map/data/building/" + buildingID;
-        $("#sidebar").load(buildingUrl, () => {
-          sidebar.toggle();
-        });
-        // Load rooms for clicked building
-        loadRooms(buildingID);
-      }
+      //selects the building clicked and shows sidebar
+      $("#sidebar").load(buildingUrl, () => {
+          sidebar.show();
+      });
+
+      // Load rooms for clicked building
+      loadRooms(buildingID);
+
     });
   }
 }).addTo(map);
 
-export default buildingsLayer;
+export default layer;
