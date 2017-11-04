@@ -8,26 +8,27 @@ const buildingsLayer = L.geoJSON(false, {
     });
 
     layer.on("add", ev => {
-
-      const content = layer.feature.properties.building.acronym;
-      // Define the offset of the label based on the word length
-      tooltipOptions.offset[0] = -(content.length) * acronymTooltipOffset;
-
-      layer.bindTooltip(layer => {
-        return content;
-      }, tooltipOptions);
+      // Commented tooltip label
+      // const content = layer.feature.properties.building.acronym;
+      // // Define the offset of the label based on the word length
+      // tooltipOptions.offset[0] = -(content.length) * acronymTooltipOffset;
+      //
+      // layer.bindTooltip(layer => {
+      //   return content;
+      // }, tooltipOptions);
     });
     // Trigger when user click on a building
     layer.on("click", () => {
       // The key references to that building clicked
-      const buildingID = this.feature.properties.building.id;
+
+      const buildingID = feature.properties.building.id;
 
       if (sidebar.isVisible()) {
         sidebar.hide();
       } else {
         //selects the building clicked and shows sidebar
-        const numberToBuilding = "/map/data/building/" + buildingID;
-        $("#sidebar").load(numberToBuilding, () => {
+        const buildingUrl = "/map/data/building/" + buildingID;
+        $("#sidebar").load(buildingUrl, () => {
           sidebar.toggle();
         });
         // Load rooms for clicked building
