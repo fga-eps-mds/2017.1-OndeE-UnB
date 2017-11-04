@@ -38,20 +38,20 @@ var buildingLayer = L.geoJSON(false, {
 }).addTo(map);
 
 // Insert each building on the layer of building
-$.getJSON("/map/data/buildings", function(buildings) { //getting the json data
-  buildings.forEach(function(building) {
-    console.info("Adding building");
-    try {
-      var geoJSON = JSON.parse(building.geo_data);
-      geoJSON.features[0].properties.building = {
-        id: building.id,
-        title: building.title,
-        acronym: building.acronym
-      };
-      console.info(geoJSON);
-      buildingLayer.addData(geoJSON);
-    } catch (err) {
-      console.error(err);
-    }
-  });
-});
+// $.getJSON("/map/data/buildings", function(buildings) { //getting the json data
+//   buildings.forEach(function(building) {
+//     console.info("Adding building");
+//     try {
+//       var geoJSON = JSON.parse(building.geo_data);
+//       geoJSON.features[0].properties.building = {
+//         id: building.id,
+//         title: building.title,
+//         acronym: building.acronym
+//       };
+//       console.info(geoJSON);
+//       buildingLayer.addData(geoJSON);
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   });
+// });
