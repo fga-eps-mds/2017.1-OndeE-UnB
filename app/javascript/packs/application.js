@@ -8,7 +8,7 @@
 // layout file, like app/views/layouts/application.html.erb
 
 console.log('Hello World from Webpacker');
-import "../map/buildingsLayer"
+import buildingsLayer from "../map/buildingsLayer"
 import Buildings from "../map/buildings"
 const buildings = new Buildings();
-buildings.addToMap(buildingLayer);
+buildings.addToMap(buildingsLayer);
