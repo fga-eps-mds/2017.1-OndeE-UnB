@@ -10,4 +10,4 @@
 console.log('Hello World from Webpacker');
 import Buildings from "../map/buildings"
 const buildings = new Buildings();
-buildings.getBuildings();
+buildings.addToMap();
