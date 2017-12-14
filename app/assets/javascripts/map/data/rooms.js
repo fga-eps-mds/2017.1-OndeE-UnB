@@ -64,16 +64,16 @@ var loadRooms = function loadRooms(buildingKey) {
     indoorLayer = new L.Indoor(rooms, {
       onEachFeature: function(feature, layer) {
 
-        layer.on("add", function(ev) {
+        // layer.on("add", function(ev) {
 
-          var content = layer.feature.properties.room.acronym;
-          // Define the offset of the label based on the word length
-          tooltipOptions.offset[0] = -(content.length)*acronymTooltipOffset;
+        //   var content = layer.feature.properties.room.acronym;
+        //   // Define the offset of the label based on the word length
+        //   tooltipOptions.offset[0] = -(content.length)*acronymTooltipOffset;
 
-          layer.bindTooltip(function(layer) {
-            return content; // Needs to be a string
-          }, tooltipOptions);
-        });
+        //   layer.bindTooltip(function(layer) {
+        //     return content; // Needs to be a string
+        //   }, tooltipOptions);
+        // });
         // Trigger when user click on a building
         layer.on("click", function() {
           // The key references to that building clicked
