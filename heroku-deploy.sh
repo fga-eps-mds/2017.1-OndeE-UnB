@@ -9,4 +9,4 @@ git fetch heroku
 
 # deploy code changes (and implicitly restart the app and any running workers)
 
-git subtree push --prefix darcyWeb heroku master
+git subtree push heroku master
