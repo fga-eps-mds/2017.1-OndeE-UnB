@@ -68,7 +68,6 @@ Console do rails:
 $ docker-compose exec web rails c
 ```
 
-
 ## Principais Features
 
 O projeto OndeÉ?UnB tem como principais features:

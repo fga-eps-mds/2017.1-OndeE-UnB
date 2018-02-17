@@ -1,0 +1,46 @@
+<div  id="card" class="card">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card-header">
+                <%= title %>
+            </div>
+            <div class="card-body">
+                <%= form_for(point, url: url, validate: true) do |f| %>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <%= f.label "Título" %>
+                        <%= f.text_field :title, class: 'form-control' %>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <%= f.label "Tipo de Ponto" %>
+                        <%= f.select :type_point, ['Bicicletario', 'Banheiro','Lanchonete', 'Parada de Onibus', 'Entrada de Edificio', 'Ponto de Informacao'], {}, {required: 'true', class: 'form-control' } %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <%= f.label "Descrição" %>
+                        <%= f.text_field :description, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <%= f.label :latitude %>
+                        <%= f.text_field :latitude, class: 'form-control' %>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <%= f.label :longitude %>
+                        <%= f.text_field :longitude, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <%= f.hidden_field :geo_data %>
+                    <%= f.submit 'Salvar', class: 'btn btn-sm btn-success', id: "Salvar" %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div id="map" style="float: left;"></div>
+        </div>
+    </div>
+</div>

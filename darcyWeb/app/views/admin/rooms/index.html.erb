@@ -1,0 +1,50 @@
+<div class="row" style="margin-top: 30px;">
+    <div class="col-xs-12">
+      <%= notice.html_safe unless notice.blank? %>
+        <div class="card card-mini">
+            <div class="card-header">
+                <div class="card-title">Salas</div>
+                <ul class="card-action">
+                    <li>
+                        <%= link_to '<i class="fa fa-plus"></i>'.html_safe, new_admin_room_path %>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body no-padding table-responsive">
+                <table class="table card-table">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Sigla</th>
+                            <th>Edifício</th>
+                            <th>Nível</th>
+                            <th>Tipo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @rooms.each do |room| %>
+                        <tr>
+                            <td><%= room.title %></td>
+                            <td><%= room.acronym %></td>
+                            <td><%= room.building.acronym %></td>
+                            <td><%= room.level %></td>
+                            <td><%= room.translated_room_type %></td>
+                            <td>
+                                <%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_admin_room_path(room) %>
+                                <%= link_to '<i class="fa fa-remove"></i>'.html_safe, admin_room_path(room), method: :delete, data: {
+                                  'sweet-alert-confirm': 'Alerta',
+                                  'confirm-button-text': 'Sim',
+                                  'confirm-button-color': '#DD6B55',
+                                  'cancel-button-text': 'Cancelar',
+                                  'text': 'Tem certeza que deseja apagar esta sala?'
+                                } %>
+                            </td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

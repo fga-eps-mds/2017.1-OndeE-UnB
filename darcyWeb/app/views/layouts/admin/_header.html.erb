@@ -1,0 +1,45 @@
+<nav class="navbar navbar-default" id="navbar">
+    <div class="navbar-collapse collapse in">
+        <ul class="nav navbar-nav navbar-mobile">
+            <li>
+                <button type="button" class="sidebar-toggle">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </li>
+            <li class="logo">
+                <a class="navbar-brand" href="#">
+                    <span class="highlight">Onde É</span>
+                    UnB</a>
+            </li>
+            <li>
+                <button type="button" class="navbar-toggle">
+                    <%= image_tag 'avatar' , class: 'profile-img' %>
+                </button>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-left">
+            <li class="navbar-title">Painel de Administração</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown profile">
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                    <%= image_tag 'avatar.png', class: 'profile-img' %>
+                    <div class="title">Profile</div>
+                </a>
+                <div class="dropdown-menu">
+                    <div class="profile-info">
+                        <h4 class="username"><%= current_admin.name %></h4>
+                    </div>
+                    <ul class="action">
+                        <li>
+                            <%= link_to 'Configurações', edit_admin_registration_path  %>
+                        </li>
+                        <li>
+                            <%= link_to 'Sair', logout_path  %>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,25 @@
+<h1 class="sidebar-header"> Sobre
+  <a class="close">
+    <i class="ion-close"></i>
+  </a>
+</h1>
+<div class="sidebar-body">
+			<% @contributors.each do |contributor| %>
+				<div class="col-sm-2">
+					<div class="team-member">
+						<img src= <%= contributor[:avatar] %> class="team-photo img-responsive img-circle" alt="">
+						<h4 class="text-center"><%= contributor[:name] %></h4>
+						<p class="text-muted text-center"><%= contributor[:role] %></p>
+						<ul class="list-inline social-buttons text-center">
+							<li><a href= <%= contributor[:git] %> ><i class="fa fa-github"></i></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			<% end %>
+		</div>
+		<div class="col-lg-8 col-lg-offset-2 text-center">
+			<p class="large text-muted"><%= @description %></p>
+		</div>
+	</div>
+</div>

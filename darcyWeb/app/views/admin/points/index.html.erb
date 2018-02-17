@@ -1,0 +1,46 @@
+<div class="row" style="margin-top: 30px;">
+    <div class="col-xs-12">
+      <%= notice.html_safe unless notice.blank? %>
+        <div class="card card-mini">
+            <div class="card-header">
+                <div class="card-title">Pontos</div>
+                <ul class="card-action">
+                    <li>
+                        <%= link_to '<i class="fa fa-plus"></i>'.html_safe, new_admin_point_path %>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body no-padding table-responsive">
+                <table class="table card-table">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Tipo</th>
+                            <th>Descrição</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @points.each do |point| %>
+                        <tr>
+                            <td><%= point.title %></td>
+                            <td><%= point.type_point %></td>
+                            <td><%= point.description %></td>
+                            <td>
+                                <%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_admin_point_path(point) %>
+                                <%= link_to '<i class="fa fa-remove"></i>'.html_safe, admin_point_path(point), method: :delete, data: {
+                                  'sweet-alert-confirm': 'Alerta',
+                                  'confirm-button-text': 'Sim',
+                                  'confirm-button-color': '#DD6B55',
+                                  'cancel-button-text': 'Cancelar',
+                                  'text': 'Tem certeza que deseja apagar este ponto?'
+                                } %>
+                            </td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
