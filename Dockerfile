@@ -8,7 +8,7 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 RUN apt-get update -qq
 RUN apt-get install -y yarn
 RUN mkdir /campusmap
-ADD .
+ADD . /campusmap
 WORKDIR /campusmap
 RUN gem install bundler
 RUN bundle package --all
