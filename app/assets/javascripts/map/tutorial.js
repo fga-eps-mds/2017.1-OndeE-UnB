@@ -13,13 +13,13 @@ L.easyButton("fa-question-circle", function(btn, map) {
 
 $(".navbar")
   .attr("data-intro",
-  "<h2>WELCOME!</h2> Facilite seu trajeto pela universidade com o <b>Onde é? UnB</b>, através dele você será capaz de traçar rotas entre edifícios, localizar salas, prédios, departamentos e muito mais. Para conhecer mais sobre a aplicação clique em <b>Próximo</b>.")
+  "<h2>BEM-VINDO(A)!</h2> Facilite seu trajeto pela universidade com o <b>Onde é? UnB</b>, através dele você será capaz de traçar rotas entre edifícios, localizar salas, prédios, departamentos e muito mais. Para conhecer mais sobre a aplicação clique em <b>Próximo</b>.")
   .attr("data-step", "1")
   .attr("data-tooltipClass", "tutorialStyle")
   .attr("data-position", "bottom-middle-aligned");
 $("#searchContainer")
   .attr("data-intro",
-  "<h2>PESQUISA</h2> Aqui é possível pesquisar qualquer <b>prédio</b>, <b>sala</b> e <b>departamento</b> da universidade!")
+  "<h2>PESQUISA</h2> Aqui é possível pesquisar qualquer <b>prédio</b> e <b>sala</b> da universidade!")
   .attr("data-step", "2")
   .attr("data-tooltipClass", "tutorialStyle")
   .attr("data-position", "bottom-middle-aligne");
@@ -43,7 +43,7 @@ $(".leaflet-control-layers.leaflet-control")
   .attr("data-position", "auto");
 $(".leaflet-contextmenu")
   .attr("data-intro",
-  "<h2>MENU</h2> Clicando com o botão direito do mouse no mapa um menu irá aparecerá com opções para selecionar <b>rotas</b> e <b>compartilhar sua posição</b>!")
+  "<h2>MENU</h2> Clicando com o botão direito do mouse no mapa um menu irá aparecer com opções para selecionar <b>rotas</b> e <b>compartilhar sua posição</b>!")
   .attr("data-step", "6")
   .attr("data-tooltipClass", "tutorialStyle")
   .attr("data-position", "bottom-middle-aligne");
