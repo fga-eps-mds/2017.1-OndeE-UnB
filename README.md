@@ -38,21 +38,34 @@ $ docker-compose up
 
 Em outra aba do terminal, configure o banco de dados.
 ```console
-$ docker-compose run web rails db:setup
+$ docker-compose exec web rails db:setup
 ```
 
 Instale os pacotes JavaScript.
 ```console
-$ docker-compose run web yarn install
+$ docker-compose exec web yarn install
 ```
 
-Abra seu navegador em localhost:3000
+Acesse o app em localhost:3000
 
-## Instruções Adicionais
+## Outras Instruções
 
-Sempre que alterar o Gemfile, atualize a imagem.
+Para executar comandos no container do rails, utilize:
+
 ```console
-$ docker-compose build
+$ docker-compose exec web your command
+```
+
+#### Exemplos
+
+Instalação de gems:
+```console
+$ docker-compose exec web bundle install
+```
+
+Console do rails:
+```console
+$ docker-compose exec web rails c
 ```
 
 ## Principais Features
@@ -70,7 +83,7 @@ O projeto OndeÉ?UnB tem como principais features:
 
 ## Documentação do Projeto
 
-Visualize a documentação na nossa [wiki](https://github.com/fga-gpp-mds/2017.1-OndeE-UnB/wiki).
+Visualize a documentação na [wiki](https://github.com/fga-gpp-mds/2017.1-OndeE-UnB/wiki).
 
 ## Licença
 

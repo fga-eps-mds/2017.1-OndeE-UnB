@@ -6,9 +6,10 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module DarcyWeb
+module CampusMap
   class Application < Rails::Application
     config.i18n.default_locale = 'pt-BR'
+    config.load_defaults 5.1
     config.to_prepare do
       # Configure single controller layout
       Devise::SessionsController.layout "sign"

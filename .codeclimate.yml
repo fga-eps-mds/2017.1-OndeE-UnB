@@ -17,11 +17,10 @@ engines:
       file: my_rubocop.yml
 ratings:
   paths:
-  - "darcyWeb/**.js"
-  - "darcyWeb/**.rb"
+  - "**.js"
+  - "**.rb"
 exclude_paths:
-  - darcyWeb/db/
-  - darcyWeb/spec/
-  - darcyWeb/test/
-  - darcyWeb/vendor/
-  - Vagrantfile
+  - db/
+  - spec/
+  - test/
+  - vendor/

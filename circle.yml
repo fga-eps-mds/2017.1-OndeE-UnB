@@ -2,18 +2,18 @@
 
 version: 1
 # general:
-#   build_dir: darcyWeb
+#   build_dir: ~/
 machine:
   ruby:
     version: 2.3.0
 dependencies:
   override:
-    - cd darcyWeb && bundle install
-    - cd darcyWeb && bundle exec rake db:setup
-    - cd darcyWeb && bundle exec rake db:migrate
+    - bundle install
+    - bundle exec rake db:setup
+    - bundle exec rake db:migrate
 test:
   override:
-    - cd darcyWeb && COVERALLS_REPO_TOKEN=togFVZcnCwIEezRsMHecWBzSIhr7dFS8x bundle exec rspec spec
+    - COVERALLS_REPO_TOKEN=togFVZcnCwIEezRsMHecWBzSIhr7dFS8x bundle exec rspec spec
 
 deployment:
   production:
@@ -30,8 +30,8 @@ deployment:
         EOF
       - chmod 600 ~/.netrc # Heroku cli complains about permissions without this
       - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
-      # - git subtree push --prefix darcyWeb git@heroku.com:ondeeunb-prod.git master
-      - git push git@heroku.com:ondeeunb-prod.git `git subtree split --prefix darcyWeb master`:master --force
+      # - git subtree push --prefix git@heroku.com:ondeeunb-prod.git master
+      - git push git@heroku.com:ondeeunb-prod.git `git subtree split --prefix master`:master --force
   staging:
     branch: devel
     commands:
@@ -46,5 +46,5 @@ deployment:
         EOF
       - chmod 600 ~/.netrc # Heroku cli complains about permissions without this
       - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
-      # - git subtree push --prefix darcyWeb git@heroku.com:ondeeunb-dev.git master
-      - git push git@heroku.com:ondeeunb-dev.git `git subtree split --prefix darcyWeb devel`:master --force
+      # - git subtree push --prefix git@heroku.com:ondeeunb-dev.git master
+      - git push git@heroku.com:ondeeunb-dev.git `git subtree split --prefix devel`:master --force
