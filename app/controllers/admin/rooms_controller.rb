@@ -4,7 +4,7 @@ class Admin::RoomsController < AdminController
 
   def index
     @rooms = Room.all
-    @rooms_for_paginate = Room.order("acronym").page(params['page']).per(20)
+    @rooms_for_paginate = Room.order("building_id").page(params['page']).per(15)
   end
 
   def new

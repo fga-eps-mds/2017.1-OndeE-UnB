@@ -44,7 +44,7 @@
                         <% end %>
                     </tbody>
                 </table>
-                <%= paginate @rooms_for_paginate %>
+                <%= paginate @rooms_for_paginate, window: 3 %>
             </div>
         </div>
     </div>
