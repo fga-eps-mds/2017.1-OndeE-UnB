@@ -2,7 +2,7 @@ class Admin::BuildingsController < AdminController
   before_action :set_building, only: [:destroy, :edit, :update]
 
   def index
-    @buildings = Building.all
+    @buildings = Building.order("acronym").page(params['page']).per(13)
   end
 
   def new

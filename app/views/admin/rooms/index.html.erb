@@ -23,7 +23,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% @rooms_for_paginate.each do |room| %>
+                        <% @rooms.each do |room| %>
                         <tr>
                             <td><%= room.title %></td>
                             <td><%= room.acronym %></td>
@@ -44,7 +44,7 @@
                         <% end %>
                     </tbody>
                 </table>
-                <%= paginate @rooms_for_paginate, window: 3 %>
+                <%= paginate @rooms, window: 3 %>
             </div>
         </div>
     </div>

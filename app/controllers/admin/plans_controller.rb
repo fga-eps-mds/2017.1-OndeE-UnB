@@ -3,7 +3,7 @@ class Admin::PlansController < AdminController
   before_action :set_buildings, only: [:new, :edit, :update, :create]
 
   def index
-    @plans = Plan.all
+    @plans = Plan.order("building_id").page(params['page']).per(13)
   end
 
   def new

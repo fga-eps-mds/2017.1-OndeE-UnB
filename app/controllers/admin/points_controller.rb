@@ -2,7 +2,7 @@ class Admin::PointsController < AdminController
   before_action :set_point, only: [:destroy, :edit, :update]
 
   def index
-    @points = Point.all
+    @points = Point.order("type_point").page(params['page']).per(13)
   end
 
   def new
