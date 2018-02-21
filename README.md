@@ -14,11 +14,11 @@
 
 ## Sobre o Projeto
 
-<p align="justify">O "Onde É? UnB" tem a finalidade de facilitar a localização, via mapa interativo, de algumas das instalações e estabelecimentos do Campus Darcy Ribeiro da UnB. A plataforma web é um serviço de localização dentro do campus que pretende auxiliar os diversos frequentadores da UnB a encontrar edifícios, departamentos e salas.</p>
+<p align="justify">O "Onde É? UnB" tem a finalidade de facilitar a localização, via mapa interativo, de algumas das instalações e estabelecimentos do Campus Darcy Ribeiro da UnB. A plataforma web é um serviço de localização dentro do campus que pretende auxiliar os diversos frequentadores da UnB a encontrar edifícios e salas.</p>
 
 ## Links do Site / Deploy Contínuo
 
-* [Site Oficial](https://ondeeunb-prod.herokuapp.com/)
+* [Site Oficial](https://ondeeunb.herokuapp.com/)
 * [Ambiente de Homologação](https://ondeeunb-dev.herokuapp.com/)
 
 ## Instalação

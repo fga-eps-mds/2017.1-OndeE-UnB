@@ -3,7 +3,7 @@ class Admin::RoomsController < AdminController
   before_action :set_room_types, :set_plans, only: [:new, :edit, :update, :create]
 
   def index
-    @rooms = Room.all
+    @rooms = Room.order("building_id").page(params['page']).per(13)
   end
 
   def new
