@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   root 'map#index'
 
   get 'about', to: 'about#index'
-  
+
   get 'findme', to: 'map#index'
 
   get 'admin', to: 'admin#index'

@@ -4906,6 +4906,10 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-on-rails@^10.1.1:
+  version "10.1.1"
+  resolved "https://registry.yarnpkg.com/react-on-rails/-/react-on-rails-10.1.1.tgz#b645e3e2021c66ba3d77fa5660692a9de3219462"
+
 read-cache@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/read-cache/-/read-cache-1.0.0.tgz#e664ef31161166c9751cdbe8dbcf86b5fb58f774"

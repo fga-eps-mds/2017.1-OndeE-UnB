@@ -92,3 +92,7 @@ gem 'seed_dump'
 
 # gem for pagination
 gem 'kaminari'
+
+gem 'react_on_rails', '10.0.2'
+
+gem 'mini_racer', platforms: :ruby
