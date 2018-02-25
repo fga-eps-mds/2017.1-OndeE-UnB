@@ -67,7 +67,6 @@ gem 'sweet-alert-confirm'
 # Gem responsible for test coverage
 gem 'simplecov', group: :test
 gem 'coveralls', require: false
-gem ' eslint-rails '
 
 gem 'rails-controller-testing'
 

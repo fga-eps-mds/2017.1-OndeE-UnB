@@ -29,6 +29,7 @@ default: &default
     - .jpeg
     - .jpg
 
+
 development:
   <<: *default
   compile: true
