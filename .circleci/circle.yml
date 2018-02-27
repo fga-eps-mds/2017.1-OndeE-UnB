@@ -7,7 +7,7 @@ jobs:
         environment:
           POSTGRES_USER: root
 
-    working_directory: ~/darcyWeb/
+    working_directory: ~/
     steps:
       - checkout
       - run:
@@ -15,13 +15,13 @@ jobs:
           command: apt-get update -qq && apt-get install -y build-essential nodejs
       - run:
           name: Install Ruby Dependencies
-          command: cd darcyWeb && bundle install
+          command: bundle install
       - run:
           name: Create DB
-          command: cd darcyWeb && bundle exec rake db:create db:schema:load --trace
+          command: bundle exec rake db:create db:schema:load --trace
       - run:
           name: DB Migrations
-          command: cd darcyWeb && bundle exec rake db:migrate
+          command: bundle exec rake db:migrate
       - run:
           name: Run Tests
-          command: cd darcyWeb && bundle exec rake test
+          command: bundle exec rake test

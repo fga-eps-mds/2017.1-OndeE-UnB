@@ -1,0 +1,126 @@
+pt-BR:
+  devise:
+    registrations:
+      admin:
+        updated: "Cadastrado editado com sucesso."
+    sessions:
+      admin:
+        signed_in: "Seja bem-vindo!"
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "Registro inválido."
+      models:
+        admin:
+          attributes:
+            name:
+              blank: "Insira o nome."
+              too_long: "Insira um nome com até 20 caracteres."
+            email:
+              blank: "Insira o email."
+              invalid: "Email inválido. Insira novamente."
+              taken: "Já existe administrador com esse email."
+            password:
+              blank: "Insira a senha."
+              too_short: "Insira a senha com no mínimo 6 caracteres."
+            password_confirmation:
+              blank: "Insira a confirmação da senha."
+              confirmation: "As senhas não correspondem."
+        building:
+          attributes:
+            acronym:
+              blank: "Insira a sigla do edifício."
+        room:
+          attributes:
+            acronym:
+              blank: "Insira a sigla da sala."
+              too_long: "A sigla é muito grande."
+            room_type:
+              blank: "Insira o tipo de sala."
+            level:
+              blank: "Insira o nível da sala."
+              not_a_number: "Insira um número."
+              not_an_integer: "Insira um número inteiro."
+        location:
+          attributes:
+            title:
+              blank: "Insira o título."
+            latitude:
+              blank: "Insira a latitude."
+            longitude:
+              blank: "Insira a longitude"
+            image:
+                blank: "É necessária uma foto do edifício."
+            name:
+              too_long: "O nome do edifício é muito longo."
+            phone:
+              blank: "Insira o número de telefone."
+              not_a_number: "O telefone deve conter apenas números."
+        plan:
+          attributes:
+            building:
+              blank: "Informe o edifício."
+            level:
+              blank: "Informe o nível."
+              not_a_number: "Insira um número."
+              not_an_integer: "Insira um número inteiro."
+            image:
+              blank: "Insira a imagem."
+            geo_data:
+              blank: "Geo Data é obrigatório."
+    models:
+    attributes:
+      location:
+        title: "Título do Local"
+      building:
+        acronym: "Sigla"
+        phone: "Telefone"
+      room:
+        title: "Título"
+        acronym: "Acrônimo"
+        level: "Nível"
+        building_id: "Edifício"
+        room_type: "Tipo de Sala"
+        room_type_list:
+          classroom: 'Sala de Aula'
+          laboratory: 'Laboratório'
+          professor_room: 'Sala de Professor'
+          study_room: 'Sala de Estudo'
+          amphitheater: 'Anfiteatro'
+          academic_center: 'Centro Acadêmico'
+          kitchen: 'Cozinha'
+          SAA: 'Secretaria'
+          others: 'Outros'
+      schedule:
+        day_of_week_list:
+          sunday: 'DOM'
+          monday: 'SEG'
+          tuesday: 'TER'
+          wednesday: 'QUA'
+          thursday: 'QUI'
+          friday: 'SEX'
+          saturday: 'SAB'
+      admin:
+        name: "Nome"
+        password: "Senha"
+        password_confirmation: "Confirmação da senha"
+      plan:
+        building_id: "Edifício"
+        level: "Nível"
+        image: "Imagem"
+  views:
+    pagination:
+      first: "&laquo; Primeira"
+      last: "Última &raquo;"
+      previous: "&lsaquo; Anterior"
+      next: "Próxima &rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "Nenhum(a) %{entry_name} encontrado(a)"
+          one: "Exibindo <b>1</b> %{entry_name}"
+          other: "Exibindo <b>todas %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Exibindo %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> de <b>%{total}</b> no total"

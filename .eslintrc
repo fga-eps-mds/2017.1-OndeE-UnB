@@ -1,0 +1,13 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "one-var": 0,
+    "comma-dangle": 0,
+    "max-len": [0, 120, 4],
+    "indent": [2, 4],
+    "key-spacing": [2, {
+      "beforeColon": false,
+      "afterColon": true
+    }]
+  }
+}

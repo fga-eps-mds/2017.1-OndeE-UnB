@@ -4,128 +4,69 @@
 <a href="https://circleci.com/gh/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://circleci.com/gh/fga-gpp-mds/2017.1-OndeE-UnB.svg?style=shield&circle-token=:circle-token" alt="Build Status"></a>
 <a href="https://codeclimate.com/github/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://img.shields.io/codeclimate/github/fga-gpp-mds/2017.1-OndeE-UnB.svg" alt="Build Status"></a>
 <a href='https://coveralls.io/github/fga-gpp-mds/2017.1-OndeE-UnB?branch=devel'><img src='https://coveralls.io/repos/github/fga-gpp-mds/2017.1-OndeE-UnB/badge.svg?branch=devel' alt='Coverage Status' /></a>
-<a href="(https://github.com/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://img.shields.io/badge/ruby-2.3.1-blue.svg"></a>
-<a href="(https://github.com/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://img.shields.io/badge/rails-5.0.2-blue.svg"></a>
+<a href="(https://github.com/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://img.shields.io/badge/ruby-2.3.3-blue.svg"></a>
+<a href="(https://github.com/fga-gpp-mds/2017.1-OndeE-UnB"><img src="https://img.shields.io/badge/rails-5.1.4-blue.svg"></a>
 <a href="http://www.gnu.org/licenses/agpl-3.0"><img src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg" alt="License: AGPL v3"></a>
 <a href="https://github.com/fga-gpp-mds"><img src="https://img.shields.io/badge/gpp--mds-2017.1-lightgrey.svg" alt="GPP/MDS 2017.1"></a>
 </p>
 
-# 2017.1 Onde É? UnB
+# Onde É? UnB
 
 ## Sobre o Projeto
 
-<p align="justify">O "Onde É? UnB" tem a finalidade de facilitar a localização, via mapa interativo, de algumas das instalações e estabelecimentos do Campus Darcy Ribeiro da UnB. A plataforma web é um serviço de localização dentro do campus que pretende auxiliar os diversos frequentadores da UnB a encontrar edifícios, departamentos e salas.</p>
+<p align="justify">O "Onde É? UnB" tem a finalidade de facilitar a localização, via mapa interativo, de algumas das instalações e estabelecimentos do Campus Darcy Ribeiro da UnB. A plataforma web é um serviço de localização dentro do campus que pretende auxiliar os diversos frequentadores da UnB a encontrar edifícios e salas.</p>
 
 ## Links do Site / Deploy Contínuo
 
-* [Site Oficial](https://ondeeunb-prod.herokuapp.com/)
+* [Site Oficial](https://ondeeunb.herokuapp.com/)
 * [Ambiente de Homologação](https://ondeeunb-dev.herokuapp.com/)
 
 ## Instalação
 
-Para contribuir com esse repositório é necessário a instalação do VirtualBox e Vagrant em um ambiente linux como o ubuntu.
-
-Veja informações e resoluções de alguns problemas com Vagrant em https://pt.wikiversity.org/wiki/Vagrant_e_Docker
+Para contribuir com esse repositório é necessário a instalação do Docker e Docker Compose.
 
 Faça clone ou download do repositório.
 
 ```console
-$ git clone https://github.com/fga-gpp-mds/2017.1-LocalizacaoDarcy
+$ git clone git@github.com:OndeEUnB/OndeEUnB.git
 ```
 
-Entre no arquivo clonado e execute o seguinte comando para fazer o boot na máquina virtual e executa os o que está definido no VagrantFile
+Entre na pasta do projeto e suba o ambiente. A primeira vez pode demorar.
+```console
+$ docker-compose up
+```
+
+Em outra aba do terminal, configure o banco de dados.
+```console
+$ docker-compose exec web rails db:setup
+```
+
+Instale os pacotes JavaScript.
+```console
+$ docker-compose exec web yarn install
+```
+
+Acesse o app em localhost:3000
+
+## Outras Instruções
+
+Para executar comandos no container do rails, utilize:
 
 ```console
-$ vagrant up
+$ docker-compose exec web your command
 ```
 
-Após isso, entre na maquina virtual criada
+#### Exemplos
+
+Instalação de gems:
 ```console
-$ vagrant ssh
+$ docker-compose exec web bundle install
 ```
 
-Agora já na máquina virtual criada entre no bash
+Console do rails:
 ```console
-$ vim ~/.bashrc
+$ docker-compose exec web rails c
 ```
-
-E adicione a seguinte linha no final do arquivo para que na próxima vez que abrir com ssh já abra na pasta do projeto.
-
-```console
-cd /vagrant/darcyWeb
-```
-
-Para entrar na pasta, reinicie o vagrant ssh ou digite
-```console
-$ cd
-$ cd vagrant/
-```
-
-Já na máquina virtual, configure o postgree com:
-
-Entre no modo root
-```console
-$ sudo su
-```
-Abra o seguinte arquivo
-```console
-$ nano /etc/postgresql/9.5/main/pg_hba.conf
-```
-
-Altere as linhas do arquivo de:
-```console
-local all postgres peer
-local all all peer
-```
-
-Para:
-```console
-local all postgres trust
-local all all trust
-```
-
-Reinicie o postgree
-```console
-service postgresql reload
-```
-
-Ainda no modo root, entre com o usuário postgres
-```console
-su postgres
-```
-
-Entre no postgresql
-```console
-psql -U postgres
-```
-
-Crie o usuário vagrant e autorize-o a criar databases
-```console
-CREATE USER vagrant WITH createdb;
-```
-
-Saia do postgres
-```console
-\q
-```
-
-Saia do usuário postgres e root
-```console
-exit
-exit
-```
-
-Entre na pasta do projeto em rails darcyWeb e execute
-```console
-rake db:setup
-rake db:migrate
-```
-
-Rode o servidor
-```console
-$ rails s
-```
-Abra seu navegador em localhost:8080
 
 ## Principais Features
 
@@ -142,7 +83,7 @@ O projeto OndeÉ?UnB tem como principais features:
 
 ## Documentação do Projeto
 
-Visualize a documentação na nossa [wiki](https://github.com/fga-gpp-mds/2017.1-OndeE-UnB/wiki).
+Visualize a documentação na [wiki](https://github.com/fga-gpp-mds/2017.1-OndeE-UnB/wiki).
 
 ## Licença
 
